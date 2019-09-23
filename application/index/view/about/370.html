@@ -1,0 +1,185 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>创始人致辞</title>
+<meta name='keywords' content="创合汇" />
+<meta name='description' content="创合汇" />
+<!-- Apple iOS and Android stuff -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="__CHHA__/images/icon.png"/>
+<link rel="apple-touch-icon-precomposed" href="__CHHA__/images/icon.png" />
+<link rel="apple-touch-startup-image" media="screen and (orientation: portrait)" href="__CHHA__/images/startup.png" />
+<link rel="apple-touch-startup-image" media="screen and (orientation: landscape)" href="__CHHA__/images/startupL.png" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1" />
+<script type="text/javascript">
+function fBrowserRedirect()
+{    
+    var sUserAgent = navigator.userAgent.toLowerCase();    
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";      
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";    
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";    
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";    
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";    
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";    
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";    
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";    
+   
+    if(bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM){    
+            window.location.href = "/mobile/";   
+    }     
+}   
+
+fBrowserRedirect();  
+</script> 
+<link href="__CHHA__/css/flexslider.css" type="text/css" rel="stylesheet" />
+<link href="__CHHA__/css/reset.css" type="text/css" rel="stylesheet" />
+<link href="__CHHA__/css/layout.css" type="text/css" rel="stylesheet" />
+<link href="__CHHA__/css/common.css" type="text/css" rel="stylesheet" />
+<link href="__CHHA__/css/page.css" type="text/css" rel="stylesheet" />
+<!--[if IE]><script src="__CHHA__/js/html5.js"></script><![endif]-->
+<!--[if lt IE 10]><script type="text/javascript" src="__CHHA__/js/pie.js"></script><![endif]-->
+<script type="text/javascript" src="__CHHA__/js/jquery.min.js"></script>
+<script type="text/javascript" src="__CHHA__/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="__CHHA__/js/banner.js"></script>
+<script type="text/javascript" src="__CHHA__/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+$(function(){
+	 $('.flexslider').flexslider({
+                animation: "fade",
+                slideshow: true,
+                slideshowSpeed: 3000,
+                animationSpeed: 2000,
+                touch: false,
+                controlNav: true,
+                directionNav: false,
+                pauseOnHover: false
+            });
+	
+	
+	
+	$(".index_btm_body .tab_body a").click(function(){
+		var index = $(".index_btm_body .tab_body a").index($(this));
+		$(".index_btm_body .tab_body a").removeClass("cur").eq(index).addClass("cur");
+		$(".index_btm_body .tab_con .con").hide().eq(index).fadeIn();
+	}).eq(0).click();
+	
+	
+});
+</script>
+</head>
+<body>
+<header>
+  {include file="public/header" /}
+</header>
+<script type="text/javascript">
+    function searchAll() {
+        var str = $("#keys").val();
+        if (str == "")
+            alert("请输入要搜索的关键词");
+        else
+            location.href = "/index/search/index.html?q=" + str;
+    }
+    $(function() {
+        $("ul.nav_list li").hover(function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+        }, function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+        });
+    });
+</script>
+<div class="pageBanner">
+  <div class="roll">
+    <ul class="slides">
+      <li style="background:url(__CHHA__/images/banner.jpg) no-repeat center;">
+        <div class="txt">
+          <div class="cw">
+            <h3></h3>
+          </div>
+        </div>
+      </li>
+    </ul>
+	
+  </div>
+</div>
+<div class="page">
+  <div class="cw">
+    <div class="pageBody clearfix">
+      <!--left start-->
+      <div class="leftBy fl">
+        <div class="tit">
+          <h3>关于创合汇</h3>
+          <h4>ABOUT US</h4>
+        </div>
+		<ul class="list2">
+          <li> <a href="/index/about/index/cid/369.html" class="title ">创合汇概况</a> </li>
+          <li> <a href="/index/about/index/cid/370.html" class="title cur">创始人介绍</a> </li>
+          <li> <a href="/index/about/index/cid/371.html" class="title ">企业文化</a></li>
+          <li> <a href="/index/about/video.html" class="title ">视频集锦</a> </li>
+          <li> <a href="/index/about/join.html" class="title ">加入创合汇</a> 
+          </li>
+        </ul>
+        <div class="list03">
+    <div class="content">
+        <div class="lay02">
+            <h3><span>平台活动</span></h3>
+            <ul>
+                                <li>
+                    <a href="/index/activity/detail/cid/466/id/58.html" target="_blank">
+                        <div class="txt">“从自我激活到组织共创——企业家精神...<br>2019-08-08</div>
+                    </a>
+                </li>
+                                <li>
+                    <a href="/index/activity/detail/cid/466/id/54.html" target="_blank">
+                        <div class="txt">“最强阵容”聚首论道：企业家经济学首...<br>2019-05-06</div>
+                    </a>
+                </li>
+                                <li>
+                    <a href="/index/activity/detail/cid/466/id/55.html" target="_blank">
+                        <div class="txt">科创赋能，领航未来：「创合汇」科创板...<br>2019-04-27</div>
+                    </a>
+                </li>
+                            </ul>
+        </div>
+        <div class="lay03">
+            <h3>官方微信</h3>
+            <ul>
+                <li> <img src="__CHHA__/picture/wx_1.jpg">
+                    <h4 class="pt10">创合汇商学院</h4>
+                </li>
+                <li> <img src="__CHHA__/picture/wx_2.jpg">
+                    <h4 class="pt10">创合汇</h4>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom"></div>
+</div>
+      </div>
+      <!--left End-->
+      <!--right start-->
+      <div class="rightBy fr">
+        <div class="tool clearfix">
+          <div class="fl">
+            <h3> 创始人介绍 </h3>
+          </div>
+          <div class="fr"> <a href="/" target="_blank">首页</a><span class="cur">></span><a href="javascript:;" class="cur">创始人介绍</a> </div>
+        </div>
+        <div class="contBody">
+        	<p><span style="font-size: 14px;">邵钧，北大国家发展研究院金融管理博士，现任上海交通大学国际与公共事务学院经济与管理培训中心主任、荷兰商学院(BSN)上海中心主任、创合汇创始人、北京大学企业大数据研究中心常务理事、亚布力中国企业家论坛成员兼青春合伙人讲师。</span></p><p><br/></p><p><strong><span style="font-size: 14px;">工作经历</span></strong></p><p><span style="font-size: 14px;">2008年起，负责组建荷兰商学院(BSN)上海中心，并担任中心主任一职；</span></p><p><span style="font-size: 14px;">2010年，创立创合汇商学院、创合汇咨询；</span></p><p><span style="font-size: 14px;">2011年起，担任<span style="font-size: 14px;">上海交通大学国际与公共事务学院经济与管理培训中心主任</span>；</span></p><p><span style="font-size: 14px;">2015年，创立创合汇创新创业生态服务平台。</span></p><p><br/></p><p><strong><span style="font-size: 14px;">投资经历</span></strong></p><p><span style="font-size: 14px;">2015年9月，邵钧创立创合汇资本；</span></p><p><span style="font-size: 14px;">2016年3月，创合汇一期基金正式成立。同年，完成了对优享创智-共享际、爱可生信息、未名企鹅等项目的投资；</span></p><p><span style="font-size: 14px;">2017年6月，创合汇二期基金正式成立。同年，完成了对31会议、优客工场、职行力、优蓝网、源耀生物等项目的投资；</span></p><p><span style="font-size: 14px;">2018年2月，完成了对安科迪的投资。</span></p><p><br/></p><p><strong><span style="font-size: 14px;">社会活动</span></strong></p><p><span style="font-size: 14px;">2013年参加中美经济论坛，并参观考察世界知名创新型企业和金融投资领域的企业。&nbsp;</span></p><p><span style="font-size: 14px;">2015年至2018年，出席亚布力中国企业家论坛。</span></p><p><span style="font-size: 14px;"><br/></span></p><p style="text-align: center;"><span style="font-size: 14px;"><img src="__CHHA__/picture/1531897518894686.jpg" title="1531897518894686.jpg" alt="b3119313b07eca807b314e5b962397dda1448351.jpg"/></span></p><p style="text-align: center;"><span style="font-size: 12px;">与亚布力论坛创始人、轮值主席田源</span></p><p><span style="font-size: 14px;"><br/></span></p><p><span style="font-size: 14px;">2015年至2018年，带领中国企业家代表团赴美国、英国、日本、以色列进行学习交流考察。</span></p><p><span style="font-size: 14px;"><br/></span></p><p style="text-align: center;"><span style="font-size: 14px;"><img src="__CHHA__/picture/1531897432196242.jpg" title="1531897432196242.jpg" alt="9a504fc2d5628535f79d899f97ef76c6a7ef630a.jpg"/></span></p><p style="text-align: center;"><span style="font-size: 14px;"><span style="font-size: 12px; text-align: center;">与硅谷精神教父凯文·凯利</span></span></p><p style="text-align: center;"><img src="__CHHA__/picture/1531897372937053.jpg" title="1531897372937053.jpg" alt="b8014a90f603738d39b6569cb41bb051f919ec94.jpg" style="font-size: 14px;"/></p><p style="text-align: center;"><span style="font-size: 12px;">与《创业国度》的作者索尔辛格</span></p><p><span style="font-size: 14px;"><br/></span></p><p><span style="font-size: 14px;">2017年4月，出席第八届中美商业领袖圆桌会议。</span></p><p><span style="font-size: 14px;">2017年12月，代表创合汇学院援建青海省湟中县上新庄镇加牙村“博而思希望小学”。&nbsp;</span></p><p><span style="font-size: 14px;"><br/></span></p><p style="text-align: center;"><span style="font-size: 14px;"><img src="__CHHA__/picture/1531898271346965.jpg" title="1531898271346965.jpg" alt="1531898271346965.jpg" style="width: 220px; height: 144px;" width="220" vspace="0" height="144" border="0"/></span></p><p style="text-align: center;"><span style="font-size: 12px;">博而思希望小学</span><span style="font-size: 14px;"><br/></span></p><p><span style="font-size: 14px;"><br/></span></p><p><span style="font-size: 14px;">2018年3月，成为亚布力青春合伙人首批青春合伙人讲师。</span></p><p><span style="font-size: 14px;"><br/></span></p><p style="text-align: center;"><span style="font-size: 14px;"><img src="__CHHA__/picture/1531897295237134.jpg" title="1531897295237134.jpg" alt="838ba61ea8d3fd1f445635713c4e251f95ca5f19.jpg"/></span></p><p style="text-align: center;"><span style="font-size: 12px;">受聘为亚布力青春合伙人讲师</span><span style="font-size: 14px;"><br/></span></p><p><span style="font-size: 14px;"><br/></span></p><p><span style="font-size: 14px;">2018年6月，受聘为北京大学企业大数据研究中心常务理事。</span></p><p><span style="font-size: 14px;"><br/></span></p><p style="text-align: center;"><span style="font-size: 14px;"><img src="__CHHA__/picture/1531896522390109.jpg" title="1531896522390109.jpg" alt="1531896522390109.jpg" style="width: 220px; height: 166px;" width="220" vspace="0" height="166" border="0"/></span></p><p style="text-align: center;"><span style="font-size: 12px;">北京大学副校长王博教授（右二）为邵钧先生（右一）颁发常务理事聘书</span></p><p><br/></p><p><strong><span style="font-size: 14px;">个人论著</span></strong></p><p><span style="font-size: 14px;">邵钧的著作《商学院模式创新背景下的MBA教育现状及发展趋势》，从商学教育理念、培养模式以及运营模式三个方面分析了中国MBA教育未来发展趋势，收录在《管理蓝皮书-中国管理发展报告2015》中。</span></p><p><span style="font-size: 14px;"><br/></span></p><p style="text-align: center;"><span style="font-size: 14px;"><img src="__CHHA__/picture/1531897561950273.jpg" title="1531897561950273.jpg" alt="09fa513d269759eed7401777b5fb43166d22df7e.jpg"/></span></p><p style="text-align: center;"><span style="font-size: 12px;">管理蓝皮书</span><span style="font-size: 14px;"><br/></span></p>        </div>
+      </div>
+      <!--right End-->
+    </div>
+  </div>
+  <div class="right_extend"></div>
+</div>
+<footer>
+    {include file="public/footer" /}
+</footer>
+</body>
+</html>

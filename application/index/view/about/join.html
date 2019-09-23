@@ -1,0 +1,509 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>关于创合汇</title>
+    <meta name='keywords' content="创合汇" />
+    <meta name='description' content="创合汇" />
+    <!-- Apple iOS and Android stuff -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="__CHHA__/images/icon.png" />
+    <link rel="apple-touch-icon-precomposed" href="__CHHA__/images/icon.png" />
+    <link rel="apple-touch-startup-image" media="screen and (orientation: portrait)" href="__CHHA__/images/startup.png" />
+    <link rel="apple-touch-startup-image" media="screen and (orientation: landscape)" href="__CHHA__images/startupL.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1" />
+    <script type="text/javascript">
+        function fBrowserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+            if (bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+                window.location.href = "/mobile/";
+            }
+        }
+
+        fBrowserRedirect();
+    </script>
+    <link href="__CHHA__/css/flexslider.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/layout.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/common.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/page.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/colorbox.css" type="text/css" rel="stylesheet" />
+    <!--[if IE]>
+    <script src="__CHHA__/js/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <script type="text/javascript" src="__CHHA__/js/pie.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="__CHHA__/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/banner.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/ckplayer.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/jquery.colorbox.js"></script>
+    <script type="text/javascript">
+        $(function() {
+
+
+
+
+
+            $('.flexslider').flexslider({
+                animation: "fade",
+                slideshow: true,
+                slideshowSpeed: 3000,
+                animationSpeed: 2000,
+                touch: false,
+                controlNav: true,
+                directionNav: false,
+                pauseOnHover: false
+            });
+
+
+
+            $(".index_btm_body .tab_body a").click(function() {
+                var index = $(".index_btm_body .tab_body a").index($(this));
+                $(".index_btm_body .tab_body a").removeClass("cur").eq(index).addClass("cur");
+                $(".index_btm_body .tab_con .con").hide().eq(index).fadeIn();
+            }).eq(0).click();
+
+
+
+
+
+
+        });
+    </script>
+    <script>
+        $(function() {
+            $(".txt_body h7").click(function() {
+
+
+                var index = $(".txt_body h7").index($(this)); //获取当前点击标题行的索引
+
+
+
+                var cur_index = $(".txt_body .txt").index($(".txt.cur")); //获取当前内容样式的索引
+                if (index == cur_index) //cur索引值和当前行的索引值判断是否一致
+                {
+                    $(".txt_body .txt").slideUp().removeClass("cur");
+                    $(".txt_body h7").removeClass("show"); //所有h3行删除样式，当前索引行加上样式
+                } else {
+
+                    $(".txt_body .txt").slideUp().removeClass("cur").eq(index).slideDown().addClass("cur"); //所有txt行删除样式，当前索引行加上样式
+                    $(".txt_body h7").removeClass("show").eq(index).addClass("show"); //所有h3行删除样式，当前索引行加上样式
+                }
+            }).eq(0).click();
+        });
+    </script>
+</head>
+
+<body>
+<div style="display: none;">
+    <div class="col_pop_body" id="video_pop">
+        <div class="video_body">
+            <div id="a1"></div>
+        </div>
+    </div>
+</div>
+<header>
+    {include file="public/header" /}
+</header>
+<script type="text/javascript">
+    function searchAll() {
+        var str = $("#keys").val();
+        if (str == "")
+            alert("请输入要搜索的关键词");
+        else
+            location.href = "/index/search/index.html?q=" + str;
+    }
+    $(function() {
+        $("ul.nav_list li").hover(function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+        }, function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+        });
+    });
+</script>
+<!--页面背景图-->
+<div class="pageBanner">
+    <div class="roll">
+        <ul class="slides">
+            <li style="background:url(__CHHA__/images/banner.jpg) no-repeat center;">
+                <div class="txt">
+                    <div class="cw">
+                        <h3></h3>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--页面背景图 end-->
+<div class="page">
+    <div class="cw">
+        <div class="pageBody clearfix">
+            <!--left start-->
+            <div class="leftBy fl">
+                <div class="tit">
+                    <h3>关于创合汇</h3>
+
+                    <h4>ABOUT US</h4>
+
+                </div>
+                <ul class="list2">
+                    <li> <a href="/index/about/index/cid/369.html" class="title ">创合汇概况</a>
+                    </li>
+                    <li> <a href="/index/about/index/cid/370.html" class="title ">创始人介绍</a>
+                    </li>
+                    <li> <a href="/index/about/index/cid/371.html" class="title ">企业文化</a>
+                    </li>
+                    <li> <a href="/index/about/video.html" class="title ">视频集锦</a>
+                    </li>
+                    <li> <a href="/index/about/join.html" class="title cur">加入创合汇</a>
+                    </li>
+                </ul>
+                <div class="list03">
+                    <div class="content">
+                        <div class="lay02">
+                            <h3><span>平台活动</span></h3>
+
+                            <ul>
+                                <li>
+                                    <a href="/index/activity/detail/cid/466/id/58.html" target="_blank">
+                                        <div class="txt">“从自我激活到组织共创——企业家精神...
+                                            <br>2019-08-08</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/index/activity/detail/cid/466/id/54.html" target="_blank">
+                                        <div class="txt">“最强阵容”聚首论道：企业家经济学首...
+                                            <br>2019-05-06</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/index/activity/detail/cid/466/id/55.html" target="_blank">
+                                        <div class="txt">科创赋能，领航未来：「创合汇」科创板...
+                                            <br>2019-04-27</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="lay03">
+                            <h3>官方微信</h3>
+
+                            <ul>
+                                <li>
+                                    <img src="__CHHA__/picture/wx_1.jpg">
+                                    <h4 class="pt10">创合汇商学院</h4>
+
+                                </li>
+                                <li>
+                                    <img src="__CHHA__/picture/wx_2.jpg">
+                                    <h4 class="pt10">创合汇</h4>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bottom"></div>
+                </div>
+            </div>
+            <!--left End-->
+            <!--right start-->
+            <div class="rightBy fr">
+                <div class="tool clearfix">
+                    <div class="fl">
+                        <h3> 加入创合汇 </h3>
+
+                    </div>
+                    <div class="fr"> <a href="/" target="_blank">首页</a><span class="cur">></span><a href="javascript:;" class="cur">加入创合汇</a>
+                    </div>
+                </div>
+                <div class="join">
+                    <div class="top">	<span class="first">招聘职位</span><span>招聘部门</span><span>工作地点</span><span>发布时间</span><span class="last">操作</span>
+
+                    </div>
+                    <ul class="ullist">
+                        <li>
+                            <div class="txt_body">
+                                <h7><span class="first">MBA项目招生主管</span><span>市场部</span><span>上海-徐汇区</span><span>2017-12-15</span><a class="last">更多</a>
+                                </h7>
+                                <div class="txt">
+                                    <p><strong><span style="font-size: 14px;">职位描述：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">1、负责制定招生计划，明确招生目标与招生方式、岗位职责，策划、组织、实施各项招生推广活动。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">2、负责督导、训练和激励课程顾问以及电话销售以提升销售业绩，达成业绩目标。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">3、负责持续优化工作流程，完善团队沟通方式，提升团队合作的效率与效果。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">4、负责组织实施本项目的各项课程与活动，并对其他项目组的课程与活动进行支持与协助。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">5、负责带领团队不断提升专业水准与职业素养，提供高品质的客户服务与客户体验，持续提升学员的满意度与忠诚度。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">6、负责完善课程模块与课程体系，优化项目师资队伍。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">7、积极推动团队合作，特别是跨部门的沟通与合作，提倡正思维，传递正能量，打造卓越团队文化。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">8、协助项目总监，与各部门通力合作推动市场网络、内部网络、校友网络及校友平台的构建与完善。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">9、其他需要配合的工作。岗位要求：</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">职位要求：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">1、大学本科及以上学历，专业不限，有教育行业工作经验优先；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">2、优秀的学习能力，能够在短时间内了解行业、职位以及客户的特点和需求，并掌握精准有效的推广方式；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">3、文案能力强，能够独立撰写高质量的课程宣传资料；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">4、沟通能力强，能够得体、顺畅和企业家、高管沟通交流。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">5、具备较好的市场分析及判断能力，具备较强的市场拓展能力；</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">工作地点：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">上海交通大学本部（徐家汇）淮海西路55号17楼</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><span style="font-size: 14px;">简历投递邮箱：jiangchen@besedu.cn</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                        <li>
+                            <div class="txt_body">
+                                <h7><span class="first">高级课程顾问</span><span>市场部</span><span>上海-徐汇区</span><span>2017-12-07</span><a class="last">更多</a>
+                                </h7>
+                                <div class="txt">
+                                    <p><strong><span style="font-size: 14px;">岗位职责:</span></strong><span style="font-size: 14px;"> </span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">1、负责高端教育培训类课程的招生咨询工作；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">2、负责协助组织、实施相关市场推广活动；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">3、负责学员的班级管理与服务工作。</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">岗位要求：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">1、大专或以上学历，三年以上工作经验；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">2、具备良好的心理素质、沟通技巧和语言表达能力；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">3、具备良好的团队合作精神及组织协调能力，愿意接受高挑战的工作目标与任务；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">4、具有专注、乐观向上的精神，以及良好工作责任感和执行力。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">5、有教育培训行业工作经验者优先。</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">晋升空间：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">课程顾问——高级课程顾问——资深课程顾问——助理项目主管——项目主管</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">工作时间：</span></strong><span style="font-size: 14px;"> </span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">朝九晚五 做五休二（周末双休）</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">待遇：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">高薪资，高提成，为员工缴纳五险一金，员工生日福利，传统假日福利，年度两次旅游、为员工父母提供每月1000元的孝心津贴；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">优秀员工可接受全面MBA核心管理课程的学习</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">工作地点：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">上海交通大学本部（徐家汇）淮海西路55号17楼</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;"><br/></span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">简历投递邮箱：jiangchen@besedu.cn</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                        <li>
+                            <div class="txt_body">
+                                <h7><span class="first">大客户经理/企业培训</span><span>内训部</span><span>上海-徐汇区</span><span>2017-12-07</span><a class="last">更多</a>
+                                </h7>
+                                <div class="txt">
+                                    <p><strong><span style="font-size: 14px;">岗位职责：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">1、通过有效的客户拜访、市场活动等多种方式开拓新客户，销售相关培训咨询课程，完成公司下达的销售目标；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">2、负责新老客户的深度挖掘及需求跟进，维护和更新客户数据库，通过邮件、电话及面谈等形式定期联络维护；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">3、以顾问方式对客户需求进行分析，负责培训业务开展，方案编写及合作谈判并负责对合作项目的进度跟进管理；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">4、单独或陪同主管拜访客户，与客户就培训服务进行深入有效的沟通，能够很快识别客户的培训需求并提供建议及方案；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">5、协助培训师完成公开课或内训，做好课程组织、现场协调及后续评估、跟踪工作。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">6、根据团队发展战略，制定个人业绩目标达成的工作计划并分解；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">7、遵守公司规章制度，完成上级领导临时交办的其他任务工作。</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">任职资格：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">1、大专及以上学历，市场营销等相关专业，2年以上培训咨询行业销售及课程研发经验，有大客户销售经验者优先；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">2、具备较强的市场分析、营销推广能力和良好的人际沟通、应变协调、分析解决问题的能力，并具备一定的课程研发能力；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">3、熟练使用电脑办公软件和办公自动化设备，具有良好商业意识和谈判技能；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">4、了解培训咨询行业现状和发展趋势，具有良好的学习意识和敏锐的洞察力；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">5、具备出色的客户开拓能力，能不断丰富客户资源；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">6、具备良好的职业素养、习惯和职场礼仪。</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">工作时间：</span></strong><span style="font-size: 14px;"> </span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">朝九晚五 做五休二（周末双休）</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">待遇：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">高薪资，高提成，为员工缴纳五险一金，员工生日福利，传统假日福利，年度两次旅游、为员工父母提供每月1000元的孝心津贴；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">优秀员工可接受全面MBA核心管理课程的学习</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">工作地点：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">上海交通大学本部（徐家汇）淮海西路55号17楼</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><span style="font-size: 14px;">简历投递邮箱：jiangchen@besedu.cn</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                        <li>
+                            <div class="txt_body">
+                                <h7><span class="first">行政主管</span><span>行政部</span><span>上海-徐汇区</span><span>2017-12-07</span><a class="last">更多</a>
+                                </h7>
+                                <div class="txt">
+                                    <p><strong><span style="font-size: 14px;">岗位职责：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">1、负责协助行政管理制度的建立和完善，并监督执行公司的各项规章制度；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">2、负责公司后勤采购、会议管理、车辆管理、办公环境以及固定资产管理、票务等日常性行政事务的管理与监督，确保公司行政工作能有效的积极开展；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">3、负责公司各类资质、证照的申请、办理、年检及归档管理工作；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">4、协调各部门之间的关系，做好公司内外沟通工作 ；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">5、负责促进公司与社会各界的广泛合作和友好往来，并协助上级领导做好对外接待工作，树立公司良好形象；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">6、负责策划、打造“事件性“的企业文化活动；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">8、公司领导交办的其他工作。</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">任职要求：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">1、人力资源管理、行政管理、中文、文秘、汉语言文学及相关专业大专以上学历；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">2、从事行政管理工作，3年以上，具备行政管理专业知识；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">3、具有良好的书面、口头表达能力，具有亲和力和服务意识，沟通领悟能力强；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">4、熟练使用常用办公软件；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">5、具备良好的沟通、组织、协调能力和时间管理能力；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">6、吃苦耐劳，工作细致认真，原则性强，具备较强的分析判断能力，有良好的执行力及职业素养；</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">7、有强烈的责任感和敬业精神，公平公正、做事严谨，能承受较大的工作压力。</span>
+                                    </p>
+                                    <p><span style="font-size: 14px;">优秀员工可接受全面MBA核心管理课程的学习</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><strong><span style="font-size: 14px;">工作地点：</span></strong>
+                                    </p>
+                                    <p><span style="font-size: 14px;">上海交通大学本部（徐家汇）淮海西路55号17楼</span>
+                                    </p>
+                                    <p>
+                                        <br/>
+                                    </p>
+                                    <p><span style="font-size: 14px;">简历投递邮箱：jiangchen@besedu.cn</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                    </ul>
+                </div>
+            </div>
+            <!--right End-->
+        </div>
+    </div>
+    <div class="right_extend"></div>
+</div>
+<footer>
+    {include file="public/footer" /}
+</footer>
+</body>
+
+</html>

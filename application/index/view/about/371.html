@@ -1,0 +1,476 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>企业文化</title>
+    <meta name='keywords' content="创合汇" />
+    <meta name='description' content="创合汇" />
+    <!-- Apple iOS and Android stuff -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="__CHHA__/images/icon.png" />
+    <link rel="apple-touch-icon-precomposed" href="__CHHA__/images/icon.png" />
+    <link rel="apple-touch-startup-image" media="screen and (orientation: portrait)" href="__CHHA__/images/startup.png" />
+    <link rel="apple-touch-startup-image" media="screen and (orientation: landscape)" href="__CHHA__/images/startupL.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1" />
+    <script type="text/javascript">
+        function fBrowserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+            if (bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+                window.location.href = "/mobile/";
+            }
+        }
+
+        fBrowserRedirect();
+    </script>
+    <link href="__CHHA__/css/flexslider.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/layout.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/common.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/page.css" type="text/css" rel="stylesheet" />
+    <!--[if IE]>
+    <script src="__CHHA__/js/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <script type="text/javascript" src="__CHHA__/js/pie.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="__CHHA__/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/banner.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('.flexslider').flexslider({
+                animation: "fade",
+                slideshow: true,
+                slideshowSpeed: 3000,
+                animationSpeed: 2000,
+                touch: false,
+                controlNav: true,
+                directionNav: false,
+                pauseOnHover: false
+            });
+
+
+
+            $(".index_btm_body .tab_body a").click(function() {
+                var index = $(".index_btm_body .tab_body a").index($(this));
+                $(".index_btm_body .tab_body a").removeClass("cur").eq(index).addClass("cur");
+                $(".index_btm_body .tab_con .con").hide().eq(index).fadeIn();
+            }).eq(0).click();
+
+
+        });
+    </script>
+</head>
+
+<body>
+<header>
+  {include file="public/header" /}
+</header>
+<script type="text/javascript">
+    function searchAll() {
+        var str = $("#keys").val();
+        if (str == "")
+            alert("请输入要搜索的关键词");
+        else
+            location.href = "/index/search/index.html?q=" + str;
+    }
+    $(function() {
+        $("ul.nav_list li").hover(function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+        }, function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+        });
+    });
+</script>
+<div class="pageBanner">
+    <div class="roll">
+        <ul class="slides">
+            <li style="background:url(__CHHA__/images/banner.jpg) no-repeat center;">
+                <div class="txt">
+                    <div class="cw">
+                        <h3></h3>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="page">
+    <div class="cw">
+        <div class="pageBody clearfix">
+            <!--left start-->
+            <div class="leftBy fl">
+                <div class="tit">
+                    <h3>关于创合汇</h3>
+
+                    <h4>ABOUT US</h4>
+
+                </div>
+                <ul class="list2">
+                    <li> <a href="/index/about/index/cid/369.html" class="title ">创合汇概况</a>
+                    </li>
+                    <li> <a href="/index/about/index/cid/370.html" class="title ">创始人介绍</a>
+                    </li>
+                    <li> <a href="/index/about/index/cid/371.html" class="title cur">企业文化</a>
+                    </li>
+                    <li> <a href="/index/about/video.html" class="title ">视频集锦</a>
+                    </li>
+                    <li> <a href="/index/about/join.html" class="title ">加入创合汇</a>
+                    </li>
+                </ul>
+                <div class="list03">
+                    <div class="content">
+                        <div class="lay02">
+                            <h3><span>平台活动</span></h3>
+
+                            <ul>
+                                <li>
+                                    <a href="/index/activity/detail/cid/466/id/58.html" target="_blank">
+                                        <div class="txt">“从自我激活到组织共创——企业家精神...
+                                            <br>2019-08-08</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/index/activity/detail/cid/466/id/54.html" target="_blank">
+                                        <div class="txt">“最强阵容”聚首论道：企业家经济学首...
+                                            <br>2019-05-06</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/index/activity/detail/cid/466/id/55.html" target="_blank">
+                                        <div class="txt">科创赋能，领航未来：「创合汇」科创板...
+                                            <br>2019-04-27</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="lay03">
+                            <h3>官方微信</h3>
+
+                            <ul>
+                                <li>
+                                    <img src="__CHHA__/picture/wx_1.jpg">
+                                    <h4 class="pt10">创合汇商学院</h4>
+
+                                </li>
+                                <li>
+                                    <img src="__CHHA__/picture/wx_2.jpg">
+                                    <h4 class="pt10">创合汇</h4>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bottom"></div>
+                </div>
+            </div>
+            <!--left End-->
+            <!--right start-->
+            <div class="rightBy fr">
+                <div class="tool clearfix">
+                    <div class="fl">
+                        <h3> 企业文化 </h3>
+
+                    </div>
+                    <div class="fr"> <a href="/" target="_blank">首页</a><span class="cur">></span><a href="javascript:;" class="cur">企业文化</a>
+                    </div>
+                </div>
+                <div class="contBody">
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">使命</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">致力于成为中国企业家及其管理团队的有价值的学习平台，帮助中国企业建立可持续发展的竞争优势，实现创新转型，并以此推动中国经济与文化的复兴与发展！</span>
+                            <br/>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;">帮助员工实现物质和精神两个方面的幸福！</span>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">愿景</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">打造具有卓越影响力、令人尊敬的文化教育品牌；</span>
+                            <br/>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;">发展成为中国线上线下一体化的创新型管理教育培训平台！</span>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">核心价值观</span></strong>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">“专注、创新、追求卓越”</span>
+                            <br/>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;">“谦虚、尊重、团队合作“</span>
+                    </p>
+                    <p><span style="font-size: 14px;"><br/></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">教学理念</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">“和而不同、知行合一”</span>
+                            <br/>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"><br/></span>
+                    </p>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">管理哲学核心思想</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">仁爱、忠恕、知行合一、中和合一、诚明合一、平和专精</span>
+                            <br/>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"><br/></span>
+                    </p>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">发展理念</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">“全球智慧、慎思笃行”</span>
+                            <br/>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"><br/></span>
+                    </p>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">经营原点</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">以奋斗者为本、以客户为中心</span>
+                            <br/>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"><br/></span>
+                    </p>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">职业素养</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">在一项对100多个企业进行的调查中，得到的结果让人吃惊：这就是100多个企业主几乎无一例外地说出了一个共同答案：诚实和正直。正直的品质受欢迎的程度是87%，其次是高瞻远瞩，精明能干，才智过人，直率，勇敢等。</span>
+                            <br/>
+                        </p>
+                    </section>
+                    <p>
+                        <br/>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">工作信条</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;"></span>
+                        </p>
+                        <section data-author="Wxeditor">
+                            <p>►<span style="font-size: 14px;">目标是成功的一半</span>
+                            </p>
+                        </section>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">日事日清</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">坚持“六种正精进”，磨练心智，提升心性</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">将个人追求融入企业发展，在企业实现的价值中成长</span>
+                        </p>
+                    </section>
+                    <p>
+                        <br/>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">团队合作精神</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;"></span>
+                        </p>
+                        <section data-author="Wxeditor">
+                            <p>►<span style="font-size: 14px;">共享共担，以小我完成大我。</span>
+                            </p>
+                        </section>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">乐于分享经验和知识，与团队共同成长，有团队主人翁意识。</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">为团队建设添砖加瓦。</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">在工作中主动相互配合，拾遗补缺。</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">决策前充分发表意见，决策后坚决执行。</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">正面影响团队，使团队朝着同一个方向前进。</span>
+                        </p>
+                    </section>
+                    <p>
+                        <br/>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">同事关系准则</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">良好的、有道德的同事关系是公司健康发展的重要保证。在同事关系上公司推崇这样的原则：</span><span style="font-size: 14px;">热情、坦诚、简单、互助、尊重、分享</span>
+                        </p>
+                    </section>
+                    <p>
+                        <br/>
+                    </p>
+                    <p><span style="font-size: 14px;">在同事关系上，公司把下列“三反对”当作公司纪律，要求全体员工严格遵守：</span>
+                    </p>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">反对探听同事的隐私，更反对议论和散布同事的隐私。</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">反对背后说同事坏话，贬低同事的人格。</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">反对同事之间议论公司内部的和客户方面的人际关系纠葛和是非。</span>
+                        </p>
+                    </section>
+                    <p>
+                        <br/>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><span style="font-size: 16px;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">职业操守</span>
+                                        </strong>
+                                        </span>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;"></span>►<span style="font-size: 14px;">客户价值导向（把为客户创造价值当做企业信仰来恪守）</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">忠于公司的使命和愿景，维护公司的的品牌和信誉</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">用精湛的专业水准和高尚的职业道德来赢得职业尊严和职业荣誉</span>
+                        </p>
+                    </section>
+                    <p><span style="font-size: 14px;"></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p>►<span style="font-size: 14px;">保守公司和客户的商业秘密</span>
+                        </p>
+                    </section>
+                    <p>
+                        <br/>
+                    </p>
+                </div>
+            </div>
+            <!--right End-->
+        </div>
+    </div>
+    <div class="right_extend"></div>
+</div>
+<footer>
+    {include file="public/footer" /}
+</footer>
+</body>
+
+</html>

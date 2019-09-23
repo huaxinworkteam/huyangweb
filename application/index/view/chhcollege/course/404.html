@@ -1,0 +1,225 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>创新创业类-「独角兽」创业成长计划 | 独步天下，角逐未来</title>
+<meta name='keywords' content="创合汇商学院——全球开放式平台型商学院" />
+<meta name='description' content="创合汇商学院——全球开放式平台型商学院" />
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?7996666e6d269b8161c664dc73b41699";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script src="__COLL__/js/entrance.js" data-args="groupId=f120961075064bbebb64783685097ee4"  class="zhiCustomBtn" id="zhichiScript"></script>
+<!-- Apple iOS and Android stuff -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="__COLL__/images/icon.png"/>
+<link rel="apple-touch-icon-precomposed" href="__COLL__/images/icon.png" />
+<link rel="apple-touch-startup-image" media="screen and (orientation: portrait)" href="__COLL__/images/startup.png" />
+<link rel="apple-touch-startup-image" media="screen and (orientation: landscape)" href="__COLL__/images/startupL.png" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1" />
+<script type="text/javascript">
+function fBrowserRedirect()
+{    
+    var sUserAgent = navigator.userAgent.toLowerCase();    
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";      
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";    
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";    
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";    
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";    
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";    
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";    
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";    
+   
+    if(bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM){    
+            window.location.href = "http://www.chhcollege.org/mobile/";   
+    }     
+}   
+
+fBrowserRedirect();  
+</script> 
+<link href="__COLL__/css/flexslider.css" type="text/css" rel="stylesheet" />
+<link href="__COLL__/css/reset.css" type="text/css" rel="stylesheet" />
+<link href="__COLL__/css/layout.css" type="text/css" rel="stylesheet" />
+<link href="__COLL__/css/common.css" type="text/css" rel="stylesheet" />
+<link href="__COLL__/css/page.css" type="text/css" rel="stylesheet" />
+<!--[if IE]><script src="__COLL__/js/html5.js"></script><![endif]-->
+<!--[if lt IE 10]><script type="text/javascript" src="__COLL__/js/pie.js"></script><![endif]-->
+<script type="text/javascript" src="__COLL__/js/jquery.min.js"></script>
+<script type="text/javascript" src="__COLL__/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="__COLL__/js/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="__COLL__/js/jquery-powerswitch.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$('.flexslider').flexslider({
+                animation: "fade",
+                slideshow: true,
+                slideshowSpeed: 3000,
+                animationSpeed: 2000,
+                touch: false,
+                controlNav: true,
+                directionNav: false,
+                pauseOnHover: false
+            });
+	$(".index_btm_body .tab_body a").click(function(){
+		var index = $(".index_btm_body .tab_body a").index($(this));
+		$(".index_btm_body .tab_body a").removeClass("cur").eq(index).addClass("cur");
+		
+		$(".index_btm_body .tab_con .con").hide().eq(index).fadeIn();
+	}).eq(0).click();
+	
+	$(".list2 li a").each(function(){
+			if($(this).hasClass('cur'))
+			{
+				$(this).next('dl').show();
+			}
+  	});
+});
+</script>
+</head>
+<body>
+<header>
+    {include file="public/coll_header" /}
+</header>
+<script type="text/javascript">
+    function searchAll() {
+        var str = $("#keys").val();
+        if (str == "")
+            alert("请输入要搜索的关键词");
+        else
+            location.href = "/index/search/index.html?q=" + str;
+    }
+
+    $(function() {
+        $("ul.nav_list li").hover(function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+        }, function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+        });
+    });
+</script>
+<div class="pageBanner">
+  <div class="roll flexslider">
+    <ul class="slides">
+    <li><img src="__COLL__/picture/20180523104050.jpg"></li>    </ul>
+	</div>
+	<!--<div class="txt">-->
+		<!--<div class="cw">-->
+		 <!--<h3></h3>-->
+		<!--</div>-->
+         <!---->
+        <!--</div>-->
+    <!--<div class="line"></div>-->
+    <!--<div class="btn">-->
+      <!--<div class="cw"> <a href="/index/contact/message.html" class="act" target="_blank">在线报名</a> </div>-->
+    <!--</div>-->
+  
+</div>
+<div class="page">
+  <div class="cw">
+    <div class="pageBody clearfix">
+      <!--left start-->
+      <div class="leftBy fl">
+        <div class="tit">
+          <h3>核心课程</h3>
+          <h4>Main course</h4>
+        </div>
+        		<ul class="list2">
+                            <li> <a href="{:url('chhcollege/m402')}" class="title " >工商管理类</a>
+                  <dl>
+                                                 <dd><a href="{:url('chhcollege/m402')}" class="">> 荷兰商学院MBA/DBA学位课程</a></dd>
+                                                 <dd><a href="{:url('chhcollege/m403')}" class="">> 上海交通大学高级研修课程</a></dd>
+                      	
+                  </dl>
+                </li>
+                            <li> <a href="{:url('chhcollege/m404')}" class="title cur" >创新创业类</a>
+                  <dl>
+                                                 <dd><a href="{:url('chhcollege/m404')}" class="cur">> 「独角兽」创业成长计划 | 独步天下，角逐未来</a></dd>
+                                                 <dd><a href="{:url('chhcollege/m405')}" class="">> 全球CEO创新领导力发展计划</a></dd>
+                      	
+                  </dl>
+                </li>
+                            <li> <a href="{:url('chhcollege/m385')}" class="title " >金融实务类</a>
+                  <dl>
+                                                 <dd><a href="{:url('chhcollege/m385')}" class="">> 股权激励实战特训营</a></dd>
+                                                 <dd><a href="{:url('chhcollege/m384')}" class="">> 董事会秘书研修班</a></dd>
+                      	
+                  </dl>
+                </li>
+                            <li> <a href="{:url('chhcollege/m375')}" class="title " >人文与领导力类</a>
+                  <dl>
+                                                 <dd><a href="{:url('chhcollege/m375')}" class="">> 哲学与东方领导力学习坊</a></dd>
+                      	
+                  </dl>
+                </li>
+                            <li> <a href="{:url('chhcollege/m380')}" class="title " >国际访学类</a>
+                  <dl>
+                                                 <dd><a href="{:url('chhcollege/m380')}" class="">> 2019「创合汇」德国访学 | 隐形冠军与工匠精神</a></dd>
+                                                 <dd><a href="{:url('chhcollege/m379')}" class="">> 美国访学</a></dd>
+                                                 <dd><a href="{:url('chhcollege/m381')}" class="">> 英国访学</a></dd>
+                                                 <dd><a href="{:url('chhcollege/m383')}" class="">> 日本访学</a></dd>
+                                                 <dd><a href="{:url('chhcollege/m382')}" class="">> 以色列访学</a></dd>
+                      	
+                  </dl>
+                </li>
+                    </ul>
+       
+        
+        <div class="list03">
+          <div class="content">
+            <div class="course02">
+              <h3><span>报名咨询</span></h3>
+              <ul>
+                <li> 
+                  <div class="txt">「独角兽」创业成长计划 | 独步天下，角逐未来<!--独角兽创业成长营--><br>
+                      <span>021-62826922</span> <br>
+					  <span class="email">unicorn@chuanghehui.cn</span> 
+				  </div>
+				</li>
+              </ul>
+			  <a href="/index/contact/message.html">在线报名</a>
+            </div>
+        
+          </div>
+          <div class="bottom"></div>
+        </div>
+                
+      </div>
+      <!--left End-->
+      <!--right start-->
+      <div class="rightBy fr">
+        <div class="tool clearfix">
+          <div class="fl">
+            <h3> 「独角兽」创业成长计划 | 独步天下，角逐未来 </h3>
+          </div>
+          <div class="fr"> <a href="/" target="_blank">首页</a><span>></span><a href="/index/course/index/id/369.html">核心课程</a><span class="cur">></span><a href="javascript:;" class="cur">「独角兽」创业成长计划 | 独步天下，角逐未来</a> </div>
+        </div>
+        <div class="course">
+			<div class="contBody">
+				<p style="text-align: left;"><br/></p><p style="text-align: left;"><img width="800" height="612" title="1557799169477381.gif" style="width: 800px; height: 612px;" alt="1557799169477381.gif" src="__COLL__/picture/1557799169477381.gif" border="0" vspace="0"/><img width="800" height="991" title="1557799175880176.gif" style="width: 800px; height: 991px;" alt="1557799175880176.gif" src="__COLL__/picture/1557799175880176.gif" border="0" vspace="0"/><img width="800" height="1249" title="1557799177397949.gif" style="width: 800px; height: 1249px;" alt="1557799177397949.gif" src="__COLL__/picture/1557799177397949.gif" border="0" vspace="0"/><img width="800" height="1048" title="1557799181537548.gif" style="width: 800px; height: 1048px;" alt="1557799181537548.gif" src="__COLL__/picture/1557799181537548.gif" border="0" vspace="0"/><img width="800" height="928" title="1557799183496762.gif" style="width: 800px; height: 928px;" alt="1557799183496762.gif" src="__COLL__/picture/1557799183496762.gif" border="0" vspace="0"/><img width="800" height="949" title="1557799185775546.gif" style="width: 800px; height: 949px;" alt="1557799185775546.gif" src="__COLL__/picture/1557799185775546.gif" border="0" vspace="0"/></p><p style="text-align: left;"><img width="800" height="1070" title="1557799195245687.gif" style="width: 800px; height: 1070px;" alt="1557799195245687.gif" src="__COLL__/picture/1557799195245687.gif" border="0" vspace="0"/><img width="800" height="486" title="1557799197181967.gif" style="width: 800px; height: 486px;" alt="1557799197181967.gif" src="__COLL__/picture/1557799197181967.gif" border="0" vspace="0"/><br/></p>			</div>
+         	
+        </div>
+      </div>
+      <!--right End-->
+    </div>
+  </div>
+  <div class="right_extend"></div>
+</div>
+<div class="color_blank s_1"></div>
+<footer>
+    {include file="public/coll_footer" /}
+</footer>
+</body>
+</html>

@@ -1,0 +1,313 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>企业定制</title>
+    <meta name='keywords' content="创合汇咨询——企业定制课程与管理咨询项目" />
+    <meta name='description' content="创合汇咨询——企业定制课程与管理咨询项目" />
+    <!-- Apple iOS and Android stuff -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="__CON__/images/icon.png" />
+    <link rel="apple-touch-icon-precomposed" href="__CON__/images/icon.png" />
+    <link rel="apple-touch-startup-image" media="screen and (orientation: portrait)" href="__CON__/images/startup.png" />
+    <link rel="apple-touch-startup-image" media="screen and (orientation: landscape)" href="__CON__/images/startupL.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1" />
+    <script type="text/javascript">
+        function fBrowserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+            if (bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+                window.location.href = "/mobile/";
+            }
+        }
+
+        fBrowserRedirect();
+    </script>
+    <link href="__CON__/css/flexslider.css" type="text/css" rel="stylesheet" />
+    <link href="__CON__/css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="__CON__/css/layout.css" type="text/css" rel="stylesheet" />
+    <link href="__CON__/css/common.css" type="text/css" rel="stylesheet" />
+    <link href="__CON__/css/page.css" type="text/css" rel="stylesheet" />
+    <!--[if IE]>
+    <script src="__CON__/js/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <script type="text/javascript" src="__CON__/js/pie.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="__CON__/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__CON__/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="__CON__/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="__CON__/js/jquery-powerswitch.js"></script>
+    <script type="text/javascript">
+        $(function() {
+
+            $('.flexslider').flexslider({
+                animation: "fade",
+                slideshow: true,
+                slideshowSpeed: 3000,
+                animationSpeed: 2000,
+                touch: false,
+                controlNav: true,
+                directionNav: false,
+                pauseOnHover: false
+            });
+            $(".index_btm_body .tab_body a").click(function() {
+                var index = $(".index_btm_body .tab_body a").index($(this));
+                $(".index_btm_body .tab_body a").removeClass("cur").eq(index).addClass("cur");
+                $(".index_btm_body .tab_con .con").hide().eq(index).fadeIn();
+            }).eq(0).click();
+
+
+        });
+    </script>
+</head>
+
+<body>
+<header>
+    {include file="public/con_header" /}
+</header>
+<script type="text/javascript">
+    function searchAll() {
+        var str = $("#keys").val();
+        if (str == "")
+            alert("请输入要搜索的关键词");
+        else
+            location.href = "/index/search/index.html?q=" + str;
+    }
+
+    $(function() {
+        $("ul.nav_list li").hover(function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+        }, function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+        });
+    });
+</script>
+<div class="pageBanner">
+    <div class="roll flexslider">
+        <ul class="slides">
+            <li>
+                <img src="__CON__/picture/20180327095009.jpg">
+            </li>
+        </ul>
+    </div>
+    <!--<div class="txt">-->
+    <!--<div class="cw">-->
+    <!--<h3>-->
+    <!--</h3>-->
+    <!--</div>-->
+    <!---->
+    <!--</div>-->
+    <!--<div class="line"></div>-->
+    <!--<div class="btn">-->
+    <!--<div class="cw"> <a href="/index/contact/message.html" class="act" target="_blank">在线咨询</a> </div>-->
+    <!--</div>-->
+</div>
+<div class="page">
+    <div class="cw">
+        <div class="pageBody clearfix">
+            <!--left start-->
+            <div class="leftBy fl">
+                <div class="tit">
+                    <h3>核心服务</h3>
+
+                    <h4>core services</h4>
+
+                </div>
+                <div class="list03">
+                    <div class="content">
+                        <ul class="list4">
+                            <li><a href="{:url('chhconsulting/doctor')}" class="title ">测评诊断</a>
+                            </li>
+                            <li><a href="{:url('chhconsulting/make')}" class="title cur">企业定制</a>
+                            </li>
+                            <li><a href="{:url('chhconsulting/manage')}" class="title ">管理咨询</a>
+                            </li>
+                        </ul>
+                        <div class="lay05">
+                            <h3>联系我们</h3>
+
+                            <div class="txt">
+                                <p>021-52307916</p>
+                            </div>
+                            <div class="btn"> <a href="{:url('chhconsulting/contact')}">在线咨询</a>
+
+                            </div>
+                            <h3>官方微信</h3>
+                            <div class="box">
+                                <div class="fl">
+                                    <img src="__CON__/picture/weixin.jpg">
+                                </div>
+                                <div class="fr">
+                                    <p>创合汇</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom"></div>
+                </div>
+            </div>
+            <!--left End-->
+            <!--right start-->
+            <div class="rightBy fr">
+                <div class="tool clearfix">
+                    <div class="fl">
+                        <h3>企业定制</h3>
+
+                    </div>
+                    <div class="fr"> <a href="/" target="_blank">首页</a><span class="cur">></span><a href="javascript:;" class="cur">企业定制</a>
+                    </div>
+                </div>
+                <div class="contBody">
+                    <p> <strong><span style="font-size: 16px;">宗旨</span></strong>
+
+                    </p>
+                    <p><span style="font-size: 14px;">企业定制课程旨在协助企业构建系统性人才培养体系，助力企业培养符合发展需求的管理人才队伍。</span>
+
+                        <br/>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+                    <p> <strong><span style="font-size: 16px;">课程体系</span></strong>
+
+                    </p>
+                    <p><span style="font-size: 14px;">对标管理团队不同层级提供综合管理能力提升方案；对标工作内容的不同提供专项管理能力提升方案；对标不同行业特征提供行业精英提升方案。同时，根据每个企业自身的发展特点，个性化设计人才培养课程，运用全球教学方法，并提供高品质课程交付与班主任带班服务，促进学习效果转化与企业经营业绩提升。</span>
+
+                        <br/>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+                    <p> <strong><span style="font-size: 16px;">综合管理课程</span></strong>
+                    </p>
+                    <p><span style="font-size: 14px;">基于企业的战略发展方向，人才诊断测评结果，搭建人才发展路径，根据不同阶段的能力需要，匹配相应课程，系统性地建设人才梯队。</span>
+                        <br/>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+
+                    <p> <strong><span style="font-size: 16px;">适宜需求</span></strong>
+                    </p>
+                    <p><span style="font-size: 14px;">大中型企业定制化研修需求或系列主题课程，行业协会、商会组织定制化研修需求。</span>
+
+                        <br/>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+
+                    <p> <strong><span style="font-size: 16px;">课程列表</span></strong>
+                    </p>
+                    <p style="text-align: center;">
+                        <img title="1522742013408242.png" alt="微信图片_20180403154751.png" src="__CON__/picture/1522742013408242.png" />
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+                    <p> <strong><span style="font-size: 16px;">专项管理课程</span></strong>
+                    </p>
+                    <p><span style="font-size: 14px;">所谓“术业有专攻”，针对企业各项专业技能，创合汇企业定制课程整合各领域专家，结合企业需求，理论搭配案例，帮助企业的专业人才深度发展。</span>
+
+                    <br/>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <p><span style="font-size: 14px;"><br/></span>
+
+                        </p>
+                        <p style="text-align: center;">
+                            <img width="400" height="332" title="1522743313285644.png" style="width: 400px; height: 332px;" alt="1522743313285644.png" src="__CON__/picture/1522743313285644.png" border="0" vspace="0" />
+                        </p>
+                    </section>
+                    <p style="text-align: center;"><span style="font-size: 12px;">专项管理课程</span>
+
+                        <br/>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+
+                    <p> <strong><span style="font-size: 16px;">行业精英提升课程</span></strong>
+                    </p>
+                    <p><span style="font-size: 14px;">针对不同的行业，创合汇咨询专门根据企业的实际情况“度身定做”课程，旨在帮助企业培养行业精英。</span>
+
+                        <br/>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+
+                    <p style="text-align: center;"><span style="font-size: 14px;"><img width="400" height="331" title="1522743186128200.png" style="width: 400px; height: 331px; text-align: center; font-size: 14px; white-space: normal;" alt="1522743186128200.png" src="__CON__/picture/1523613383657864.png" border="0" vspace="0"/></span>
+
+                    </p>
+                    <p style="text-align: center;"><span style="font-size: 12px;">行业精英提升课程</span><span style="font-size: 14px;"><br/></span>
+
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+
+                    <p> <strong><span style="font-size: 16px;">授课形式</span></strong>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+                    <p style="text-align: center;"><span style="font-size: 14px;"></span>
+
+                        <img width="600" height="483" title="1522742812126758.png" style="width: 600px; height: 483px;" alt="1522742812126758.png" src="__CON__/picture/1522742812126758.png" border="0" vspace="0" />
+                    </p>
+                    <p><span style="font-size: 14px;"></span>
+
+                    </p>
+                    <p style="text-align: center;"><span style="font-size: 14px;"><br/></span>
+
+                    </p>
+                    <p style="text-align: center;"><strong><span style="font-size: 14px;">落地的学习方式——行动学习</span></strong>
+
+                    </p>
+                    <p style="text-align: center;"><span style="font-size: 14px;">行动学习方程式：L（学习）= P（程序化知识） + Q（提问） + R（反思）</span>
+
+                    </p>
+                    <p style="text-align: center;"><span style="font-size: 14px;"><br/></span>
+
+                    </p>
+                    <p style="text-align: center;"><span style="font-size: 14px;"><img title="1562143531659716.png" alt="1522743027285731_副本.png" src="__CON__/picture/1562143531659716.png"/></span>
+
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+                </div>
+            </div>
+            <!--right End-->
+        </div>
+    </div>
+    <div class="right_extend"></div>
+</div>
+<footer>
+    {include file="public/con_footer" /}
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,376 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>创合汇</title>
+    <meta name='keywords' content="创合汇" />
+    <meta name='description' content="创合汇" />
+    <!-- Apple iOS and Android stuff -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="__CHHA__/images/icon.png" />
+    <link rel="apple-touch-icon-precomposed" href="__CHHA__/images/icon.png" />
+    <link rel="apple-touch-startup-image" media="screen and (orientation: portrait)" href="__CHHA__/images/startup.png" />
+    <link rel="apple-touch-startup-image" media="screen and (orientation: landscape)" href="__CHHA__/images/startupL.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1" />
+    <script type="text/javascript">
+        function fBrowserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+            if (bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+                window.location.href = "/mobile/";
+            }
+        }
+
+        fBrowserRedirect();
+    </script>
+    <link href="__CHHA__/css/flexslider.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/layout.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/common.css" type="text/css" rel="stylesheet" />
+    <link href="__CHHA__/css/page.css" type="text/css" rel="stylesheet" />
+    <!--[if IE]>
+    <script src="__CHHA__/js/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 10]>
+    <script type="text/javascript" src="__CHHA__/js/pie.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="__CHHA__/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/banner.js"></script>
+    <script type="text/javascript" src="__CHHA__/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('.flexslider').flexslider({
+                animation: "fade",
+                slideshow: true,
+                slideshowSpeed: 3000,
+                animationSpeed: 2000,
+                touch: false,
+                controlNav: true,
+                directionNav: false,
+                pauseOnHover: false
+            });
+
+
+
+            $(".index_btm_body .tab_body a").click(function() {
+                var index = $(".index_btm_body .tab_body a").index($(this));
+                $(".index_btm_body .tab_body a").removeClass("cur").eq(index).addClass("cur");
+                $(".index_btm_body .tab_con .con").hide().eq(index).fadeIn();
+            }).eq(0).click();
+
+
+        });
+    </script>
+</head>
+
+<body>
+<header>
+   {include file="public/header" /}
+</header>
+<script type="text/javascript">
+    function searchAll() {
+        var str = $("#keys").val();
+        if (str == "")
+            alert("请输入要搜索的关键词");
+        else
+            location.href = "/index/search/index.html?q=" + str;
+    }
+    $(function() {
+        $("ul.nav_list li").hover(function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+        }, function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+        });
+    });
+</script>
+<!--背景图片 开始-->
+<div class="pageBanner">
+    <img src="__CHHA__/images/banner.jpg">
+</div>
+<!--背景图片 end-->
+<div class="page">
+    <div class="cw">
+        <div class="pageBody clearfix">
+            <!--left start-->
+            <div class="leftBy fl">
+                <div class="tit">
+                    <h3>关于创合汇</h3>
+
+                    <h4>ABOUT US</h4>
+
+                </div>
+                <ul class="list2">
+                    <li> <a href="/index/about/index/cid/369.html" class="title cur">创合汇概况</a>
+                    </li>
+                    <li> <a href="/index/about/index/cid/370.html" class="title ">创始人介绍</a>
+                    </li>
+                    <li> <a href="/index/about/index/cid/371.html" class="title ">企业文化</a>
+                    </li>
+                    <li> <a href="/index/about/video.html" class="title ">视频集锦</a>
+                    </li>
+                    <li> <a href="/index/about/join.html" class="title ">加入创合汇</a>
+                    </li>
+                </ul>
+
+                <div class="list03">
+                    <div class="content">
+                        <div class="lay02">
+                            <h3><span>平台活动</span></h3>
+
+                            <ul>
+                                <li>
+                                    <a href="/index/activity/detail/cid/466/id/58.html" target="_blank">
+                                        <div class="txt">“从自我激活到组织共创——企业家精神...
+                                            <br>2019-08-08</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/index/activity/detail/cid/466/id/54.html" target="_blank">
+                                        <div class="txt">“最强阵容”聚首论道：企业家经济学首...
+                                            <br>2019-05-06</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/index/activity/detail/cid/466/id/55.html" target="_blank">
+                                        <div class="txt">科创赋能，领航未来：「创合汇」科创板...
+                                            <br>2019-04-27</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="lay03">
+                            <h3>官方微信</h3>
+
+                            <ul>
+                                <li>
+                                    <img src="__CHHA__/picture/wx_1.jpg">
+                                    <h4 class="pt10">创合汇商学院</h4>
+
+                                </li>
+                                <li>
+                                    <img src="__CHHA__/picture/wx_2.jpg">
+                                    <h4 class="pt10">创合汇</h4>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bottom"></div>
+                </div>
+
+            </div>
+            <!--left End-->
+            <!--right start-->
+            <div class="rightBy fr">
+                <div class="tool clearfix">
+                    <div class="fl">
+                        <h3> 创合汇概况 </h3>
+
+                    </div>
+                    <div class="fr"> <a href="/" target="_blank">首页</a><span class="cur">></span><a href="javascript:;" class="cur">创合汇概况</a>
+                    </div>
+                </div>
+                <div class="contBody">
+                    <p style="text-align: center;"><span style="font-size: 14px;"><img src="__CHHA__/picture/1534836175874689.jpg" title="1534836175874689.jpg" alt="1534836175874689.jpg" style="width: 600px; height: 338px;" width="600" vspace="0" height="338" border="0"/></span>
+                    </p>
+                    <p><span style="font-size: 14px;"><br/></span>
+                    </p>
+                    <p><span style="font-size: 14px;">创合汇平台是基于“斯坦福（教育）+硅谷（创新创业生态系统）”的模式，依托上海交通大学等国内外知名院校，整合投资机构、券商、投行、会所、律所、创业孵化器等优质资源所打造的以产学研为核心，集商学、资本、创服为一体的创新创业生态服务平台。目前创合汇平台已聚集20000+商界精英，500+教授、专家顾问，与100+资本、产业、社群联盟达成战略合作，链接1000亿+资金，影响1,000,000+人群，致力于培养商界精英，成就卓越企业，为中国创新创业和经济转型贡献力量！</span>
+                    </p>
+                    <p style="text-align: center;">
+                        <br/>
+                    </p>
+                    <p style="text-align: center;"><span style="font-size: 14px;"></span>
+                    </p>
+                    <p><span style="font-size: 14px;"><br/></span>
+                    </p>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">创合汇使命</span></strong>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">培养商界精英，成就卓越企业，助力中国创新！</span>
+                        </p>
+                        <p>
+                            <br/>
+                        </p>
+                    </section>
+                    <section data-author="Wxeditor">
+                        <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                            <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">创合汇愿景</span></strong>
+                            </p>
+                        </article>
+                        <p><span style="font-size: 14px;">成为具价值与影响力的创新创业生态服务平台！</span>
+                        </p>
+                        <p>
+                            <br/>
+                        </p>
+                        <section data-author="Wxeditor">
+                            <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                                <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">创合汇平台生态框架</span></strong>
+                                </p>
+                            </article>
+                            <p><strong><span style="font-size: 14px;">业务平台</span></strong>
+                            </p>
+                            <p><span style="font-size: 14px;">培训咨询平台、投融资平台 、创业服务平台</span>
+                            </p>
+                            <p>
+                                <br/>
+                            </p>
+                            <p><strong><span style="font-size: 14px;">专家智库</span></strong>
+                            </p>
+                            <p><span style="font-size: 14px;">专家顾问委员会、创业导师团</span>
+                            </p>
+                            <p>
+                                <br/>
+                            </p>
+                            <p><strong><span style="font-size: 14px;">战略联盟</span></strong>
+                            </p>
+                            <p><span style="font-size: 14px;">培训合作：</span><span style="font-size: 14px;">上海交大、荷兰商学院、北大国发院、剑桥大学、IDC大学......</span>
+                                <br/>
+                            </p>
+                            <p><span style="font-size: 14px;">科研合作：</span><span style="font-size: 14px;">上海交大AI研究院、北大企业大数据研究中心 ......</span>
+                                <br/>
+                            </p>
+                            <p><span style="font-size: 14px;">创业孵化合作：</span><span style="font-size: 14px;">零号湾、优客工场 ......</span>
+                                <br/>
+                            </p>
+                            <p><span style="font-size: 14px;">投资合作：</span><span style="font-size: 14px;">申万投资、软银中国、达晨创投、接力基金......</span>
+                                <br/>
+                            </p>
+                            <p><span style="font-size: 14px;">上市挂牌合作：</span><span style="font-size: 14px;">申万证券、东方花旗、光大证券、平安证券......</span>
+                                <br/>
+                            </p>
+                        </section>
+                        <p>
+                            <br/>
+                        </p>
+                        <section data-author="Wxeditor">
+                            <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                                <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">创合汇企业赋能加速服务体系</span></strong>
+                                </p>
+                            </article>
+                            <p>
+                                <br/>
+                            </p>
+                            <p style="text-align: center;">
+                                <img src="__CHHA__/picture/1534838331377344.jpg" title="1534838331377344.jpg" alt="1534838331377344.jpg" style="width: 600px; height: 333px;" width="600" vspace="0" height="333" border="0" />
+                            </p>
+                        </section>
+                        <p>
+                            <br/>
+                        </p>
+                        <section data-author="Wxeditor">
+                            <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                                <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">创合汇大事记</span></strong>
+                                </p>
+                            </article>
+                            <p><span style="font-size: 14px;">2010年，与BSN荷兰商学院建立战略合作关系</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2011年，与上海交通大学共建经济与管理培训中心</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2015年，被上海交通大学评为“优秀培训团队”</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2015年12月，全球商学院众创空间“赤兔创业咖啡”正式开业</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2016年6月，创合汇一期基金正式成立</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2016年6月，赤兔创业咖啡（普陀环球店）正式开业</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2016年7月，创合汇与创业接力基金达成战略合作</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2016年11月，创合汇全球商学院HR俱乐部正式成立</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2016年，完成优享创智-共享际、爱可生信息、未名企鹅项目的投资</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2017年1月，创合汇慕课正式上线</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2017年6月，创合汇与优客工场达成战略合作</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2017年6月，创合汇二期基金正式成立</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2017年8月，赤兔创业咖啡（浦东喜马拉雅店）正式开业</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2017年9月，创合汇与申能诚毅投资、交大零号湾达成战略合作，落地“基金+上市公司+政府引导基金”模式</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2017年9月，创合汇与上海股权交易托管中心达成战略合作</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2017年9月，赤兔创业咖啡（徐汇万科中心店）正式开业</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2017年12月，创合汇全球商学院董秘俱乐部正式成立</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2017年12月，创合汇学院捐助“博而思”希望小学</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2017年，完成优客工场、31会议、执行力、优蓝网、源耀生物项目投资</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2018年1月，创合汇学院福州分院正式揭牌成立</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2018年5月，创合汇与上海交大人工智能研究院达成战略合作联合举办“科技创业营”项目</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2018年6月，携手北京大学共建企业大数据研究中心，并受聘为常务理事单位</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2018年7月，战略投资中国职业女性成长平台“睿问 ShePower”</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2018年8月，创合汇厦门分院正式成立</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2018年11月，创合汇全球商学院创业与投资俱乐部正式成立</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2018年11月，携手北大发布《中国风险投资的演化和现状》报告</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2018年12月，创合汇全球商学院大健康产业联盟正式成立</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2018年12月，创合汇宁波分院正式成立</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2019年1月，创合汇APP正式发布</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2019年3月，战略投资小米生态链孵化平台—谷仓创业学院</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2019年4月，创合汇全球商学院人文与领导力俱乐部成立</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2019年4月，与中化集团金茂资本达成战略合作，合作设立股权投资基金</span>
+                            </p>
+                            <p><span style="font-size: 14px;">2019年5月，举办企业家经济学首届年会暨《企业家》出版30周年活动《中国企业家精神研究报告》发布</span>
+                            </p>
+                        </section>
+                        <p>
+                            <br/>
+                        </p>
+                        <section data-author="Wxeditor">
+                            <article id="m47" class="yead_editor" data-author="Wxeditor" style="font-size:14px;margin:5px auto;">
+                                <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; color: rgb(255, 255, 255); white-space: pre-wrap; min-height: 1.5em; max-width: 100%; font-stretch: normal; word-wrap: break-word !important;"><strong><span class="yead_bgc" style="padding: 4px 10px; font-family: 微软雅黑, 'Microsoft YaHei'; margin-right: 8px; max-width: 100%; word-wrap: break-word !important; background-color: rgb(189, 140, 119);">合作咨询</span></strong>
+                                </p>
+                            </article>
+                            <p><span style="font-size: 14px;">电话：021-62828166 / 62822099</span>
+                            </p>
+                            <p><span style="font-size: 14px;">传真：021-52308253</span>
+                            </p>
+                        </section>
+                    </section>
+                </div>
+            </div>
+            <!--right End-->
+        </div>
+    </div>
+    <div class="right_extend"></div>
+</div>
+<footer>
+    {include file="public/footer" /}
+</footer>
+</body>
+
+</html>
