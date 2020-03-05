@@ -39,5 +39,6 @@ return [
         '__CAP__'=>'/static/chhcapital',
         '__CON__'=>'/static/chhconsulting',
         '__COLL__'=>'/static/chhcollege',
+        '__ADMIN__'=>'/static/houtai',
     ],
 ];

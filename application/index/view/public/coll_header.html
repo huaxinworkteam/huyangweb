@@ -1,47 +1,61 @@
+<!--<script type="text/javascript">
+    $(function () {
+        $('#searchAll').click(function () {
+            var keys=$("#keys").val();
+            $.ajax({
+                url:"{:url('index/search')}",
+                type:"get",
+                data:{keys:keys},
+                dataType:"json",
+                success:function (data) {
+                    if(data.code==1){
+                        location.href=data.url;
+                    }else{
+                        alert(data.msg);
+                    }
+
+                }
+            });
+            return false;
+        });
+    });
+</script>-->
 <div class="cw">
-    <a href="/" class="logo fl"></a>
+    <a href="{:url('index/index')}" class="logo fl"></a>
     <div class="tools_bar fr">
         <div class="tools_top">
             <div class="search_bar" onkeydown="if (event.keyCode==13) {searchAll();}" style="position: relative">
-                <div style="position: absolute; margin-left: -160px; font-size: 22px; color: #311f13;">400-6886-238</div>
-                <input type="text" id="keys" placeholder="Search" />
-                <a href="javascript:;" onclick="searchAll()"></a>
-            </div>
-            <div class="website_change"><span>创合汇网群</span><i></i>
-                <ul>
-                    <li><a href="{:url('index/index')}" target="_blank">创合汇总站</a></li>
-                    <li><a href="{:url('chhcapital/index')}" target="_blank">创合汇资本</a></li>
-
-                    <li><a href="{:url('chhcollege/index')}" target="_blank">创合汇商学院</a></li>
-                    <li><a href="{:url('chhconsulting/index')}" target="_blank">创合汇咨询</a></li>
-                    <li><a href="http://www.chhcollege.org/index/mooc/index.html" target="_blank">创合汇APP</a></li>
-                </ul>
+ <!--               <div style="position: absolute; margin-left: -160px; font-size: 22px; color: #311f13;">电话：400-6886-238</div>
+               <input type="text" id="keys" placeholder="Search" />
+                <a href="javascript:void(0);" id="searchAll"></a>-->
             </div>
             <!-- <a href="javascript:;" class="wechat"><span><img src="__COLL__/picture/qr_code_top.jpg" /></span></a> </div> -->
             <ul class="nav_list">
-                <li><a href="{:url('chhcollege/index')}" class="">首页</a></li>
-                <li><a href="{:url('chhcollege/about')}" class="">学院介绍</a></li>
-                <li><a href="{:url('chhcollege/course')}" class="cur">核心课程</a>
+                <li><a href="{:url('index/index')}" class="">首页</a></li>
+                <li><a href="{:url('index/about')}" class="">胡杨概况</a>
                     <div class="sub_Nav">
                         <div class="line"></div>
-                        <p><a href="{:url('chhcollege/m402')}" target="_blank">工商管理类</a></p>
-                        <p><a href="{:url('chhcollege/m404')}" target="_blank">创新创业类</a></p>
-                        <p><a href="{:url('chhcollege/m385')}" target="_blank">金融实务类</a></p>
-                        <p><a href="{:url('chhcollege/m375')}" target="_blank">人文与领导力类</a></p>
-                        <p><a href="{:url('chhcollege/m380')}" target="_blank">国际访学类</a></p>
+                        <p><a href="{:url('index/introduction')}">学院介绍</a></p>
+                        <p><a href="{:url('index/organization')}">组织架构</a></p>
                     </div>
                 </li>
-                <li><a href="{:url('chhcollege/szll')}" class="">师资力量</a>
+                <li><a href="{:url('index/course')}" class="">核心课程</a>
                     <div class="sub_Nav">
                         <div class="line"></div>
-                        <p><a href="/index/staff/index/cateid/1.html" target="_blank"> 中教师资 </a></p>
-                        <p><a href="/index/staff/index/cateid/2.html" target="_blank"> 外教师资 </a></p>
-                        <p><a href="/index/staff/index/cateid/3.html" target="_blank"> 论坛讲座师资 </a></p>
+                        <p><a href="{:url('index/m402')}" target="_blank">工商管理类</a></p>
                     </div>
                 </li>
-                <li><a href="{:url('chhcollege/news')}" class="">新闻动态</a></li>
-                <li><a href="{:url('chhcollege/activity')}" class="">平台活动</a></li>
-                <li><a href="{:url('chhcollege/contact')}" class="">联系我们</a></li>
+                <li><a href="{:url('index/szll',['seriesNO'=>1])}" class="">师资力量</a>
+                    <div class="sub_Nav">
+                        <div class="line"></div>
+                        {volist name="shizi" id="vo"}
+                        <p><a href="{:url('index/szll',['seriesNO'=>$vo.seriesNO])}" target="_blank">{$vo.series}</a></p>
+                        {/volist}
+                    </div>
+                </li>
+                <li><a href="{:url('index/news')}" class="">新闻动态</a></li>
+                <li><a href="http://www.massmakers.cn/category-9338.html" target="_blank" class="">培训报名</a></li><!--{:url('index/activity')}-->
+                <li><a href="{:url('index/contact')}" class="">联系我们</a></li>
             </ul>
         </div>
     </div>

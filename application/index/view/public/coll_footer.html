@@ -2,58 +2,63 @@
     <div class="top_body clearfix">
         <ul class="fl clearfix">
             <li>
-                <h3>学院介绍</h3>
-                <p><a href="{:url('chhcollege/index')}" target="_blank">使命与愿景</a></p>
-                <p><a href="#" target="_blank">核心价值观</a></p>
-                <p><a href="#" target="_blank">学院特色</a></p>
-                <p><a href="#" target="_blank">学习模式</a></p>
+                <h3><a href="{:url('index/about')}" target="_blank">胡杨概况</a></h3>
+                <p><a href="{:url('index/introduction')}" target="_blank">学院介绍</a></p>
+                <p><a href="{:url('index/organization')}" target="_blank">组织架构</a></p>
             </li>
             <li>
-                <h3>核心课程</h3>
+                <h3><a href="{:url('index/course')}" class="">核心课程</a></h3>
                 <p><a href="{:url('chhcollege/m402')}" target="_blank">工商管理类</a></p>
-                <p><a href="{:url('chhcollege/m404')}" target="_blank">创新创业类</a></p>
-                <p><a href="{:url('chhcollege/m385')}" target="_blank">金融实务类</a></p>
-                <p><a href="{:url('chhcollege/m375')}" target="_blank">人文与领导力类</a></p>
-                <p><a href="{:url('chhcollege/m380')}" target="_blank">国际访学类</a></p>
             </li>
             <li>
-                <h3>师资力量</h3>
-                <p><a href="/index/staff/index/cateid/1.html" target="_blank">中教师资</a></p>
-                <p><a href="/index/staff/index/cateid/2.html" target="_blank">名教师资</a></p>
-                <p><a href="/index/staff/index/cateid/3.html" target="_blank">名家讲坛师资</a></p>
+                <h3><a href="{:url('index/szll',['seriesNO'=>1])}" class="">师资力量</a></h3>
+                {volist name="footer_szll" id="vo"}
+                <p><a href="{:url('index/szll',['seriesNO'=>$vo.seriesNO])}" target="_blank">{$vo.series}</a></p>
+                {/volist}
             </li>
             <li>
-                <h3 class="no_b"><a href="/index/activity/index.html" target="_blank">平台活动</a></h3>
+                <h3 class="no_b"><a href="{:url('index/news')}" target="_blank">新闻动态</a></h3>
             </li>
             <li>
-                <h3 class="no_b"><a href="/index/news/index.html" target="_blank">新闻动态</a></h3>
+                <h3 class="no_b"><a href="http://www.massmakers.cn/category-9338.html" target="_blank" class="">培训报名</a></h3>
             </li>
+            <!--<li>-->
+                <!--<h3 class="no_b"><a href="{:url('index/contact')}" target="_blank">联系我们</a></h3>-->
+            <!--</li>-->
         </ul>
 
         <div class="contactus_body fr">
             <h3>联系我们</h3>
-            <p><span>创合汇商学院：</span></p>
-            <p>地址：上海市淮海西路55号申通信息广场17楼</p>
-            <p>电话：400-6886-238</p>
+            <!--<p><span>：</span></p>-->
+            <p>地址：上海市杨浦区公共实训基地裙楼3楼</p>
+            <p>电话：021-62095281</p>
             <p>传真：021-52308253</p>
             <!-- <h6><img src="static/picture/qr_code.jpg" /></h6> -->
         </div>
 
     </div>
 
-    <div class="copyright_bar">
-        <div class="fl">
-            <a href="/index/contact/index.html" target="_blank">联系我们</a>
-            <em>|</em>
-            <a href="#" target="_blank">网站地图</a>
-            <em>|</em>
-            <a href="#" target="_blank">法律声明</a>
-        </div>
-        <p class="fr">版权 © 创合汇商学院 网站备案号：
-            <a style='color: #e6e6e6;' href="http://www.miitbeian.gov.cn" target="_blank">沪ICP备18026080号-1</a>
-            <a class="blank" id="host" target="_blank" href=""><img src="static/picture/dian.png" alt=""></a>
-        </p>
+    <div class="links">
+        友情链接：
+        <a href="http://www.hcclub.org" target="_blank">华创官网</a>
+        <a href="http://www.massmakers.cn" target="_blank">创服汇</a>
+        <a href="http://www.v7mall.com" target="_blank">商城</a>
     </div>
+
+
+    <div class="copyright_bar">
+        <!-- <div class="fl">
+             <a href="{:url('index/contact')}" target="_blank">联系我们</a>
+             <em>|</em>
+             <a href="{:url('index/index')}" target="_blank">网站地图</a>
+             <em>|</em>
+             <a href="#" target="_blank">法律声明</a>
+         </div>
+         <p class="fr">版权 ©  网站备案号：
+             <a style='color: #e6e6e6;' href="http://www.miitbeian.gov.cn" target="_blank">沪ICP备18026080号-1</a>
+             <a class="blank" id="host" target="_blank" href=""><img src="static/picture/dian.png" alt=""></a>
+         </p>-->
+     </div>
 
     <script>
         var link = ['http://218.242.124.22:8081/businessCheck/verifKey.do?showType=extShow&serial=9031000020190125155927000003646420-SAIC_SHOW_310000-20190703165346702253&signData=MEYCIQCrnaIIflg67U0hfPCfiVlkLaW0yTyYt/GiY7XUNVxtMgIhAJCTWwD1Hp4jrl4On+ciavsC4DwSXgA3wT0v+r7iMpoE', 'http://218.242.124.22:8081/businessCheck/verifKey.do?showType=extShow&serial=9031000020190327163918000004498431-SAIC_SHOW_310000-4028e4cb697682950169cf8d393c3725618&signData=MEQCIDSCUjNe0hZGCeWPdf8pKfbQD3X8Yf71iwcGL7xvbf14AiAwL8YfS2vNIr2VGKle2IqaoTgKiXS7tDeNCOMPq30m6Q==']
@@ -66,4 +71,44 @@
         }
     </script>
 
+    <script src="//at.alicdn.com/t/font_1471030_svadb868xjp.js"></script>
+    <script type="text/javascript">
+        //Dialog icon base path
+        ds.Dialog.defaults.iconBasePath = 'images/';
+        ds.loadScript(baseJSUrl+'quick_links.js');
+    </script>
+
 </div>
+
+<!--在线咨询--><!--
+<div class="consultation">
+    <div class="consultation_head">
+        <div class="consultation_bj"></div>
+    </div>
+    <div class="consultation_icon">
+        <a href="">
+            <div class="consultation_icon_item">
+                <div class="consultation_icon_item_img"></div>
+                <div class="consultation_icon_item_text">创新管理课程</div>
+            </div>
+        </a>
+        <a href="">
+            <div class="consultation_icon_item">
+                <div class="consultation_icon_item_img"></div>
+                <div class="consultation_icon_item_text">创新管理课程</div>
+            </div>
+        </a>
+        <a href="">
+            <div class="consultation_icon_item">
+                <div class="consultation_icon_item_img"></div>
+                <div class="consultation_icon_item_text">创新管理课程</div>
+            </div>
+        </a>
+        <a href="">
+            <div class="consultation_icon_item">
+                <div class="consultation_icon_item_img"></div>
+                <div class="consultation_icon_item_text">创新管理课程</div>
+            </div>
+        </a>
+    </div>
+</div>-->

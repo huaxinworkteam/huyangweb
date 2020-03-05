@@ -1,0 +1,378 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head runat="server">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>组织架构</title>
+  <meta name='keywords' content="——全球开放式平台型商学院" />
+  <meta name='description' content="——全球开放式平台型商学院" />
+    {include file="public/head" /}
+  <style>
+    table{}
+    table tr{height:40px;}
+    table tr td{text-align: center;font-size: 18px;}
+  </style>
+</head>
+<body>
+<header>
+    {include file="public/coll_header" /}
+</header>
+<script type="text/javascript">
+    function searchAll() {
+        var str = $("#keys").val();
+        if (str == "")
+            alert("请输入要搜索的关键词");
+        else
+            location.href = "/index/search/index.html?q=" + str;
+    }
+
+    $(function() {
+        $("ul.nav_list li").hover(function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+        }, function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+        });
+    });
+</script>
+<div class="pageBanner">
+  <div class="roll flexslider">
+    <ul class="slides">
+      <!--<li><img src="__COLL__/picture/schoolnews.jpg"></li>-->
+      <li><img src="__COLL__/images/huyanggaikuang.jpg"></li>
+    </ul>
+  </div>
+  <!--<div class="txt">-->
+  <!--<div class="cw">-->
+  <!--<h3></h3>-->
+  <!--</div>-->
+  <!---->
+  <!--</div>-->
+  <!--<div class="line"></div>-->
+  <!--<div class="btn">-->
+  <!--<div class="cw"> <a href="/index/contact/message.html" class="act" target="_blank">在线报名</a> </div>-->
+  <!--</div>-->
+
+</div>
+<div class="page">
+  <div class="cw">
+    <div class="pageBody clearfix">
+      <!--left start-->
+      <div class="leftBy fl">
+        <div class="tit">
+          <h3>新闻动态</h3>
+          <h4>News</h4>
+        </div>
+        {include file="public/coll_leftBy" /}
+      </div>
+      <!--left End-->
+      <!--right start-->
+      <div class="rightBy fr">
+        <div class="tool clearfix">
+          <div class="fl">
+            <h3> 组织<span>架构</span></h3>
+          </div>
+          <div class="fr"><a href="{:url('index/index')}" target="_blank">首页</a><span class="cur">></span><a href="javascript:;" class="cur">组织架构</a>
+          </div>
+        </div>
+        <div class="contBody">
+
+          <table width="100%" border="1" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+              <td colspan="4" style="background-color: #ff7c00;">校长及院长</td>
+            </tr>
+            <tr>
+              <td>校长</td>
+              <td colspan="3">许炳</td>
+            </tr>
+            <tr>
+              <td>院长</td>
+              <td>名誉院长</td>
+              <td>院长</td>
+              <td>副院长</td>
+            </tr>
+            <tr>
+              <td>创业CEO学院</td>
+              <td>宁钟</td>
+              <td>凌建民</td>
+              <td>/</td>
+            </tr>
+            <tr>
+              <td>新零售学院</td>
+              <td>李悦</td>
+              <td>秦  影</td>
+              <td>刘彦麟</td>
+            </tr>
+            <tr>
+              <td>文创学院</td>
+              <td>/</td>
+              <td>申  杰</td>
+              <td>石梦玄</td>
+            </tr>
+            <tr>
+              <td>法商学院</td>
+              <td>/</td>
+              <td>邱春雨</td>
+              <td>/</td>
+            </tr>
+            <tr>
+              <td>国学创意学院</td>
+              <td>李冀</td>
+              <td>范慧英</td>
+              <td>郑乾</td>
+            </tr>
+            <tr>
+              <td>女性创业学院</td>
+              <td>/</td>
+              <td>孙  瑜</td>
+              <td>/</td>
+            </tr>
+            <tr>
+              <td>个人品牌学院</td>
+              <td>/</td>
+              <td>白诗豪</td>
+              <td>/</td>
+            </tr>
+            <tr>
+              <td>人工智能学院</td>
+              <td>凌棕</td>
+              <td>白诗豪</td>
+              <td>/</td>
+            </tr>
+            <tr>
+              <td>财税学院</td>
+              <td>/</td>
+              <td>傅旭东</td>
+              <td>/</td>
+            </tr>
+            <tr>
+              <td>经理人学院</td>
+              <td>曾莹</td>
+              <td>翁海冰</td>
+              <td>/</td>
+            </tr>
+            <tr>
+              <td>K12教育学院</td>
+              <td>/</td>
+              <td>沈俊同</td>
+              <td>/</td>
+            </tr>
+          </table>
+
+          <br/><br/><br/>
+
+          <table width="100%" border="1" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+              <td colspan="3" style="background-color: #ffab00;">行政部门</td>
+            </tr>
+            <tr>
+              <td>校长</td>
+              <td colspan="2">许炳</td>
+            </tr>
+            <tr>
+              <td>常务副校长</td>
+              <td colspan="2">崔亚男</td>
+            </tr>
+            <tr>
+              <td>班主任</td>
+              <td>张想丽</td>
+              <td>方亚昕</td>
+            </tr>
+            <tr>
+              <td rowspan="7">校友工作办公室</td>
+              <td>主任</td>
+              <td>郑乾</td>
+            </tr>
+            <tr>
+              <td>副主任</td>
+              <td>王晔</td>
+            </tr>
+            <tr>
+              <td>主任助理</td>
+              <td>吴睦（兼）</td>
+            </tr>
+            <tr>
+              <td>法务科</td>
+              <td>李亚楠 律师</td>
+            </tr>
+            <tr>
+              <td>财务科</td>
+              <td>李健</td>
+            </tr>
+            <tr>
+              <td>组织科</td>
+              <td>陈水红</td>
+            </tr>
+            <tr>
+              <td>保密与信息化科</td>
+              <td>芦金梅</td>
+            </tr>
+          </table>
+
+          <br/><br/><br/>
+
+          <table width="100%" border="1" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+              <td colspan="3" style="background-color: #ffc247;">第二届校友会</td>
+            </tr>
+            <tr>
+              <td>顾问团</td>
+              <td>总顾问</td>
+              <td>修淑华</td>
+            </tr>
+            <tr>
+              <td rowspan="4">校友会</td>
+              <td>会长</td>
+              <td>程强</td>
+            </tr>
+            <tr>
+              <td>副会长</td>
+              <td>郑乾（兼纪律与激励部部长）</td>
+            </tr>
+            <tr>
+              <td>副会长</td>
+              <td>黄舒</td>
+            </tr>
+            <tr>
+              <td>副会长</td>
+              <td>黄丽敏（兼活动部部长）</td>
+            </tr>
+            <tr>
+              <td>秘书处</td>
+              <td>秘书长</td>
+              <td>张燕</td>
+            </tr>
+            <tr>
+              <td>秘书处</td>
+              <td>常务副秘书长</td>
+              <td>孔翔斌</td>
+            </tr>
+            <tr>
+              <td>秘书处</td>
+              <td>副秘书长</td>
+              <td>张文忠</td>
+            </tr>
+            <tr>
+              <td>秘书处</td>
+              <td>副秘书长</td>
+              <td>赵 鹏</td>
+            </tr>
+            <tr>
+              <td>宣传部</td>
+              <td>部长</td>
+              <td>周栓授</td>
+            </tr>
+            <tr>
+              <td>宣传部</td>
+              <td>副部长</td>
+              <td>陈莎莎</td>
+            </tr>
+            <tr>
+              <td>学习与发展部</td>
+              <td>第一副部长</td>
+              <td>朱红杲</td>
+            </tr>
+            <tr>
+              <td>活动部</td>
+              <td>副部长</td>
+              <td>陈德渊</td>
+            </tr>
+            <tr>
+              <td>资源整合部</td>
+              <td>部长</td>
+              <td>张 伟</td>
+            </tr>
+            <tr>
+              <td>资源整合部</td>
+              <td>副部长</td>
+              <td>何秀炜</td>
+            </tr>
+            <tr>
+              <td>公共关系部</td>
+              <td>部长</td>
+              <td>汪芙蓉</td>
+            </tr>
+            <tr>
+              <td>公共关系部</td>
+              <td>副部长</td>
+              <td>魏冬妮</td>
+            </tr>
+            <tr>
+              <td>公共关系部</td>
+              <td>副部长</td>
+              <td>王顺斌</td>
+            </tr>
+            <tr>
+              <td>会员服务部</td>
+              <td>副部长</td>
+              <td>张丽芬</td>
+            </tr>
+            <tr>
+              <td>渠道推广部</td>
+              <td>副部长</td>
+              <td>陈宝文</td>
+            </tr>
+            <tr>
+              <td>礼品推介部</td>
+              <td>部长</td>
+              <td>刘显喜</td>
+            </tr>
+            <tr>
+              <td>礼品推介部</td>
+              <td>副部长</td>
+              <td>漆家芳</td>
+            </tr>
+          </table>
+
+        </div>
+      </div>
+      <!--right End-->
+    </div>
+  </div>
+  <div class="right_extend"></div>
+</div>
+<div class="color_blank s_1"></div>
+<footer>
+    {include file="public/coll_footer" /}
+</footer>
+<script type="text/javascript">
+ $(function () {
+      $('#consub').click(function (){
+      $.ajax({
+          url:"{:url('Index/sendEmail')}",
+          type:"post",
+          data:$('#sendEmail').serialize(),
+          dataType:"json",
+          success:function (data) {
+                  if(data.code==1){
+                     layer.msg(data.msg,{
+                         icon:6,
+                         time:2000,
+                     },function () {
+                         location.href=data.url;
+                     });
+                  }else{
+                      layer.open({
+                          title:'发送失败',
+                          content:data.msg,
+                          icon:5,
+                      });
+                  }
+
+              }
+      });
+      return false;
+
+      });
+  });
+</script>
+<script>
+    $(".quickMessage li").click(function () {
+        var lit = $(this).find("p").text()
+        $(".conteat").val(lit)
+    });
+
+</script>
+<script type="text/javascript" src="__ADMIN__/lib/layer/3.1.1/layer.js"></script>
+</body>
+</html>

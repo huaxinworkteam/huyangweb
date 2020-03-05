@@ -1,0 +1,29 @@
+<div class="list03">
+        <div class="content">
+
+            <div class="lay02">
+                <h3><span>平台活动</span></h3>
+                <ul>
+                    {volist name="activity" id="vo"}
+                    <li>
+                        <a href="{:url('index/act_detail',['activityId'=>$vo.activityId])}" target="_blank">
+                            <div class="txt">{$vo.activityTitle}<br>{$vo.createTime}</div>
+                        </a>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+            <div class="lay03">
+                <h3>官方微信</h3>
+                <ul>
+                    <li><img src="__COLL__/picture/wx_1.jpg">
+                        <h4 class="pt10"><br>教育平台</h4>
+                    </li>
+                    <li><img src="__COLL__/picture/wx_2.jpg">
+                        <h4 class="pt10">创合汇</h4>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom"></div>
+    </div>

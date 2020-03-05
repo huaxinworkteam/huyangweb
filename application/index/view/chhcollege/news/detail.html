@@ -1,0 +1,95 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{$newsid.newstitle}</title>
+    <meta name='keywords' content="创合汇商学院——全球开放式平台型商学院" />
+    <meta name='description' content="2019年3月23日，创合汇「独角兽」创业成长计划三期的学员们开启了他们学习、成长、蜕变的新征程。此次学习之旅让创业者携手同行，在创业征途中成为时代的主角！" />
+
+    {include file="public/head" /}
+</head>
+
+<body>
+<header>
+    {include file="public/coll_header" /}
+</header>
+<script type="text/javascript">
+    function searchAll() {
+        var str = $("#keys").val();
+        if (str == "")
+            alert("请输入要搜索的关键词");
+        else
+            location.href = "/index/search/index.html?q=" + str;
+    }
+
+    $(function() {
+        $("ul.nav_list li").hover(function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+        }, function() {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+        });
+    });
+</script>
+    <div class="pageBanner">
+        <div class="roll flexslider">
+            <ul class="slides">
+                <li><img src="__COLL__/images/news.jpg"></li>
+            </ul>
+        </div>
+        <!--<div class="txt">
+            <div class="cw">
+                <h3></h3>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="btn">
+            <div class="cw"> <a href="/index/contact/message.html" class="act" target="_blank">在线报名</a> </div>
+        </div>-->
+    </div>
+    <div class="page">
+        <div class="cw">
+            <div class="pageBody clearfix">
+                <!--left start-->
+                <div class="leftBy fl">
+                    <div class="tit">
+                        <h3>新闻动态</h3>
+                        <h4>News</h4>
+                    </div>
+                    {include file="public/coll_leftBy" /}
+                </div>
+                <!--left End-->
+                <!--right start-->
+                <div class="rightBy fr">
+                    <div class="tool clearfix">
+                        <div class="fl">
+                            <h3> 平台<span>活动</span> </h3>
+                        </div>
+                        <div class="fr"> <a href="/" target="_blank">首页</a><span class="cur">></span><a href="javascript:;" class="cur">平台活动</a> </div>
+                    </div>
+                    <div class="activity">
+                        <div class="back"> <a href="javascript:history.go(-1)">返回<em>&gt;&gt;</em></a> </div>
+                        <div class="content">
+                            <h3>{$newsid.newstitle}</h3>
+                            <h4>{$newsid.createTime}</h4>
+                            <h4>{$newsid.articleContent|raw}</h4>
+                         </div>
+
+                       <!-- 点赞数-->
+                        <div class="bottom">  <a class="off">{$newsid.newsup}</a>  </div>
+                    </div>
+                </div>
+                <!--right End-->
+            </div>
+        </div>
+        <div class="right_extend"></div>
+    </div>
+    <div class="color_blank s_1"></div>
+<footer>
+    {include file="public/coll_footer" /}
+</footer>
+</body>
+
+</html>

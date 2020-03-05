@@ -1,0 +1,182 @@
+﻿<!--_meta 作为公共模版分离出去-->
+{include file="Common/meta" /}
+<!--/meta 作为公共模版分离出去-->
+
+<title>管理员列表 - 管理员列表 - h-ui.admin.pro v1.0</title>
+<meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+<meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+<body>
+<!--_menu 作为公共模版分离出去-->
+{include file="Common/leftbar" /}
+<!--/_menu 作为公共模版分离出去-->
+
+<div class="Hui-admin-dislpayArrow">
+    <a href="javascript:void(0);" onClick="displaynavbar(this)">
+        <i class="Hui-iconfont Hui-iconfont-left">&#xe6d4;</i>
+        <i class="Hui-iconfont Hui-iconfont-right">&#xe6d7;</i>
+    </a>
+</div>
+
+<section class="Hui-admin-article-wrapper">
+    <!--_header 作为公共模版分离出去-->
+    {include file="Common/header" /}
+    <!--/_header 作为公共模版分离出去-->
+
+    <div class="Hui-admin-article">
+        <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
+            首页
+            <span class="c-gray en">/</span>
+            管理员管理
+            <span class="c-gray en">/</span>
+            管理员列表
+        </nav>
+
+        <article class="Hui-admin-content clearfix">
+            <div class="panel">
+                <div class="panel-body">
+                    <form action="{:url('admin/adminsearch')}" method="get">
+                    <div class="text-c">
+                        <input type="text" class="input-text" style="width:250px" placeholder="输入管理员昵称或手机号或邮箱" id="search" name="search">
+                        <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i>
+                            搜用户
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel mt-20">
+                <div class="panel-body">
+                    <div class="clearfix">
+							<span class="f-l">
+								<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i
+                                        class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+								<a href="javascript:;" onclick="admin_add('管理员添加','adminadd.html')"
+                                   class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
+							</span>
+                        <span class="f-r">共有数据：<strong>{$total}</strong> 条</span>
+                    </div>
+                    <div class="mt-20 clearfix">
+                        <table class="table table-border table-bordered table-bg table-hover table-sort">
+                            <thead>
+                            <tr>
+                                <th scope="col" colspan="9">员工列表</th>
+                            </tr>
+                            <tr class="text-c">
+                                <th width="25"><input type="checkbox"  id="ckAll" onclick="QuanXuan()"></th>
+                                <th width="40">ID</th>
+                                <th width="100">账号</th>
+                                <th width="100">昵称</th>
+                                <th width="90">手机</th>
+                                <th width="150">邮箱</th>
+                                <th width="100">角色</th>
+                                <th width="130">加入时间</th>
+                                <th width="100">是否已启用</th>
+                                {if session('admin.is_super')==1}<th width="100">操作</th>{/if}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="admin" id="vo"}
+                            <tr class="text-c">
+                                <td><input type="checkbox"  value="{$vo.id}" class="ckc"></td>
+                                <td>{$vo.id}</td>
+                                <td>{$vo.username}</td>
+                                <td>{$vo.nickname}</td>
+                                <td>{$vo.phone}</td>
+                                <td>{$vo.email}</td>
+                                <td>{if $vo.is_super==1}超级管理员{else /}普通管理员{/if}</td>
+                                <td>{$vo.create_time}</td>
+                                <td class="td-status"><span class="label label-success radius">{if $vo.status==1}已启用{else /}已禁用{/if}</span>
+                                </td>
+                                {if session('admin.is_super')==1}
+                                <td class="td-manage">
+                                   <a style="text-decoration:none" onClick="{if $vo.status==1}admin_stop(this,{$vo.id}){else /}admin_start(this,{$vo.id}){/if}"
+                                                         href="javascript:;" title="停用"><i
+                                        class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;"
+                                                                                 onclick="admin_role_edit('管理员编辑', 'adminedit', {$vo.id})"
+                                                                                 class="ml-5"
+                                                                                 style="text-decoration:none"><i
+                                        class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;"
+                                                                                 onclick="admin_del(this,{$vo.id})"
+                                                                                 class="ml-5"
+                                                                                 style="text-decoration:none"><i
+                                        class="Hui-iconfont">&#xe6e2;</i></a></td>
+                                {/if}
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                        {$admin|raw}
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!--_footer 作为公共模版分离出去-->
+{include file="Common/footer" /}
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.15/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ADMIN__/business/js/main.js"></script>
+<script type="text/javascript">
+    $(function () {
+        runDatetimePicker();
+    });
+    $(function () {
+        for($i=0;$i<$(".td-status span").length;$i++){
+            if ($(".td-status span")[$i].innerText == '已禁用') {
+                $(".td-status span")[$i].className = "label label-defaunt radius";
+            }
+        }
+    });
+</script>
+<script type="text/javascript">
+    function QuanXuan()
+    {
+        $(".ckc").prop("checked",$("#ckAll").prop("checked"))
+    }
+    function datadel() {
+        var array = new Array();
+        $('.ckc:checked').each(function () {
+            array.push(this.value);
+        });
+        console.log(array.toString());
+        if(confirm("确定要删除吗")){
+            $.ajax({
+                url:"{:url('admin/Admin/deladmin')}",
+                data:{id:array.toString()},
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    if(data.code==1){
+                        layer.msg(data.msg,{
+                            icon:6,
+                            time:1000
+                        },function () {
+                            location.href=data.url;
+                        });
+
+                    }else{
+                        layer.open({
+                            title:"删除失败",
+                            content:data.msg,
+                            icon:5,
+                            anim:6
+
+                        });
+                    }
+
+                }
+            });
+            return false;
+        }
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

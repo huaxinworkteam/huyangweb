@@ -1,0 +1,35 @@
+<script type="text/javascript" src="__ADMIN__/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/layer/3.1.1/layer.js"></script>
+<script type="text/javascript" src="__ADMIN__/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="__ADMIN__/h-ui.admin.pro/js/h-ui.admin.pro.js"></script>
+<script>
+    $(function () {
+        $('#loginout').click(function () {
+            $.ajax({
+                url:"{:url('admin/home/loginout')}",
+                type:'post',
+                dataType:'json',
+                success:function (data) {
+                  if(data.code==1){
+                            layer.msg(data.msg,{
+                                icon:6,
+                                time:2000
+                            },function () {
+                                location.href =data.url;
+                            });
+                  }else{
+                      layer.open({
+                          titile:'退出失败',
+                          content:data.msg,
+                          icon:5,
+                          anim:6
+                      })
+                  }
+                    
+                }
+            });
+            
+        });
+        
+    });
+</script>

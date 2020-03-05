@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员信息</title>
+</head>
+<body>
+<div>管理员信息</div>
+<div>账号：{:session('admin.username')}</div>
+<div>昵称：{:session('admin.nickname')}</div>
+<div>权限：{if session('admin.is_super')==1}超级管理员{else /}普通管理员{/if}</div>
+<div>创建时间：{:session('admin.create_time')}</div>
+</body>
+</html>
