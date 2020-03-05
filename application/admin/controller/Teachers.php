@@ -30,9 +30,9 @@ class Teachers extends Base
                 'teachername' => input('teachername'),
                 'seriesNO' => input('seriesNO'),
                 'teacherlevel' => input('teacherlevel'),
+                'job' => input('job'),
                 'isShow' => input('isShow') ? 1 : 0,
                 'teacherdescription' => input('teacherdescription'),
-                'teacherdirection' => input('teacherdirection'),
                 'teacherphoto'=>"/upload/teacherpic/".input('teacherphoto'),
             ];
             $result = model('Teachers')->add($data);
@@ -67,9 +67,9 @@ class Teachers extends Base
                 'teachername' => input('teachername'),
                 'seriesNO' => input('seriesNO'),
                 'teacherlevel' => input('teacherlevel'),
+                'job' => input('job'),
                 'isShow' => input('isShow',0),
                 'teacherdescription' => input('teacherdescription'),
-                'teacherdirection' => input('teacherdirection'),
                 'teacherphoto'=>"/upload/teacherpic/".input('teacherphoto'),
             ];
             $result = model('teachers')->edit($data);

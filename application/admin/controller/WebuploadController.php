@@ -8,7 +8,7 @@ use think\Request;
 
 class WebuploadController extends Controller
 {
-    public function fileUpload(Request $request)
+    public function teacherpicUpload(Request $request)
     {
 
         //获取图片对象
@@ -24,4 +24,22 @@ class WebuploadController extends Controller
             }
         }
     }
+
+    public function galleryUpload(Request $request)
+    {
+
+        //获取图片对象
+        $filetemp = $request->file('file');
+        if ($filetemp) {
+            //存放服务器上地址
+            $serverFile = $filetemp->move(ROOT_PATH . '/public/upload/gallery');
+            if($serverFile) {
+                //访问地址
+                return json_encode($serverFile->getSaveName());
+            }else{
+                echo $filetemp->getError();
+            }
+        }
+    }
+
 }

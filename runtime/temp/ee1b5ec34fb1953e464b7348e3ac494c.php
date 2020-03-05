@@ -1,4 +1,4 @@
-<?php /*a:5:{s:86:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\chhcollege\szll\szll.html";i:1577929756;s:77:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\head.html";i:1574909810;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_header.html";i:1576828632;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_leftBy.html";i:1574734484;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_footer.html";i:1576828823;}*/ ?>
+<?php /*a:5:{s:86:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\chhcollege\szll\szll.html";i:1583396557;s:77:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\head.html";i:1574909810;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_header.html";i:1576828632;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_leftBy.html";i:1574734484;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_footer.html";i:1576828823;}*/ ?>
 ﻿<!DOCTYPE HTML>
 <html>
 <head runat="server">
@@ -355,7 +355,7 @@
                                     <h3><?php echo htmlentities($vo['teachername']); ?></h3>
                                     <p><span style="font-size: 14px;"><?php echo htmlentities($vo['teacherdescription']); ?></span>
                                     </p>
-                                    <p><span style="font-size: 14px;">研究方向:<?php echo htmlentities($vo['teacherdirection']); ?></span></p></div>
+                                    </div>
                             </div>
                         </li>
                         <?php endforeach; endif; else: echo "" ;endif; ?>

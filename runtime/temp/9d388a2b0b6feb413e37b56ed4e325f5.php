@@ -1,4 +1,4 @@
-<?php /*a:5:{s:80:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\admin\view\teachers\index.html";i:1572677422;s:77:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\admin\view\Common\meta.html";i:1574735572;s:80:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\admin\view\Common\leftbar.html";i:1583390538;s:79:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\admin\view\Common\header.html";i:1572677422;s:79:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\admin\view\Common\footer.html";i:1572677422;}*/ ?>
+<?php /*a:5:{s:80:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\admin\view\teachers\index.html";i:1583395256;s:77:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\admin\view\Common\meta.html";i:1574735572;s:80:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\admin\view\Common\leftbar.html";i:1583390538;s:79:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\admin\view\Common\header.html";i:1572677422;s:79:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\admin\view\Common\footer.html";i:1572677422;}*/ ?>
 ﻿<!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
@@ -259,7 +259,8 @@
                                 <th width="80">ID</th>
                                 <th width="80">教师姓名</th>
                                 <th width="80">院系</th>
-                                <th width="120">教师等级</th>
+                                <th width="120">教师资历</th>
+                                <th width="120">职务</th>
                                 <th width="120">创建时间</th>
                                 <th width="60">显示</th>
                                 <th width="120">操作</th>
@@ -273,6 +274,7 @@
                                 <td><?php echo htmlentities($vo['teachername']); ?></td>
                                 <td><?php echo htmlentities($vo['series']); ?></td>
                                 <td><?php echo htmlentities($vo['teacherlevel']); ?></td>
+                                <td><?php echo htmlentities($vo['job']); ?></td>
                                 <td><?php echo htmlentities($vo['create_time']); ?></td>
                                 <td class="td-status"><span class="label label-success radius"><?php if($vo['isShow'] ==1): ?>已显示<?php else: ?>已隐藏<?php endif; ?>
                                 </td>

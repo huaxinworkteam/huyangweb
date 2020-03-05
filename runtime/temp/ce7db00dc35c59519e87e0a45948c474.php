@@ -355,7 +355,7 @@
                                     <h3><?php echo htmlentities($vo['teachername']); ?></h3>
                                     <p><span style="font-size: 14px;"><?php echo htmlentities($vo['teacherdescription']); ?></span>
                                     </p>
-                                    <p><span style="font-size: 14px;">研究方向:<?php echo htmlentities($vo['teacherdirection']); ?></span></p></div>
+                                </div>
                             </div>
                         </li>
                         <?php endforeach; endif; else: echo "" ;endif; ?>

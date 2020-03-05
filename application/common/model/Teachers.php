@@ -40,11 +40,11 @@ class Teachers extends  Model
         $sql->isShow = $data['isShow'];
         $sql->seriesNO = $data['seriesNO'];
         $sql->teacherlevel = $data['teacherlevel'];
+        $sql->job = $data['job'];
         $sql->teacherdescription= $data['teacherdescription'];
         if($data['teacherphoto']){
             $sql->teacherphoto= $data['teacherphoto'];
         }
-        $sql->teacherdirection = $data['teacherdirection'];
         $result = $sql->save();
         if ($result) {
             return 1;

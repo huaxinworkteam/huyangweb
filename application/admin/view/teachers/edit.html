@@ -35,15 +35,15 @@
 				</div>
 			</div>
 			<div class="row clearfix">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>教师等级：</label>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>教师资历：</label>
 				<div class="form-controls col-xs-8 col-sm-9">
 					<input type="text" class="input-text" value="{$teacherinfo.teacherlevel}" placeholder="" id="teacherlevel" name="teacherlevel">
 				</div>
 			</div>
 			<div class="row clearfix">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>研究方向：</label>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>职务：</label>
 				<div class="form-controls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="{$teacherinfo.teacherdirection}" placeholder="" id="teacherdirection" name="teacherdirection">
+					<input type="text" class="input-text" value="" placeholder="" id="job" name="job">
 				</div>
 			</div>
 			<div class="row clearfix">
@@ -129,7 +129,7 @@
 	<script type="text/javascript">
         var SCOPE = {
             'swf' : '/public/static/webuploader/0.1.5/Uploader.swf',
-            'url' : "{:url('admin/WebuploadController/fileUpload')}",
+            'url' : "{:url('admin/WebuploadController/teacherpicUpload')}",
         };
 
         $(function() {

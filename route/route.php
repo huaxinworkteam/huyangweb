@@ -20,7 +20,8 @@ Route::group('admin',function (){
     Route::rule('newsedit/[:newsid]','admin/news/newsedit','get|post');
     Route::rule('newsdel','admin/news/newsdel','get|post');
     Route::rule('loginverify','admin/index/verify','get|post');
-    Route::rule('webupload','admin/WebuploadController/fileUpload','get|post');
+    Route::rule('webupload','admin/WebuploadController/teacherpicUpload','get|post');
+    Route::rule('webupload','admin/WebuploadController/galleryUpload','get|post');
   /*  Route::rule('newssearch','admin/news/newssearch','get|post');*/
     Route::rule('activitylist','admin/activity/lists','get|post');
     Route::rule('activityadd','admin/activity/add','get|post');

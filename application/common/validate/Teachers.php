@@ -15,19 +15,17 @@ class Teachers extends Validate
 {
     protected $rule=[
         'teachername|教师名称'=>'require|unique:teachers|max:10',
-        'teacherlevel|教师等级'=>'require|max:20',
         'isShow|是否显示'=>'require',
         'seriesNO|院系'=>'require',
-        'teacherdescription|教师描述'=>'require',
-        'teacherdirection|研究方向'=>'require',
+        'teacherdescription|教师描述'=>'require'
     ];
     public function  sceneAdd(){
-        return $this->only(['teachername','teacherlevel','seriesNO','teacherdescription','teacherdirection']);
+        return $this->only(['teachername','seriesNO','teacherdescription']);
     }
     public function  sceneShow(){
         return $this->only(['isShow']);
     }
     public function  sceneEdit(){
-        return $this->only(['teachername|教师名称'=>'require|max:10','teacherlevel','isShow','seriesNO','teacherdescription', 'teacherdirection']);
+        return $this->only(['teachername|教师名称'=>'require|max:10','isShow','seriesNO','teacherdescription']);
     }
 }
