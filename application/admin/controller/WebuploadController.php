@@ -15,7 +15,7 @@ class WebuploadController extends Controller
         $filetemp = $request->file('file');
         if ($filetemp) {
             //存放服务器上地址
-            $serverFile = $filetemp->move(ROOT_PATH . '/public/upload/teacherpic');
+            $serverFile = $filetemp->move(ROOT_PATH . 'public/upload/teacherpic');
             if($serverFile) {
                 //访问地址
                 return json_encode($serverFile->getSaveName());
@@ -32,7 +32,7 @@ class WebuploadController extends Controller
         $filetemp = $request->file('file');
         if ($filetemp) {
             //存放服务器上地址
-            $serverFile = $filetemp->move(ROOT_PATH . '/public/upload/gallery');
+            $serverFile = $filetemp->move(ROOT_PATH . 'public/upload/gallery');
             if($serverFile) {
                 //访问地址
                 return json_encode($serverFile->getSaveName());
