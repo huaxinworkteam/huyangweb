@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+/* global */
+@import url("global.css");
+
+.blank_tit{background:url(../images/blank_tit_bg.jpg) left center repeat-x;width:520px;text-align:center;
+	margin:0 auto;}
+.blank_tit span{background-color:#fff;color:#535353;font-size:35px;padding:0 35px;}
+
+.color_blank{height:6px;overflow:hidden;}
+.color_blank.s_1{background-color:#c49a81;}
+
+.fckBody h1{font-size:1.5em;}
+.fckBody h2{font-size:1.4em;}
+.fckBody h3{font-size:1.3em;}
+.fckBody h4{font-size:1.2em;}
+.fckBody h5{font-size:1.1em;}
+.fckBody h6{font-size:1em;}
+.fckBody h1,.fckBody h2,.fckBody h3,.fckBody h4,.fckBody h5,.fckBody h6 {margin:10px 0;font-weight:700;}
+
