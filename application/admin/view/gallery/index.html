@@ -91,7 +91,7 @@
                                             <i class="Hui-iconfont">&#xe631;</i></a> 
                                         <a title="编辑" href="javascript:;" onclick="edit('编辑', 'adminedit')" class="ml-5"style="text-decoration:none">
                                             <i class="Hui-iconfont">&#xe6df;</i></a> 
-                                        <a title="删除" href="javascript:;" onclick="del(this)"class="ml-5" style="text-decoration:none">
+                                        <a title="删除" href="javascript:;" onclick="del('{$vo.id}')"class="ml-5" style="text-decoration:none">
                                             <i class="Hui-iconfont">&#xe6e2;</i></a>
                                     </td>
                                 </tr>
@@ -133,9 +133,9 @@ function datadel() {
     layer.confirm('确认要删除吗？', function (index) {
         layer.close(index);
         $.ajax({
-            url:"./activitydel",
+            url:"{:url('admin/gallery/del')}",
             type:'POST',
-            data:{activityId:id},
+            data:{galleryId:array.toString()},
             dataType:'json',
             success: function (data) {
                 if (data.code == 1) {
@@ -172,13 +172,13 @@ function add(title, url) {
     });
 }
 // 删除
-function del() {
+function del(id) {
     layer.confirm('确认要删除吗？', function (index) {
         layer.close(index);
         $.ajax({
-            url:"./activitydel",
+            url:"{:url('admin/gallery/del')}",
             type:'POST',
-            data:{activityId:id},
+            data:{galleryId:id},
             dataType:'json',
             success: function (data) {
                 if (data.code == 1) {
@@ -192,7 +192,7 @@ function del() {
                     alert(id);
                     layer.open(
                         {
-                            title: "新闻删除失败",
+                            title: "图片删除失败",
                             content:data.msg,
                             icon:5,
                             anim:6
