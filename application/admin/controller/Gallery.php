@@ -12,9 +12,9 @@ namespace app\admin\controller;
 class Gallery extends Base
 {
     public  function index(){
-
+        return view();
     }
-    public function addPicGroup(){
+    public function add(){
 
         if(request()->isAjax()){
             $data = [
@@ -31,6 +31,7 @@ class Gallery extends Base
                 $this->error($result);
             }
         }
+        return view();
     }
 
 
