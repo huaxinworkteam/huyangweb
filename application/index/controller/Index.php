@@ -5,6 +5,7 @@ namespace app\index\controller;
 use app\common\model\Activity;
 use app\common\model\News;
 use app\common\model\Teachers;
+use app\common\model\Gallery;
 use think\Controller;
 use think\Db;
 
@@ -26,6 +27,8 @@ class Index extends Controller
         //获取学院类别
         $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->group('seriesNO')->select();
         $this->assign('group', $group);
+        $gallery=Gallery::where('webno',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $this->assign('gallery',$gallery);
         //获取教师信息
         $t = input('seriesNO');
        if (!$t)
@@ -72,6 +75,8 @@ class Index extends Controller
     {   $this->header();
         $this->left_bar();
         $this->footer();
+        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $this->assign('gallery',$gallery);
         $news = News::where('isShow',1)->order('createTime desc')->paginate(6);
         $this->assign('news', $news);
 
@@ -93,6 +98,8 @@ class Index extends Controller
     {  $this->header();
         $this->left_bar();
         $this->footer();
+        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $this->assign('gallery',$gallery);
         return view('chhcollege/about/index');
     }
     //关于胡杨概况页面
@@ -106,6 +113,8 @@ class Index extends Controller
     public function course()
     {   $this->footer();
         $this->header();
+        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $this->assign('gallery',$gallery);
         return view('chhcollege/course/index');
     }
     //咨询页面
@@ -113,6 +122,8 @@ class Index extends Controller
     {   $this->footer();
         $this->header();
         $this->left_bar();
+        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $this->assign('gallery',$gallery);
         return view('chhcollege/contact/contact');
     }
  //师资力量页面
@@ -124,6 +135,8 @@ class Index extends Controller
         //获取学院类别
         $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
         $this->assign('group', $group);
+        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $this->assign('gallery',$gallery);
         $t = input('seriesNO');
         //获取教师信息
         if (!$t)

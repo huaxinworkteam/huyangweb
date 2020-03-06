@@ -1,4 +1,4 @@
-<?php /*a:5:{s:86:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\chhcollege\szll\szll.html";i:1583396557;s:77:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\head.html";i:1574909810;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_header.html";i:1576828632;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_leftBy.html";i:1574734484;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_footer.html";i:1576828823;}*/ ?>
+<?php /*a:5:{s:86:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\chhcollege\szll\szll.html";i:1583485202;s:77:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\head.html";i:1574909810;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_header.html";i:1576828632;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_leftBy.html";i:1574734484;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_footer.html";i:1576828823;}*/ ?>
 ﻿<!DOCTYPE HTML>
 <html>
 <head runat="server">
@@ -268,10 +268,9 @@
 <div class="pageBanner">
     <div class="roll flexslider">
         <ul class="slides">
-            <li><img src="/static/chhcollege/images/Faculty.jpg">
-            <!--<li><img src="/static/chhcollege/images/T1_I.jpg"></li>
-            <li><img src="/static/chhcollege/images/T2_I.jpg"></li>
-            <li><img src="/static/chhcollege/images/T3_I.jpg"></li>-->
+            <?php if(is_array($gallery) || $gallery instanceof \think\Collection || $gallery instanceof \think\Paginator): $i = 0; $__LIST__ = $gallery;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+            <li><img src="<?php echo htmlentities($vo['path']); ?>"></li>
+            <?php endforeach; endif; else: echo "" ;endif; ?>
         </ul>
     </div>
     <!--<div class="txt">
