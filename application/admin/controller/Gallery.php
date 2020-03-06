@@ -15,19 +15,23 @@ class Gallery extends Base
 {
     public  function index(){
         $webno=input('webno');
-        if($webno!=null)
+        if($webno==null) return json_encode(['code'=>-1,'message'=>'缺少参数webno']);
+        $this->assign('webno',$webno);
         $sql=model('gallery')->where('is_del',0)->where('webno',$webno)->order('sort')->select();
-        else return json_encode(['code'=>-1,'message'=>'缺少参数webno']);
         $this->assign('gallery',$sql);
         $count=sizeof($sql);
         $this->assign('count',$count);
         return view();
     }
     public function add(){
+        $this->assign('webno',$_GET['webno']);
+        return view();
+    }
 
-        if(request()->isAjax()){
+    public function save(){
+        $webno=input('webno');
             $data = [
-                'webno' => input('webno'),
+                'webno' => $webno,
                 'headline'=>input('headline'),
                 'src'=>input('src'),
                 'path' => input('path'),
@@ -37,11 +41,10 @@ class Gallery extends Base
             ];
             $result = model('Gallery')->add($data);
             if ($result == 1) {
-                $this->success('添加成功', 'admin/gallery/index');
+                $this->success('添加成功', 'admin/gallery/index/webno/'.$webno);
             } else {
                 $this->error($result);
             }
-        }
         return view();
     }
     public function del(){
