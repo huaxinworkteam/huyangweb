@@ -45,7 +45,16 @@ class Gallery extends Base
         return view();
     }
     public function del(){
+        if(request()->isAjax()){
 
+            $return=db('gallery')->whereIn('id',input('id'))->setField(['is_del'=>1]);
+            if($return){
+                $this->success('删除成功',$_SERVER['HTTP_REFERER']);
+            }else{
+                $this->error($return);
+            }
+
+        }
     }
 
 }
