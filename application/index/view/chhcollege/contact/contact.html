@@ -34,7 +34,9 @@
   <div class="roll flexslider">
     <ul class="slides">
       <!--<li><img src="__COLL__/picture/contactus.jpg"></li>-->
-      <li><img src="__COLL__/images/contactus.jpg"></li>
+      {volist name="gallery" id="vo"}
+      <li><img src="{$vo.path}"></li>
+      {/volist}
     </ul>
   </div>
   <div class="txt">
@@ -72,7 +74,9 @@
           <ul>
             <li>
               <div class="item">
-                <div class="fl"> <img src="__COLL__/picture/address.png"> </div>
+                <div class="fl">
+                  <img src="__COLL__/picture/address.png">
+                </div>
                 <div class="fr">
                   <h3>地址</h3>
                   <p>上海市杨浦区公共实训基地裙楼3楼</p>

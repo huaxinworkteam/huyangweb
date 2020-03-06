@@ -54,19 +54,9 @@
     }
 </script>-->
 <div class="index_kv_body">
-    <a href="" class="kv" style="background-image:url(__COLL__/images/home.jpg);"></a>
-    <!--<a href="http://college.chuanghehui.com/index/dujiaoshou.html" target="_blank" class="kv"
-       style="background-image:url(__COLL__/images/home.jpg);"></a>
-    <a href="http://college.chuanghehui.com/index/dujiaoshou.html" target="_blank" class="kv"
-       style="background-image:url(__COLL__/images/home1.jpg);"></a>
-    <a href="http://college.chuanghehui.com/index/course/index/cid/375.html" target="_blank" class="kv"
-       style="background-image:url(__COLL__/images/home2.jpg);"></a>
-    <a href="http://college.chuanghehui.com/index/embaceo.html" target="_blank" class="kv"
-       style="background-image:url(__COLL__/images/home3.jpg);"></a>
-    <a href="http://college.chuanghehui.com/index/course/index/cid/380.html" target="_blank" class="kv"
-       style="background-image:url(__COLL__/images/home4.jpg);"></a>
-    <a href="javascript:;" class="btn prev_btn"></a>
-    <a href="javascript:;" class="btn next_btn"></a>-->
+    {volist name="gallery" id="vo"}
+    <a href="" class="kv" style="background-image:url({$vo.path});"></a>
+    {/volist}
 </div>
 
 <div class="index_center_body">

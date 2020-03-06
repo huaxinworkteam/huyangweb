@@ -1,4 +1,4 @@
-<?php /*a:4:{s:82:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\chhcollege\index.html";i:1577929756;s:77:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\head.html";i:1574909810;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_header.html";i:1576828632;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_footer.html";i:1576828823;}*/ ?>
+<?php /*a:4:{s:82:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\chhcollege\index.html";i:1583484121;s:77:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\head.html";i:1574909810;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_header.html";i:1576828632;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_footer.html";i:1576828823;}*/ ?>
 ﻿<!DOCTYPE HTML>
 <html>
 
@@ -289,19 +289,9 @@
     }
 </script>-->
 <div class="index_kv_body">
-    <a href="" class="kv" style="background-image:url(/static/chhcollege/images/home.jpg);"></a>
-    <!--<a href="http://college.chuanghehui.com/index/dujiaoshou.html" target="_blank" class="kv"
-       style="background-image:url(/static/chhcollege/images/home.jpg);"></a>
-    <a href="http://college.chuanghehui.com/index/dujiaoshou.html" target="_blank" class="kv"
-       style="background-image:url(/static/chhcollege/images/home1.jpg);"></a>
-    <a href="http://college.chuanghehui.com/index/course/index/cid/375.html" target="_blank" class="kv"
-       style="background-image:url(/static/chhcollege/images/home2.jpg);"></a>
-    <a href="http://college.chuanghehui.com/index/embaceo.html" target="_blank" class="kv"
-       style="background-image:url(/static/chhcollege/images/home3.jpg);"></a>
-    <a href="http://college.chuanghehui.com/index/course/index/cid/380.html" target="_blank" class="kv"
-       style="background-image:url(/static/chhcollege/images/home4.jpg);"></a>
-    <a href="javascript:;" class="btn prev_btn"></a>
-    <a href="javascript:;" class="btn next_btn"></a>-->
+    <?php if(is_array($gallery) || $gallery instanceof \think\Collection || $gallery instanceof \think\Paginator): $i = 0; $__LIST__ = $gallery;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+    <a href="" class="kv" style="background-image:url(<?php echo htmlentities($vo['path']); ?>);"></a>
+    <?php endforeach; endif; else: echo "" ;endif; ?>
 </div>
 
 <div class="index_center_body">

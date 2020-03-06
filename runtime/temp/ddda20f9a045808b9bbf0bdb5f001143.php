@@ -1,4 +1,4 @@
-<?php /*a:3:{s:89:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\chhcollege\course\index.html";i:1577929960;s:77:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\head.html";i:1574909810;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_header.html";i:1576828632;}*/ ?>
+<?php /*a:3:{s:89:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\chhcollege\course\index.html";i:1583485238;s:77:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\head.html";i:1574909810;s:84:"D:\phpstudy\PHPTutorial\WWW\huyangWeb\application\index\view\public\coll_header.html";i:1576828632;}*/ ?>
 ﻿<!DOCTYPE HTML>
 <html>
 <head runat="server">
@@ -268,8 +268,9 @@
 <div class="pageBanner">
   <div class="roll flexslider">
     <ul class="slides">
-    <!--<li><img src="/static/chhcollege/picture/20190923144043.jpg"></li>-->
-        <li><img src="/static/chhcollege/images/course.jpg"></li>
+        <?php if(is_array($gallery) || $gallery instanceof \think\Collection || $gallery instanceof \think\Paginator): $i = 0; $__LIST__ = $gallery;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+        <li><img src="<?php echo htmlentities($vo['path']); ?>"></li>
+        <?php endforeach; endif; else: echo "" ;endif; ?>
     </ul>
 	</div>
 	<!--<div class="txt">-->
