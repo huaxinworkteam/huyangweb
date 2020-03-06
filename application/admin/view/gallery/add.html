@@ -1,86 +1,35 @@
 <!--_meta 作为公共模版分离出去-->
 {include file="Common/meta" /}
 	<!--/meta 作为公共模版分离出去-->
-
 	<title>新增轮播图 - 轮播图新增 </title>
 	<meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
     <meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+    <!-- import Vue before Element -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
 <body>
 	<article class="clearfix pd-20" id="edit">
-        <el-form label-width="150px">
-            <el-form-item label="标题">
-                <el-input></el-input>
+        <el-form :model="dataForm" label-width="130px" :rules="rules">
+            <el-form-item label="标题；">
+                <el-input v-model="dataForm.title"></el-input>
             </el-form-item>
-            <el-form-item label="跳转链接">
-                <el-input></el-input>
+            <el-form-item label="跳转链接：">
+                <el-input v-model="dataForm.link"></el-input>
             </el-form-item>
-            <el-form-item label="图片 (nnn*mmm px)">
+            <el-form-item label="图片 (nnn*mmm px)：">
                 <el-image :src="src" fit="cover"></el-image>
             </el-form-item>
-            <el-form-item label="排序">
-                <el-input></el-input>
+            <el-form-item label="排序：">
+                <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
             </el-form-item>
-            <el-form-item label="状态">
-                <el-input></el-input>
-            </el-form-item>
+            <el-form-item label="状态：">
+                <el-switch v-model="dataForm.status" :active-text="dataForm.status? '启用':'禁用'"></el-switch>
+              </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
+                <el-button type="primary" @click="submitForm(dataForm)">立即创建</el-button>
+                <el-button @click="resetForm('dataForm')">重置</el-button>
             </el-form-item>
         </el-form>
-		<!-- <form class="form form-horizontal" id="form-admin-add">
-			<div class="row clearfix">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>法三翻四复称：</label>
-				<div class="form-controls col-xs-8 col-sm-9">
-					<input type="text" class="input-text"  placeholder="" id="nickname" name="nickname">
-				</div>
-			</div>
-			<div class="row clearfix">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
-				<div class="form-controls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" placeholder="" id="username" name="username">
-				</div>
-			</div>
-			<div class="row clearfix">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>初始密码：</label>
-				<div class="form-controls col-xs-8 col-sm-9">
-					<input type="password" class="input-text" autocomplete="off"  placeholder="密码" id="password" name="password">
-				</div>
-			</div>
-			<div class="row clearfix">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>确认密码：</label>
-				<div class="form-controls col-xs-8 col-sm-9">
-					<input type="password" class="input-text" autocomplete="off"  placeholder="确认新密码" id="password2" name="password2">
-				</div>
-			</div>
-			<div class="row clearfix">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
-				<div class="form-controls col-xs-8 col-sm-9">
-					<input type="text" class="input-text"  placeholder="" id="phone" name="phone">
-				</div>
-			</div>
-			<div class="row clearfix">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
-				<div class="form-controls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" placeholder="@" name="email" id="email">
-				</div>
-			</div>
-			<div class="row clearfix">
-				<label class="form-label col-xs-4 col-sm-3">角色：</label>
-				<div class="form-controls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
-					<select class="select" name="is_super" size="1">
-						<option value="0">普通管理员</option>
-						<option value="1">超级管理员</option>
-					</select>
-					</span> </div>
-			</div>
-			<div class="row clearfix">
-				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-					<input class="btn btn-primary radius" id="adminadd" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
-				</div>
-			</div>
-		</form> -->
     </article>
 
 	<!--_footer 作为公共模版分离出去-->
@@ -97,6 +46,13 @@
             el: '#edit',
             data: function() {
                 return {
+                    dataForm: {
+                        title: '',
+                        link: '',
+                        imageUrl: '',
+                        sort: '',
+                        status: true
+                    },
                     src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
                 }
             }
