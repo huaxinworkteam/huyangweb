@@ -19,7 +19,7 @@ class Gallery extends Base
         $sql=model('gallery')->where('is_del',0)->where('webno',$_GET['webno'])->order('sort')->select();
         else return json_encode(['code'=>-1,'message'=>'缺少参数webno']);
         $this->assign('gallery',$sql);
-        return view('slideshow/all');
+        return view();
     }
     public function add(){
 
