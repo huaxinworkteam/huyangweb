@@ -12,7 +12,9 @@ namespace app\admin\controller;
 class Gallery extends Base
 {
     public  function index(){
-        return view();
+        $sql=model('gallery')->where('is_del',0)->where('webno',$_GET['webno'])->select();
+        $this->assign('gallery',$sql);
+        return view('slideshow/all');
     }
     public function add(){
 
@@ -26,7 +28,7 @@ class Gallery extends Base
             ];
             $result = model('Gallery')->add($data);
             if ($result == 1) {
-                $this->success('教师添加成功', 'admin/gallery/index');
+                $this->success('添加成功', 'admin/gallery/index');
             } else {
                 $this->error($result);
             }
