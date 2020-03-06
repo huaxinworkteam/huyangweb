@@ -9,12 +9,14 @@
 namespace app\admin\controller;
 
 
+use think\facade\Request;
+
 class Gallery extends Base
 {
     public  function index(){
         $webno=$_GET['webno'];
         if($webno!=null)
-        $sql=model('gallery')->where('is_del',0)->where('webno',$_GET['webno'])->select();
+        $sql=model('gallery')->where('is_del',0)->where('webno',$_GET['webno'])->order('sort')->select();
         else return json_encode(['code'=>-1,'message'=>'缺少参数webno']);
         $this->assign('gallery',$sql);
         return view('slideshow/all');
@@ -38,6 +40,8 @@ class Gallery extends Base
         }
         return view();
     }
+    public function del(){
 
+    }
 
 }

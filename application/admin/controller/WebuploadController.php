@@ -8,6 +8,7 @@ use think\Request;
 
 class WebuploadController extends Controller
 {
+    //获取教师图片路径
     public function teacherpicUpload(Request $request)
     {
 
@@ -24,7 +25,7 @@ class WebuploadController extends Controller
             }
         }
     }
-
+    //获取轮播图图片路径
     public function galleryUpload(Request $request)
     {
 
@@ -41,5 +42,21 @@ class WebuploadController extends Controller
             }
         }
     }
+    //获取广告图片路径
+    public function adsUpload(Request $request)
+    {
 
+        //获取图片对象
+        $filetemp = $request->file('file');
+        if ($filetemp) {
+            //存放服务器上地址
+            $serverFile = $filetemp->move(ROOT_PATH . '/public/upload/ads');
+            if($serverFile) {
+                //访问地址
+                return json_encode($serverFile->getSaveName());
+            }else{
+                echo $filetemp->getError();
+            }
+        }
+    }
 }
