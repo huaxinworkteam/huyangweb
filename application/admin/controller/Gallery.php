@@ -12,12 +12,11 @@ namespace app\admin\controller;
 class Gallery extends Base
 {
     public  function index(){
-
         $sql=model('gallery')->where('is_del',0)->where('webno',$_GET['webno'])->select();
         $this->assign('gallery',$sql);
         return view('slideshow/all');
     }
-    public function addPicGroup(){
+    public function add(){
 
         if(request()->isAjax()){
             $data = [
@@ -34,6 +33,7 @@ class Gallery extends Base
                 $this->error($result);
             }
         }
+        return view();
     }
 
 
