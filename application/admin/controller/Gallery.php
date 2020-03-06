@@ -14,11 +14,13 @@ use think\facade\Request;
 class Gallery extends Base
 {
     public  function index(){
-        $webno=$_GET['webno'];
+        $webno=input('webno');
         if($webno!=null)
-        $sql=model('gallery')->where('is_del',0)->where('webno',$_GET['webno'])->order('sort')->select();
+        $sql=model('gallery')->where('is_del',0)->where('webno',$webno)->order('sort')->select();
         else return json_encode(['code'=>-1,'message'=>'缺少参数webno']);
         $this->assign('gallery',$sql);
+        $count=sizeof($sql);
+        $this->assign('count',$count);
         return view();
     }
     public function add(){
@@ -26,6 +28,8 @@ class Gallery extends Base
         if(request()->isAjax()){
             $data = [
                 'webno' => input('webno'),
+                'headline'=>input('headline'),
+                'src'=>input('src'),
                 'path' => input('path'),
                 'is_show' => input('is_show') ? 1 : 0,
                 'create_time'=>time(),
