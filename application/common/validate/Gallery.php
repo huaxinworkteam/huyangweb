@@ -9,7 +9,7 @@
 namespace app\common\validate;
 
 
-use think\facade\Validate;
+use think\Validate;
 
 class Gallery extends  Validate
 {
