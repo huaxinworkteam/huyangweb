@@ -2,10 +2,12 @@
 <script type="text/javascript" src="__ADMIN__/lib/layer/3.1.1/layer.js"></script>
 <script type="text/javascript" src="__ADMIN__/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="__ADMIN__/h-ui.admin.pro/js/h-ui.admin.pro.js"></script>
-<!-- import Vue before Element -->
+<!-- import Vue before Element vue需要在头部 在尾部可能造成 vue 实例 undefind-->
 <script type="text/javascript" src="__ADMIN__/lib/vue/vue.js"></script>
-<!-- element-ui js -->
+<!-- element-ui js  -->
 <script type="text/javascript" src="__ADMIN__/lib/element-ui/lib/index.js"></script>
+<!-- 请求封装代码 -->
+<script type="text/javascript" src="__ADMIN__/business/js/http.js"></script>
 <script>
     $(function () {
         $('#loginout').click(function () {

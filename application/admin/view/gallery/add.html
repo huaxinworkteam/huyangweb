@@ -4,7 +4,6 @@
 	<title>新增轮播图 - 轮播图新增 </title>
 	<meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
     <meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。"> 
-
 </head>
 <body>
 	<article class="clearfix pd-20" id="edit">
@@ -38,16 +37,19 @@
             </el-form-item>
         </el-form>
     </article>
+
+    <!-- footer 作为公共模板分离出去 -->
+    {include file="Common/footer" /}
     <!--请在下方写此页面业务相关的脚本-->
-	<script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+	<!-- <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 	<script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
-    <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+    <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/messages_zh.js"></script> -->
     <script type="text/javascript">
         new Vue({
             el: '#edit',
             data: function() {
                 return {
-                    uploadAction: 'https://jsonplaceholder.typicode.com/posts/', // 图片上传服务器地址
+                    uploadAction: '/admin/Webupload/galleryUpload', // 图片上传服务器地址
                     dataForm: {
                         title: '',
                         webno:{$webno},
@@ -70,12 +72,12 @@
             methods: {
                 uploadImageSuccess(res, file) {
                     layer.close(this.uploadLoading);
-                    layer.msg('上传成功');
+                    layer.msg('上传成功', {icon: 1});
                     this.dataForm.imgUrl = URL.createObjectURL(file.raw);
                 },
                 uploadImageError(err, file) {
                     layer.close(this.uploadLoading);
-                    layer.msg('上传失败，原因:'+err);
+                    layer.msg('上传失败，状态 status:'+err.status);
                 },
                 beforeImageUpload(file) {
                     // const isJPG = file.type === 'image/jpeg';
@@ -98,6 +100,10 @@
                     this.$refs[formName].validate((valid) => {
                         if (valid) {
                             // 提交数据的请求
+                            http_post('/admin/gallery/save', this.dataForm).then((res) => {
+                                console.log(res);
+                                this.$refs[formName].resetFields();
+                            })
                         } else {
                             console.log('error submit!!');
                             return false;
