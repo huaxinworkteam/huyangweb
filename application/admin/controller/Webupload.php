@@ -22,7 +22,7 @@ class Webupload extends Controller
                 return json_encode($serverFile->getSaveName());
             }else{
                 echo $filetemp->getError();
-            }
+             }
         }
     }
     //获取轮播图图片路径
