@@ -13,15 +13,15 @@
                 <el-input v-model="dataForm.headline"></el-input>
             </el-form-item>
             <el-form-item label="跳转链接：">
-                <el-input v-model="dataForm.link"></el-input>
+                <el-input v-model="dataForm.src"></el-input>
             </el-form-item>
-            <el-form-item label="图片 (nnn*mmm px)：" prop="imgUrl">
+            <el-form-item label="图片 (nnn*mmm px)：" prop="path">
                 <el-upload drag :action="uploadAction" :show-file-list="false"
                     :on-success="uploadImageSuccess" :on-error="uploadImageError" 
                     :before-upload="beforeImageUpload" accept="image/*">
-                    <i class="el-icon-upload" v-show="!dataForm.imgUrl"></i>
-                    <img v-show="dataForm.imgUrl" :src="dataForm.imgUrl"  class="el-upload-dragger"/>
-                    <div class="el-upload__text"v-show="!dataForm.imgUrl">将文件拖到此处，或<em>点击上传</em></div>
+                    <i class="el-icon-upload" v-show="!dataForm.path"></i>
+                    <img v-show="dataForm.path" :src="dataForm.path"  class="el-upload-dragger"/>
+                    <div class="el-upload__text"v-show="!dataForm.path">将文件拖到此处，或<em>点击上传</em></div>
                     <div class="el-upload__tip" slot="tip" style="margin-top: -15px;">图片上传提示</div>
                 </el-upload>
                 
@@ -54,13 +54,13 @@
                     dataForm: {
                         headline: '',
                         webno:{$webno},
-                        link: '',
-                        imgUrl: null,
+                        src: '',
+                        path: null,
                         sort: '',
                         status: true
                     },
                     rules: {
-                        imgUrl: [
+                        path: [
                             { required: true, message: '请上传图片', trigger: 'blur' }
                         ]
                     },
@@ -75,7 +75,7 @@
                     console.log(res)
                     layer.close(this.uploadLoading);
                     layer.msg('上传成功', {icon: 1});
-                    this.dataForm.imgUrl = '/upload/gallery/'+ res;
+                    this.dataForm.path = '/upload/gallery/'+ res;
                 },
                 uploadImageError(err, file) {
                     layer.close(this.uploadLoading);
