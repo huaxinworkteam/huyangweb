@@ -1,0 +1,123 @@
+<!--_meta 作为公共模版分离出去-->
+{include file="Common/meta" /}
+	<!--/meta 作为公共模版分离出去-->
+	<title>新增轮播图 - 轮播图新增 </title>
+	<meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+    <meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+
+<body>
+	<article class="clearfix pd-20" id="edit">
+        <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
+            <el-form-item label="标题；">
+                <el-input v-model="dataForm.headline"></el-input>
+            </el-form-item>
+            <el-form-item label="跳转链接：">
+                <el-input v-model="dataForm.src"></el-input>
+            </el-form-item>
+            <el-form-item label="图片 (nnn*mmm px)：" prop="path">
+                <el-upload drag :action="uploadAction" :show-file-list="false"
+                    :on-success="uploadImageSuccess" :on-error="uploadImageError" 
+                    :before-upload="beforeImageUpload" accept="image/*">
+                    <i class="el-icon-upload" v-show="!dataForm.path"></i>
+                    <img v-show="dataForm.path" :src="dataForm.path"  class="el-upload-dragger"/>
+                    <div class="el-upload__text"v-show="!dataForm.path">将文件拖到此处，或<em>点击上传</em></div>
+                    <div class="el-upload__tip" slot="tip" style="margin-top: -15px;">图片上传提示</div>
+                </el-upload>
+                
+            </el-form-item>
+            <el-form-item label="排序：">
+                <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
+            </el-form-item>
+            <el-form-item label="状态：">
+                <el-switch v-model="dataForm.status" :active-text="dataForm.status? '启用':'禁用'"></el-switch>
+              </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="submitForm('dataForm')">立即提交</el-button>
+                <el-button @click="resetForm('dataForm')">重置</el-button>
+            </el-form-item>
+        </el-form>
+    </article>
+
+    <!-- footer 作为公共模板分离出去 -->
+    {include file="Common/footer" /}
+    <!--请在下方写此页面业务相关的脚本-->
+	<!-- <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+	<script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/messages_zh.js"></script> -->
+    <script type="text/javascript">
+        new Vue({
+            el: '#edit',
+            data: function() {
+                return {
+                    uploadAction: '/admin/Webupload/galleryUpload', // 图片上传服务器地址
+                    dataForm: {
+                        headline: '',
+                        webno:{$webno},
+                        src: '',
+                        path: null,
+                        sort: '',
+                        status: true
+                    },
+                    rules: {
+                        path: [
+                            { required: true, message: '请上传图片', trigger: 'blur' }
+                        ]
+                    },
+                    uploadLoading: false
+                }
+            },
+            mounted() {
+                console.log(this.dataForm.webno)
+            },
+            methods: {
+                uploadImageSuccess(res, file) {
+                    layer.close(this.uploadLoading);
+                    layer.msg('上传成功', {icon: 1});
+                    this.dataForm.path = '/upload/gallery/'+ res;
+                },
+                uploadImageError(err, file) {
+                    layer.close(this.uploadLoading);
+                    layer.msg('上传失败，状态 status:'+err.status);
+                },
+                beforeImageUpload(file) {
+                    // const isJPG = file.type === 'image/jpeg';
+                    // const isLt2M = file.size / 1024 / 1024 < 2;
+
+                    // if (!isJPG) {
+                    // this.$message.error('上传图片只能是 JPG 格式!');
+                    // }
+                    // if (!isLt2M) {
+                    // this.$message.error('上传图片大小不能超过 2MB!');
+                    // }
+                    // return isJPG && isLt2M;
+                    this.uploadLoading = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+                },
+
+                submitForm(formName) {
+                    var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+                    setTimeout(()=> {
+                        this.$refs[formName].validate((valid) => {
+                            if (valid) {
+                                // 提交数据的请求
+                                http_post('/admin/gallery/save', this.dataForm).then((res) => {
+                                    layer.close(index);
+                                    this.$refs[formName].resetFields();
+                                    layer.msg("提交成功", {icon:1});
+                                })
+                            } else {
+                                console.log('error submit!!');
+                                layer.close(index);
+                                layer.msg("没有上传图片", {icon: 2});
+                                return false;
+                            }
+                        });
+                    }, 500); 
+                },
+                resetForm(formName) {
+                    this.$refs[formName].resetFields();
+                }
+            }
+        })
+    </script>
+</body>

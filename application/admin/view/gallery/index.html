@@ -76,12 +76,12 @@
                             <tbody>
                                 {volist name="gallery" id="vo"}
                                 <tr class="text-c">
-                                    <td><input type="checkbox"  value="110" class="ckc" onclick="select()"></td>
+                                    <td><input type="checkbox"  data-id="{$vo.id}" data-name="{$vo.headline}" class="ckc" onclick="select()"></td>
                                     <td>{$vo.id}</td>
                                     <td>{$vo.headline}</td>
                                     <td>{$vo.src}</td>
                                     <td>
-                                        <img alt="回收元宝" src="{$vo.path}" style="width: 150px; height: 100px;"/>
+                                        <img alt="{$vo.headline}" src="{$vo.path}" style="width: 150px; height: 100px;"/>
                                     </td>
                                     <td class="td-status">
                                         <span class="label label-success radius">{if $vo.is_show==1}已启用{else /}未启用{/if}</span>
@@ -121,11 +121,11 @@ function QuanXuan(){
 function select() {
 
 }
-// 全部删除
+// 批量删除
 function datadel() {
     var array = new Array();
     $('.ckc:checked').each(function () {
-        array.push(this.value);
+        array.push({galleryId: this.getAttribute("data-id"), name: this.getAttribute("data-name") });
     });
     if (array.length === 0) {
         layer.msg('没有选中需要删除的数据！');
@@ -134,32 +134,8 @@ function datadel() {
     //询问框
     layer.confirm('确认要删除吗？', function (index) {
         layer.close(index);
-        $.ajax({
-            url:"{:url('admin/gallery/del')}",
-            type:'POST',
-            data:{galleryId:array.toString()},
-            dataType:'json',
-            success: function (data) {
-
-                if (data.code == 1) {
-                    layer.msg(data.msg, {
-                        icon: 6,
-                        time: 2000
-                    }, function () {
-                        location.href = data.url;
-                    });
-                } else {
-                    layer.open(
-                        {
-                            title: "新闻删除失败",
-                            content:data.msg,
-                            icon:5,
-                            anim:6
-
-                        }
-                    );
-                }
-            }
+        http_post('/admin/gallery/del', array).then(res => {
+            layer.msg("删除成功", {icon: 1});
         });
     });
 }
