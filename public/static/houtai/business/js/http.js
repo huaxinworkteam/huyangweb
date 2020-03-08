@@ -8,7 +8,7 @@ function http_post(url, data) {
             dataType:'json',
             success:function (res) {
                 if (res.code == 1)  reslove(res);
-                reject(res);
+                else layer.msg('出错了，状态 code:' + res.code);
             },
             error: function (err) {
                 console.log(err)

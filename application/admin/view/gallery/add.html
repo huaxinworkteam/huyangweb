@@ -72,7 +72,6 @@
             },
             methods: {
                 uploadImageSuccess(res, file) {
-                    console.log(res)
                     layer.close(this.uploadLoading);
                     layer.msg('上传成功', {icon: 1});
                     this.dataForm.path = '/upload/gallery/'+ res;
@@ -94,24 +93,26 @@
                     // return isJPG && isLt2M;
                     this.uploadLoading = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                 },
-                uploadProgress(file) {
-                    
-                },
 
                 submitForm(formName) {
-                    this.$refs[formName].validate((valid) => {
-                        if (valid) {
-                            // 提交数据的请求
-                            http_post('/admin/gallery/save', this.dataForm).then((res) => {
-                                console.log(res);
-                                this.$refs[formName].resetFields();
-                            })
-                        } else {
-                            console.log('error submit!!');
-                            layer.msg("没有上传图片", {icon: 2});
-                            return false;
-                        }
-                    });
+                    var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+                    setTimeout(()=> {
+                        this.$refs[formName].validate((valid) => {
+                            if (valid) {
+                                // 提交数据的请求
+                                http_post('/admin/gallery/save', this.dataForm).then((res) => {
+                                    layer.close(index);
+                                    this.$refs[formName].resetFields();
+                                    layer.msg("提交成功", {icon:1});
+                                })
+                            } else {
+                                console.log('error submit!!');
+                                layer.close(index);
+                                layer.msg("没有上传图片", {icon: 2});
+                                return false;
+                            }
+                        });
+                    }, 500); 
                 },
                 resetForm(formName) {
                     this.$refs[formName].resetFields();
