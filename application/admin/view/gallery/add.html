@@ -72,7 +72,6 @@
             },
             methods: {
                 uploadImageSuccess(res, file) {
-                    console.log(res)
                     layer.close(this.uploadLoading);
                     layer.msg('上传成功', {icon: 1});
                     this.dataForm.imgUrl = '/upload/gallery/'+ res;
