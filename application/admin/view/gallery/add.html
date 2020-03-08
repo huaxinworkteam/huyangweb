@@ -68,7 +68,7 @@
 		$(function () {
 			$('#adminadd').click(function () {
 				$.ajax({
-					url:"{:url('admin/gallery/add')}",
+					url:"{:url('admin/gallery/save')}",
 					type:"post",
 					data:$('form').serialize(),
 					dataType:'json',
@@ -83,7 +83,7 @@
                             });
 						}else{
 						    layer.open({
-								title:'管理员添加失败',
+								title:'图片添加失败',
 								content:data.msg,
 								icon:5,
 								anim:6

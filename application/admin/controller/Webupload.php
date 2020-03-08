@@ -6,7 +6,7 @@ use think\Controller;
 use think\Exception;
 use think\Request;
 
-class WebuploadController extends Controller
+class Webupload extends Controller
 {
     //获取教师图片路径
     public function teacherpicUpload(Request $request)
