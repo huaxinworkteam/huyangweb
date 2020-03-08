@@ -76,7 +76,7 @@
                             <tbody>
                                 {volist name="gallery" id="vo"}
                                 <tr class="text-c">
-                                    <td><input type="checkbox"  value="110" class="ckc"></td>
+                                    <td><input type="checkbox"  value="110" class="ckc" onclick="select()"></td>
                                     <td>{$vo.id}</td>
                                     <td>{$vo.headline}</td>
                                     <td>{$vo.src}</td>
@@ -114,11 +114,13 @@
 <script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="__ADMIN__/business/js/main.js"></script>
 <script type="text/javascript">
-function QuanXuan()
-{
+
+function QuanXuan(){
     $(".ckc").prop("checked",$("#ckAll").prop("checked"))
 }
+function select() {
 
+}
 // 全部删除
 function datadel() {
     var array = new Array();
