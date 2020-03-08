@@ -22,7 +22,7 @@
                     <i class="el-icon-upload" v-show="!dataForm.imgUrl"></i>
                     <img v-show="dataForm.imgUrl" :src="dataForm.imgUrl"  class="el-upload-dragger"/>
                     <div class="el-upload__text"v-show="!dataForm.imgUrl">将文件拖到此处，或<em>点击上传</em></div>
-                    <div class="el-upload__tip" slot="tip">图片上传提示</div>
+                    <div class="el-upload__tip" slot="tip" style="margin-top: -15px;">图片上传提示</div>
                 </el-upload>
                 
             </el-form-item>
@@ -72,9 +72,10 @@
             },
             methods: {
                 uploadImageSuccess(res, file) {
+                    console.log(res)
                     layer.close(this.uploadLoading);
                     layer.msg('上传成功', {icon: 1});
-                    this.dataForm.imgUrl = URL.createObjectURL(file.raw);
+                    this.dataForm.imgUrl = '/upload/gallery/'+ res;
                 },
                 uploadImageError(err, file) {
                     layer.close(this.uploadLoading);
@@ -107,6 +108,7 @@
                             })
                         } else {
                             console.log('error submit!!');
+                            layer.msg("没有上传图片", {icon: 2});
                             return false;
                         }
                     });
