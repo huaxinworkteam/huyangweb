@@ -30,6 +30,7 @@ class Gallery extends Base
     public function save(){
         $webno=input('webno');
             $data = [
+                'id'=>input('galleryId')?input('galleryId'):'',
                 'webno' => $webno,
                 'headline'=>input('headline'),
                 'src'=>input('src'),
@@ -63,15 +64,11 @@ class Gallery extends Base
         $id=input('galleryId');
         $res=model('gallery')->getInfo($id);
         if(empty($res)) return false;
-        $this->assign('webno',$res['webno']);
         return json_encode($res);}
 
         return view();
     }
 
-    public function editHtml(){
-
-    }
 
 
 }
