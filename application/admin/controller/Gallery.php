@@ -16,7 +16,7 @@ class Gallery extends Base
         $webno=input('webno');
         if($webno==null) return json_encode(['code'=>-1,'message'=>'缺少参数webno']);
         $this->assign('webno',$webno);
-        $sql=model('gallery')->where('is_del',0)->where('webno',$webno)->order('is_show','sort')->select();
+        $sql=model('gallery')->where('is_del',0)->where('webno',$webno)->order(['is_show'=>'desc','sort'])->select();
         $this->assign('gallery',$sql);
         $count=sizeof($sql);
         $this->assign('count',$count);
