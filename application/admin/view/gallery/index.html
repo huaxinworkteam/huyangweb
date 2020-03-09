@@ -207,9 +207,13 @@ function edit(title, url, galleryId) {
 
 // 启用/禁用
 function stop(is_show,galleryId){
+    console.log(is_show);
+    console.log(galleryId)
     layer.confirm(`确认要${is_show==1?'禁用':'启用'}吗？`, function (index) {
         http_post('/admin/gallery/shiftState',{galleryId: galleryId, is_show: is_show}).then(res => {
             layer.msg(`已${is_show==1?'禁用':'启用'}`);
+        }).catch(err => {
+            // 错误处理
         });
     });
 }
