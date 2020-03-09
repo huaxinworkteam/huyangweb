@@ -30,7 +30,7 @@ class Gallery extends Base
     public function save(){
         $webno=input('webno');
             $data = [
-                'id'=>input('galleryId')?input('galleryId'):'',
+                'id'=>input('galleryId'),
                 'webno' => $webno,
                 'headline'=>input('headline'),
                 'src'=>input('src'),
@@ -67,6 +67,19 @@ class Gallery extends Base
         return json_encode($res);}
 
         return view();
+    }
+
+    public function shiftState(){
+        $id=input('galleryId');
+        $isShow=input('is_show') ? 0 : 1;
+        $data=[
+          'id'=>$id,
+          'is_show'=>$isShow
+        ];
+        $result=model('gallery')->where('id',$id)->save($data);
+        if($result)
+            return json_encode(['code'=>1,'message'=>'更新成功']);
+        else return json_encode(['code'=>0,'message'=>'操作失败']);
     }
 
 
