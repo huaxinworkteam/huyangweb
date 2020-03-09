@@ -62,10 +62,11 @@ class Gallery extends Base
     public function edit(){
         if(request()->isAjax()){
         $id=input('galleryId');
-        $res=model('gallery')->getInfo($id);
-        if(empty($res)) return false;
-        return json_encode($res);}
-        $this->assign('galleryId',$_GET['galleryId']);
+        $res=model('gallery')->getInfo($id)->toArray();
+        if(!$res) return json_decode(['code'=>0,'message'=>'获取id失败']);
+        return json_encode(['code'=>1,$res]);}
+
+        $this->assign('galleryId',$_GET['galleryId']); //ajax请求在edit需要id
         return view();
     }
 

@@ -50,7 +50,7 @@
                 return {
                     uploadAction: '/admin/Webupload/galleryUpload', // 图片上传服务器地址
                     dataForm: {
-                        galleryId:'',
+                        galleryId: {$galleryId},
                         headline: '',
                         webno:'',
                         src: '',
@@ -67,8 +67,13 @@
                 }
             },
             mounted(){
-                http_get('/admin/gallery/edit',{galleryId: {$galleryId}}).then(res => {
-                    console.log(res);
+                http_get('/admin/gallery/edit',{galleryId: this.dataForm.galleryId}).then(res => {
+                    this.dataForm.headline = res['0'].headline;
+                    this.dataForm.webno = res['0'].webno;
+                    this.dataForm.src = res['0'].src;
+                    this.dataForm.path = res['0'].path;
+                    this.dataForm.sort = res['0'].sort;
+                    this.dataForm.is_show = res['0'].is_show;
                 });
             },
             methods: {
@@ -105,6 +110,8 @@
                                     layer.close(index);
                                     this.$refs[formName].resetFields();
                                     layer.msg("提交成功", {icon:1});
+                                }).catch(err => {
+                                    layer.close(index);
                                 })
                             } else {
                                 console.log('error submit!!');
