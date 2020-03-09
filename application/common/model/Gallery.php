@@ -27,5 +27,10 @@ class Gallery extends  Model
             return '信息添加失败';
         }
     }
+   // 获取一个指定id的数据
+    public function getInfo($id){
+        $res=Gallery::where('id',$id)->find();
+        return $res;
+    }
 
 }

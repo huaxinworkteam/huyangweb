@@ -17,7 +17,7 @@ class Gallery extends Base
         $webno=input('webno');
         if($webno==null) return json_encode(['code'=>-1,'message'=>'缺少参数webno']);
         $this->assign('webno',$webno);
-        $sql=model('gallery')->where('is_del',0)->where('webno',$webno)->order('sort')->select();
+        $sql=model('gallery')->where('is_del',0)->where('webno',$webno)->order('is_show','sort')->select();
         $this->assign('gallery',$sql);
         $count=sizeof($sql);
         $this->assign('count',$count);
@@ -49,7 +49,6 @@ class Gallery extends Base
     }
     public function del(){
         if(request()->isAjax()){
-
             $return=db('gallery')->whereIn('id',input('galleryId'))->setField(['is_del'=>1]);
             if($return){
                 $this->success('删除成功',$_SERVER['HTTP_REFERER']);
@@ -58,6 +57,14 @@ class Gallery extends Base
             }
 
         }
+    }
+
+    public function edit(){
+        $id=input('galleryId');
+        $res=model('gallery')->getInfo($id)->toArray();
+        if(!$res) return false;
+        $this->assign('webno',$res['webno']);
+        return json_encode($res);
     }
 
 }
