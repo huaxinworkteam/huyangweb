@@ -8,8 +8,7 @@
 
 namespace app\admin\controller;
 
-
-use think\facade\Request;
+use think\Request;
 
 class Gallery extends Base
 {
@@ -60,11 +59,19 @@ class Gallery extends Base
     }
 
     public function edit(){
+        if(request()->isAjax()){
         $id=input('galleryId');
-        $res=model('gallery')->getInfo($id)->toArray();
-        if(!$res) return false;
+        $res=model('gallery')->getInfo($id);
+        if(empty($res)) return false;
         $this->assign('webno',$res['webno']);
-        return json_encode($res);
+        return json_encode($res);}
+
+        return view();
     }
+
+    public function editHtml(){
+
+    }
+
 
 }
