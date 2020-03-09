@@ -12,10 +12,10 @@ namespace app\admin\controller;
 class Ads extends  Base
 {
     public function index(){
-
+        return view();
     }
 
     public function location(){
-
+        return view();
     }
 }
