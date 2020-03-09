@@ -42,9 +42,7 @@
     <!-- footer 作为公共模板分离出去 -->
     {include file="Common/footer" /}
     <!--请在下方写此页面业务相关的脚本-->
-	<!-- <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
-	<script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
-    <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/messages_zh.js"></script> -->
+	<script type="text/javascript" src="__ADMIN__/business/js/http.js"></script>
     <script type="text/javascript">
         new Vue({
             el: '#edit',
@@ -67,8 +65,10 @@
                     uploadLoading: false
                 }
             },
-            mounted() {
-                console.log(this.dataForm.webno)
+            mounted(){
+                http_get('/admin/gallery/edit',{galleryId: {$galleryId}}).then(res => {
+                    console.log(res);
+                });
             },
             methods: {
                 uploadImageSuccess(res, file) {

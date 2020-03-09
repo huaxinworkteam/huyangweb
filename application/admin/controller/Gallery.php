@@ -65,7 +65,7 @@ class Gallery extends Base
         if(empty($res)) return false;
         $this->assign('webno',$res['webno']);
         return json_encode($res);}
-
+        $this->assign('galleryId',$_GET['galleryId']);
         return view();
     }
 

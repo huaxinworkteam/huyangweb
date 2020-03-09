@@ -33,7 +33,7 @@
         </nav>
 
         <article class="Hui-admin-content clearfix">
-            <div class="panel">
+            <div class="panel" style="display: none;">
                 <div class="panel-body">
                     <form action="{:url('admin/adminsearch')}" method="get">
                     <div class="text-c">
@@ -197,7 +197,7 @@ function edit(title, url, galleryId) {
     var index = layer.open({
         type: 2,
         title: title,
-        content: url+'?galleryId='+galleryId,
+        content: url + '?galleryId=' + galleryId,
         area: ['700px', '600px'],
         end : function() {
             window.location.reload();  // 刷新
