@@ -22,7 +22,24 @@
     <!--_header 作为公共模版分离出去-->
     {include file="Common/header" /}
     <!--/_header 作为公共模版分离出去-->
-    
+    <div id="location">
+        <el-card shadow="hover" >
+            <el-collapse v-model="activeNames" @change="handleChange" class="el-success">
+                <el-collapse-item title="操作说明">
+                    <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+                    <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                </el-collapse-item>
+            </el-collapse>
+        </el-card>
+        <el-table :data="tableData" stripe style="width: 100%">
+            <el-table-column prop="date" label="日期" width="180"></el-table-column>
+            <el-table-column prop="date" label="日期" width="180"></el-table-column>
+            <el-table-column prop="date" label="日期" width="180"></el-table-column>
+            <el-table-column prop="address" label="地址"></el-table-column>
+        </el-table>
+        
+
+    </div>
 </section>
 
 <!--_footer 作为公共模版分离出去-->
@@ -33,7 +50,14 @@
 <script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.15/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="__ADMIN__/business/js/main.js"></script>
+<script>
+    new Vue({
+        el: '#location',
+        data: {
 
+        }
+    });
+</script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>
