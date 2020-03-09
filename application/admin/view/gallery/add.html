@@ -15,7 +15,7 @@
             <el-form-item label="跳转链接：">
                 <el-input v-model="dataForm.src"></el-input>
             </el-form-item>
-            <el-form-item label="图片 (nnn*mmm px)：" prop="path">
+            <el-form-item label="图片 (1190*350 px)：" prop="path">
                 <el-upload drag :action="uploadAction" :show-file-list="false"
                     :on-success="uploadImageSuccess" :on-error="uploadImageError" 
                     :before-upload="beforeImageUpload" accept="image/*">
