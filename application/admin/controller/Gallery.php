@@ -16,7 +16,7 @@ class Gallery extends Base
         $webno=input('webno');
         if($webno==null) return json_encode(['code'=>-1,'message'=>'缺少参数webno']);
         $this->assign('webno',$webno);
-        $sql=model('gallery')->where('is_del',0)->where('webno',$webno)->order('is_show','sort')->select();
+        $sql=model('gallery')->where('is_del',0)->where('webno',$webno)->order(['is_show'=>'desc','sort'])->select();
         $this->assign('gallery',$sql);
         $count=sizeof($sql);
         $this->assign('count',$count);
@@ -30,6 +30,7 @@ class Gallery extends Base
     public function save(){
         $webno=input('webno');
             $data = [
+                'id'=>input('galleryId'),
                 'webno' => $webno,
                 'headline'=>input('headline'),
                 'src'=>input('src'),
@@ -63,15 +64,24 @@ class Gallery extends Base
         $id=input('galleryId');
         $res=model('gallery')->getInfo($id);
         if(empty($res)) return false;
-        $this->assign('webno',$res['webno']);
         return json_encode($res);}
         $this->assign('galleryId',$_GET['galleryId']);
         return view();
     }
 
-    public function editHtml(){
-
+    public function shiftState(){
+        $id=input('galleryId');
+        $isShow=input('is_show') ? 0 : 1;
+        $data=[
+          'id'=>$id,
+          'is_show'=>$isShow
+        ];
+        $result=model('gallery')->where('id',$id)->save($data);
+        if($result)
+            return json_encode(['code'=>1,'message'=>'更新成功']);
+        else return json_encode(['code'=>0,'message'=>'操作失败']);
     }
+
 
 
 }
