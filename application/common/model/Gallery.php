@@ -20,7 +20,8 @@ class Gallery extends  Model
         if (!$validate->scene('add')->check($data)) {
             return $validate->getError();
         }
-        $result = $this->allowField(true)->save($data);
+        if($data['id']) {$result=$this->where('id',$data['id'])->update($data);}
+       else $result = $this->allowField(true)->save($data);
         if ($result) {
             return 1;
         } else {
