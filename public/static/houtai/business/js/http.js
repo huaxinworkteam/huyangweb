@@ -8,7 +8,7 @@ function http_post(url, data) {
             dataType:'json',
             success:function (res) {
                 // 格式化 json
-                res = $.parseJSON( res );
+                if (!isJSON(res)) res = $.parseJSON( res );
                 console.log(res);
                 if (res.code == 1)  reslove(res);
                 else {
@@ -34,7 +34,7 @@ function http_get(url, data) {
             dataType:'json',
             success: function (res) {
                 // 格式化 json
-                res = $.parseJSON( res );
+                if (!isJSON(res)) res = $.parseJSON( res );
                 console.log(res);
                 if (res.code == 1)  reslove(res);
                 else {
@@ -50,4 +50,10 @@ function http_get(url, data) {
             }
         });
     });
+}
+
+// 校验数据是否是json 数据
+function isJSON(str) {
+    var isjson = typeof(str) == "object" && Object.prototype.toString.call(str).toLowerCase() == "[object object]" && !str.length;
+    return isjson;
 }
