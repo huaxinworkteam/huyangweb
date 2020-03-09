@@ -87,7 +87,7 @@
                                         <span class="label radius {if $vo.is_show==1}label-success{/if}">{if $vo.is_show==1}已启用{else /}已禁用{/if}</span>
                                     </td>
                                     <td class="td-manage">
-                                        <a title="{if $vo.is_show==1}启用{else /}禁用{/if}" onclick="stop('{$vo.is_show}','{$vo.id}')" href="javascript:;" style="text-decoration:none">
+                                        <a title="{if $vo.is_show==1}禁用{else /}启用{/if}" onclick="stop('{$vo.is_show}','{$vo.id}')" href="javascript:;" style="text-decoration:none">
                                             <i class="Hui-iconfont">&#xe631;</i></a> 
                                         <a title="编辑" href="javascript:;" onclick="edit('编辑轮播图','{:url(\'admin/gallery/edit\')}','{$vo.id}')" class="ml-5"style="text-decoration:none">
                                             <i class="Hui-iconfont">&#xe6df;</i></a> 
@@ -207,15 +207,11 @@ function edit(title, url, galleryId) {
 
 // 启用/禁用
 function stop(is_show,galleryId){
-    console.log(is_show);
-    console.log(galleryId)
-    layer.confirm(`确认要${is_show==1?'禁用':'启用'}吗？`, function (index) {
-        http_post('/admin/gallery/shiftState',{galleryId: galleryId, is_show: is_show}).then(res => {
-            layer.msg(`已${is_show==1?'禁用':'启用'}`);
-            location.reload();  // 刷新
-        }).catch(err => {
-            // 错误处理
-        });
+    http_post('/admin/gallery/shiftState',{galleryId: galleryId, is_show: is_show}).then(res => {
+        layer.msg(`已${is_show==1?'禁用':'启用'}`);
+        location.reload();  // 刷新
+    }).catch(err => {
+        // 错误处理
     });
 }
 </script>
