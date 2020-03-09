@@ -25,15 +25,15 @@ class Index extends Controller
     {   $this->header();
         $this->footer();
         //获取学院类别
-        $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->group('seriesNO')->select();
-        $this->assign('group', $group);
-        $gallery=Gallery::where('webno',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+/*        $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->group('seriesNO')->select();
+        $this->assign('group', $group);*/
+        $gallery=Gallery::where('webno',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         //获取教师信息
-        $t = input('seriesNO');
-       if (!$t)
-            $list = Teachers::where('seriesNO', 1)->limit(4)->select();
-        else  $list = Teachers::where('seriesNO', $t)->limit(4)->select();
+    /*    $t = input('seriesNO');
+       if (!$t)*/
+            $list = Teachers::where('isShow',1)->where('delete_time',null)->limit(8)->order('seriesNO','create_time')->select();
+      /*  else  $list = Teachers::where('seriesNO', $t)->limit(4)->select();*/
         $this->assign('teachers', $list);
         //主页下方左侧新闻
         $news=News::where('isShow',1)->order('createTime desc')->limit(6)->select();
@@ -75,7 +75,7 @@ class Index extends Controller
     {   $this->header();
         $this->left_bar();
         $this->footer();
-        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $news = News::where('isShow',1)->order('createTime desc')->paginate(6);
         $this->assign('news', $news);
@@ -87,6 +87,8 @@ class Index extends Controller
         $this->header();
         $this->left_bar();
         $this->footer();
+        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $this->assign('gallery',$gallery);
         //获取参数
         $param=input('newsid');
        $newsid = News::where('newsid',$param)->find();
@@ -98,7 +100,7 @@ class Index extends Controller
     {  $this->header();
         $this->left_bar();
         $this->footer();
-        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         return view('chhcollege/about/index');
     }
@@ -113,7 +115,7 @@ class Index extends Controller
     public function course()
     {   $this->footer();
         $this->header();
-        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         return view('chhcollege/course/index');
     }
@@ -122,7 +124,7 @@ class Index extends Controller
     {   $this->footer();
         $this->header();
         $this->left_bar();
-        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         return view('chhcollege/contact/contact');
     }
@@ -135,13 +137,13 @@ class Index extends Controller
         //获取学院类别
         $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
         $this->assign('group', $group);
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('path')->select();
+        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $t = input('seriesNO');
         //获取教师信息
         if (!$t)
-            $list = Teachers::where(['seriesNO'=>'1','isShow'=>'1' ])->paginate(4);
-        else  $list = Teachers::where(['seriesNO'=> $t,'isShow'=>'1'])->paginate(4);
+            $list = Teachers::where(['seriesNO'=>'1','isShow'=>'1','delete_time'=>null ])->paginate(7);
+        else  $list = Teachers::where(['seriesNO'=> $t,'isShow'=>'1','delete_time'=>null])->paginate(7);
         $this->assign('teachers', $list);
         return view('chhcollege/szll/szll');
     }

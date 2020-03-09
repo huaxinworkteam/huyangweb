@@ -36,7 +36,9 @@
     <div class="pageBanner">
         <div class="roll flexslider">
             <ul class="slides">
-                <li><img src="__COLL__/images/news.jpg"></li>
+                {volist name="gallery" id="vo"}
+                <li><img src="{$vo.path}" alt="{$vo.headline}"></li>
+                {/volist}
             </ul>
         </div>
         <!--<div class="txt">

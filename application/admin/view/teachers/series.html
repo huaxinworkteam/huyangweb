@@ -98,7 +98,6 @@
             $('.ckc:checked').each(function () {
                 array.push(this.value);
             });
-            console.log(array.toString());
             if(confirm("确定要删除吗")){
                 $.ajax({
                     url:"{:url('admin/Teachers/delseries')}",

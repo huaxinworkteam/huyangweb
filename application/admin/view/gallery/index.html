@@ -125,7 +125,7 @@ function select() {
 function datadel() {
     var array = new Array();
     $('.ckc:checked').each(function () {
-        array.push({galleryId: this.getAttribute("data-id"), name: this.getAttribute("data-name") });
+        array.push(this.getAttribute("data-id"));
     });
     if (array.length === 0) {
         layer.msg('没有选中需要删除的数据！');
@@ -134,7 +134,8 @@ function datadel() {
     //询问框
     layer.confirm('确认要删除吗？', function (index) {
         layer.close(index);
-        http_post('/admin/gallery/del', array).then(res => {
+
+        http_post('/admin/gallery/del', {galleryId:array.toString()}).then(res => {
             layer.msg("删除成功", {icon: 1});
         });
     });
@@ -153,9 +154,36 @@ function add(title, url,webno) {
 function del(id) {
     layer.confirm('确认要删除吗？', function (index) {
         layer.close(index);
-        http_post('/admin/gallery/del', {galleryId:id}).then(res => {
-            layer.msg("删除成功", {icon: 1});
+        $.ajax({
+            url:"{:url('/admin/gallery/del')}",
+            data:{id:array.toString()},
+            type:"post",
+            dataType:"json",
+            success:function (data) {
+                if(data.code==1){
+                    layer.msg(data.msg,{
+                        icon:6,
+                        time:1000
+                    },function () {
+                        location.href=data.url;
+                    });
+
+                }else{
+                    layer.open({
+                        title:"删除失败",
+                        content:data.msg,
+                        icon:5,
+                        anim:6
+
+                    });
+                }
+
+            }
         });
+/*        http_post('/admin/gallery/del', {galleryId:id}).then(res => {
+            layer.msg("删除成功", {icon: 1});
+
+        });*/
     });
 }
 
@@ -173,7 +201,6 @@ function edit() {
 function admin_stop(obj, id) {
     layer.confirm('确认要停用吗？', function (index) {
         //此处请求后台程序，下方是成功后的前台处理……
-        layer.close(index);
         $.ajax({
             url:"./Admin/status",
             type:'post',
