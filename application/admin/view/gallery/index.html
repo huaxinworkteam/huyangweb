@@ -84,10 +84,10 @@
                                         <img alt="{$vo.headline}" src="{$vo.path}" style="width: 150px; height: 100px;"/>
                                     </td>
                                     <td class="td-status">
-                                        <span class="label label-success radius">{if $vo.is_show==1}已启用{else /}未启用{/if}</span>
+                                        <span class="label label-success radius">{if $vo.is_show==1}已启用{else /}已禁用{/if}</span>
                                     </td>
                                     <td class="td-manage">
-                                        <a title="停用/启用" onclick="stop(this)" href="javascript:;" style="text-decoration:none">
+                                        <a title="{if $vo.is_show==1}启用{else /}禁用{/if}" onclick="stop(this)" href="javascript:;" style="text-decoration:none">
                                             <i class="Hui-iconfont">&#xe631;</i></a> 
                                         <a title="编辑" href="javascript:;" onclick="edit('编辑', 'adminedit')" class="ml-5"style="text-decoration:none">
                                             <i class="Hui-iconfont">&#xe6df;</i></a> 
