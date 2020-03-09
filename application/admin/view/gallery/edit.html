@@ -50,7 +50,7 @@
                 return {
                     uploadAction: '/admin/Webupload/galleryUpload', // 图片上传服务器地址
                     dataForm: {
-                        galleryId: {$galleryId},
+                        galleryId:'',
                         headline: '',
                         webno:'',
                         src: '',
@@ -68,6 +68,7 @@
             },
             mounted(){
                 http_get('/admin/gallery/edit',{galleryId: this.dataForm.galleryId}).then(res => {
+                    this.dataForm.galleryId = res['0'].id;
                     this.dataForm.headline = res['0'].headline;
                     this.dataForm.webno = res['0'].webno;
                     this.dataForm.src = res['0'].src;
