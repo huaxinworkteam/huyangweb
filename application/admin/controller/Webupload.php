@@ -45,7 +45,6 @@ class Webupload extends Controller
     //获取广告图片路径
     public function adsUpload(Request $request)
     {
-
         //获取图片对象
         $filetemp = $request->file('file');
         if ($filetemp) {

@@ -7,6 +7,7 @@
  */
 
 namespace app\admin\controller;
+use app\common\model\AdPositions;
 
 
 class Ads extends  Base
@@ -16,6 +17,14 @@ class Ads extends  Base
     }
 
     public function location(){
+
+        $sql=AdPositions::getAll();
+        $this->assign('adsPosition',$sql);
+        $count=sizeof($sql);
+        $this->assign('count',$count);
+        return view();
+    }
+    public function addLocation(){
         return view();
     }
 }

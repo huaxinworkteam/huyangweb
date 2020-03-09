@@ -11,7 +11,7 @@ namespace app\common\validate;
 
 use think\Validate;
 
-class Ad_position extends Validate
+class AdPositions extends Validate
 {
   protected  $rule=[
       'positionType|位置类型'=>'require',

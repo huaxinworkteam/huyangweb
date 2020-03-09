@@ -7,9 +7,9 @@
  */
 
 namespace app\common\model;
-use think\model;
+use think\Model;
 
-class Ads extends model
+class Ads extends Model
 {
     public static function add($data){
         if(!$data) return false;

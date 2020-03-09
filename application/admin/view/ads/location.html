@@ -2,7 +2,7 @@
 {include file="Common/meta" /}
 <!--/meta 作为公共模版分离出去-->
 
-<title>广告管理 - 轮播图列表 - h-ui.admin.pro v1.0</title>
+<title>首页轮播管理 - 轮播图列表 - h-ui.admin.pro v1.0</title>
 <meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
@@ -22,23 +22,82 @@
     <!--_header 作为公共模版分离出去-->
     {include file="Common/header" /}
     <!--/_header 作为公共模版分离出去-->
-    <div id="location">
-        <el-card shadow="hover" >
-            <el-collapse v-model="activeNames" @change="handleChange" class="el-success">
-                <el-collapse-item title="操作说明">
-                    <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-                    <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-                </el-collapse-item>
-            </el-collapse>
-        </el-card>
-        <el-table :data="tableData" stripe style="width: 100%">
-            <el-table-column prop="date" label="日期" width="180"></el-table-column>
-            <el-table-column prop="date" label="日期" width="180"></el-table-column>
-            <el-table-column prop="date" label="日期" width="180"></el-table-column>
-            <el-table-column prop="address" label="地址"></el-table-column>
-        </el-table>
-        
 
+    <div class="Hui-admin-article">
+        <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
+            首页
+            <span class="c-gray en">/</span>
+            轮播图管理
+            <span class="c-gray en">/</span>
+            首页轮播图
+        </nav>
+
+        <article class="Hui-admin-content clearfix">
+            <div class="panel" style="display: none;">
+                <div class="panel-body">
+                    <form action="#" method="get">
+                        <div class="text-c">
+                            <input type="text" class="input-text" style="width:250px" placeholder="输入管理员昵称或手机号或邮箱" id="search" name="search">
+                            <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i>
+                                搜用户
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel mt-20">
+                <div class="panel-body">
+                    <div class="clearfix">
+							<span class="f-l">
+								<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i
+                                        class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+								<a href="javascript:;" onclick="add('新增轮播图','{:url(\'admin/ads/addLocation\')}')"
+                                   class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加轮播图</a>
+							</span>
+                        <span class="f-r">共有数据：<strong>{$count}</strong> 张</span>
+                    </div>
+                    <div class="mt-20 clearfix">
+                        <table class="table table-border table-bordered table-bg table-hover table-sort">
+                            <thead>
+                            <tr>
+                                <th scope="col" colspan="9">首页轮播图列表</th>
+                            </tr>
+                            <tr class="text-c">
+                                <th width="25"><input type="checkbox"  id="ckAll" onclick="QuanXuan()"></th>
+                                <th width="40">编号</th>
+                                <th width="100">位置名称</th>
+                                <th width="50">宽度</th>
+                                <th width="50">高度</th>
+                                <th width="100">位置类型</th>
+                                <th width="100">位置代码</th>
+                                <th width="100">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="adsPosition" id="vo"}
+                            <tr class="text-c">
+                                <td><input type="checkbox"  data-id="{$vo.positionId}"  class="ckc" onclick="select()"></td>
+                                <td>{$vo.positionId}</td>
+                                <td>{$vo.positionName}</td>
+                                <td>{$vo.positionWidth}</td>
+                                <td>{$vo.positionHeight}</td>
+                                <td>{$vo.positionType}</td>
+                                <td>{$vo.positionCode}</td>
+                                <td class="td-manage">
+                                    <a title="编辑" href="javascript:;" onclick="edit('编辑轮播图','{:url(\'admin/gallery/edit\')}','{$vo.positionId}')" class="ml-5"style="text-decoration:none">
+                                        <i class="Hui-iconfont">&#xe6df;</i></a>
+                                    <a title="删除" href="javascript:;" onclick="del('{$vo.positionId}')"class="ml-5" style="text-decoration:none">
+                                        <i class="Hui-iconfont">&#xe6e2;</i></a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </article>
     </div>
 </section>
 
@@ -50,13 +109,81 @@
 <script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.15/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="__ADMIN__/business/js/main.js"></script>
-<script>
-    new Vue({
-        el: '#location',
-        data: {
+<script type="text/javascript">
 
+    function QuanXuan(){
+        $(".ckc").prop("checked",$("#ckAll").prop("checked"))
+    }
+    function select() {
+
+    }
+    // 批量删除
+    function datadel() {
+        var array = new Array();
+        $('.ckc:checked').each(function () {
+            array.push(this.getAttribute("data-id"));
+        });
+        if (array.length === 0) {
+            layer.msg('没有选中需要删除的数据！');
+            return;
         }
-    });
+        //询问框
+        layer.confirm('确认要删除吗？', function (index) {
+            layer.close(index);
+
+            http_post('/admin/gallery/del', {galleryId:array.toString()}).then(res => {
+                layer.msg("删除成功", {icon: 1});
+            location.reload();  // 刷新
+        });
+        });
+    }
+
+    // 新增
+    function add(title, url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url,
+            area: ['700px', '600px'],
+            end : function() {
+                window.location.reload();  // 刷新
+            }
+        });
+
+    }
+    // 删除
+    function del(id) {
+        layer.confirm('确认要删除吗？', function (index) {
+            layer.close(index);
+            http_post('/admin/gallery/del', {galleryId:id}).then(res => {
+                layer.msg("删除成功", {icon: 1});
+            location.reload();  // 刷新
+        });
+        });
+    }
+
+    // 编辑
+    function edit(title, url, galleryId) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url + '?galleryId=' + galleryId,
+            area: ['700px', '600px'],
+            end : function() {
+                window.location.reload();  // 刷新
+            }
+        });
+    }
+
+    // 启用/禁用
+    function stop(is_show,galleryId){
+        http_post('/admin/gallery/shiftState',{galleryId: galleryId, is_show: is_show}).then(res => {
+            layer.msg(`已${is_show==1?'禁用':'启用'}`);
+        location.reload();  // 刷新
+    }).catch(err => {
+            // 错误处理
+        });
+    }
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
