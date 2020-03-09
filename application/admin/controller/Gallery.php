@@ -77,7 +77,7 @@ class Gallery extends Base
           'id'=>$id,
           'is_show'=>$isShow
         ];
-        $result=model('gallery')->where('id',$id)->save($data);
+        $result=model('gallery')->where('id',$id)->update($data);
         if($result)
             return json_encode(['code'=>1,'message'=>'更新成功']);
         else return json_encode(['code'=>0,'message'=>'操作失败']);
