@@ -55,35 +55,41 @@
 								<a href="javascript:;" onclick="add('新增广告位置','{:url(\'admin/ads/addLocation\')}')"
                                    class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 增加</a>
 							</span>
-                        <span class="f-r">共有数据：<strong>{$count}</strong> 张</span>
+                        <span class="f-r">共有数据：<strong>x</strong> 张</span>
                     </div>
                     <div class="mt-20 clearfix">
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
                             <thead>
                             <tr>
-                                <th scope="col" colspan="9">首页轮播图列表</th>
+                                <th scope="col" colspan="11">广告列表</th>
                             </tr>
                             <tr class="text-c">
                                 <th width="25"><input type="checkbox"  id="ckAll" onclick="QuanXuan()"></th>
                                 <th width="40">编号</th>
-                                <th width="100">位置名称</th>
-                                <th width="50">宽度</th>
-                                <th width="50">高度</th>
-                                <th width="100">位置类型</th>
-                                <th width="100">位置代码</th>
-                                <th width="100">操作</th>
+                                <th width="100">广告文件</th>
+                                <th width="80">标题</th>
+                                <th width="80">广告位置</th>
+                                <th width="100">广告网址</th>
+                                <th width="80">广告开始时间</th>
+                                <th width="80">广告结束时间</th>
+                                <th width="40">点击</th>
+                                <th width="40">排序</th>
+                                <th width="80">操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             {volist name="adsPosition" id="vo"}
                             <tr class="text-c">
-                                <td><input type="checkbox"  data-id="{$vo.positionId}"  class="ckc" onclick="select()"></td>
-                                <td>{$vo.positionId}</td>
+                                <td><input type="checkbox"  data-id="{$vo.adpositonId}"  class="ckc" onclick="select()"></td>
+                                <td>{$vo.adpositonId}</td>
+                                <td>{$vo.adFile}</td>
+                                <td>{$vo.adName}</td>
                                 <td>{$vo.positionName}</td>
-                                <td>{$vo.positionWidth}</td>
-                                <td>{$vo.positionHeight}</td>
-                                <td>{$vo.positionType}</td>
-                                <td>{$vo.positionCode}</td>
+                                <td>{$vo.adURL}</td>
+                                <td>{$vo.adStartDate}</td>
+                                <td>{$vo.adEndDate}</td>
+                                <td>{$vo.adClickNum}</td>
+                                <td>{$vo.adSort}</td>
                                 <td class="td-manage">
                                     <a title="编辑" href="javascript:;" onclick="edit('编辑广告位置','{:url(\'admin/ads/edit_location\')}','{$vo.positionId}')" class="ml-5"style="text-decoration:none">
                                         <i class="Hui-iconfont">&#xe6df;</i></a>
