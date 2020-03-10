@@ -55,7 +55,7 @@
 								<a href="javascript:;" onclick="add('新增广告位置','{:url(\'admin/ads/addLocation\')}')"
                                    class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 增加</a>
 							</span>
-                        <span class="f-r">共有数据：<strong>x</strong> 张</span>
+                        <span class="f-r">共有数据：<strong>{$count}</strong> 张</span>
                     </div>
                     <div class="mt-20 clearfix">
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
@@ -78,10 +78,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {volist name="adsPosition" id="vo"}
+                            {volist name="ads" id="vo"}
                             <tr class="text-c">
-                                <td><input type="checkbox"  data-id="{$vo.adpositonId}"  class="ckc" onclick="select()"></td>
-                                <td>{$vo.adpositonId}</td>
+                                <td><input type="checkbox"  data-id="{$vo.id}"  class="ckc" onclick="select()"></td>
+                                <td>{$vo.id}</td>
                                 <td>{$vo.adFile}</td>
                                 <td>{$vo.adName}</td>
                                 <td>{$vo.positionName}</td>
@@ -91,9 +91,9 @@
                                 <td>{$vo.adClickNum}</td>
                                 <td>{$vo.adSort}</td>
                                 <td class="td-manage">
-                                    <a title="编辑" href="javascript:;" onclick="edit('编辑广告位置','{:url(\'admin/ads/edit_location\')}','{$vo.positionId}')" class="ml-5"style="text-decoration:none">
+                                    <a title="编辑" href="javascript:;" onclick="edit('编辑广告位置','{:url(\'admin/ads/edit_location\')}','{$vo.id}')" class="ml-5"style="text-decoration:none">
                                         <i class="Hui-iconfont">&#xe6df;</i></a>
-                                    <a title="删除" href="javascript:;" onclick="del('{$vo.positionId}')"class="ml-5" style="text-decoration:none">
+                                    <a title="删除" href="javascript:;" onclick="del('{$vo.id}')"class="ml-5" style="text-decoration:none">
                                         <i class="Hui-iconfont">&#xe6e2;</i></a>
                                 </td>
                             </tr>
@@ -181,15 +181,7 @@
         });
     }
 
-    // 启用/禁用
-    function stop(is_show,positionId){
-        http_post('/admin/gallery/shiftState',{positionId: positionId, is_show: is_show}).then(res => {
-            layer.msg(`已${is_show==1?'禁用':'启用'}`);
-        location.reload();  // 刷新
-    }).catch(err => {
-            // 错误处理
-        });
-    }
+
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>

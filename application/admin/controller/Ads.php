@@ -8,11 +8,15 @@
 
 namespace app\admin\controller;
 use app\common\model\AdPositions;
-
+use app\common\model\Ads as AdsModel;
 
 class Ads extends  Base
 {
     public function index(){
+        $sql=AdsModel::getAll();
+        $this->assign('ads',$sql);
+        $count=sizeof($sql);
+        $this->assign('count',$count);
         return view();
     }
 

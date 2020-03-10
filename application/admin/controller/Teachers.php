@@ -7,7 +7,7 @@ class Teachers extends Base
 {
     //教师管理页面
     public function index(){
-        $sql = model('teachers')->alias('n')->leftjoin('series a', 'a.seriesID=n.seriesNO')->paginate(20);
+        $sql = model('teachers')->alias('n')->leftjoin('series a', 'a.seriesID=n.seriesNO')->select();
         $viewdata = [
             'teachers' => $sql,
         ];

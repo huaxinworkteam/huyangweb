@@ -52,6 +52,7 @@
 										<th width="25"><input type="checkbox"  id="ckAll" onclick="QuanXuan()"></th>
 										<th width="40">ID</th>
 										<th width="150">院系名称</th>
+										<th width="40">排序</th>
 										<th width="40">教师个数</th>
 									</tr>
 								</thead>
@@ -62,6 +63,7 @@
 										<td><input class="ckc" type="checkbox" value="{$vo.seriesID}" name=""></td>
 										<td>{$vo.seriesID}</td>
 										<td>{$vo.series}</td>
+										<td>{$vo.seriesSort}</td>
 										<td>{if $vo.sums==null}0{else /}{$vo.sums}{/if}</td>
 
 									</tr>
