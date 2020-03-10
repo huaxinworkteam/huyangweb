@@ -98,7 +98,15 @@
                 }
             },
             mounted() {
-                console.log(this.dataForm)
+                // 初始化数据
+                // http_get('/admin/gallery/edit',{galleryId: this.dataForm.galleryId}).then(res => {
+                //     this.dataForm.headline = res['0'].headline;
+                //     this.dataForm.webno = res['0'].webno;
+                //     this.dataForm.src = res['0'].src;
+                //     this.dataForm.path = res['0'].path;
+                //     this.dataForm.sort = res['0'].sort;
+                //     this.dataForm.is_show = res['0'].is_show==1?true:false;
+                // });
             },
             methods: {
                 uploadImageSuccess(res, file) {

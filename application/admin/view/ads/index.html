@@ -29,7 +29,7 @@
             <span class="c-gray en">/</span>
             广告管理
             <span class="c-gray en">/</span>
-            广告位置
+            广告管理
         </nav>
 
         <article class="Hui-admin-content clearfix">
@@ -52,7 +52,7 @@
 							<span class="f-l">
 								<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i
                                         class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-								<a href="javascript:;" onclick="add('新增广告位置','{:url(\'admin/ads/addLocation\')}')"
+								<a href="javascript:;" onclick="add('新增广告','{:url(\'admin/ads/add\')}')"
                                    class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 增加</a>
 							</span>
                         <span class="f-r">共有数据：<strong>{$count}</strong> 张</span>
@@ -91,7 +91,7 @@
                                 <td>{$vo.adClickNum}</td>
                                 <td>{$vo.adSort}</td>
                                 <td class="td-manage">
-                                    <a title="编辑" href="javascript:;" onclick="edit('编辑广告位置','{:url(\'admin/ads/edit_location\')}','{$vo.id}')" class="ml-5"style="text-decoration:none">
+                                    <a title="编辑" href="javascript:;" onclick="edit('编辑广告','{:url(\'admin/ads/edit\')}','{$vo.id}')" class="ml-5"style="text-decoration:none">
                                         <i class="Hui-iconfont">&#xe6df;</i></a>
                                     <a title="删除" href="javascript:;" onclick="del('{$vo.id}')"class="ml-5" style="text-decoration:none">
                                         <i class="Hui-iconfont">&#xe6e2;</i></a>
