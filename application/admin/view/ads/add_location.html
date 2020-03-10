@@ -9,12 +9,12 @@
 <body>
 	<article class="clearfix pd-20" id="edit">
         <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
-            <el-form-item label="位置类型" prop="positionType">
+            <el-form-item label="位置类型：" prop="positionType">
                 <el-select v-model="dataForm.positionType" placeholder="请选择位置类型">
-                  <el-option label="PC版" value="PC版"></el-option>
-                  <el-option label="手机版" value="手机版"></el-option>
-                  <el-option label="微信版" value="微信版"></el-option>
-                  <el-option label="微信小程序" value="微信小程序"></el-option>
+                  <el-option label="PC版" value="1"></el-option>
+                  <el-option label="手机版" value="2"></el-option>
+                  <el-option label="微信版" value="3"></el-option>
+                  <el-option label="微信小程序" value="4"></el-option>
                 </el-select>
               </el-form-item>
             <el-form-item label="位置名称：" prop="positionName">
