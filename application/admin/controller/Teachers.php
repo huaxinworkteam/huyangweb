@@ -19,7 +19,7 @@ class Teachers extends Base
     //教师添加
     public function add()
     {
-        $series=db('series')->select();
+        $series=db('series')->where('delete_time',null)->field('seriesID,series')->order('seriesSort desc')->select();
         $this->assign('series',$series);
         //ajax添加响应
         if (request()->isAjax()) {
@@ -30,8 +30,10 @@ class Teachers extends Base
                 'job' => input('job'),
                 'isShow' => input('isShow') ? 1 : 0,
                 'teacherdescription' => input('teacherdescription'),
-                'teacherphoto'=>"/upload/teacherpic/".input('teacherphoto'),
-                'sort'=>input('sort')
+                'teacherphoto'=>input('teacherphoto'),
+                'sort'=>input('sort'),
+                'create_time'=>time(),
+                'update_time'=>time()
             ];
             $result = model('Teachers')->add($data);
             if ($result == 1) {
@@ -52,15 +54,16 @@ class Teachers extends Base
         ];
         $result = model('Teachers')->show($data);
         if ($result == 1) {
-            $this->success('操作成功', 'admin/teachers/index');
+            $this->success('操作成功', '/admin/teachers/index');
         } else {
             $this->error($result);
         }
     }
     //教师编辑
     public function edit(){
+        $id=input('teacherid');
         if (request()->isAjax()) {
-            $data = [
+           /* $data = [
                 'teacherid'=>input('teacherid'),
                 'teachername' => input('teachername'),
                 'seriesNO' => input('seriesNO'),
@@ -70,17 +73,16 @@ class Teachers extends Base
                 'teacherdescription' => input('teacherdescription'),
                 'teacherphoto'=>"/upload/teacherpic/".input('teacherphoto'),
                 'sort'=>input('sort')
-            ];
-            $result = model('teachers')->edit($data);
+            ];*/
+           $result=model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,sort')->find($id);
             if ($result) {
-                $this->success('编辑成功','admin/Teachers/index');
+                return json_encode(['code'=>1,'data'=>$result]);
             } else {
-                $this->error($result);
+                return json_encode(['code'=>0,'message'=>'获取数据失败']);
             }
         }
-        $teacherinfo = model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,sort')->find(input('teacherid'));
-        $this->assign('teacherinfo', $teacherinfo);
-        $series=db('series')->select();
+        $this->assign('teacherid', $id);
+        $series=db('series')->where('delete_time',null)->field('seriesID,series')->order('seriesSort desc')->select();
         $this->assign('series',$series);
         return view();
     }
@@ -123,12 +125,12 @@ class Teachers extends Base
     //院系列表
     public function series(){
 
-        $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,count(t.seriesNO) as sums')->group('a.seriesID')->select()->toArray();
+        $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,seriesSort,count(t.seriesNO) as sums')->group('a.seriesID')->select()->toArray();
         $has='';
         foreach ($teachers as $k=>$v){
             $has=$has.$teachers[$k]['seriesID'].',';
         }
-        $miss=model('series')->whereNotIn('seriesID',$has)->where('delete_time',null)->field('series,seriesID')->select()->toArray();
+        $miss=model('series')->whereNotIn('seriesID',$has)->where('delete_time',null)->field('series,seriesID,seriesSort')->select()->toArray();
        foreach ($miss as $k=>$v) {
             $miss[$k]['sums']=0;
        }
@@ -143,7 +145,9 @@ class Teachers extends Base
     public function addseries(){
         if(request()->isAjax()){
             $data=[
+                'seriesID'=>input('seriesID'),
                 'series'=>input('series'),
+                'seriesSort'=>input('seriesSort')
             ];
             $result=model('Series')->add($data);
             if($result==1){
@@ -157,10 +161,23 @@ class Teachers extends Base
         return view('teachers/addseries');
     }
 
+
+    public function editSeries(){
+        $id=input('seriesID');
+        if(request()->isAjax()){
+            $res=model('series')->where('seriesID',$id)->field(['seriesID,series,seriesSort'])->find();
+            if($res) return json_encode(['code'=>1,'data'=>$res]);
+            else return json_encode(['code'=>0,'message'=>'获取数据失败']);
+        }
+        $this->assign('seriesID',$id);
+        return view('teachers/editseries');
+
+}
     //删除院系
     public function delseries(){
         if(request()->isAjax()){
-           $return=db('series')->whereIn('seriesID',input('id'))->delete();
+            $id=','.input('seriesID').',';
+           $return=db('series')->whereIn('seriesID',$id)->delete();
             if($return){
                 $this->success('删除成功','admin/teachers/series');
             }else{

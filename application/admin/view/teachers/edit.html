@@ -14,9 +14,9 @@
             </el-form-item>
             <el-form-item label="院系：" prop="seriesNO">
                 <el-select v-model="dataForm.seriesNO" placeholder="请选择院系">
-                    <!-- 此处遍历 -->
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
+                   <!-- {volist name="series" id="vo"}
+                    <el-option label="{$vo.series}" value="{$vo.seriesID}"></el-option>
+                    {/volist} -->
                 </el-select>
             </el-form-item>
             <el-form-item label="教师资历: ">
@@ -30,13 +30,13 @@
                 :autosize="{ minRows: 5, maxRows: 7}" show-word-limit>
                 </el-input>
             </el-form-item>
-            <el-form-item label="图片 (472*300 px)：" prop="path">
+            <el-form-item label="图片 (472*300 px)：" prop="teacherphoto">
                 <el-upload drag :action="uploadAction" :show-file-list="false"
                     :on-success="uploadImageSuccess" :on-error="uploadImageError" 
                     :before-upload="beforeImageUpload" accept="image/*">
-                    <i class="el-icon-upload" v-show="!dataForm.path"></i>
-                    <img v-show="dataForm.path" :src="dataForm.path"  class="el-upload-dragger"/>
-                    <div class="el-upload__text"v-show="!dataForm.path">将文件拖到此处，或<em>点击上传</em></div>
+                    <i class="el-icon-upload" v-show="!dataForm.teacherphoto"></i>
+                    <img v-show="dataForm.teacherphoto" :src="dataForm.teacherphoto"  class="el-upload-dragger"/>
+                    <div class="el-upload__text"v-show="!dataForm.teacherphoto">将文件拖到此处，或<em>点击上传</em></div>
                     <div class="el-upload__tip" slot="tip" style="margin-top: -15px;">图片大小(472*300 px)</div>
                 </el-upload> 
             </el-form-item>
@@ -74,12 +74,13 @@
                 return {
                     uploadAction: '/admin/Webupload/galleryUpload', // 图片上传服务器地址           
                     dataForm: {
+                        teacherid:{$teacherid},
                         teachername: '',
-                        seriesNO: null,
+                        seriesNO: '',
                         teacherlevel: '',
                         job: null,
                         teacherdescription: null,
-                        path: null,
+                        teacherphoto: null,
                         sort: null,
                         isShow: true
                     },
@@ -99,20 +100,24 @@
             },
             mounted() {
                 // 初始化数据
-                // http_get('/admin/gallery/edit',{galleryId: this.dataForm.galleryId}).then(res => {
-                //     this.dataForm.headline = res['0'].headline;
-                //     this.dataForm.webno = res['0'].webno;
-                //     this.dataForm.src = res['0'].src;
-                //     this.dataForm.path = res['0'].path;
-                //     this.dataForm.sort = res['0'].sort;
-                //     this.dataForm.is_show = res['0'].is_show==1?true:false;
-                // });
+
+                http_get('/admin/teachers/edit',{teacherid: this.dataForm.teacherid}).then(res => {
+                    this.dataForm.teachername = res['data'].teachername;
+                    this.dataForm.teacherlevel = res['data'].teacherlevel;
+                    // this.dataForm.seriesNO = res['data'].series;
+                    this.dataForm.job = res['data'].job;
+                    this.dataForm.teacherphoto = res['data'].teacherphoto;
+                    this.dataForm.sort = res['data'].sort;
+                    this.dataForm.isShow = res['data'].isShow==1?true:false;
+                    this.dataForm.teacherdescription = res['data'].teacherdescription;
+                });
+                console.info('init:'+this.dataForm);
             },
             methods: {
                 uploadImageSuccess(res, file) {
                     layer.close(this.uploadLoading);
                     layer.msg('上传成功', {icon: 1});
-                    this.dataForm.path = '/upload/teacherpic/'+ res;
+                    this.dataForm.teacherphoto = '/upload/teacherpic/'+ res;
                 },
                 uploadImageError(err, file) {
                     layer.close(this.uploadLoading);
@@ -138,14 +143,17 @@
                             // 提交数据的请求
                             this.dataForm.isShow = this.dataForm.isShow ? 1:0;
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
-                            http_post('/admin/teachers/edit', this.dataForm).then((res) => {
+                            setTimeout(()=> {
+                                http_post('/admin/teachers/edit', this.dataForm).then((res) => {
                                     layer.close(index);
                                     layer.msg("提交成功", {icon:1});
                                     //先得到当前iframe层的索引
                                     parent.layer.close(parent.layer.getFrameIndex(window.name)); //再执行关闭  
                                 }).catch(err => {
                                     layer.close(index);
-                                });                           
+                                });;
+                            }, 500); 
+                                                      
                         } else {
                             layer.msg("请填写必填项");
                             return false;

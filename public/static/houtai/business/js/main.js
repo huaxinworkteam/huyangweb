@@ -97,7 +97,6 @@ function news_del(obj, id) {
                         location.href = data.url;
                     });
                 } else {
-                    alert(id);
                     layer.open(
                         {
                             title: "新闻删除失败",
@@ -131,10 +130,41 @@ function activity_del(obj, id) {
                         location.href = data.url;
                     });
                 } else {
-                    alert(id);
                     layer.open(
                         {
                             title: "新闻删除失败",
+                            content:data.msg,
+                            icon:5,
+                            anim:6
+
+                        }
+                    );
+                }
+            }
+        });
+    });
+    return false;
+}
+function series_del(obj, id) {
+    layer.confirm('确认要删除吗？', function (index) {
+        layer.close(index);
+        $.ajax({
+            url:"/admin/teachers/delseries",
+            type:'POST',
+            data:{seriesID:id},
+            dataType:'json',
+            success: function (data) {
+                if (data.code == 1) {
+                    layer.msg(data.msg, {
+                        icon: 6,
+                        time: 2000
+                    }, function () {
+                        location.href = data.url;
+                    });
+                } else {
+                    layer.open(
+                        {
+                            title: "删除失败",
                             content:data.msg,
                             icon:5,
                             anim:6
@@ -164,7 +194,6 @@ function teacher_del(obj, id) {
                         location.href = data.url;
                     });
                 } else {
-                    alert(id);
                     layer.open(
                         {
                             title: "删除失败",
@@ -625,6 +654,15 @@ function teacher_edit(title, url, id) {
         type: 2,
         title: title,
         content: url+'?teacherid='+id,
+        area: ['700px', '600px']
+    });
+}
+/*院系-编辑*/
+function series_edit(title, url, id) {
+    var index = layer.open({
+        type: 2,
+        title: title,
+        content: url+'?seriesID='+id,
         area: ['700px', '600px']
     });
 }

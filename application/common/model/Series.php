@@ -15,14 +15,15 @@ use think\model\concern\SoftDelete;
 class Series extends Model
 {
     use SoftDelete;
-
+   protected  $pk='seriesID';
     //院系添加
     public function add($data){
         $validate=new \app\common\validate\Series();
         if(!$validate->scene('add')->check($data)){
             return $validate->getError();
         }
-        $return=$this->save($data);
+        if($data['seriesID']) $return=$this->update($data);
+      else{unset($data['seriesID']);$return=$this->save($data);}
         if($return){
             return 1;
         }else{
