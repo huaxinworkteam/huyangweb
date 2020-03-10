@@ -30,36 +30,6 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="row clearfix">
-                        <!--							<div class="col-xs-12 col-sm-6 col-md-4">
-                                                        <div class="row clearfix mb-10">
-                                                            <span class="col-xs-4 form-item-label">选择分类：</span>
-                                                            <span class="col-xs-8 form-item-control">
-                                                                <span class="select-box">
-                                                                    <select id="classifyID" name="" class="select">
-                                                                        <option value="0">全部分类</option>
-                                                                        <option value="1">分类一</option>
-                                                                        <option value="2">分类二</option>
-                                                                    </select>
-                                                                </span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                                        <div class="row clearfix mb-10">
-                                                            <span class="col-xs-4 form-item-label">开始日期：</span>
-                                                            <span class="col-xs-8 form-item-control">
-                                                                <input type="text" id="search-datetime-start" class="input-text datetimepicker-input">
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                                        <div class="row clearfix mb-10">
-                                                            <span class="col-xs-4 form-item-label">结束日期：</span>
-                                                            <span class="col-xs-8 form-item-control">
-                                                                <input type="text" id="search-datetime-end" class="input-text datetimepicker-input">
-                                                            </span>
-                                                        </div>
-                                                    </div>-->
                         <form action="{:url('teachers/search')}" method="get">
                             <div class="col-xs-12 col-sm-6 col-md-4">
                                 <div class="row clearfix mb-10">
@@ -104,7 +74,8 @@
                                 <th width="80">教师姓名</th>
                                 <th width="80">院系</th>
                                 <th width="120">教师资历</th>
-                                <th width="120">职务</th>
+                                <th width="100">职务</th>
+                                <th width="100">排序</th>
                                 <th width="120">创建时间</th>
                                 <th width="60">显示</th>
                                 <th width="120">操作</th>
@@ -119,6 +90,7 @@
                                 <td>{$vo.series}</td>
                                 <td>{$vo.teacherlevel}</td>
                                 <td>{$vo.job}</td>
+                                <td>{$vo.sort}</td>
                                 <td>{$vo.create_time}</td>
                                 <td class="td-status"><span class="label label-success radius">{if $vo.isShow ==1}已显示{else /}已隐藏{/if}
                                 </td>
@@ -176,41 +148,7 @@
 
 </script>
 <script type="text/javascript">
-    /*    function article_del(obj, id) {
-            alert(id);
-            layer.confirm('确认要删除吗？', function (index) {
-                layer.close(index);
-                $.ajax({
-                    url:"{:url('admin/teachers/teachersdel')}",
-                    type:'POST',
-                    data:{teacherid:id},
-                    dataType:'json',
-                    success: function (data) {
-                        alert("1");
-                        if (data.code == 1) {
-                            layer.msg(data.msg, {
-                                icon: 6,
-                                time: 2000
-                            }, function () {
-                                location.href = data.url;
-                            });
-                        } else {
-                            alert(id);
-                            layer.open(
-                                {
-                                    title: "教师删除失败",
-                                    content:data.msg,
-                                    icon:5,
-                                    anim:6
 
-                                }
-                            );
-                        }
-                    }
-                });
-            });
-            return false;
-        }*/
     $(function () {
         $('.op1').click(function () {
             var teacherid = $(this).attr('teacherid');
@@ -426,12 +364,12 @@
 
         $('.table-sort').dataTable({
             "aaSorting": [[1, "desc"]],//默认第几个排序
-            "bStateSave": true,//状态保存
+            "bStateSave": false,//状态保存
             "pading": false,
             "pagingType": "full_numbers",
             "aoColumnDefs": [
                 //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-                {"orderable": false, "aTargets": [0, 8]}// 不参与排序的列
+                {"orderable": false, "aTargets": [0,2,3,4,5,8,9]}// 不参与排序的列
             ]
         });
 

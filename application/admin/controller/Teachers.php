@@ -7,7 +7,7 @@ class Teachers extends Base
 {
     //教师管理页面
     public function index(){
-        $sql = model('teachers')->alias('n')->leftjoin('series a', 'a.seriesID=n.seriesNO')->order('n.teacherid')->paginate(20);
+        $sql = model('teachers')->alias('n')->leftjoin('series a', 'a.seriesID=n.seriesNO')->paginate(20);
         $viewdata = [
             'teachers' => $sql,
         ];
@@ -31,6 +31,7 @@ class Teachers extends Base
                 'isShow' => input('isShow') ? 1 : 0,
                 'teacherdescription' => input('teacherdescription'),
                 'teacherphoto'=>"/upload/teacherpic/".input('teacherphoto'),
+                'sort'=>input('sort')
             ];
             $result = model('Teachers')->add($data);
             if ($result == 1) {
@@ -68,6 +69,7 @@ class Teachers extends Base
                 'isShow' => input('isShow',0),
                 'teacherdescription' => input('teacherdescription'),
                 'teacherphoto'=>"/upload/teacherpic/".input('teacherphoto'),
+                'sort'=>input('sort')
             ];
             $result = model('teachers')->edit($data);
             if ($result) {
@@ -76,7 +78,7 @@ class Teachers extends Base
                 $this->error($result);
             }
         }
-        $teacherinfo = model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow')->find(input('teacherid'));
+        $teacherinfo = model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,sort')->find(input('teacherid'));
         $this->assign('teacherinfo', $teacherinfo);
         $series=db('series')->select();
         $this->assign('series',$series);
@@ -114,7 +116,7 @@ class Teachers extends Base
         $sq=model('Teachers')->where('teachername','like','%'.$searchinfo.'%')->select();
         $total=count($sq);
         $this->assign('total',$total);
-        $sql=model('Teachers')->alias('n')->join('series a', 'a.seriesId=n.seriesNO')->order('create_time desc')->where('teachername','like','%'.$searchinfo.'%')->paginate(10);
+        $sql=model('Teachers')->alias('n')->join('series a', 'a.seriesId=n.seriesNO')->order('sort desc ,create_time desc')->where('teachername','like','%'.$searchinfo.'%')->paginate(20);
         $this->assign('teachers',$sql);
         return view('teachers/index');
     }

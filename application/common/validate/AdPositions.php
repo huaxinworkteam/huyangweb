@@ -18,7 +18,7 @@ class AdPositions extends Validate
       'positionName|位置名称'=>'require',
       'positionCode|位置代码'=>'require',
       'positionWidth|建议宽度'=>'require',
-      'positionHeight|建议高度'=>'require',
+      'positionHeight|建议高度'=>'require'
       ];
 
 }

@@ -625,7 +625,7 @@ function teacher_edit(title, url, id) {
         type: 2,
         title: title,
         content: url+'?teacherid='+id,
-        area: ['600px', '700px']
+        area: ['700px', '600px']
     });
 }
 /*管理员-角色-编辑*/
@@ -700,7 +700,7 @@ function teacher_add(title, url) {
         type: 2,
         title: title,
         content: url,
-        area: ['600px', '700px']
+        area: ['700px', '600px']
     });
 }
 
@@ -709,7 +709,7 @@ function news_add(title, url) {
         type: 2,
         title: title,
         content: url,
-        area: ['600px', '700px']
+        area: ['700px', '600px']
     });
 }
 function activity_add(title, url) {
@@ -717,6 +717,6 @@ function activity_add(title, url) {
         type: 2,
         title: title,
         content: url,
-        area: ['600px', '700px']
+        area: ['700px', '600px']
     });
 }

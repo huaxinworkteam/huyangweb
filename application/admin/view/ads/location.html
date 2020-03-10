@@ -85,7 +85,7 @@
                                 <td>{$vo.positionType}</td>
                                 <td>{$vo.positionCode}</td>
                                 <td class="td-manage">
-                                    <a title="编辑" href="javascript:;" onclick="edit('编辑广告位置','{:url(\'admin/ads/edit_location\')}','{$vo.positionId}')" class="ml-5"style="text-decoration:none">
+                                    <a title="编辑" href="javascript:;" onclick="edit('编辑广告位置','{:url(\'admin/ads/editLocation\')}','{$vo.positionId}')" class="ml-5"style="text-decoration:none">
                                         <i class="Hui-iconfont">&#xe6df;</i></a>
                                     <a title="删除" href="javascript:;" onclick="del('{$vo.positionId}')"class="ml-5" style="text-decoration:none">
                                         <i class="Hui-iconfont">&#xe6e2;</i></a>
@@ -131,7 +131,7 @@
         layer.confirm('确认要删除吗？', function (index) {
             layer.close(index);
 
-            http_post('/admin/gallery/del', {positionId:array.toString()}).then(res => {
+            http_post('/admin/ads/delLocation', {positionId:array.toString()}).then(res => {
                 layer.msg("删除成功", {icon: 1});
             location.reload();  // 刷新
         });
@@ -144,7 +144,7 @@
             type: 2,
             title: title,
             content: url,
-            area: ['700px', '600px'],
+            area: ['600px', '700px'],
             end : function() {
                 window.location.reload();  // 刷新
             }
@@ -155,7 +155,7 @@
     function del(id) {
         layer.confirm('确认要删除吗？', function (index) {
             layer.close(index);
-            http_post('/admin/gallery/del', {positionId:id}).then(res => {
+            http_post('/admin/ads/delLocation', {positionId:id}).then(res => {
                 layer.msg("删除成功", {icon: 1});
             location.reload();  // 刷新
         });
@@ -168,7 +168,7 @@
             type: 2,
             title: title,
             content: url + '?positionId=' + id,
-            area: ['700px', '600px'],
+            area: ['600px', '700px'],
             end : function() {
                 window.location.reload();  // 刷新
             }
