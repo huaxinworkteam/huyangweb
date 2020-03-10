@@ -7,14 +7,11 @@ class Teachers extends Base
 {
     //教师管理页面
     public function index(){
-        $title="输入查找";
-        $this->assign('title',$title);
-        $sql = model('teachers')->alias('n')->join('series a', 'a.seriesID=n.seriesNO')->order('hy_teachers.update_time desc')->paginate(10);
+        $sql = model('teachers')->alias('n')->leftjoin('series a', 'a.seriesID=n.seriesNO')->order('n.teacherid')->paginate(20);
         $viewdata = [
             'teachers' => $sql,
         ];
         $this->assign($viewdata);
-
         $total = count(model('teachers')->select());
         $this->assign('total', $total);
         return view();
@@ -79,7 +76,7 @@ class Teachers extends Base
                 $this->error($result);
             }
         }
-        $teacherinfo = model('Teachers')->find(input('teacherid'));
+        $teacherinfo = model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow')->find(input('teacherid'));
         $this->assign('teacherinfo', $teacherinfo);
         $series=db('series')->select();
         $this->assign('series',$series);
@@ -123,9 +120,7 @@ class Teachers extends Base
     }
     //院系列表
     public function series(){
-     //   $teachers=model('teachers')->alias('t')->rightJoin('series a','a.seriesID=t.seriesNO')->field('a.seriesID,a.series,count(t.seriesNO) as sums')->group('a.seriesID')->select()->toArray();
-       // $teachersno=model('teachers')->where('delete_time',null)->group('seriesNO')->field('count(teacherid),seriesNO')->select()->toArray();
-      //  var_dump($teachersno);
+
         $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,count(t.seriesNO) as sums')->group('a.seriesID')->select()->toArray();
         $has='';
         foreach ($teachers as $k=>$v){

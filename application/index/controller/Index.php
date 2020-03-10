@@ -142,7 +142,7 @@ class Index extends Controller
         $t = input('seriesNO');
         //获取教师信息
         if (!$t)
-            $list = Teachers::alias('t')->where(['t.seriesNO'=>'1','t.isShow'=>'1','t.delete_time'=>null ])->leftJoin('series s' ,' t.seriesNO=s.seriesID')->field('teacherphoto,teachername,teacherdescription,series,teacherlevel,job')->paginate(7);
+            $list = Teachers::alias('t')->where(['t.isShow'=>'1','t.delete_time'=>null ])->leftJoin('series s' ,' t.seriesNO=s.seriesID')->field('teacherphoto,teachername,teacherdescription,series,teacherlevel,job')->order("t.create_time")->paginate(7);
         else   $list = Teachers::alias('t')->where(['t.seriesNO'=>$t,'t.isShow'=>'1','t.delete_time'=>null ])->leftJoin('series s', 't.seriesNO=s.seriesID')->field('teacherphoto,teachername,teacherdescription,series,teacherlevel,job')->paginate(7);
         $this->assign('teachers', $list);
         return view('chhcollege/szll/szll');
