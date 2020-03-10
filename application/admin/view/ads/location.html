@@ -74,7 +74,7 @@
                                 <th width="100">操作</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="getData-list" data-currPage='1'>
                             {volist name="adsPosition" id="vo"}
                             <tr class="text-c">
                                 <td><input type="checkbox"  data-id="{$vo.positionId}"  class="ckc" onclick="select()"></td>
@@ -95,6 +95,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <div id="laypage" class="text-c"></div>
                 </div>
             </div>
         </article>
