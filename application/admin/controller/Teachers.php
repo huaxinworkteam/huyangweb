@@ -123,12 +123,12 @@ class Teachers extends Base
     //院系列表
     public function series(){
 
-        $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,count(t.seriesNO) as sums')->group('a.seriesID')->select()->toArray();
+        $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,seriesSort,count(t.seriesNO) as sums')->group('a.seriesID')->select()->toArray();
         $has='';
         foreach ($teachers as $k=>$v){
             $has=$has.$teachers[$k]['seriesID'].',';
         }
-        $miss=model('series')->whereNotIn('seriesID',$has)->where('delete_time',null)->field('series,seriesID')->select()->toArray();
+        $miss=model('series')->whereNotIn('seriesID',$has)->where('delete_time',null)->field('series,seriesID,seriesSort')->select()->toArray();
        foreach ($miss as $k=>$v) {
             $miss[$k]['sums']=0;
        }
@@ -143,7 +143,9 @@ class Teachers extends Base
     public function addseries(){
         if(request()->isAjax()){
             $data=[
+                'seriesID'=>input('seriesID'),
                 'series'=>input('series'),
+                'seriesSort'=>input('seriesSort')
             ];
             $result=model('Series')->add($data);
             if($result==1){
@@ -157,10 +159,23 @@ class Teachers extends Base
         return view('teachers/addseries');
     }
 
+
+    public function editSeries(){
+        $id=input('seriesID');
+        if(request()->isAjax()){
+            $res=model('series')->where('seriesID',$id)->field(['seriesID,series,seriesSort'])->find();
+            if($res) return json_encode(['code'=>1,'data'=>$res]);
+            else return json_encode(['code'=>0,'message'=>'获取数据失败']);
+        }
+        $this->assign('seriesID',$id);
+        return view('teachers/editseries');
+
+}
     //删除院系
     public function delseries(){
         if(request()->isAjax()){
-           $return=db('series')->whereIn('seriesID',input('id'))->delete();
+            $id=','.input('seriesID').',';
+           $return=db('series')->whereIn('seriesID',$id)->delete();
             if($return){
                 $this->success('删除成功','admin/teachers/series');
             }else{
