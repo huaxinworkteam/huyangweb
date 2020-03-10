@@ -23,17 +23,53 @@ class Ads extends  Base
     public function add(){
         return view();
     }
+    //异步接受广告位置类型 返回广告位置
+    public function getPosition(){
+        if(request()->isAjax()){
+            $positionType=input('positionType');
+            $res=AdPositions::getPosition($positionType);
+            if($res) return json_encode(['code'=>1,'data'=>$res]);
+            else return json_encode(['code'=>0,'message'=>'获取广告位置信息失败']);
+        }
+        return false;
+    }
 
     public  function edit(){
+        $id=input('id');
+        if(request()->isAjax()){
+            $res=AdsModel::getInfo($id);
+            if($res) return json_encode(['code'=>1,'data'=>$res]);
+            else return json_encode(['code'=>0,'message'=>'获取信息失败']);
+        }
+        $this->assign('id',$id);
         return view();
     }
     public function save(){
-
+        $data=[
+          'id'=>input('id'),
+            'adpositionId'=>input('positionId'),
+            'adFile'=>input('adFile'),
+            'adName'=>input('adName'),
+            'adURL'=>input('adURL'),
+            'adStartDate'=>input('adStartDate'),
+            'adEndDate'=>input('adEndDate'),
+            'adSort'=>input('adSort'),
+            'positionType'=>input('positionType')
+        ];
+        if($data['id']==null) $data=array_merge($data,['createTime'=>time()]);
+        $res=AdsModel::saveInfo($data);
+        if($res==1) return json_encode(['code'=>1,'message'=>'保存成功']);
+        else return json_encode(['code'=>0,'message'=>'保存失败']);
     }
 
     public function  del(){
-
+        $id=input('id');
+        $res=AdsModel::del($id);
+        if($res==1) return json_encode(['code'=>1,'message'=>'删除成功']);
+        else return json_encode(['code'=>0,'message'=>'删除失败']);
     }
+
+
     //==============================以下是location相关代码====================================
     public function location(){
         $sql=AdPositions::getAll();

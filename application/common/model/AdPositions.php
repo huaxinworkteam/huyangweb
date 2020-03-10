@@ -47,4 +47,9 @@ class AdPositions extends  Model
         return $res;
     }
 
+    public static function getPosition($positionType){
+        $res=self::where(['positionType'=>$positionType,'isDel'=>0])->order('apSort desc')->field('positionId,positionName')->select();
+        return $res;
+    }
+
 }

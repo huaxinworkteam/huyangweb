@@ -11,12 +11,34 @@ use think\Model;
 
 class Ads extends Model
 {
-    public static function add($data){
+    public static function saveInfo($data){
         if(!$data) return false;
-
+        $validate=new \app\common\validate\Ads();
+        if(!$validate->check($data)){
+            return $validate->getError();
+        }
+        if($data['id']) $res= self::where('id',$data['id'])->update($data);
+            else{
+            unset($data['id']); $res=self::insert($data);
+            }
+            if($res) return 1;
+            else return 0;
     }
     public static function getAll(){
         $res=self::alias('A')->where('A.isDel',0)->leftJoin('AdPositions P','A.adpositionId=P.positionId')->field('A.id,A.adFile,A.adName,A.adURL,A.adStartDate,A.adEndDate,A.adSort,A.adClickNum,A.positionType,P.positionName')->select();
        return $res;
+    }
+
+    public static function del($id){
+        $id=','.$id.',';
+        $res=model('ads')->whereIn('id',$id)->update('isDel',1);
+        if($res) return 1;
+        else return 0;
+    }
+
+    public static function  getInfo($id){
+        $res=self::where('id',$id)->field('id,adFile,adName,adURL,adStartDate,adEndDate,adSort,positionType,positionName')->find();
+        if(!empty($res)) return $res;
+        else return 0;
     }
 }
