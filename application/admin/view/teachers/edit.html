@@ -72,7 +72,7 @@
             el: '#add',
             data: function() {
                 return {
-                    uploadAction: '/admin/Webupload/galleryUpload', // 图片上传服务器地址           
+                    uploadAction: '/admin/Webupload/teacherpicUpload', // 图片上传服务器地址           
                     dataForm: {
                         teacherid:{$teacherid},
                         teachername: '',
@@ -162,8 +162,7 @@
                     
                 },
                 resetForm(formName) {
-                    console.log(this.dataForm)
-                    // this.$refs[formName].resetFields();
+                    this.$refs[formName].resetFields();
                 }
             }
         })

@@ -14,15 +14,15 @@
             </el-form-item>
             <el-form-item label="院系：" prop="seriesNO">
                 <el-select v-model="dataForm.seriesNO" placeholder="请选择院系">
-                    {volist name="series" id="vo"}
-                    <el-option label="{$vo.series}" value="{$vo.seriesID}"></el-option>
+                   {volist name="series" id="vo"}
+                    <el-option label="{$vo.series}" :value="{$vo.seriesID}"></el-option>
                     {/volist}
                 </el-select>
             </el-form-item>
-            <el-form-item label="教师资历: ">
+            <el-form-item label="教师资历: " prop="teacherlevel">
                 <el-input v-model="dataForm.teacherlevel"></el-input>
             </el-form-item>
-            <el-form-item label="职务: ">
+            <el-form-item label="职务: " prop="job">
                 <el-input v-model="dataForm.job"></el-input>
             </el-form-item>
             <el-form-item label="教师介绍: " prop="teacherdescription">
@@ -40,10 +40,10 @@
                     <div class="el-upload__tip" slot="tip" style="margin-top: -15px;">图片大小(472*300 px)</div>
                 </el-upload> 
             </el-form-item>
-            <el-form-item label="排序：">
+            <el-form-item label="排序：" prop="sort">
                 <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
             </el-form-item>
-            <el-form-item label="是否显示：">
+            <el-form-item label="是否显示：" prop="isShow">
                 <el-switch v-model="dataForm.isShow" :active-text="dataForm.isShow? '显示':'隐藏'"></el-switch>
             </el-form-item>
             <el-form-item>

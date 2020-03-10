@@ -9,10 +9,10 @@
 <body>
 	<article class="clearfix pd-20" id="edit">
         <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
-            <el-form-item label="标题；">
+            <el-form-item label="标题；" prop="headline">
                 <el-input v-model="dataForm.headline"></el-input>
             </el-form-item>
-            <el-form-item label="跳转链接：">
+            <el-form-item label="跳转链接：" prop="src">
                 <el-input v-model="dataForm.src"></el-input>
             </el-form-item>
             <el-form-item label="图片 (1190*350 px)：" prop="path">
@@ -26,12 +26,12 @@
                 </el-upload>
                 
             </el-form-item>
-            <el-form-item label="排序：">
+            <el-form-item label="排序：" prop="sort">
                 <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
             </el-form-item>
-            <el-form-item label="状态：">
+            <el-form-item label="状态：" prop="is_show">
                 <el-switch v-model="dataForm.is_show" :active-text="dataForm.is_show? '启用':'禁用'"></el-switch>
-              </el-form-item>
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm('dataForm')">立即提交</el-button>
                 <el-button @click="resetForm('dataForm')">重置</el-button>
