@@ -29,7 +29,7 @@
             <span class="c-gray en">/</span>
             轮播图管理
             <span class="c-gray en">/</span>
-            首页轮播图
+            {if $webno==0 }首页{elseif $webno==1}胡杨概况{elseif $webno==2}核心课程{elseif $webno==3}师资力量{elseif $webno==4}新闻动态{else /}联系我们{/if}轮播图
         </nav>
 
         <article class="Hui-admin-content clearfix">
@@ -61,7 +61,7 @@
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
                             <thead>
                             <tr>
-                                <th scope="col" colspan="9">首页轮播图列表</th>
+                                <th scope="col" colspan="9">轮播图列表</th>
                             </tr>
                             <tr class="text-c">
                                 <th width="25"><input type="checkbox"  id="ckAll" onclick="QuanXuan()"></th>
@@ -116,7 +116,7 @@
 <script type="text/javascript">
 
 function QuanXuan(){
-    $(".ckc").prop("checked",$("#ckAll").prop("checked"))
+    $(".ckc").prop("checked",$("#ckAll").prop("checked"));
 }
 function select() {
 
