@@ -20,7 +20,7 @@ class AdPositions extends  Model
             return $validate->getError();
         }
         if($data['positionId']) $res=self::where('positionId',$data['positionId'])->update($data);
-     else  {unset($data['positionId']); $res=self::insert($data);}
+     else  {unset($data['positionId']); $res=model('AdPositions')->insert($data);}
         if($res){
             return 1;
         }else{
@@ -31,7 +31,7 @@ class AdPositions extends  Model
 
     public static function del($id){
         $id=','.$id.',';
-        $res=self::whereIn('positionId',$id)->update(['isDel'=>1]);
+        $res=model('AdPositions')->whereIn('positionId',$id)->update(['isDel'=>1]);
         if(!$res) return false;
         return 1;
     }

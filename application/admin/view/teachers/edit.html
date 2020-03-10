@@ -47,6 +47,12 @@
 				</div>
 			</div>
 			<div class="row clearfix">
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>教师介绍：</label>
+				<div class="form-controls col-xs-8 col-sm-9">
+					<textarea cols="" rows="" class="textarea textarea-article"  placeholder="说点什么...最少输入10个字符" name="teacherdescription">{$teacherinfo.teacherdescription}</textarea>
+				</div>
+			</div>
+			<div class="row clearfix">
 				<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>当前封面：</label>
 				<div class="form-controls col-xs-8 col-sm-9">
 					<img src="{$teacherinfo.teacherphoto}" alt="封面" width="250px" height="200px" >
@@ -85,14 +91,14 @@
 				<div id="InputsWrapper">
 				</div>
 			</div>
+
+
 			<div class="row clearfix">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>教师介绍：</label>
+				<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>排序(越大越靠前,默认0)：</label>
 				<div class="form-controls col-xs-8 col-sm-9">
-					<textarea cols="" rows="" class="textarea textarea-article"  placeholder="说点什么...最少输入10个字符" name="teacherdescription">{$teacherinfo.teacherdescription}</textarea>
+					<input type="text" class="input-text" value="{$teacherinfo.sort}" placeholder="" id="sort" name="sort">
 				</div>
 			</div>
-
-
 			<div class="row clearfix">
 				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
 					<button class="btn btn-primary radius" type="submit" id="teacheredit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>

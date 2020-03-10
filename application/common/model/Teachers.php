@@ -42,6 +42,7 @@ class Teachers extends  Model
         $sql->teacherlevel = $data['teacherlevel'];
         $sql->job = $data['job'];
         $sql->teacherdescription= $data['teacherdescription'];
+        $sql->sort=$data['sort'];
         if($data['teacherphoto']){
             $sql->teacherphoto= $data['teacherphoto'];
         }

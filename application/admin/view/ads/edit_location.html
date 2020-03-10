@@ -51,6 +51,7 @@
             data: function() {
                 return {
                     dataForm: {
+                        positionId:{$positionId},
                         positionName: '',
                         positionWidth:'',
                         positionHeight: '',
@@ -78,7 +79,14 @@
                 }
             },
             mounted() {
-                console.log(this.dataForm.webno)
+                http_get('/admin/ads/editLocation',{positionId: this.dataForm.positionId}).then(res => {
+                    this.dataForm.positionType = res['data'].positionType;
+                this.dataForm.positionCode = res['data'].positionCode;
+                this.dataForm.positionHeight = res['data'].positionHeight;
+                this.dataForm.positionWidth = res['data'].positionWidth;
+                this.dataForm.positionName = res['data'].positionName;
+                this.dataForm.apSort = res['data'].apSort;
+            });
             },
             methods: {
                 
@@ -86,10 +94,9 @@
                     this.$refs[formName].validate((valid) => {
                         if (valid) {
                             // 提交数据的请求
-                            this.dataForm.is_show = this.dataForm.is_show ? 1:0;
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                             setTimeout(()=> {
-                                http_post('/admin/gallery/save', this.dataForm).then((res) => {
+                                http_post('/admin/ads/saveLocation', this.dataForm).then((res) => {
                                     layer.close(index);
                                     this.$refs[formName].resetFields();
                                     layer.msg("提交成功", {icon:1});

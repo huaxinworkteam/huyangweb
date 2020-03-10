@@ -32,6 +32,7 @@ class Ads extends  Base
             'positionWidth'=>input('positionWidth'),
             'positionHeight'=>input('positionHeight'),
             'positionType'=>input('positionType'),
+            'positionName'=>input('positionName'),
             'positionCode'=>input('positionCode'),
             'apSort'=>input('apSort')
 
@@ -41,5 +42,25 @@ class Ads extends  Base
             return json_encode(['code'=>1,'message'=>'添加成功']);
         else return json_encode(['code'=>0,'message'=>'添加失败']);
 
+    }
+
+    public function delLocation(){
+        $id=input('positionId');
+        $res=AdPositions::del($id);
+        if($res==1)
+            return json_encode(['code'=>1,'message'=>'删除成功']);
+        else return json_encode(['code'=>0,'message'=>'删除失败']);
+    }
+
+    public function editLocation(){
+        $positionId=input('positionId');
+        if(request()->isAjax()){
+        $res=AdPositions::getInfo($positionId);
+        if(!empty($res))return json_encode(['code'=>'1','data'=>$res]);
+        else return json_encode(['code'=>0,'message'=>'error']);
+        }
+
+        $this->assign('positionId',$positionId);
+        return view();
     }
 }
