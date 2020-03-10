@@ -8,12 +8,10 @@
 namespace app\common\model;
 
 use think\Model;
-use think\model\concern\SoftDelete;
 
 class Teachers extends  Model
 {
-    use SoftDelete;
-
+    protected $pk='teacherid';
     //教师添加
     public function add($data)
     {

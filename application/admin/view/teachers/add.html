@@ -14,9 +14,9 @@
             </el-form-item>
             <el-form-item label="院系：" prop="seriesNO">
                 <el-select v-model="dataForm.seriesNO" placeholder="请选择院系">
-                    <!-- 此处遍历 -->
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
+                    {volist name="series" id="vo"}
+                    <el-option label="{$vo.series}" value="{$vo.seriesID}"></el-option>
+                    {/volist}
                 </el-select>
             </el-form-item>
             <el-form-item label="教师资历: ">
@@ -30,13 +30,13 @@
                 :autosize="{ minRows: 5, maxRows: 7}" show-word-limit>
                 </el-input>
             </el-form-item>
-            <el-form-item label="图片 (472*300 px)：" prop="path">
+            <el-form-item label="图片 (472*300 px)：" prop="teacherphoto">
                 <el-upload drag :action="uploadAction" :show-file-list="false"
                     :on-success="uploadImageSuccess" :on-error="uploadImageError" 
                     :before-upload="beforeImageUpload" accept="image/*">
-                    <i class="el-icon-upload" v-show="!dataForm.path"></i>
-                    <img v-show="dataForm.path" :src="dataForm.path"  class="el-upload-dragger"/>
-                    <div class="el-upload__text"v-show="!dataForm.path">将文件拖到此处，或<em>点击上传</em></div>
+                    <i class="el-icon-upload" v-show="!dataForm.teacherphoto"></i>
+                    <img v-show="dataForm.teacherphoto" :src="dataForm.teacherphoto"  class="el-upload-dragger"/>
+                    <div class="el-upload__text"v-show="!dataForm.teacherphoto">将文件拖到此处，或<em>点击上传</em></div>
                     <div class="el-upload__tip" slot="tip" style="margin-top: -15px;">图片大小(472*300 px)</div>
                 </el-upload> 
             </el-form-item>
@@ -72,14 +72,14 @@
             el: '#add',
             data: function() {
                 return {
-                    uploadAction: '/admin/Webupload/galleryUpload', // 图片上传服务器地址           
+                    uploadAction: '/admin/Webupload/teacherpicUpload', // 图片上传服务器地址
                     dataForm: {
                         teachername: '',
                         seriesNO: null,
                         teacherlevel: '',
                         job: null,
                         teacherdescription: null,
-                        path: null,
+                        teacherphoto: null,
                         sort: null,
                         isShow: true
                     },
@@ -104,7 +104,7 @@
                 uploadImageSuccess(res, file) {
                     layer.close(this.uploadLoading);
                     layer.msg('上传成功', {icon: 1});
-                    this.dataForm.path = '/upload/teacherpic/'+ res;
+                    this.dataForm.teacherphoto = '/upload/teacherpic/'+ res;
                 },
                 uploadImageError(err, file) {
                     layer.close(this.uploadLoading);

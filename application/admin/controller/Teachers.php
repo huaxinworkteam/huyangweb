@@ -19,7 +19,7 @@ class Teachers extends Base
     //教师添加
     public function add()
     {
-        $series=db('series')->select();
+        $series=db('series')->where('delete_time',null)->field('seriesID,series')->order('seriesSort desc')->select();
         $this->assign('series',$series);
         //ajax添加响应
         if (request()->isAjax()) {
@@ -30,8 +30,10 @@ class Teachers extends Base
                 'job' => input('job'),
                 'isShow' => input('isShow') ? 1 : 0,
                 'teacherdescription' => input('teacherdescription'),
-                'teacherphoto'=>"/upload/teacherpic/".input('teacherphoto'),
-                'sort'=>input('sort')
+                'teacherphoto'=>input('teacherphoto'),
+                'sort'=>input('sort'),
+                'create_time'=>time(),
+                'update_time'=>time()
             ];
             $result = model('Teachers')->add($data);
             if ($result == 1) {
@@ -52,15 +54,16 @@ class Teachers extends Base
         ];
         $result = model('Teachers')->show($data);
         if ($result == 1) {
-            $this->success('操作成功', 'admin/teachers/index');
+            $this->success('操作成功', '/admin/teachers/index');
         } else {
             $this->error($result);
         }
     }
     //教师编辑
     public function edit(){
+        $id=input('teacherid');
         if (request()->isAjax()) {
-            $data = [
+           /* $data = [
                 'teacherid'=>input('teacherid'),
                 'teachername' => input('teachername'),
                 'seriesNO' => input('seriesNO'),
@@ -70,17 +73,16 @@ class Teachers extends Base
                 'teacherdescription' => input('teacherdescription'),
                 'teacherphoto'=>"/upload/teacherpic/".input('teacherphoto'),
                 'sort'=>input('sort')
-            ];
-            $result = model('teachers')->edit($data);
+            ];*/
+           $result=model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,sort')->find($id);
             if ($result) {
-                $this->success('编辑成功','admin/Teachers/index');
+                return json_encode(['code'=>1,'data'=>$result]);
             } else {
-                $this->error($result);
+                return json_encode(['code'=>0,'message'=>'获取数据失败']);
             }
         }
-        $teacherinfo = model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,sort')->find(input('teacherid'));
-        $this->assign('teacherinfo', $teacherinfo);
-        $series=db('series')->select();
+        $this->assign('teacherid', $id);
+        $series=db('series')->where('delete_time',null)->field('seriesID,series')->order('seriesSort desc')->select();
         $this->assign('series',$series);
         return view();
     }
