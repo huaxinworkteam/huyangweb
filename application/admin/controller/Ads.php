@@ -20,6 +20,21 @@ class Ads extends  Base
         return view();
     }
 
+    public function add(){
+        return view();
+    }
+
+    public  function edit(){
+        return view();
+    }
+    public function save(){
+
+    }
+
+    public function  del(){
+
+    }
+    //==============================以下是location相关代码====================================
     public function location(){
         $sql=AdPositions::getAll();
         $this->assign('adsPosition',$sql);

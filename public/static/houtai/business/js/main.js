@@ -181,7 +181,7 @@ function teacher_del(obj, id) {
     layer.confirm('确认要删除吗？', function (index) {
         layer.close(index);
         $.ajax({
-            url:"./teacherdel",
+            url:"/admin/teachers/del",
             type:'POST',
             data:{teacherid:id},
             dataType:'json',

@@ -7,7 +7,7 @@ class Teachers extends Base
 {
     //教师管理页面
     public function index(){
-        $sql = model('teachers')->alias('n')->leftjoin('series a', 'a.seriesID=n.seriesNO')->select();
+        $sql = model('teachers')->alias('n')->leftjoin('series a', 'a.seriesID=n.seriesNO')->where('n.delete_time',NULL)->select();
         $viewdata = [
             'teachers' => $sql,
         ];
@@ -63,17 +63,7 @@ class Teachers extends Base
     public function edit(){
         $id=input('teacherid');
         if (request()->isAjax()) {
-           /* $data = [
-                'teacherid'=>input('teacherid'),
-                'teachername' => input('teachername'),
-                'seriesNO' => input('seriesNO'),
-                'teacherlevel' => input('teacherlevel'),
-                'job' => input('job'),
-                'isShow' => input('isShow',0),
-                'teacherdescription' => input('teacherdescription'),
-                'teacherphoto'=>"/upload/teacherpic/".input('teacherphoto'),
-                'sort'=>input('sort')
-            ];*/
+
            $result=model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('seriesNO,s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,sort')->find($id);
             if ($result) {
                 return json_encode(['code'=>1,'data'=>$result]);
@@ -87,10 +77,27 @@ class Teachers extends Base
         return view();
     }
 
+    public function editSave(){
+     $data = [
+     'teacherid'=>input('teacherid'),
+     'teachername' => input('teachername'),
+     'seriesNO' => input('seriesNO'),
+     'teacherlevel' => input('teacherlevel'),
+     'job' => input('job'),
+     'isShow' => input('isShow',0),
+     'teacherdescription' => input('teacherdescription'),
+     'teacherphoto'=>input('teacherphoto'),
+     'sort'=>input('sort'),
+      'update_time'=>time(),
+    ];
+     $res=model('teachers')->edit($data);
+     if($res==1){
+         return json_encode(['code'=>1,'message'=>'编辑成功']);
+     }else return json_encode(['code'=>0,'message'=>'编辑失败']);
+    }
     //教师删除
     public  function  del(){
-        $teacherinfo = model('teachers')->find(input('teacherid'));
-        $result = $teacherinfo->delete();
+        $result = model('teachers')->where('teacherid',input('teacherid'))->update(['delete_time'=>time()]);
         if ($result) {
             $this->success('删除成功', 'admin/teachers/index');
         } else {
@@ -100,7 +107,7 @@ class Teachers extends Base
     //教师批量删除
     public function delteachers(){
         if(request()->isAjax()){
-            $return=db('teachers')->whereIn('teacherid',input('id'))->delete();
+            $return=db('teachers')->whereIn('teacherid',input('id'))->update(['delete_time'=>time()]);
             if($return){
                 $this->success('删除成功','admin/teachers/index');
             }else{
