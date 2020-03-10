@@ -74,7 +74,7 @@ class Teachers extends Base
                 'teacherphoto'=>"/upload/teacherpic/".input('teacherphoto'),
                 'sort'=>input('sort')
             ];*/
-           $result=model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,sort')->find($id);
+           $result=model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('seriesNO,s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,sort')->find($id);
             if ($result) {
                 return json_encode(['code'=>1,'data'=>$result]);
             } else {
