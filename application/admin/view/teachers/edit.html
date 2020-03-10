@@ -82,7 +82,8 @@
                         teacherdescription: null,
                         teacherphoto: null,
                         sort: null,
-                        isShow: true
+                        isShow: true,
+                        series:''
                     },
                     rules: {
                         teachername: [
@@ -104,6 +105,7 @@
                 this.dataForm.teachername = res['data'].teachername;
                 this.dataForm.teacherlevel = res['data'].teacherlevel;
                 this.dataForm.seriesNO = res['data'].seriesNO;
+                this.dataForm.series = res['data'].series;
                 this.dataForm.job = res['data'].job;
                 this.dataForm.teacherphoto = res['data'].teacherphoto;
                 this.dataForm.sort = res['data'].sort;
