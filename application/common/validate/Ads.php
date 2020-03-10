@@ -18,7 +18,6 @@ class Ads extends Validate
         'adpositionId|广告位置ID'=>'require',
         'adFile|广告文件'=>'require',
         'adName|广告名称'=>'require',
-        'adURL|广告网址'=>'require',
         'adStartDate|广告开始日期'=>'require',
         'adEndDate|广告结束日期'=>'require',
     ];
