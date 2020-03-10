@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<article class="clearfix pd-20" id="edit">
+	<article class="clearfix pd-20" id="add">
         <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
             <el-form-item label="位置类型：" prop="positionType">
                 <el-select v-model="dataForm.positionType" placeholder="请选择位置类型" @change="selctPosition">
@@ -19,10 +19,7 @@
               </el-form-item>
             <el-form-item label="广告位置：" prop="adpositionId">
                 <el-select v-model="dataForm.adpositionId" placeholder="请选择位置类型">
-                    <el-option label="PC版" value="PC版"></el-option>
-                    <el-option label="手机版" value="手机版"></el-option>
-                    <el-option label="微信版" value="微信版"></el-option>
-                    <el-option label="微信小程序" value="微信小程序"></el-option>
+                    <el-option v-for="item in positions" :key='item.cc' :label="item.aa" value="item.cc"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="广告标题：" prop="adName">
@@ -64,7 +61,7 @@
     <script type="text/javascript" src="__ADMIN__/lib/jquery.validation/1.14.0/messages_zh.js"></script> -->
     <script type="text/javascript">
         new Vue({
-            el: '#edit',
+            el: '#add',
             data: function() {
                 return {
                     uploadAction: '/admin/Webupload/galleryUpload', // 图片上传服务器地址
@@ -73,7 +70,7 @@
                         adFile: null, // 广告文件
                         adName: null, // 广告名称
                         adURL: null, // 广告网址
-                        adData: null, // 广告时间
+                        adDate: null, // 广告时间
                         adStartDate: null, //广告开始时间
                         adEndDate: null, // 广告结束日期
                         adSort: null, // 排序号
@@ -131,7 +128,7 @@
                 */
                 selctPosition(event) {
                     http_post('/admin/ads/getPosition', {positionType: this.dataForm.positionType}).then((res) => {
-                        this.positions = res;
+                        this.positions = res.data;
                     });
                 },
                 submitForm(formName) {
@@ -139,25 +136,27 @@
                         if (valid) {
                             // 提交数据的请求
                             this.dataForm.is_show = this.dataForm.is_show ? 1:0;
+                            // 时间
+                            if (!this.dataForm.adDate) return;
+                            this.dataForm.adStartDate = this.dataForm.adDate[0];
+                            this.dataForm.adEndDate = this.dataForm.adDate[1];
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                             setTimeout(()=> {
-                                http_post('/admin/gallery/save', this.dataForm).then((res) => {
+                                http_post('/admin/ads/save', this.dataForm).then((res) => {
                                     layer.close(index);
                                     this.$refs[formName].resetFields();
                                     layer.msg("提交成功", {icon:1});
                                 });
                             }, 500);                            
                         } else {
-                            console.log('error submit!!');
-                            layer.msg("没有上传图片", {icon: 2});
+                            layer.msg("请填写必填项");
                             return false;
                         }
                     });
                     
                 },
                 resetForm(formName) {
-                    console.log(this.dataForm)
-                    // this.$refs[formName].resetFields();
+                    this.$refs[formName].resetFields();
                 }
             }
         })
