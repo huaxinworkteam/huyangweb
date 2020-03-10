@@ -15,14 +15,14 @@
             <el-form-item label="院系：" prop="seriesNO">
                 <el-select v-model="dataForm.seriesNO" placeholder="请选择院系">
                    {volist name="series" id="vo"}
-                    <el-option label="{$vo.series}" value="{$vo.seriesID}"></el-option>
+                    <el-option label="{$vo.series}" :value="{$vo.seriesID}"></el-option>
                     {/volist}
                 </el-select>
             </el-form-item>
-            <el-form-item label="教师资历: ">
+            <el-form-item label="教师资历: " prop="teacherlevel">
                 <el-input v-model="dataForm.teacherlevel"></el-input>
             </el-form-item>
-            <el-form-item label="职务: ">
+            <el-form-item label="职务: " prop="job">
                 <el-input v-model="dataForm.job"></el-input>
             </el-form-item>
             <el-form-item label="教师介绍: " prop="teacherdescription">
@@ -40,10 +40,10 @@
                     <div class="el-upload__tip" slot="tip" style="margin-top: -15px;">图片大小(472*300 px)</div>
                 </el-upload> 
             </el-form-item>
-            <el-form-item label="排序：">
+            <el-form-item label="排序：" prop="sort">
                 <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
             </el-form-item>
-            <el-form-item label="是否显示：">
+            <el-form-item label="是否显示：" prop="isShow">
                 <el-switch v-model="dataForm.isShow" :active-text="dataForm.isShow? '显示':'隐藏'"></el-switch>
             </el-form-item>
             <el-form-item>
@@ -82,8 +82,7 @@
                         teacherdescription: null,
                         teacherphoto: null,
                         sort: null,
-                        isShow: true,
-                        series:''
+                        isShow: true
                     },
                     rules: {
                         teachername: [
@@ -101,18 +100,18 @@
             },
             mounted() {
                 // 初始化数据
-                http_get('/admin/teachers/edit',{teacherid: this.dataForm.teacherid}).then(res => {
-                this.dataForm.teachername = res['data'].teachername;
-                this.dataForm.teacherlevel = res['data'].teacherlevel;
-                this.dataForm.seriesNO = res['data'].seriesNO;
-                this.dataForm.series = res['data'].series;
-                this.dataForm.job = res['data'].job;
-                this.dataForm.teacherphoto = res['data'].teacherphoto;
-                this.dataForm.sort = res['data'].sort;
-                this.dataForm.isShow = res['data'].isShow==1?true:false;
-                this.dataForm.teacherdescription = res['data'].teacherdescription;
 
-            });
+                http_get('/admin/teachers/edit',{teacherid: this.dataForm.teacherid}).then(res => {
+                    this.dataForm.teachername = res['data'].teachername;
+                    this.dataForm.teacherlevel = res['data'].teacherlevel;
+                    this.dataForm.seriesNO = res['data'].seriesNO;
+                    this.dataForm.job = res['data'].job;
+                    this.dataForm.teacherphoto = res['data'].teacherphoto;
+                    this.dataForm.sort = res['data'].sort;
+                    this.dataForm.isShow = res['data'].isShow==1?true:false;
+                    this.dataForm.teacherdescription = res['data'].teacherdescription;
+                });
+                console.info('init:'+this.dataForm);
             },
             methods: {
                 uploadImageSuccess(res, file) {
@@ -144,14 +143,17 @@
                             // 提交数据的请求
                             this.dataForm.isShow = this.dataForm.isShow ? 1:0;
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
-                            http_post('/admin/teachers/edit', this.dataForm).then((res) => {
+                            setTimeout(()=> {
+                                http_post('/admin/teachers/editSave', this.dataForm).then((res) => {
                                     layer.close(index);
                                     layer.msg("提交成功", {icon:1});
                                     //先得到当前iframe层的索引
                                     parent.layer.close(parent.layer.getFrameIndex(window.name)); //再执行关闭  
                                 }).catch(err => {
                                     layer.close(index);
-                                });                           
+                                });;
+                            }, 500); 
+                                                      
                         } else {
                             layer.msg("请填写必填项");
                             return false;
@@ -160,7 +162,8 @@
                     
                 },
                 resetForm(formName) {
-                    this.$refs[formName].resetFields();
+                    console.log(this.dataForm)
+                    // this.$refs[formName].resetFields();
                 }
             }
         })

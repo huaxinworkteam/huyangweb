@@ -33,18 +33,7 @@ class Teachers extends  Model
         if (!$validate->scene('edit')->check($data)) {
             return $validate->getError();
         }
-        $sql = $this->find($data['teacherid']);
-        $sql->teachername = $data['teachername'];
-        $sql->isShow = $data['isShow'];
-        $sql->seriesNO = $data['seriesNO'];
-        $sql->teacherlevel = $data['teacherlevel'];
-        $sql->job = $data['job'];
-        $sql->teacherdescription= $data['teacherdescription'];
-        $sql->sort=$data['sort'];
-        if($data['teacherphoto']){
-            $sql->teacherphoto= $data['teacherphoto'];
-        }
-        $result = $sql->save();
+    $result=$this->allowField(true)->update($data);
         if ($result) {
             return 1;
         } else {
