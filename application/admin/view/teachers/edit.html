@@ -130,7 +130,7 @@
                             // 提交数据的请求
                             this.dataForm.isShow = this.dataForm.isShow ? 1:0;
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
-                            http_post('/admin/gallery/save', this.dataForm).then((res) => {
+                            http_post('/admin/teachers/edit', this.dataForm).then((res) => {
                                     layer.close(index);
                                     layer.msg("提交成功", {icon:1});
                                     //先得到当前iframe层的索引
