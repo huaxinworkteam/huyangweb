@@ -8,7 +8,7 @@ class News extends Base
     public function  lists()
     {  $title="输入查找";
         $this->assign('title',$title);
-        $news = model('news')->alias('n')->join('admin a', 'a.id=n.staffId')->order('createTime desc')->paginate(10);
+        $news = model('news')->alias('n')->join('admin a', 'a.id=n.staffId')->order('a.id')->paginate(20);
         $viewdata = [
             'news' => $news,
         ];

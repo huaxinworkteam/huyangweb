@@ -14,7 +14,7 @@ use think\Validate;
 class Teachers extends Validate
 {
     protected $rule=[
-        'teachername|教师名称'=>'require|unique:teachers|max:10',
+        'teachername|教师名称'=>'require|unique:teachers',
         'isShow|是否显示'=>'require',
         'seriesNO|院系'=>'require',
         'teacherdescription|教师描述'=>'require'
@@ -26,6 +26,6 @@ class Teachers extends Validate
         return $this->only(['isShow']);
     }
     public function  sceneEdit(){
-        return $this->only(['teachername|教师名称'=>'require|max:10','isShow','seriesNO','teacherdescription']);
+        return $this->only(['teachername|教师名称'=>'require','isShow','seriesNO','teacherdescription']);
     }
 }

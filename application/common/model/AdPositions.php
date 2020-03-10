@@ -15,7 +15,7 @@ class AdPositions extends  Model
 
     public static function add($data){
         if(!$data) return false;
-        $validate =new \app\common\validate\AdPosition();
+        $validate =new \app\common\validate\AdPositions();
         if(!$validate->check($data)){
             return $validate->getError();
         }
@@ -26,8 +26,6 @@ class AdPositions extends  Model
         }else{
             return '发送失败';
         }
-
-
 
     }
 

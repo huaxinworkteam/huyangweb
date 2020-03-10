@@ -28,7 +28,7 @@
 					<span class="select-box">
 						<select name="seriesNO" class="select">
 							{volist name="series" id="vo"}
-							<option value="{$vo.seriesID}">{$vo.series}</option>
+							<option value="{$vo.seriesID}">{$teacherinfo.series}</option>
 							{/volist}
 						</select>
 					</span>
@@ -43,7 +43,7 @@
 			<div class="row clearfix">
 				<label class="form-label col-xs-4 col-sm-2"><span class="c-red"></span>职务：</label>
 				<div class="form-controls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" value="" placeholder="" id="job" name="job">
+					<input type="text" class="input-text" value="{$teacherinfo.job}" placeholder="" id="job" name="job">
 				</div>
 			</div>
 			<div class="row clearfix">
