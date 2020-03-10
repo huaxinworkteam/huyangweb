@@ -13,5 +13,12 @@ use think\Validate;
 
 class Ads extends Validate
 {
-
+    protected  $rule=[
+        'positionType|位置类型'=>'require',
+        'adpositionId|广告位置ID'=>'require',
+        'adFile|广告文件'=>'require',
+        'adName|广告名称'=>'require',
+        'adStartDate|广告开始日期'=>'require',
+        'adEndDate|广告结束日期'=>'require',
+    ];
 }
