@@ -140,7 +140,7 @@
         layer.confirm('确认要删除吗？', function (index) {
             layer.close(index);
 
-            http_post('/admin/ads/del', {positionId:array.toString()}).then(res => {
+            http_post('/admin/ads/del', {id:array.toString()}).then(res => {
                 layer.msg("删除成功", {icon: 1});
             location.reload();  // 刷新
         });

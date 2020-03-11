@@ -34,7 +34,7 @@ class Ads extends Model
 
     public static function del($id){
         $id=','.$id.',';
-        $res=model('ads')->whereIn('id',$id)->update('isDel',1);
+        $res=model('ads')->whereIn('id',$id)->update(['isDel'=>1]);
         if($res) return 1;
         else return 0;
     }
