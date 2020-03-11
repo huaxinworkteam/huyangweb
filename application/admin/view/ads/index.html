@@ -165,7 +165,9 @@
                             }).catch(err => {
                                 layer.close(index);
                             });*/
-                            location.href='/admin/ads/search?adpositionId='+this.queryForm.adpositionId;
+                            if(this.queryForm.adpositionId!=null)
+                            location.href='/admin/ads/search?positionType='+this.queryForm.positionType+'&adpositionId='+this.queryForm.adpositionId;
+                            else location.href='/admin/ads/search?positionType='+this.queryForm.positionType;
                         }, 500);                            
                     } else {
                         return false;

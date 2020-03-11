@@ -70,8 +70,9 @@ class Ads extends  Base
     }
 
     public function search(){
-        $index=input('adpositionId');
-        $res=AdsModel::search($index);
+        $adpositionId=input('adpositionId');
+        $positionType=input('positionType');
+        $res=AdsModel::search($positionType,$adpositionId);
         if($res){
         $this->assign('ads',$res);
         $count=sizeof($res);

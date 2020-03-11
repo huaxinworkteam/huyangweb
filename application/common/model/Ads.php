@@ -45,11 +45,19 @@ class Ads extends Model
         else return 0;
     }
 
-    public static function search($index){
-        $res=self::Alias('A')->where(['A.adpositionId'=>$index])->where('A.isDel',0)->field('A.id,A.adFile,A.adName,A.adURL,A.adStartDate,A.adEndDate,A.adSort,A.adClickNum,A.positionType,P.positionName')->leftJoin('AdPositions P','A.adpositionId=P.positionId')->select();
-        if($res)
-        return $res;
-        return 0;
+    public static function search($positionType,$adpositionId){
+        if($adpositionId!=null) {
+            $res = self::Alias('A')->where(['A.adpositionId' => $adpositionId])->where('A.isDel', 0)->field('A.id,A.adFile,A.adName,A.adURL,A.adStartDate,A.adEndDate,A.adSort,A.adClickNum,A.positionType,P.positionName')->leftJoin('AdPositions P', 'A.adpositionId=P.positionId')->select();
+            if ($res)
+                return $res;
+            return 0;
+        }else{
+            $res = self::Alias('A')->where(['A.positionType' => $positionType])->where('A.isDel', 0)->field('A.id,A.adFile,A.adName,A.adURL,A.adStartDate,A.adEndDate,A.adSort,A.adClickNum,A.positionType,P.positionName')->leftJoin('AdPositions P', 'A.adpositionId=P.positionId')->select();
 
+            if ($res)
+                return $res;
+            return 0;
+
+        }
     }
 }
