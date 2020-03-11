@@ -82,7 +82,9 @@
                             <tr class="text-c">
                                 <td><input type="checkbox"  data-id="{$vo.id}"  class="ckc" onclick="select()"></td>
                                 <td>{$vo.id}</td>
-                                <td>{$vo.adFile}</td>
+                                <td>
+                                    <img alt="{$vo.adName}" src="{$vo.adFile}" style="width: 100%; height: 60px; object-fit: fill;"/>
+                                </td>
                                 <td>{$vo.adName}</td>
                                 <td>{$vo.positionName}</td>
                                 <td>{$vo.adURL}</td>
