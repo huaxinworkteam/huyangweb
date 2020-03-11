@@ -69,7 +69,19 @@ class Ads extends  Base
         else return json_encode(['code'=>0,'message'=>'删除失败']);
     }
 
-
+    public function search(){
+        $index=input('index');
+        $res=AdsModel::search($index);
+        if($res) {
+/*            $this->assign('ads',$res->toArray());
+            $count=sizeof($res);
+            $this->assign('count',$count);
+            return view('/admin/ads/index');*/
+            return json_encode(['code'=>1,'message'=>'获取数据成功','data'=>$res]);
+        }else{
+            return json_encode(['code'=>0,'message'=>'获取数据失败']);
+        }
+    }
     //==============================以下是location相关代码====================================
     public function location(){
         $sql=AdPositions::getAll();
@@ -117,5 +129,14 @@ class Ads extends  Base
 
         $this->assign('positionId',$positionId);
         return view();
+    }
+    public function searchLocation(){
+        $index=input('index');
+        $res=AdPositions::search($index);
+        if($res) {
+            return json_encode(['code'=>1,'message'=>'获取数据成功','data'=>$res]);
+        }else{
+            return json_encode(['code'=>0,'message'=>'获取数据失败']);
+        }
     }
 }

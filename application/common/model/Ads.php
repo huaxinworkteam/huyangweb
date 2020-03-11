@@ -44,4 +44,10 @@ class Ads extends Model
         if(!empty($res)) return $res;
         else return 0;
     }
+
+    public static function search($index){
+        $res=self::alias('A')->where(['A.adName'=>'%'.$index.'%'])->whereOr(['A.adURL'=>'%'.$index.'%'])->where('A.isDel',0)->leftJoin('AdPositions P','A.adpositionId=P.positionId')->field('A.id,A.adFile,A.adName,A.adURL,A.adStartDate,A.adEndDate,A.adSort,A.adClickNum,A.positionType,P.positionName')->select();
+        if($res) return $res;
+        else return 0;
+    }
 }
