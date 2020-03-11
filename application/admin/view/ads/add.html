@@ -17,9 +17,9 @@
                   <el-option label="微信小程序" value="微信小程序"></el-option>
                 </el-select>
               </el-form-item>
-            <el-form-item label="广告位置：" prop="adpositionId">
-                <el-select v-model="dataForm.adpositionId" placeholder="请选择位置类型">
-                    <el-option v-for="item in positions" :key='item.cc' :label="item.aa" value="item.cc"></el-option>
+            <el-form-item label="广告位置：" prop="positionId">
+                <el-select v-model="dataForm.positionId" placeholder="请选择位置类型">
+                    <el-option v-for="item in positions" :key='item.positionId' :label="item.positionName" value="item.positionId"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="广告标题：" prop="adName">
@@ -75,7 +75,7 @@
                         adEndDate: null, // 广告结束日期
                         adSort: null, // 排序号
                         positionType: null, // 位置类型 1：PC版 2：手机版 3：微信版 4：微信小程序
-                        adpositionId: null, // 广告位置ID
+                        positionId: null, // 广告位置ID
                     },
                     rules: {
                         positionType: [
