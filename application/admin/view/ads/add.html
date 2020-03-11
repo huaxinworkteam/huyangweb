@@ -147,6 +147,8 @@
                                     layer.close(index);
                                     this.$refs[formName].resetFields();
                                     layer.msg("提交成功", {icon:1});
+                                }).catch(err => {
+                                    layer.close(index);
                                 });
                             }, 500);                            
                         } else {
@@ -157,8 +159,7 @@
                     
                 },
                 resetForm(formName) {
-                    console.log(this.dataForm.adDate)
-                    // this.$refs[formName].resetFields();
+                    this.$refs[formName].resetFields();
                 }
             }
         })

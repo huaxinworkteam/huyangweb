@@ -32,17 +32,28 @@
             广告管理
         </nav>
 
-        <article class="Hui-admin-content clearfix">
+        <article id="app" class="Hui-admin-content clearfix">
             <div class="panel">
                 <div class="panel-body">
-                    <form action="#" method="get">
-                        <div class="text-c">
-                            <input type="text" class="input-text" style="width:250px" placeholder="输入管理员昵称或手机号或邮箱" id="search" name="search">
-                            <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i>
-                                搜用户
-                            </button>
-                        </div>
-                    </form>
+                    <el-form :inline="true" :model="queryForm" ref="queryForm">
+                        <el-form-item style="margin-bottom: 0;" prop="positionType">
+                            <el-select v-model="queryForm.positionType" placeholder="请选择位置类型" @change="selctPosition">
+                                <el-option label="PC版" :value="1"></el-option>
+                                <el-option label="手机版" :value="2"></el-option>
+                                <el-option label="微信版" :value="3"></el-option>
+                                <el-option label="微信小程序" :value="4"></el-option>
+                            </el-select>
+                          </el-form-item>
+                        <el-form-item style="margin-bottom: 0;" prop="adpositionId">
+                            <el-select v-model="queryForm.adpositionId" placeholder="请选择位置类型">
+                                <el-option v-for="item in positions" :key='item.positionId' :label="item.positionName" :value="item.positionId"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item style="margin-bottom: 0;">
+                            <el-button type="primary" size="medium" icon="el-icon-search" @click="submitForm('queryForm')">查询</el-button>
+                            <el-button size="medium" icon="el-icon-refresh-left" @click="resetForm('queryForm')">重置</el-button>
+                        </el-form-item>
+                    </el-form>
                 </div>
             </div>
 
@@ -117,6 +128,57 @@
 <script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.15/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="__ADMIN__/business/js/main.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                positions: null,
+                queryForm: {
+                    positionType: '',
+                    adpositionId: ''
+                }
+            }
+        },
+        mounted() {
+
+        },
+        methods: {
+            /**
+            * 联动 位置类型 和 广告位置
+            */
+            selctPosition(event) {
+                this.queryForm.adpositionId = null;
+                http_post('/admin/ads/getPosition', {positionType: this.queryForm.positionType}).then((res) => {
+                    this.positions = res.data;
+                });
+            },
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        // 提交数据的请求
+                        var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+                        setTimeout(()=> {
+                            http_post('/admin/ads/search', this.queryForm).then((res) => {
+                                layer.close(index);
+                                layer.msg("查询成功");
+                            }).catch(err => {
+                                layer.close(index);
+                            });
+                        }, 500);                            
+                    } else {
+                        return false;
+                    }
+                });
+                
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            }
+        }
+    });
+
+</script>
 <script type="text/javascript">
 
     function QuanXuan(){
