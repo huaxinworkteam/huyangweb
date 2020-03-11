@@ -17,12 +17,15 @@ class Ads extends Model
         if(!$validate->check($data)){
             return $validate->getError();
         }
-        if($data['id']) $res= self::where('id',$data['id'])->update($data);
+        try{
+        if($data['id']) $res=self::where('id',$data['id'])->update($data);
             else{
             unset($data['id']); $res=self::insert($data);
             }
-            if($res) return 1;
-            else return 0;
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+        return 1;
     }
     public static function getAll(){
         $res=self::alias('A')->where('A.isDel',0)->leftJoin('AdPositions P','A.adpositionId=P.positionId')->field('A.id,A.adFile,A.adName,A.adURL,A.adStartDate,A.adEndDate,A.adSort,A.adClickNum,A.positionType,P.positionName')->select();

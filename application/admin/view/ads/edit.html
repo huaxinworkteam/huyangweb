@@ -155,7 +155,6 @@
                     this.$refs[formName].validate((valid) => {
                         if (valid) {
                             // 提交数据的请求
-                            this.dataForm.is_show = this.dataForm.is_show ? 1:0;
                             // 时间
                             if (!this.dataForm.adDate) return;
                             this.dataForm.adStartDate = this.dataForm.adDate[0]/1000;
