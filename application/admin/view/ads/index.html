@@ -121,7 +121,8 @@
         $(".ckc").prop("checked",$("#ckAll").prop("checked"))
     }
     function select() {
-
+        // 判断选中的列表长度是否=列表长度
+        // 设置
     }
     // 批量删除
     function datadel() {
@@ -137,7 +138,7 @@
         layer.confirm('确认要删除吗？', function (index) {
             layer.close(index);
 
-            http_post('/admin/gallery/del', {positionId:array.toString()}).then(res => {
+            http_post('/admin/ads/del', {positionId:array.toString()}).then(res => {
                 layer.msg("删除成功", {icon: 1});
             location.reload();  // 刷新
         });
@@ -161,7 +162,7 @@
     function del(id) {
         layer.confirm('确认要删除吗？', function (index) {
             layer.close(index);
-            http_post('/admin/gallery/del', {positionId:id}).then(res => {
+            http_post('/admin/ads/del', {positionId:id}).then(res => {
                 layer.msg("删除成功", {icon: 1});
             location.reload();  // 刷新
         });
