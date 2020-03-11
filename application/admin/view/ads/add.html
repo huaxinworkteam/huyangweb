@@ -11,10 +11,10 @@
         <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
             <el-form-item label="位置类型：" prop="positionType">
                 <el-select v-model="dataForm.positionType" placeholder="请选择位置类型" @change="selctPosition">
-                    <el-option label="PC版" :value="0"></el-option>
-                    <el-option label="手机版" :value="1"></el-option>
-                    <el-option label="微信版" :value="2"></el-option>
-                    <el-option label="微信小程序" :value="3"></el-option>
+                    <el-option label="PC版" :value="1"></el-option>
+                    <el-option label="手机版" :value="2"></el-option>
+                    <el-option label="微信版" :value="3"></el-option>
+                    <el-option label="微信小程序" :value="4"></el-option>
                 </el-select>
               </el-form-item>
             <el-form-item label="广告位置：" prop="positionId">
@@ -40,7 +40,7 @@
             </el-form-item>
             <el-form-item label="广告时间：" prop="adDate">
                 <el-date-picker v-model="dataForm.adDate" type="datetimerange" start-placeholder="开始日期"
-                    end-placeholder="结束日期" :default-time="['12:00:00', '08:00:00']" value-format="timestamp">
+                    end-placeholder="结束日期" value-format="timestamp">
                 </el-date-picker>
               </el-form-item>
             <el-form-item label="排序号：" prop="adSort">
@@ -138,8 +138,8 @@
                             this.dataForm.is_show = this.dataForm.is_show ? 1:0;
                             // 时间
                             if (!this.dataForm.adDate) return;
-                            this.dataForm.adStartDate = this.dataForm.adDate[0];
-                            this.dataForm.adEndDate = this.dataForm.adDate[1];
+                            this.dataForm.adStartDate = this.dataForm.adDate[0]/1000;
+                            this.dataForm.adEndDate = this.dataForm.adDate[1]/1000;
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                             setTimeout(()=> {
                                 http_post('/admin/ads/save', this.dataForm).then((res) => {
