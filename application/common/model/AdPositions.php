@@ -53,7 +53,9 @@ class AdPositions extends  Model
     }
 
     public static function search($index){
-        $res=self::where('isDel',0)->where(['positionName'=>'%'.$index.'%'])->whereOr(['positionCode'=>'%'.$index.'%'])->field('positionId,positionName,positionWidth,positionHeight,positionType,positionCode')->select();
+        $res=self::where('isDel',0)->field('positionId,positionName,positionWidth,positionHeight,positionType,positionCode')->select();
+        if($res)
         return $res;
+        else return 0;
     }
 }

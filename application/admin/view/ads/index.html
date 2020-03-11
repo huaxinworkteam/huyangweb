@@ -159,12 +159,13 @@
                         // 提交数据的请求
                         var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                         setTimeout(()=> {
-                            http_post('/admin/ads/search', this.queryForm).then((res) => {
+                     /*       http_post('/admin/ads/search', this.queryForm).then((res) => {
                                 layer.close(index);
                                 layer.msg("查询成功");
                             }).catch(err => {
                                 layer.close(index);
-                            });
+                            });*/
+                            location.href='/admin/ads/search?adpositionId='+this.queryForm.adpositionId;
                         }, 500);                            
                     } else {
                         return false;

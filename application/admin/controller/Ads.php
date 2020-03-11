@@ -70,17 +70,18 @@ class Ads extends  Base
     }
 
     public function search(){
-        $index=input('index');
+        $index=input('adpositionId');
         $res=AdsModel::search($index);
-        if($res) {
-/*            $this->assign('ads',$res->toArray());
-            $count=sizeof($res);
-            $this->assign('count',$count);
-            return view('/admin/ads/index');*/
-            return json_encode(['code'=>1,'message'=>'获取数据成功','data'=>$res]);
-        }else{
-            return json_encode(['code'=>0,'message'=>'获取数据失败']);
-        }
+        if($res){
+        $this->assign('ads',$res);
+        $count=sizeof($res);
+         $this->assign('count',$count);}
+         else{
+             $this->assign('ads',[0=>['id'=>null,'adFile'=>null,'adName'=>null,'adURL'=>null,'adStartDate'=>null,'adEndDate'=>null,'adSort'=>null,'adClickNum'=>null,'positionType'=>null,'positionName'=>null]]);
+             $this->assign('count',0);
+         }
+            return view('ads/index');
+
     }
     //==============================以下是location相关代码====================================
     public function location(){
@@ -133,10 +134,14 @@ class Ads extends  Base
     public function searchLocation(){
         $index=input('index');
         $res=AdPositions::search($index);
-        if($res) {
-            return json_encode(['code'=>1,'message'=>'获取数据成功','data'=>$res]);
-        }else{
-            return json_encode(['code'=>0,'message'=>'获取数据失败']);
+        if($res){
+            $this->assign('adsPosition',$res);
+            $count=sizeof($res);
+            $this->assign('count',$count);}
+        else{
+            $this->assign('adsPosition',[0=>['positionId'=>null,'positionName'=>null,'positionWidth'=>null,'positionHeight'=>null,'positionType'=>null,'positionCode'=>null]]);
+            $this->assign('count',0);
         }
+        return view('ads/location');
     }
 }
