@@ -53,7 +53,13 @@ class AdPositions extends  Model
     }
 
     public static function search($positionType=null,$positionCode=null){
-        if($positionType==null && $positionCode==null) return 0;
+        if($positionType==null && $positionCode==null)
+        {
+            $res = self::where('isDel', 0)->field('positionId,positionName,positionWidth,positionHeight,positionType,positionCode')->select();
+            if ($res)
+                return $res;
+            else return 0;
+        }
         if($positionType&&$positionCode) {
             $res = self::where('isDel', 0)->where(['positionType'=>$positionType,'positionCode'=>$positionCode])->field('positionId,positionName,positionWidth,positionHeight,positionType,positionCode')->select();
             if ($res)
