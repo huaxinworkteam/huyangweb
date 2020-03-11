@@ -62,7 +62,7 @@
                 <ul class="list">
                     {volist name="group" id="vo"}
                     <li>
-                        <a href="{:url('index/szll',['seriesNO'=>$vo['seriesNO']])}" class="title cur">{$vo.series}</a>
+                        <a href="{:url('index/szll',['seriesNO'=>$vo['seriesID']])}" class="title cur">{$vo.series}</a>
                     </li>
                     {/volist}
                 </ul>

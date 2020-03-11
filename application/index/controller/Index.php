@@ -4,6 +4,7 @@ namespace app\index\controller;
 
 use app\common\model\Activity;
 use app\common\model\News;
+use app\common\model\Series;
 use app\common\model\Teachers;
 use app\common\model\Gallery;
 use think\Controller;
@@ -33,7 +34,7 @@ class Index extends Controller
         //获取教师信息
     /*    $t = input('seriesNO');
        if (!$t)*/
-            $list = Teachers::where('isShow',1)->where('delete_time',null)->limit(8)->order('seriesNO','create_time')->select();
+            $list = Teachers::where('isShow',1)->where('delete_time',null)->where('isTop',1)->limit(8)->order('sort desc')->select();
       /*  else  $list = Teachers::where('seriesNO', $t)->limit(4)->select();*/
         $this->assign('teachers', $list);
         //主页下方左侧新闻
@@ -136,7 +137,8 @@ class Index extends Controller
         $this->header();
         $this->left_bar();
         //获取学院类别
-        $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
+      //  $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
+        $group=Series::where('delete_time',null)->order('seriesSort desc')->field('series,seriesID')->select();
         $this->assign('group', $group);
         $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);

@@ -46,6 +46,9 @@
             <el-form-item label="是否显示：" prop="isShow">
                 <el-switch v-model="dataForm.isShow" :active-text="dataForm.isShow? '显示':'隐藏'"></el-switch>
             </el-form-item>
+            <el-form-item label="首页展示：" prop="isTop">
+                <el-switch v-model="dataForm.isTop" :active-text="dataForm.isTop? '显示':'隐藏'"></el-switch>
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm('dataForm')">立即提交</el-button>
                 <el-button @click="resetForm('dataForm')">重置</el-button>
@@ -82,7 +85,8 @@
                         teacherdescription: null,
                         teacherphoto: null,
                         sort: null,
-                        isShow: true
+                        isShow: true,
+                        isTop:false
                     },
                     rules: {
                         teachername: [
@@ -109,6 +113,7 @@
                     this.dataForm.teacherphoto = res['data'].teacherphoto;
                     this.dataForm.sort = res['data'].sort;
                     this.dataForm.isShow = res['data'].isShow==1?true:false;
+                this.dataForm.isTop = res['data'].isTop==1?true:false;
                     this.dataForm.teacherdescription = res['data'].teacherdescription;
                 });
                 console.info('init:'+this.dataForm);
@@ -142,6 +147,7 @@
                         if (valid) {
                             // 提交数据的请求
                             this.dataForm.isShow = this.dataForm.isShow ? 1:0;
+                            this.dataForm.isTop = this.dataForm.isTop ? 1:0;
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                             setTimeout(()=> {
                                 http_post('/admin/teachers/editSave', this.dataForm).then((res) => {
