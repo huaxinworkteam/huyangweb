@@ -70,8 +70,9 @@ class Ads extends  Base
     }
 
     public function search(){
-        $index=input('adpositionId');
-        $res=AdsModel::search($index);
+        $adpositionId=input('adpositionId');
+        $positionType=input('positionType');
+        $res=AdsModel::search($positionType,$adpositionId);
         if($res){
         $this->assign('ads',$res);
         $count=sizeof($res);
@@ -132,8 +133,9 @@ class Ads extends  Base
         return view();
     }
     public function searchLocation(){
-        $index=input('index');
-        $res=AdPositions::search($index);
+        $positionType=input('positionType');
+        $positionCode=input('positionCode');
+        $res=AdPositions::search($positionType,$positionCode);
         if($res){
             $this->assign('adsPosition',$res);
             $count=sizeof($res);
