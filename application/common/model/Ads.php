@@ -37,7 +37,7 @@ class Ads extends Model
     }
 
     public static function  getInfo($id){
-        $res=self::where('id',$id)->field('id,adFile,adName,adURL,adStartDate,adEndDate,adSort,positionType,positionName')->find();
+        $res=self::where('id',$id)->field('id,adFile,adName,adURL,adStartDate,adEndDate,adSort,positionType,adpositionId')->find();
         if(!empty($res)) return $res;
         else return 0;
     }
