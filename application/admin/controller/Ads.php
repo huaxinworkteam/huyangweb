@@ -133,8 +133,9 @@ class Ads extends  Base
         return view();
     }
     public function searchLocation(){
-        $index=input('index');
-        $res=AdPositions::search($index);
+        $positionType=input('positionType');
+        $positionCode=input('positionCode');
+        $res=AdPositions::search($positionType,$positionCode);
         if($res){
             $this->assign('adsPosition',$res);
             $count=sizeof($res);
