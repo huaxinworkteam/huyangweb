@@ -88,8 +88,8 @@
                                 <td>{$vo.adName}</td>
                                 <td>{$vo.positionName}</td>
                                 <td>{$vo.adURL}</td>
-                                <td>{$vo.adStartDate}</td>
-                                <td>{$vo.adEndDate}</td>
+                                <td>{:date('Y-m-d H:i:s',$vo.adStartDate/1000)}</td>
+                                <td>{:date('Y-m-d H:i:s',$vo.adEndDate/1000)}</td>
                                 <td>{$vo.adClickNum}</td>
                                 <td>{$vo.adSort}</td>
                                 <td class="td-manage">
@@ -164,10 +164,10 @@
     function del(id) {
         layer.confirm('确认要删除吗？', function (index) {
             layer.close(index);
-            http_post('/admin/ads/del', {positionId:id}).then(res => {
+            http_post('/admin/ads/del', {id:id}).then(res => {
                 layer.msg("删除成功", {icon: 1});
-            location.reload();  // 刷新
-        });
+                location.reload();  // 刷新
+            });
         });
     }
 
