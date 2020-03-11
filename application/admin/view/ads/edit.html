@@ -76,13 +76,13 @@
                         adEndDate: null, // 广告结束日期
                         adSort: null, // 排序号
                         positionType: null, // 位置类型 1：PC版 2：手机版 3：微信版 4：微信小程序
-                        positionId: null, // 广告位置ID
+                        positionId: null // 广告位置ID
                     },
                     rules: {
                         positionType: [
                             { required: true, message: '请选择广告类型', trigger: 'change' }
                         ],
-                        adpositionId: [
+                        positionId: [
                             { required: true, message: '请选择广告位置', trigger: 'change' }
                         ],
                         adName: [
