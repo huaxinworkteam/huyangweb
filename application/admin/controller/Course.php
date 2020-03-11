@@ -9,6 +9,8 @@
 namespace app\admin\controller;
 
 
+use app\common\model\CourseType;
+
 class Course extends Base
 {
     public function index(){
@@ -18,6 +20,7 @@ class Course extends Base
     //=======================以下是课程分类方法=========================================
 
     public  function  courseType(){
-        return view();
+        CourseType::getAll();
+    //  return view();
     }
 }
