@@ -32,6 +32,7 @@ class Teachers extends Base
                 'teacherdescription' => input('teacherdescription'),
                 'teacherphoto'=>input('teacherphoto'),
                 'sort'=>input('sort'),
+                'isTop'=>input('isTop') ? 1 : 0,
                 'create_time'=>time(),
                 'update_time'=>time()
             ];
@@ -64,7 +65,7 @@ class Teachers extends Base
         $id=input('teacherid');
         if (request()->isAjax()) {
 
-           $result=model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('seriesNO,s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,sort')->find($id);
+           $result=model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('seriesNO,s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,isTop,sort')->find($id);
             if ($result) {
                 return json_encode(['code'=>1,'data'=>$result]);
             } else {
@@ -85,6 +86,7 @@ class Teachers extends Base
      'teacherlevel' => input('teacherlevel'),
      'job' => input('job'),
      'isShow' => input('isShow',0),
+     'isTop' => input('isTop',0),
      'teacherdescription' => input('teacherdescription'),
      'teacherphoto'=>input('teacherphoto'),
      'sort'=>input('sort'),

@@ -47,7 +47,7 @@ class Ads extends  Base
     public function save(){
         $data=[
           'id'=>input('id'),
-            'adpositionId'=>input('positionId'),
+            'adpositionId'=>input('adpositionId'),
             'adFile'=>input('adFile'),
             'adName'=>input('adName'),
             'adURL'=>input('adURL'),
@@ -59,7 +59,7 @@ class Ads extends  Base
         if($data['id']==null) $data=array_merge($data,['createTime'=>time()]);
         $res=AdsModel::saveInfo($data);
         if($res==1) return json_encode(['code'=>1,'message'=>'保存成功']);
-        else return json_encode(['code'=>0,'message'=>'保存失败']);
+        else return json_encode(['code'=>0,'message'=>$res]);
     }
 
     public function  del(){
