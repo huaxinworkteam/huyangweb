@@ -43,7 +43,7 @@ class AdPositions extends  Model
     }
 
     public static function getAll(){
-        $res=self::where('isDel',0)->field('positionId,positionName,positionWidth,positionHeight,positionType,positionCode')->paginate(20);
+        $res=self::where('isDel',0)->field('positionId,positionName,positionWidth,positionHeight,positionType,positionCode')->select();
         return $res;
     }
 
@@ -52,4 +52,8 @@ class AdPositions extends  Model
         return $res;
     }
 
+    public static function search($index){
+        $res=self::where('isDel',0)->where(['positionName'=>'%'.$index.'%'])->whereOr(['positionCode'=>'%'.$index.'%'])->field('positionId,positionName,positionWidth,positionHeight,positionType,positionCode')->select();
+        return $res;
+    }
 }
