@@ -11,15 +11,15 @@
         <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
             <el-form-item label="位置类型：" prop="positionType">
                 <el-select v-model="dataForm.positionType" placeholder="请选择位置类型" @change="selctPosition">
-                  <el-option label="PC版" value="PC版"></el-option>
-                  <el-option label="手机版" value="手机版"></el-option>
-                  <el-option label="微信版" value="微信版"></el-option>
-                  <el-option label="微信小程序" value="微信小程序"></el-option>
+                    <el-option label="PC版" :value="0"></el-option>
+                    <el-option label="手机版" :value="1"></el-option>
+                    <el-option label="微信版" :value="2"></el-option>
+                    <el-option label="微信小程序" :value="3"></el-option>
                 </el-select>
               </el-form-item>
             <el-form-item label="广告位置：" prop="positionId">
                 <el-select v-model="dataForm.positionId" placeholder="请选择位置类型">
-                    <el-option v-for="item in positions" :key='item.positionId' :label="item.positionName" value="item.positionId"></el-option>
+                    <el-option v-for="item in positions" :key='item.positionId' :label="item.positionName" :value="item.positionId"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="广告标题：" prop="adName">
@@ -64,7 +64,7 @@
             el: '#add',
             data: function() {
                 return {
-                    uploadAction: '/admin/Webupload/galleryUpload', // 图片上传服务器地址
+                    uploadAction: '/admin/webupload/adsUpload', // 图片上传服务器地址
                     positions: [],
                     dataForm: {
                         adFile: null, // 广告文件
@@ -104,7 +104,7 @@
                 uploadImageSuccess(res, file) {
                     layer.close(this.uploadLoading);
                     layer.msg('上传成功', {icon: 1});
-                    this.dataForm.adFile = '/upload/gallery/'+ res;
+                    this.dataForm.adFile = '/upload/ads/'+ res;
                 },
                 uploadImageError(err, file) {
                     layer.close(this.uploadLoading);
