@@ -95,7 +95,8 @@
                             { required: true, message: '请选择时间', trigger: 'change' }
                         ]
                     },
-                    uploadLoading: false
+                    uploadLoading: false,
+                    isInit: false// 判断是否初始化
                 }
             },
             mounted() {
@@ -105,7 +106,8 @@
                     let array = [];
                     array.push(res.data.adStartDate*1000);
                     array.push(res.data.adEndDate*1000);
-                    this.dataForm.adDate = array;
+                    // this.dataForm.adDate = array; 赋值后v-mode 失去作用
+                    this.$set(this.dataForm, 'adDate', array);
                 });
             },
             computed: {
@@ -115,6 +117,8 @@
             },
             watch: {
                 newPositionType( val ) {
+                    if (this.isInit) this.dataForm.adpositionId = null;
+                    if (!this.isInit) this.isInit = true;
                     http_post('/admin/ads/getPosition', {positionType: val}).then((res) => {
                         this.positions = res.data;
                     });
