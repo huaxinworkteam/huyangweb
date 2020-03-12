@@ -48,6 +48,7 @@ class Course extends Base
             if($res) return myJson('T',$res);
             else return myJson('F');
         }
+        $this->assign('id',$id);
         return view();
     }
 
