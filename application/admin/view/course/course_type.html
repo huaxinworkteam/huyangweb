@@ -35,7 +35,7 @@
         <article id="app" class="Hui-admin-content clearfix">
             <div class="panel">
                 <div class="panel-body">
-                    <!-- <el-form :inline="true" :model="queryForm" ref="queryForm">
+                    <el-form :inline="true" :model="queryForm" ref="queryForm">
                         <el-form-item style="margin-bottom: 0;" prop="positionType">
                             <el-select v-model="queryForm.positionType" placeholder="请选择分类">
                                 <el-option label="PC版" :value="1"></el-option>
@@ -51,14 +51,15 @@
                             <el-button type="primary" size="medium" icon="el-icon-search" @click="submitForm('queryForm')">查询</el-button>
                             <el-button size="medium" icon="el-icon-refresh-left" @click="resetForm('queryForm')">重置</el-button>
                         </el-form-item>
-                    </el-form> -->
+                    </el-form>
                 </div>
             </div>
             <div class="panel mt-20">
                 <div class="panel-body">
                     <div class="clearfix">
                         <el-button type="danger" size="medium"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</el-button>
-                        <el-button type="primary" size="medium"><i class="Hui-iconfont">&#xe600;</i> 添加分类</el-button>
+                        <el-button type="primary" size="medium" @click="add('新增课程分类','{:url(\'admin/course/type_add\')}')"
+                        ><i class="Hui-iconfont">&#xe600;</i> 添加分类</el-button>
                     </div>
                     <div class="mt-20 clearfix">  
                         <el-table :data="tableData" style="width: 100%" row-key="id" border lazy stripe
@@ -122,7 +123,7 @@
                 positionType: '',
                 positionCode: ''
             },
-            tableData: null
+            tableData: []
         },
         mounted() {
             http_post('/admin/course/courseType').then(res => {
@@ -142,12 +143,12 @@
             },
             load(tree, treeNode, resolve) {
                 setTimeout(() => {
-                    http_post('/admin/course/getSons', {id: 1}).then(res => {
+                    http_post('/admin/course/getSons', {id: tree.id}).then(res => {
                         resolve(res.data);
                     }).catch(err => {
                         treeNode.loading = false;
                     });
-                }, 500)
+                }, 500);
             },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
@@ -167,6 +168,21 @@
             },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
+            },
+
+
+             // 新增
+            add(title, url) {
+                var index = layer.open({
+                    type: 2,
+                    title: title,
+                    content: url,
+                    area: ['700px', '600px'],
+                    end : function() {
+                        window.location.reload();  // 刷新
+                    }
+                });
+
             }
         }
     });
