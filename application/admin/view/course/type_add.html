@@ -84,6 +84,7 @@
                         if (valid) {
                             // 提交数据的请求
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+                            console.log(this.dataForm)
                             setTimeout(()=> {
                                 http_post('/admin/course/typeSave', this.dataForm).then((res) => {
                                     layer.close(index);
