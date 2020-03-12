@@ -16,10 +16,14 @@ class CourseType extends Model
     private static $tree = [];
     private static $record=[];
     private static $lock=0;
-    //从指定集合中卸下某一元素 ,成功则返回集合，否则返回false
-    public static function setOff($set, $element)
+
+
+    //从指定id处的nextId卸下某一元素 ,成功则返回集合，否则返回false
+    public static function setOff($id, $element)
     {
         $bool = -1;
+        $sql=self::where(['id'=>$id])->field('nextId')->find();
+        $set=$sql['nextId'];
         $array = explode(',', $set);
         foreach ($array as $k => $v) {
             if ($v == $element) {
@@ -29,11 +33,20 @@ class CourseType extends Model
         }
         if ($bool != -1) {
             unset($array[$k]);
-            return implode(',', $array);
-        } else return false;
-    }
-
-    //从指定集合中装上某一元素,成功则返回集合，否则返回false
+           try{
+            self::where('id',$id)->update(['nextId'=>implode(',', $array)]);
+            return true;
+           }catch (\Exception $e){
+               return $e->getMessage();
+           }
+        }
+        else return false;
+    }*/
+    /**从指定id中的nextId装上某一元素
+     * @param $id
+     * @param $element
+     * @return bool|string
+     */
     public static function setOn($id, $element)
     {
         $bool = true;
@@ -49,9 +62,41 @@ class CourseType extends Model
         if (!$bool) return false;
         else try {
            self::where(['id'=>$id])->update(['nextId'=>$set . ',' . $element]);
+           return true;
         }catch(\Exception $e){
             return $e->getMessage();
         }
+    }
+
+    /**
+     *清空指定id的nextId
+     * @param $id
+     */
+    public static  function setClear($id){
+       try {self::where(['id'=>$id])->update(['nextId'=>null]);
+       }
+       catch (\Exception $e){
+           return $e->getMessage();
+       }
+        return true;
+    }
+
+    public  static  function  setGet($id){
+        try{
+            $sql=self::where(['id'=>$id])->field('nextId')->find();
+            $res=$sql['nextId'];
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+        return $res;
+    }
+    public static  function  setAdd($id,$string){
+        try{
+            self::where(['id'=>$id])->update(['nextId'=>$string]);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+            return true;
     }
 //遍历一个id的所有子节点
 /*    public static function findAllSons($id,$field='*'){
@@ -129,7 +174,9 @@ class CourseType extends Model
            try {
                 self::where('id', $data['id'])->update($data);
                 if($data['lastId']!=0)
-                self::where('id', $data['lastId'])->update(['nextId' => self::setOn($data['lastId'], $data['id'])]);
+                $newstring=self::setGet($data['lastId']).$data['id'];
+                self::setClear($data['lastId']);
+                self::setAdd($data['lastId'],$newstring);
            }catch (\Exception $e){
                return $e->getMessage();
            }
