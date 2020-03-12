@@ -196,11 +196,14 @@ class CourseType extends Model
     //删除指定信息或信息集
     public static function del($id)
     {
-
+        $id=','.$id.',';
+        $arr=model('CourseType')->whereIn('id',$id)->update(['isDel'=>1]);
+        if($arr) return 1;
+        else return 0;
     }
 
-    public static  function getMaxTypeLevel(){
-        $res=self::where(['isDel'=>0])->field('typeLevel')->order('typeLevel desc')->find();
+    public static  function getAllTypeLevel(){
+        $res=self::where(['isDel'=>0])->field('id,typeName,typeLevel')->order('typeLevel desc')->find();
         if($res) return $res['typeLevel'];
         else return 0;
     }
@@ -244,4 +247,6 @@ class CourseType extends Model
           return 0;
       }
     }
+
+
 }
