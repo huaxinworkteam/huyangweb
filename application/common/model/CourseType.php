@@ -184,7 +184,7 @@ class CourseType extends Model
             unset($data['id']);
             try{
                 model('CourseType')->insert($data);
-                $id=self::where(['typeName'=>$data['typeName']])->order('id desc')->find()['typeName'];
+                $id=self::where(['typeName'=>$data['typeName']])->order('id desc')->find()['id'];
                 if($data['lastId']!=0)
                 self::setOn($data['lastId'],$id);
             }catch (\Exception $e){
