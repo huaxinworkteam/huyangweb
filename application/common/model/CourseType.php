@@ -51,7 +51,7 @@ class CourseType extends Model
     public static function findAllSons($id,$field='*'){
             $res=self::where(['id'=>$id,'isDel'=>0])->field($field)->find();
             if(!$res&&self::$record==[]) return 1;
-            array_push(self::$tree,json_encode(['typeLevel'=>$res['typeLevel'],'data'=>$res]));
+            array_push(self::$tree,['typeLevel'=>$res['typeLevel'],'data'=>$res]);
             array_push(self::$record,$id);
             if($res&&self::$record!=[]){
                 if($res['nextId']!=null){
@@ -81,7 +81,7 @@ class CourseType extends Model
             if($aa!==1) {$error=1;break;}
         }
         if($error==0){
-        $bb = json_encode(['code'=>1,'message'=>'success','data'=>self::$tree]);
+        $bb = json_encode(self::$tree);
             self::$tree=[];
             self::$lock-=1;
         return $bb;}
