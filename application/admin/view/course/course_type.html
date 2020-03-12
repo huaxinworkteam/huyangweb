@@ -73,7 +73,7 @@
                                 <el-table-column prop="typeLevel" label="排序" min-width="10%" align="center"></el-table-column>
                                 <el-table-column fixed="right" label="操作" width="150" min-width="20%" align="center"> 
                                     <template slot-scope="scope"> 
-                                        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                                        <el-button type="text" size="small" @click="del(id)">删除</el-button>
                                         <el-button type="text" size="small" @click="">编辑</el-button>
                                     </template>
                                 </el-table-column>

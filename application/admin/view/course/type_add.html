@@ -9,16 +9,10 @@
 <body>
 	<article class="clearfix pd-20" id="app">
         <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
-            <el-form-item label="父类：" prop="typeLevel">
-                <el-cascader v-model="dataForm.typeLevel" :options="typeLevels" 
+            <el-form-item label="父类：" prop="lastId">
+                <el-cascader v-model="dataForm.lastId" :options="options" 
                 :props="props" :show-all-levels="false">
             </el-cascader>
-                <!-- <el-select v-model="dataForm.typeLevel" placeholder="请选择父类">
-                    <el-option label="PC版" :value="1"></el-option>
-                    <el-option label="手机版" :value="2"></el-option>
-                    <el-option label="微信版" :value="3"></el-option>
-                    <el-option label="微信小程序" :value="4"></el-option>
-                </el-select> -->
               </el-form-item>
             <el-form-item label="分类名称：" prop="typeName">
                 <el-input v-model="dataForm.typeName"></el-input>
@@ -44,13 +38,14 @@
             el: '#app',
             data: function() {
                 return {
-                    typeLevels: [],
+                    options: [],
                     props: {
                         expandTrigger: 'hover',
                         value: 'id',
                         label: 'typeName',
                         children: 'hasChuldren',
                         checkStrictly: true,
+                        emitPath: false,
                         lazy: true,
                         lazyLoad (node, resolve) {
                             if (!node.value) return;
@@ -60,16 +55,16 @@
                                 }).catch(err => {
                                     node.loading = false;
                                 });
-                            }, 500);
+                            }, 100);
                         }
                     },
                     dataForm: {
                         typeName: '',
-                        typeLevel:'',
+                        lastId:'',
                         sort: 0
                     },
                     rules: {
-                        typeLevel: [
+                        lastId: [
                             { required: true, message: '请选择等级', trigger: 'change' }
                         ],
                         typeName: [
@@ -80,7 +75,7 @@
             },
             mounted() {
                 http_post('/admin/course/courseType').then(res => {
-                    this.typeLevels = res.data;
+                    this.options = res.data;
                 }).catch(err => {
 
                 });
@@ -91,6 +86,7 @@
                         if (valid) {
                             // 提交数据的请求
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+                            console.log(this.dataForm)
                             setTimeout(()=> {
                                 http_post('/admin/course/typeSave', this.dataForm).then((res) => {
                                     layer.close(index);
