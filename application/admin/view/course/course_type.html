@@ -63,13 +63,14 @@
                     <div class="mt-20 clearfix">  
                         <el-table :data="tableData" style="width: 100%" row-key="id" border lazy stripe
                             :load="load"  :tree-props="{hasChildren: 'hasChildren'}"
-                            :cell-style="rowClass" :header-cell-style="headClass" >
+                            :header-cell-style="headClass" >
                             <el-table-column label="课程分类列表" style="width: 100%;">
-                                <el-table-column type="selection" ></el-table-column>
-                                <el-table-column prop="id" label="ID" min-width="12%"></el-table-column>
-                                <el-table-column prop="typeName" label="分类名称" min-width="24%"></el-table-column>
-                                <el-table-column prop="typeLevel" label="分类等级" min-width="24%"></el-table-column>
-                                <el-table-column fixed="right" label="操作" width="150" min-width="24%"> 
+                                <el-table-column type="selection" align="center"></el-table-column>
+                                <el-table-column prop="id" label="ID" min-width="10%" header-align="center"></el-table-column>
+                                <el-table-column prop="typeName" label="分类名称" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="typeLevel" label="分类等级" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="typeLevel" label="排序" min-width="10%" align="center"></el-table-column>
+                                <el-table-column fixed="right" label="操作" width="150" min-width="20%" align="center"> 
                                     <template slot-scope="scope"> 
                                         <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
                                         <el-button type="text" size="small">编辑</el-button>
@@ -133,28 +134,20 @@
         methods: {
             // 表头样式设置
             headClass () {
-            return 'text-align: center;background: #f5fafe;'
+                return 'background: #f5fafe;';
             },
             // 表格样式设置
             rowClass () {
-            return 'text-align: center;'
+                // return 'text-align: center;';
             },
             load(tree, treeNode, resolve) {
                 setTimeout(() => {
-                    // resolve([
-                    //     {
-                    //         id: 1,
-                    //         typeName: "dddd",
-                    //         typeLevel: 1,
-                    //         children: true
-                    //     }, {
-                    //         id: 7,
-                    //         typeName: "adsad",
-                    //         typeLevel: 1,
-                    //         children: false
-                    //     }
-                    // ]);
-                }, 1000)
+                    http_post('/admin/course/getSons', {id: 1}).then(res => {
+                        resolve(res.data);
+                    }).catch(err => {
+                        treeNode.loading = false;
+                    });
+                }, 500)
             },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
