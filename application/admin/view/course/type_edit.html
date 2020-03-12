@@ -1,7 +1,7 @@
 <!--_meta 作为公共模版分离出去-->
 {include file="Common/meta" /}
 	<!--/meta 作为公共模版分离出去-->
-	<title>编辑课程分类 </title>
+	<title>新增课程分类 </title>
 	<meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
     <meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
@@ -9,18 +9,16 @@
 <body>
 	<article class="clearfix pd-20" id="app">
         <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
-            <el-form-item label="分类等级：" prop="positionType">
-                <el-select v-model="dataForm.positionType" placeholder="请选择位置类型">
-                    <el-option label="PC版" :value="1"></el-option>
-                    <el-option label="手机版" :value="2"></el-option>
-                    <el-option label="微信版" :value="3"></el-option>
-                    <el-option label="微信小程序" :value="4"></el-option>
-                </el-select>
+            <el-form-item label="父类 (不选为添加顶层)：" prop="lastId">
+                <el-cascader v-model="dataForm.lastId" :options="options" 
+                :props="props" :show-all-levels="false" style="width: 100%;">
+            </el-cascader>
               </el-form-item>
-            <el-form-item label="分类名称：" prop="positionName">
-                <el-input v-model="dataForm.positionName"></el-input>
+            <el-form-item label="分类名称：" prop="typeName">
+                <el-input v-model="dataForm.typeName"></el-input>
+            </el-form-item>
             <el-form-item label="排序号：">
-                <el-input-number v-model="dataForm.apSort" controls-position="right" :min="0" :max="100"></el-input-number>
+                <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm('dataForm')">立即提交</el-button>
@@ -40,39 +38,60 @@
             el: '#app',
             data: function() {
                 return {
+                    options: [],
+                    props: {
+                        expandTrigger: 'hover',
+                        value: 'id',
+                        label: 'typeName',
+                        children: 'hasChuldren',
+                        checkStrictly: true,
+                        emitPath: false,
+                        lazy: true,
+                        lazyLoad (node, resolve) {
+                            if (!node.value) return;
+                            setTimeout(() => {
+                                http_post('/admin/course/getSons', {id: node.value}).then(res => {
+                                    resolve(res.data);
+                                }).catch(err => {
+                                    node.loading = false;
+                                });
+                            }, 100);
+                        }
+                    },
                     dataForm: {
-                        id: '',
+                        id: {$id},
                         typeName: '',
-                        typeLevel:'',
-                        sort: ''
+                        lastId:'',
+                        sort: 0
                     },
                     rules: {
-                        typeLevel: [
-                            { required: true, message: '请选择等级', trigger: 'change' }
-                        ],
                         typeName: [
-                            { required: true, message: '请输入位置宽度', trigger: 'blur' }
+                            { required: true, message: '请输入名称', trigger: 'blur' }
                         ]
                     }
                 }
             },
             mounted() {
-                
+                http_post('/admin/course/courseType').then(res => {
+                    this.options = res.data;
+                }).catch(err => {
+
+                });
             },
             methods: {
-                
                 submitForm(formName) {
                     this.$refs[formName].validate((valid) => {
                         if (valid) {
                             // 提交数据的请求
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                             setTimeout(()=> {
-                                http_post('/admin/ads/saveLocation', this.dataForm).then((res) => {
+                                http_post('/admin/course/typeSave', this.dataForm).then((res) => {
                                     layer.close(index);
                                     this.$refs[formName].resetFields();
                                     layer.msg("提交成功", {icon:1});
                                 }).catch(err => {
                                     layer.close(index);
+                                    console.log(err)
                                 });
                             }, 500);                            
                         } else {

@@ -17,7 +17,7 @@
             <el-form-item label="分类名称：" prop="typeName">
                 <el-input v-model="dataForm.typeName"></el-input>
             </el-form-item>
-            <el-form-item label="排序号：">
+            <el-form-item label="排序号：" prop="sort">
                 <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
             </el-form-item>
             <el-form-item>
@@ -44,7 +44,8 @@
                         value: 'id',
                         label: 'typeName',
                         children: 'hasChuldren',
-                        checkStrictly: true,
+                        multiple: true, // 开启多选
+                        checkStrictly: true, // 父子不关联
                         emitPath: false,
                         lazy: true,
                         lazyLoad (node, resolve) {
