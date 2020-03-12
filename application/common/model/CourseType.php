@@ -41,7 +41,7 @@ class CourseType extends Model
            }
         }
         else return false;
-    }*/
+    }
     /**从指定id中的nextId装上某一元素
      * @param $id
      * @param $element
@@ -227,7 +227,7 @@ class CourseType extends Model
       $res=self::where(['isDel'=>0,'id'=>$id])->field('nextId')->find();
       if($res) {
           if($res['nextId']) {
-              $sons = self::where(['isDel' => 0])->whereIn(['id' => $res['nextId']])->field('id,typeName,typeLevel,sort')->order('sort desc')->select();
+              $sons = self::where(['isDel' => 0])->whereIn('id' , $res['nextId'])->field('id,typeName,typeLevel,sort')->order('sort desc')->select();
               if($sons) {
                   foreach ($sons as $k => $v){
                       $father=self::hasChild($v['id']);
