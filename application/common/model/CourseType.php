@@ -119,7 +119,7 @@ class CourseType extends Model
     //获取指定信息
     public static function getOne($id)
     {
-    //    self::where(['id'=>$id])->field('id,typeName')
+       self::where(['id'=>$id])->field('id,typeName')
 
     }
 
@@ -133,5 +133,11 @@ class CourseType extends Model
     public static function del($id)
     {
 
+    }
+
+    public static  function getMaxTypeLevel(){
+        $res=self::where(['isDel'=>0])->field('typeLevel')->order('typeLevel desc')->find();
+        if($res) return $res['0'];
+        else return 0;
     }
 }
