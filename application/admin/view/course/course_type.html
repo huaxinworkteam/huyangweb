@@ -57,14 +57,14 @@
             <div class="panel mt-20">
                 <div class="panel-body">
                     <div class="clearfix">
-                        <el-button type="danger" size="medium"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</el-button>
+                        <el-button type="danger" size="medium" @click="batchDel"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</el-button>
                         <el-button type="primary" size="medium" @click="add('新增课程分类','{:url(\'admin/course/typeAdd\')}')"
                         ><i class="Hui-iconfont">&#xe600;</i> 添加分类</el-button>
                     </div>
                     <div class="mt-20 clearfix">  
                         <el-table :data="tableData" style="width: 100%" row-key="id" border lazy stripe
-                            :load="load"  :tree-props="{hasChildren: 'hasChildren'}"
-                            :row-style="rowClass" :header-cell-style="headClass">
+                            :load="load"  :tree-props="{hasChildren: 'hasChildren'}" :header-cell-style="headClass"
+                            :row-style="rowClass" @selection-change="handleSelectionChange">
                             <el-table-column label="课程分类列表" style="width: 100%;">
                                 <el-table-column type="selection" align="center"></el-table-column>
                                 <el-table-column prop="id" label="ID" min-width="15%" header-align="center"></el-table-column>
@@ -107,7 +107,8 @@
                 positionType: '',
                 positionCode: ''
             },
-            tableData: []
+            tableData: [],
+            selectID: []
         },
         mounted() {
             http_post('/admin/course/courseType').then(res => {
@@ -134,13 +135,18 @@
                     });
                 }, 500);
             },
+            handleSelectionChange(val){
+                val.forEach(item => {
+                    this.selectID.push(item.id);
+                });              
+            },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         // 提交数据的请求
                         var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                         setTimeout(()=> {
-                            location.replace('/admin/ads/searchLocation?positionType=' +
+                            location.replace('/admin/course/searchLocation?positionType=' +
                             this.queryForm.positionType + '&positionCode=' + this.queryForm.positionCode);
                         }, 500);                            
                     } else {
@@ -154,7 +160,21 @@
                 this.$refs[formName].resetFields();
             },
 
+            batchDel() {
+                if (this.selectID.length === 0) {
+                    layer.msg('没有选中需要删除的数据！');
+                    return;
+                }
+                //询问框
+                layer.confirm('确认要删除吗？', index => {
+                    layer.close(index);
 
+                    http_post('/admin/course/typeDel', {id: this.selectID.toString()}).then(res => {
+                        layer.msg("删除成功", {icon: 1});
+                        location.reload();  // 刷新
+                    });
+                });
+            },
              // 新增
             add(title, url) {
                 var index = layer.open({
