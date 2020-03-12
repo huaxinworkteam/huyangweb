@@ -9,9 +9,9 @@
 <body>
 	<article class="clearfix pd-20" id="app">
         <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
-            <el-form-item label="父类：" prop="lastId">
+            <el-form-item label="父类 (不选为添加顶层)：" prop="lastId">
                 <el-cascader v-model="dataForm.lastId" :options="options" 
-                :props="props" :show-all-levels="false">
+                :props="props" :show-all-levels="false" style="width: 100%;">
             </el-cascader>
               </el-form-item>
             <el-form-item label="分类名称：" prop="typeName">
@@ -64,9 +64,6 @@
                         sort: 0
                     },
                     rules: {
-                        lastId: [
-                            { required: true, message: '请选择等级', trigger: 'change' }
-                        ],
                         typeName: [
                             { required: true, message: '请输入名称', trigger: 'blur' }
                         ]
