@@ -58,7 +58,7 @@
                 <div class="panel-body">
                     <div class="clearfix">
                         <el-button type="danger" size="medium"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</el-button>
-                        <el-button type="primary" size="medium" @click="add('新增课程分类','{:url(\'admin/course/type_add\')}')"
+                        <el-button type="primary" size="medium" @click="add('新增课程分类','{:url(\'admin/course/typeAdd\')}')"
                         ><i class="Hui-iconfont">&#xe600;</i> 添加分类</el-button>
                     </div>
                     <div class="mt-20 clearfix">  
@@ -67,38 +67,18 @@
                             :header-cell-style="headClass" >
                             <el-table-column label="课程分类列表" style="width: 100%;">
                                 <el-table-column type="selection" align="center"></el-table-column>
-                                <el-table-column prop="id" label="ID" min-width="10%" header-align="center"></el-table-column>
+                                <el-table-column prop="id" label="ID" min-width="15%" header-align="center"></el-table-column>
                                 <el-table-column prop="typeName" label="分类名称" min-width="30%" align="center"></el-table-column>
                                 <el-table-column prop="typeLevel" label="分类等级" min-width="30%" align="center"></el-table-column>
                                 <el-table-column prop="typeLevel" label="排序" min-width="10%" align="center"></el-table-column>
                                 <el-table-column fixed="right" label="操作" width="150" min-width="20%" align="center"> 
                                     <template slot-scope="scope"> 
                                         <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-                                        <el-button type="text" size="small">编辑</el-button>
+                                        <el-button type="text" size="small" @click="">编辑</el-button>
                                     </template>
                                 </el-table-column>
                             </el-table-column>
                         </el-table>
-                        <!-- <table class="table table-border table-bordered table-bg table-hover table-sort">
-                            <thead>
-                            <tr>
-                                <th scope="col" colspan="9">课程分类列表</th>
-                            </tr>
-                            <tr class="text-c">
-                                <th width="25"><input type="checkbox"  id="ckAll" onclick="QuanXuan()"></th>
-                                <th width="40">ID</th>
-                                <th width="100">父级</th>
-                                <th width="100">分类名称</th>
-                                <th width="100">分类等级</th>
-                                <th width="100">查看子分类</th>
-                                <th width="100">排序</th>
-                                <th width="100">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                              
-                            </tbody>
-                        </table> -->
                     </div>
                 </div>
             </div>
@@ -182,7 +162,18 @@
                         window.location.reload();  // 刷新
                     }
                 });
-
+            },
+            // 编辑
+            edit(title, url, id) {
+                var index = layer.open({
+                    type: 2,
+                    title: title,
+                    content: url + '?id=' + id,
+                    area: ['700px', '600px'],
+                    end : function() {
+                        window.location.reload();  // 刷新
+                    }
+                });
             }
         }
     });
