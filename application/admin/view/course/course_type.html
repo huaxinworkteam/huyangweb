@@ -35,7 +35,7 @@
         <article id="app" class="Hui-admin-content clearfix">
             <div class="panel">
                 <div class="panel-body">
-                    <el-form :inline="true" :model="queryForm" ref="queryForm">
+                    <!-- <el-form :inline="true" :model="queryForm" ref="queryForm">
                         <el-form-item style="margin-bottom: 0;" prop="positionType">
                             <el-select v-model="queryForm.positionType" placeholder="请选择分类">
                                 <el-option label="PC版" :value="1"></el-option>
@@ -51,7 +51,7 @@
                             <el-button type="primary" size="medium" icon="el-icon-search" @click="submitForm('queryForm')">查询</el-button>
                             <el-button size="medium" icon="el-icon-refresh-left" @click="resetForm('queryForm')">重置</el-button>
                         </el-form-item>
-                    </el-form>
+                    </el-form> -->
                 </div>
             </div>
             <div class="panel mt-20">
@@ -60,16 +60,16 @@
                         <el-button type="danger" size="medium"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</el-button>
                         <el-button type="primary" size="medium"><i class="Hui-iconfont">&#xe600;</i> 添加分类</el-button>
                     </div>
-                    <div class="mt-20 clearfix">
-                        <el-table :data="tableData" style="width: 100%" row-key="data.id" border lazy stripe
-                            :load="load" :tree-props="{nextId: 'nextId'}"
+                    <div class="mt-20 clearfix">  
+                        <el-table :data="tableData" style="width: 100%" row-key="id" border lazy stripe
+                            :load="load"  :tree-props="{hasChildren: 'hasChildren'}"
                             :cell-style="rowClass" :header-cell-style="headClass" >
-                            <el-table-column label="课程分类列表">
-                                <el-table-column type="selection" width="55" fit></el-table-column>
-                                <el-table-column prop="data.id" label="ID" width="180" fit></el-table-column>
-                                <el-table-column prop="data.typeName" label="分类名称" width="180" fit></el-table-column>
-                                <el-table-column prop="data.typeLevel" label="分类等级" width="180" fit></el-table-column>
-                                <el-table-column fixed="right" label="操作" width="100"> 
+                            <el-table-column label="课程分类列表" style="width: 100%;">
+                                <el-table-column type="selection" ></el-table-column>
+                                <el-table-column prop="id" label="ID" min-width="12%"></el-table-column>
+                                <el-table-column prop="typeName" label="分类名称" min-width="24%"></el-table-column>
+                                <el-table-column prop="typeLevel" label="分类等级" min-width="24%"></el-table-column>
+                                <el-table-column fixed="right" label="操作" width="150" min-width="24%"> 
                                     <template slot-scope="scope"> 
                                         <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
                                         <el-button type="text" size="small">编辑</el-button>
@@ -112,6 +112,7 @@
 <script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.15/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="__ADMIN__/business/js/main.js"></script>
+
 <script type="text/javascript">
     new Vue({
         el: '#app',
@@ -140,7 +141,19 @@
             },
             load(tree, treeNode, resolve) {
                 setTimeout(() => {
-                resolve(this.tableData)
+                    // resolve([
+                    //     {
+                    //         id: 1,
+                    //         typeName: "dddd",
+                    //         typeLevel: 1,
+                    //         children: true
+                    //     }, {
+                    //         id: 7,
+                    //         typeName: "adsad",
+                    //         typeLevel: 1,
+                    //         children: false
+                    //     }
+                    // ]);
                 }, 1000)
             },
             submitForm(formName) {
