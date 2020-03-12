@@ -10,3 +10,9 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+function myJson($Sema,$data=null){
+    if($Sema==='T')
+    return json_encode(['code'=>1,'message'=>'success','data'=>$data]);
+    if($Sema==='F')
+    return json_encode(['code'=>0,'message'=>'fail']);
+}

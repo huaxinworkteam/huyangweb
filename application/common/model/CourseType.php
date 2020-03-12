@@ -48,7 +48,7 @@ class CourseType extends Model
         else return $set . ',' . $element;
     }
 //遍历一个id的所有子节点
-    public static function findAllSons($id,$field='*'){
+/*    public static function findAllSons($id,$field='*'){
             $res=self::where(['id'=>$id,'isDel'=>0])->field($field)->find();
             if(!$res&&self::$record==[]) return 1;
             array_push(self::$tree,['typeLevel'=>$res['typeLevel'],'data'=>$res]);
@@ -65,11 +65,11 @@ class CourseType extends Model
                 }
             }
             return 1;
-    }
+    }*/
 
 
     //获取全表信息
-    public static function getAll($typeLevel=1)
+/*    public static function getAll($typeLevel=1)
     {
         $field = 'id,typeName,typeLevel,nextId';
         $res=self::where(['isDel'=>0,'typeLevel'=>$typeLevel])->field('id')->select()->toArray();
@@ -93,12 +93,14 @@ class CourseType extends Model
             return 0;
         }
 
-    }
+    }*/
 
     //获取指定信息
     public static function getOne($id)
     {
-     //  self::where(['id'=>$id])->field('id,typeName')
+      $res=self::where(['id'=>$id])->field('id,typeName,lastId')->find();
+      if($res) return $res;
+      else return 0;
 
     }
 
@@ -116,7 +118,28 @@ class CourseType extends Model
 
     public static  function getMaxTypeLevel(){
         $res=self::where(['isDel'=>0])->field('typeLevel')->order('typeLevel desc')->find();
-        if($res) return $res['0'];
+        if($res) return $res['typeLevel'];
         else return 0;
+    }
+
+    public static function getFriends($typeLevel=1){
+        $res=self::where(['isDel'=>0,'typeLevel'=>$typeLevel])->field('id,typeName,typeLevel')->order('sort desc')->select();
+        if($res) return $res;
+        else return 0;
+    }
+
+    public static  function getNextSons($id){
+      $res=self::where(['isDel'=>0,'id'=>$id])->field('nextId')->find();
+      if($res) {
+          if($res['nextId']) {
+              $sons = self::where(['isDel' => 0])->whereIn(['id' => $res['nextId']])->field('id,typeName,typeLevel')->order('sort desc')->select();
+              if($sons) return $sons;
+              else return 0;
+          }
+          else return -1;
+      }
+      else{
+          return 0;
+      }
     }
 }

@@ -22,18 +22,40 @@ class Course extends Base
     public  function  courseType(){
         $typeLevel = input('typeLevel') ? input('typeLevel') : 1;
         if(request()->isAjax()) {
-            $res = CourseType::getAll($typeLevel);
-            if ($res) {
-                $arr=json_decode($res);
-                return json_encode(['code' => 1, 'message' => 'success','data'=>$arr]);
-            }
-            else return json_encode(['code' => 0, 'message' => 'fail']);
+            $res = CourseType::getFriends($typeLevel);
+            if ($res) return myJson('T',$res);
+            else return myJson('F');
         }
         return view();
+    }
+    public function getSons(){
+        $id=input('id');
+        $res=CourseType::getNextSons($id);
+        if($res) return myJson('T',$res);
+        else return myJson('F');
     }
 
     public function getMaxLevel(){
         $res=CourseType::getMaxTypeLevel();
-        return json_encode(['code'=>1,'message'=>'success','data'=>$res]);
+        if($res) return myJson('T',$res);
+        else return myJson('F');
+    }
+
+    public function typeEdit(){
+        $id=input('id');
+        if(request()->isAjax()){
+            $res=CourseType::getOne($id);
+            if($res) return myJson('T',$res);
+            else return myJson('F');
+        }
+        return view();
+    }
+
+    public function typeSameLevel(){
+
+    }
+
+    public function  test(){
+        CourseType::getMaxTypeLevel();
     }
 }
