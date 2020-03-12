@@ -124,6 +124,7 @@ class CourseType extends Model
         if($data['id']) {
            try {
                 self::where('id', $data['id'])->update($data);
+                if($data['lastId']!=0)
                 self::where('id', $data['lastId'])->update(['nextId' => self::setOn($data['lastId'], $data['id'])]);
            }catch (\Exception $e){
                return $e->getMessage();
@@ -131,9 +132,11 @@ class CourseType extends Model
         }else{
             unset($data['id']);
             try{
-
+                self::insert($data);
+                if($data['lastId']!=0)
+                self::where('id',$data['lastId'])->update(['nextId' => self::setOn($data['lastId'], $data['id'])]);
             }catch (\Exception $e){
-
+                return $e->getMessage();
             }
 
         }
@@ -163,8 +166,8 @@ class CourseType extends Model
         $res=self::where(['isDel'=>0,'typeLevel'=>$typeLevel])->field('id,typeName,typeLevel')->order('sort desc')->select();
         if($res){ foreach ($res as $k => $v){
             $father=self::hasChild($v['id']);
-            if($father) $v['children']=true;
-            else $v['children']=false;
+            if($father) $v['hasChildren']=true;
+            else $v['hasChildren']=false;
         }
          return $res;}
         else return 0;
@@ -178,8 +181,8 @@ class CourseType extends Model
               if($sons) {
                   foreach ($sons as $k => $v){
                       $father=self::hasChild($v['id']);
-                      if($father) $v['children']=true;
-                      else $v['children']=false;
+                      if($father) $v['hasChildren']=true;
+                      else $v['hasChildren']=false;
                   }
                   return $sons;
               }
