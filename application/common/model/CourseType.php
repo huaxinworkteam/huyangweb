@@ -47,8 +47,12 @@ class CourseType extends Model
         else return $set . ',' . $element;
     }
 
+    public static function findAllSons($id,$field='*'){
+
+    }
+
     //TODO 寻找该层极其所有孩子们,调用完必须清空树,field必须有nextId,lastId
-    public static function findAllSons($typeLevel = 1, $field = '*'){
+ /*   public static function findAllSons($typeLevel = 1, $field = '*'){
        // self::$startlevel=$typeLevel;
         $arr=self::where(['isDel'=>0,'typeLevel'=>$typeLevel])->whereIn('lastId',self::$record)->field($field)->select()->toArray();
         $size=sizeof($arr);
@@ -67,7 +71,7 @@ class CourseType extends Model
         }
 
         return json_encode(self::$tree);
-    }
+    }*/
 
     //获取全表信息
     public static function getAll()
