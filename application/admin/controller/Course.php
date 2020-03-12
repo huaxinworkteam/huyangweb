@@ -52,17 +52,23 @@ class Course extends Base
     }
 
     public function typeAdd(){
+
+        return view();
+    }
+    public  function typeSave(){
         $data=[
-          'id'=>input('id'),
+            'id'=>input('id'),
             'typeName'=>input('typeName'),
             'lastId'=>input('lastId')?input('lastId'):0,
             'updateTime'=>time(),
             'sort'=>input('sort')
         ];
-        return view();
+        $res=CourseType::saveInfo($data);
+        if($res===1) return  myJson('T');
+        else   return myJson('F');
     }
 
     public function  test(){
-        CourseType::getFriends();
+       // CourseType::getFriends();
     }
 }

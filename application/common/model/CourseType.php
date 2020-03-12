@@ -47,7 +47,11 @@ class CourseType extends Model
             }
         }
         if (!$bool) return false;
-        else return $set . ',' . $element;
+        else try {
+           self::where(['id'=>$id])->update(['nextId'=>$set . ',' . $element]);
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
     }
 //遍历一个id的所有子节点
 /*    public static function findAllSons($id,$field='*'){
@@ -100,7 +104,7 @@ class CourseType extends Model
     //获取指定信息
     public static function getOne($id)
     {
-      $res=self::where(['id'=>$id])->field('id,typeName,lastId')->find();
+      $res=self::where(['id'=>$id])->field('id,typeName,lastId,sort')->find();
       if($res) return $res;
       else return 0;
 
@@ -138,9 +142,8 @@ class CourseType extends Model
             }catch (\Exception $e){
                 return $e->getMessage();
             }
-
         }
-
+            return 1;
     }
 
     //删除指定信息或信息集
@@ -163,7 +166,7 @@ class CourseType extends Model
 
     //获取朋友属性
     public static function getFriends($typeLevel=1){
-        $res=self::where(['isDel'=>0,'typeLevel'=>$typeLevel])->field('id,typeName,typeLevel')->order('sort desc')->select();
+        $res=self::where(['isDel'=>0,'typeLevel'=>$typeLevel])->field('id,typeName,typeLevel,sort')->order('sort desc')->select();
         if($res){ foreach ($res as $k => $v){
             $father=self::hasChild($v['id']);
             if($father) $v['hasChildren']=true;
@@ -177,7 +180,7 @@ class CourseType extends Model
       $res=self::where(['isDel'=>0,'id'=>$id])->field('nextId')->find();
       if($res) {
           if($res['nextId']) {
-              $sons = self::where(['isDel' => 0])->whereIn(['id' => $res['nextId']])->field('id,typeName,typeLevel')->order('sort desc')->select();
+              $sons = self::where(['isDel' => 0])->whereIn(['id' => $res['nextId']])->field('id,typeName,typeLevel,sort')->order('sort desc')->select();
               if($sons) {
                   foreach ($sons as $k => $v){
                       $father=self::hasChild($v['id']);
