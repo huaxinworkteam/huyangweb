@@ -167,8 +167,8 @@
                                 layer.close(index);
                             });*/
                             if(this.queryForm.adpositionId!=null)
-                            location.href='/admin/ads/search?positionType='+this.queryForm.positionType+'&adpositionId='+this.queryForm.adpositionId;
-                            else location.href='/admin/ads/search?positionType='+this.queryForm.positionType;
+                            location.replace('/admin/ads/search?positionType='+this.queryForm.positionType+'&adpositionId='+this.queryForm.adpositionId);
+                            else location.replace('/admin/ads/search?positionType='+this.queryForm.positionType);
                         }, 500);                            
                     } else {
                         layer.msg("查询条件不足");
