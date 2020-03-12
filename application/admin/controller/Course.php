@@ -65,7 +65,7 @@ class Course extends Base
         ];
         $res=CourseType::saveInfo($data);
         if($res===1) return  myJson('T');
-        else   return myJson('F');
+        else   return myJson('F',$res);
     }
 
     public  function  typeDel(){

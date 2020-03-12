@@ -159,15 +159,14 @@ class CourseType extends Model
     public static function saveInfo($data)
     {
         $validate=new \app\common\validate\CourseType();
-        if($validate->check($data)){
-          //  halt($validate->getError());
+        if(!$validate->check($data)){
             return $validate->getError();
         }
         if($data['lastId']!=0){
             $father=self::where('id',$data['lastId'])->field('typeLevel')->find();
             if($father)
             $data['typeLevel']=$father['typeLevel']+1;
-            else return false;
+            else return '父节点未找到';
         }else{
             $data['typeLevel']=1;
         }
@@ -184,9 +183,10 @@ class CourseType extends Model
         }else{
             unset($data['id']);
             try{
-                self::insert($data);
+                model('CourseType')->insert($data);
+                $id=self::where(['typeName'=>$data['typeName']])->order('id desc')->find()['typeName'];
                 if($data['lastId']!=0)
-                self::where('id',$data['lastId'])->update(['nextId' => self::setOn($data['lastId'], $data['id'])]);
+                self::setOn($data['lastId'],$id);
             }catch (\Exception $e){
                 return $e->getMessage();
             }

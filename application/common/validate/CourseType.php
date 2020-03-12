@@ -13,7 +13,7 @@ use think\Validate;
 
 class CourseType extends Validate
 {
-    protected    $rule=[
+    protected   $rule=[
         'typeName|类名'=>'require|unique:course_type',
         'lastId|上级分类id'=>'require',
         ];
