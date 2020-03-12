@@ -63,6 +63,6 @@ class Course extends Base
     }
 
     public function  test(){
-        CourseType::getMaxTypeLevel();
+        CourseType::getFriends();
     }
 }

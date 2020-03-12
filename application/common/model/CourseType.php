@@ -126,10 +126,15 @@ class CourseType extends Model
                 self::where('id', $data['id'])->update($data);
                 self::where('id', $data['lastId'])->update(['nextId' => self::setOn($data['lastId'], $data['id'])]);
            }catch (\Exception $e){
-               return false;
+               return $e->getMessage();
            }
         }else{
             unset($data['id']);
+            try{
+
+            }catch (\Exception $e){
+
+            }
 
         }
 
@@ -146,19 +151,38 @@ class CourseType extends Model
         if($res) return $res['typeLevel'];
         else return 0;
     }
-
-    public static function getFriends($typeLevel=1){
-        $res=self::where(['isDel'=>0,'typeLevel'=>$typeLevel])->field('id,typeName,typeLevel')->order('sort desc')->select();
-        if($res) return $res;
-        else return 0;
+    //判断是否有子类
+    public static function hasChild($id){
+        $res= self::where(['isDel'=>0,'id'=>$id])->field('nextId')->find();
+        if($res['nextId']) return true;
+        else return false;
     }
 
+    //获取朋友属性
+    public static function getFriends($typeLevel=1){
+        $res=self::where(['isDel'=>0,'typeLevel'=>$typeLevel])->field('id,typeName,typeLevel')->order('sort desc')->select();
+        if($res){ foreach ($res as $k => $v){
+            $father=self::hasChild($v['id']);
+            if($father) $v['children']=true;
+            else $v['children']=false;
+        }
+         return $res;}
+        else return 0;
+    }
+//获取下一代属性
     public static  function getNextSons($id){
       $res=self::where(['isDel'=>0,'id'=>$id])->field('nextId')->find();
       if($res) {
           if($res['nextId']) {
               $sons = self::where(['isDel' => 0])->whereIn(['id' => $res['nextId']])->field('id,typeName,typeLevel')->order('sort desc')->select();
-              if($sons) return $sons;
+              if($sons) {
+                  foreach ($sons as $k => $v){
+                      $father=self::hasChild($v['id']);
+                      if($father) $v['children']=true;
+                      else $v['children']=false;
+                  }
+                  return $sons;
+              }
               else return 0;
           }
           else return -1;
