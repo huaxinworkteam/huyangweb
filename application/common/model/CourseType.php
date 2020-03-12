@@ -160,6 +160,7 @@ class CourseType extends Model
     {
         $validate=new \app\common\validate\CourseType();
         if($validate->check($data)){
+          //  halt($validate->getError());
             return $validate->getError();
         }
         if($data['lastId']!=0){
