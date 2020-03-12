@@ -51,8 +51,15 @@ class Course extends Base
         return view();
     }
 
-    public function typeSameLevel(){
-
+    public function typeAdd(){
+        $data=[
+          'id'=>input('id'),
+            'typeName'=>input('typeName'),
+            'lastId'=>input('lastId')?input('lastId'):0,
+            'updateTime'=>time(),
+            'sort'=>input('sort')
+        ];
+        return view();
     }
 
     public function  test(){

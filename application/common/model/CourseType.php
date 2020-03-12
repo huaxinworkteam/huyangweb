@@ -34,9 +34,11 @@ class CourseType extends Model
     }
 
     //从指定集合中装上某一元素,成功则返回集合，否则返回false
-    public static function setOn($set, $element)
+    public static function setOn($id, $element)
     {
         $bool = true;
+        $sql=self::where(['id'=>$id])->field('nextId')->find();
+        $set=$sql['nextId'];
         $array = explode(',', $set);
         foreach ($array as $k => $v) {
             if ($v == $element) {
@@ -107,6 +109,29 @@ class CourseType extends Model
     //保存信息
     public static function saveInfo($data)
     {
+        $validate=new \app\common\validate\CourseType();
+        if($validate->check($data)){
+            return $validate->getError();
+        }
+        if($data['lastId']!=0){
+            $father=self::where('id',$data['lastId'])->field('typeLevel')->find();
+            if($father)
+            $data['typeLevel']=$father['typeLevel']+1;
+            else return false;
+        }else{
+            $data['typeLevel']=1;
+        }
+        if($data['id']) {
+           try {
+                self::where('id', $data['id'])->update($data);
+                self::where('id', $data['lastId'])->update(['nextId' => self::setOn($data['lastId'], $data['id'])]);
+           }catch (\Exception $e){
+               return false;
+           }
+        }else{
+            unset($data['id']);
+
+        }
 
     }
 
