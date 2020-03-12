@@ -20,7 +20,9 @@ class Course extends Base
     //=======================以下是课程分类方法=========================================
 
     public  function  courseType(){
-        CourseType::getAll();
-    //  return view();
+        $typeLevel=input('typeLevel')?input('typeLevel'):1;
+        $res=CourseType::getAll($typeLevel);
+        if($res) return $res;
+        else return json_encode(['code'=>0,'message'=>'fail']);
     }
 }
