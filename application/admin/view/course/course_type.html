@@ -70,11 +70,11 @@
                                 <el-table-column prop="id" label="ID" min-width="15%" header-align="center"></el-table-column>
                                 <el-table-column prop="typeName" label="分类名称" min-width="30%" align="center"></el-table-column>
                                 <el-table-column prop="typeLevel" label="分类等级" min-width="30%" align="center"></el-table-column>
-                                <el-table-column prop="typeLevel" label="排序" min-width="10%" align="center"></el-table-column>
+                                <el-table-column prop="sort" label="排序" min-width="10%" align="center"></el-table-column>
                                 <el-table-column fixed="right" label="操作" width="150" min-width="20%" align="center"> 
                                     <template slot-scope="scope">
                                         <el-tooltip class="item" effect="dark" content="编辑" placement="left-start">
-                                            <el-button type="text" size="small" icon="el-icon-edit"></el-button>
+                                            <el-button type="text" size="small" icon="el-icon-edit" @click="edit(scope.row.id)"></el-button>
                                         </el-tooltip>
                                         <el-tooltip class="item" effect="dark" content="删除" placement="right-start">
                                             <el-button type="text" size="small" icon="el-icon-delete" @click="del(scope.row.id)"></el-button>
@@ -168,11 +168,11 @@
                 });
             },
             // 编辑
-            edit(title, url, id) {
+            edit(id) {
                 var index = layer.open({
                     type: 2,
-                    title: title,
-                    content: url + '?id=' + id,
+                    title: '编辑课程分类',
+                    content: '/admin/course/typeEdit?id=' + id,
                     area: ['700px', '600px'],
                     end : function() {
                         window.location.reload();  // 刷新
