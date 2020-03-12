@@ -35,8 +35,8 @@ class Course extends Base
         else return myJson('F');
     }
 
-    public function getMaxLevel(){
-        $res=CourseType::getMaxTypeLevel();
+    public function getAllTypeLevel(){
+        $res=CourseType::getAllTypeLevel();
         if($res) return myJson('T',$res);
         else return myJson('F');
     }
@@ -68,7 +68,14 @@ class Course extends Base
         else   return myJson('F');
     }
 
+    public  function  typeDel(){
+        $id=input('id');
+        $res=CourseType::del($id);
+        if($res==1) return myJson('T');
+        else return myJson('F');
+    }
+
     public function  test(){
-       // CourseType::getFriends();
+       var_dump($this);
     }
 }
