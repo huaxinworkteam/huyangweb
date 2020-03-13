@@ -4,3 +4,4 @@
 thinkphp
 .DS_Store
 runtime
+*.htaccess
