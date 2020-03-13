@@ -16,7 +16,8 @@ class Course extends Base
 {
     public function index(){
         if(request()->isAjax()){
-           $res= CourseModel::getAll();
+            $courseType=input('courseType')?input('courseType'):null;
+           $res= CourseModel::getAll($courseType);
            if($res) return myJson('T',$res);
            else  return myJson('F',$res);
         }
@@ -123,6 +124,6 @@ class Course extends Base
     }
 
     public function  test(){
-       var_dump($this);
+       CourseModel::getAll();
     }
 }

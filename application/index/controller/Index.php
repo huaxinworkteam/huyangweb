@@ -19,8 +19,8 @@ class Index extends Controller
     //header
     public function header(){
       //  $SQL=model('Teachers')->alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
-       $SQL=model('series')->where('delete_time',null)->order('seriesSort desc')->select();
-        $this->assign('shizi',$SQL);
+       $xueYuan=model('series')->where('delete_time',null)->order('seriesSort desc')->select();
+        $this->assign('shizi',$xueYuan);
     }
     //主页
     public function index()

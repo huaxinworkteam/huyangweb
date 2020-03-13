@@ -27,8 +27,15 @@ class Course extends  Model
         else return 0;
     }
 
-    public static  function  getAll(){
-        $res=self::alias('C')->where(['C.isDel'=>0])->leftJoin('CourseType T','C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
+    public static  function  getAll($courseType=null){
+       if(!$courseType) {
+           $res = self::alias('C')->where(['C.isDel' => 0])->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
+
+       }else{
+           $res=self::alias('C')->where(['C.siDel'=>0,'C.courseType'=>$courseType])->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
+       }
+       $data['data']=$res;
+        $data['count']=sizeof($res);
         if($res) return $res;
         else return '未查询到任何信息';
     }
