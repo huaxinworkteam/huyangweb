@@ -1,7 +1,7 @@
 .cw{width:1220px;margin:0 auto;min-width:1220px;}
 
 header{background-color:#fff;height:115px;}
-header .logo{background:url(../images/logo.jpg) no-repeat;width:300px;height:80px;margin-top:30px;}
+header .logo{background:url(../images/logo1.png) no-repeat;width:300px;height:80px;margin-top:30px;}
 header .tools_bar .tools_top{width:860px;}
 
 header .tools_bar .tools_top{border-bottom:1px solid #e5e5e5;height:60px;line-height:60px;text-align:right;}

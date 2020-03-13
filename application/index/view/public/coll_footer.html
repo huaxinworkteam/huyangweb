@@ -1,25 +1,25 @@
 <div class="cw">
     <div class="top_body clearfix">
         <ul class="fl clearfix">
-            <li>
+            <li class="footer-animation">
                 <h3><a href="{:url('index/about')}" target="_blank">胡杨概况</a></h3>
                 <p><a href="{:url('index/introduction')}" target="_blank">学院介绍</a></p>
                 <p><a href="{:url('index/organization')}" target="_blank">组织架构</a></p>
             </li>
-            <li>
+            <li class="footer-animation">
                 <h3><a href="{:url('index/course')}" class="">核心课程</a></h3>
                 <p><a href="{:url('chhcollege/m402')}" target="_blank">工商管理类</a></p>
             </li>
-            <li>
+            <li class="footer-animation">
                 <h3><a href="{:url('index/szll',['seriesNO'=>1])}" class="">师资力量</a></h3>
                 {volist name="footer_szll" id="vo"}
                 <p><a href="{:url('index/szll',['seriesNO'=>$vo.seriesNO])}" target="_blank">{$vo.series}</a></p>
                 {/volist}
             </li>
-            <li>
+            <li class="footer-animation">
                 <h3 class="no_b"><a href="{:url('index/news')}" target="_blank">新闻动态</a></h3>
             </li>
-            <li>
+            <li class="footer-animation">
                 <h3 class="no_b"><a href="http://www.massmakers.cn/category-9338.html" target="_blank" class="">培训报名</a></h3>
             </li>
             <!--<li>-->
@@ -79,6 +79,22 @@
     </script>
 
 </div>
+<style>
+    .footer-animation {
+        height: 300px; max-height: 300px; overflow: hidden; min-height: none;
+        transition:height 2s;
+        -moz-transition:height 2s, -moz-transform 2s; /* Firefox 4 */
+        -webkit-transition:height 2s, -webkit-transform 2s; /* Safari and Chrome */
+        -o-transition: height 2s, -o-transform 2s; /* Opera */
+    }
+    .footer-animation:hover {
+        height: auto; min-height: 300px; max-height: none;
+        transition:height 2s;
+        -moz-transition:height 2s, -moz-transform 2s; /* Firefox 4 */
+        -webkit-transition:height 2s, -webkit-transform 2s; /* Safari and Chrome */
+        -o-transition: height 2s, -o-transform 2s; /* Opera */
+    }
+</style>
 
 <!--在线咨询--><!--
 <div class="consultation">
