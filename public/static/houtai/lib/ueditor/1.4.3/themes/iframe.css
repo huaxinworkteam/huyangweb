@@ -8,3 +8,6 @@
 #edui1_iframeholder {
     height: 300px !important;
 }
+html {
+    overflow-y: auto;
+}
