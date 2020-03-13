@@ -32,51 +32,66 @@
             课程管理
         </nav>
 
-        <article class="Hui-admin-content clearfix">
-            <div class="panel" style="display: none;">
+        <article id="app" class="Hui-admin-content clearfix">
+            <div class="panel">
                 <div class="panel-body">
-                    <form action="#" method="get">
-                    <div class="text-c">
-                        <input type="text" class="input-text" style="width:250px" placeholder="输入管理员昵称或手机号或邮箱" id="search" name="search">
-                        <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i>
-                            搜用户
-                        </button>
-                    </div>
-                    </form>
+                    <el-form :inline="true" :model="queryForm" ref="queryForm">
+                        <el-form-item style="margin-bottom: 0;" prop="positionType">
+                            <el-select v-model="queryForm.positionType" placeholder="请选择分类">
+                                <el-option label="PC版" :value="1"></el-option>
+                                <el-option label="手机版" :value="2"></el-option>
+                                <el-option label="微信版" :value="3"></el-option>
+                                <el-option label="微信小程序" :value="4"></el-option>
+                            </el-select>
+                          </el-form-item>
+                          <el-form-item label="分类名称：" style="margin-bottom: 0;" prop="positionCode">
+                            <el-input v-model="queryForm.positionCode" placeholder="请填写分类名称"></el-input>
+                        </el-form-item>
+                        <el-form-item style="margin-bottom: 0;">
+                            <el-button type="primary" size="medium" icon="el-icon-search" @click="submitForm('queryForm')">查询</el-button>
+                            <el-button size="medium" icon="el-icon-refresh-left" @click="resetForm('queryForm')">重置</el-button>
+                        </el-form-item>
+                    </el-form>
                 </div>
             </div>
-
             <div class="panel mt-20">
                 <div class="panel-body">
                     <div class="clearfix">
-							<span class="f-l">
-								<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i
-                                        class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-								<a href="javascript:;" onclick="add('新增轮播图','{:url(\'admin/gallery/add\')}',{})"
-                                   class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加轮播图</a>
-							</span>
-                        <span class="f-r">共有数据：<strong>x</strong> 张</span>
+                        <el-button type="danger" size="medium" @click="batchDel"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</el-button>
+                        <el-button type="primary" size="medium" @click="add('新增课程','{:url(\'admin/course/add\')}')"
+                        ><i class="Hui-iconfont">&#xe600;</i> 添加课程</el-button>
                     </div>
-                    <div class="mt-20 clearfix">
-                        <table class="table table-border table-bordered table-bg table-hover table-sort">
-                            <thead>
-                            <tr>
-                                <th scope="col" colspan="9">轮播图列表</th>
-                            </tr>
-                            <tr class="text-c">
-                                <th width="25"><input type="checkbox"  id="ckAll" onclick="QuanXuan()"></th>
-                                <th width="40">编号</th>
-                                <th width="100">标题</th>
-                                <th width="100">跳转链接</th>
-                                <th width="150">图片 (1190*350 px)</th>
-                                <th width="100">是否已启用</th>
-                                <th width="100">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                              
-                            </tbody>
-                        </table>
+                    <div class="mt-20 clearfix">  
+                        <el-table :data="tableData" style="width: 100%" row-key="id" border lazy stripe
+                            :load="load"  :tree-props="{hasChildren: 'hasChildren'}" :header-cell-style="headClass"
+                            :row-style="rowClass" @selection-change="handleSelectionChange">
+                            <el-table-column label="课程列表" style="width: 100%;">
+                                <el-table-column type="selection" align="center"></el-table-column>
+                                <el-table-column prop="id" label="ID" min-width="8%" header-align="center"></el-table-column>
+                                <el-table-column prop="courseName" label="课程名称" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="typeName" label="课程类型" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="startTime" label="开始时间" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="endTime" label="结束时间" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="mobile" label="联系电话" min-width="20%" align="center"></el-table-column>
+                                <el-table-column prop="click" label="浏览量" min-width=8%" align="center"></el-table-column>
+                                <el-table-column prop="sort" label="排序" min-width="8%" align="center"></el-table-column>
+                                <el-table-column prop="isShow" label="是否显示" min-width="15%" align="center">
+                                    <template slot-scope="scope">
+                                        <el-switch v-model="scope.row.isShow" :active-text="scope.row.isShow? '启用':'禁用'" disabled></el-switch>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column fixed="right" label="操作" min-width="20%" align="center"> 
+                                    <template slot-scope="scope">
+                                        <el-tooltip class="item" effect="dark" content="编辑" placement="left-start">
+                                            <el-button style="padding: 0;" type="text" size="small" icon="el-icon-edit" @click="edit(scope.row.id)"></el-button>
+                                        </el-tooltip>
+                                        <el-tooltip class="item" effect="dark" content="删除" placement="right-start">
+                                            <el-button style="padding: 0;" type="text" size="small" icon="el-icon-delete" @click="del(scope.row.id)"></el-button>
+                                        </el-tooltip>
+                                    </template>
+                                </el-table-column>
+                            </el-table-column>
+                        </el-table>
                     </div>
                 </div>
             </div>
@@ -92,80 +107,116 @@
 <script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.15/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="__ADMIN__/business/js/main.js"></script>
+
 <script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            queryForm: {
+                positionType: '',
+                positionCode: ''
+            },
+            tableData: [],
+            selectID: []
+        },
+        mounted() {
+            http_post('/admin/course/index').then(res => {
+                this.tableData = res.data;
+            }).catch(err => {
 
-function QuanXuan(){
-    $(".ckc").prop("checked",$("#ckAll").prop("checked"));
-}
-function select() {
+            });
+        },
+        methods: {
+            // 表头样式设置
+            headClass () {
+                return 'background: #f5fafe;';
+            },
+            // 表格样式设置
+            rowClass () {
+                // return 'height: 5px;';
+            },
+            load(tree, treeNode, resolve) {
+                setTimeout(() => {
+                    http_post('/admin/course/getSons', {id: tree.id}).then(res => {
+                        resolve(res.data);
+                    }).catch(err => {
+                        treeNode.loading = false;
+                    });
+                }, 500);
+            },
+            handleSelectionChange(val){
+                val.forEach(item => {
+                    this.selectID.push(item.id);
+                });              
+            },
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        // 提交数据的请求
+                        var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+                        setTimeout(()=> {
+                            location.replace('/admin/course/searchLocation?positionType=' +
+                            this.queryForm.positionType + '&positionCode=' + this.queryForm.positionCode);
+                        }, 500);                            
+                    } else {
+                        layer.msg("查询条件不足");
+                        return false;
+                    }
+                });
+                
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
 
-}
-// 批量删除
-function datadel() {
-    var array = new Array();
-    $('.ckc:checked').each(function () {
-        array.push(this.getAttribute("data-id"));
-    });
-    if (array.length === 0) {
-        layer.msg('没有选中需要删除的数据！');
-        return;
-    }
-    //询问框
-    layer.confirm('确认要删除吗？', function (index) {
-        layer.close(index);
-        http_post('/admin/gallery/del', {galleryId:array.toString()}).then(res => {
-            layer.msg("删除成功", {icon: 1});
-            location.reload();  // 刷新
-        });
-    });
-}
+            batchDel() {
+                if (this.selectID.length === 0) {
+                    layer.msg('没有选中需要删除的数据！');
+                    return;
+                }
+                //询问框
+                layer.confirm('确认要删除吗？', index => {
+                    layer.close(index);
 
-// 新增
-function add(title, url,webno) {
-    var index = layer.open({
-        type: 2,
-        title: title,
-        content: url+'?webno='+webno,
-        area: ['700px', '600px'],
-        end : function() {
-            window.location.reload();  // 刷新
+                    http_post('/admin/course/typeDel', {id: this.selectID.toString()}).then(res => {
+                        layer.msg("删除成功", {icon: 1});
+                        location.reload();  // 刷新
+                    });
+                });
+            },
+             // 新增
+            add(title, url) {
+                var index = layer.open({
+                    type: 2,
+                    title: title,
+                    content: url,
+                    area: ['700px', '600px'],
+                    end : function() {
+                        window.location.reload();  // 刷新
+                    }
+                });
+            },
+            // 编辑
+            edit(id) {
+                var index = layer.open({
+                    type: 2,
+                    title: '编辑课程',
+                    content: '/admin/course/edit?id=' + id,
+                    area: ['700px', '600px']
+                });
+            },
+            del(id) {
+                layer.confirm('确认要删除吗？', function (index) {
+                    layer.close(index);
+                    http_post('/admin/course/del', {id:id}).then(res => {
+                        layer.msg("删除成功", {icon: 1});
+                        location.reload();  // 刷新
+                    });
+                });
+            }
         }
     });
 
-}
-// 删除
-function del(id) {
-    layer.confirm('确认要删除吗？', function (index) {
-        layer.close(index);
-        http_post('/admin/gallery/del', {galleryId:id}).then(res => {
-            layer.msg("删除成功", {icon: 1});
-            location.reload();  // 刷新
-        });
-    });
-}
-
-// 编辑
-function edit(title, url, galleryId) {
-    var index = layer.open({
-        type: 2,
-        title: title,
-        content: url + '?galleryId=' + galleryId,
-        area: ['700px', '600px'],
-        end : function() {
-            window.location.reload();  // 刷新
-        }
-    });
-}
-
-// 启用/禁用
-function stop(is_show,galleryId){
-    http_post('/admin/gallery/shiftState',{galleryId: galleryId, is_show: is_show}).then(res => {
-        layer.msg(`已${is_show==1?'禁用':'启用'}`);
-        location.reload();  // 刷新
-    }).catch(err => {
-        // 错误处理
-    });
-}
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
