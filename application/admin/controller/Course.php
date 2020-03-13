@@ -8,13 +8,58 @@
 
 namespace app\admin\controller;
 
-
+use app\common\model\Course as CourseModel;
 use app\common\model\CourseType;
+use think\config\driver\Json;
 
 class Course extends Base
 {
     public function index(){
+        if(request()->isAjax()){
+           $res= CourseModel::getAll();
+           if($res) return myJson('T',$res);
+           else  return myJson('F',$res);
+        }
         return view();
+    }
+    public  function  add(){
+
+        return view();
+    }
+
+    public  function  del(){
+        $id = input('id');
+        $res=CourseModel::del($id);
+        if($res) return myJson('T','删除成功');
+        else return myJson('F','删除失败');
+    }
+    public  function  edit(){
+        $id=input('id');
+        if(request()->isAjax()){
+            $res=CourseModel::getOne($id);
+            if($res) return myJson('T',$res);
+            else return myJson('F','获取数据失败');
+        }
+
+         $this->assign('id',$id);
+        return view();
+    }
+
+    public function  saveInfo(){
+        $data=[
+            'courseName'=>input('courseName'),
+            'courseType'=>input('courseType'),
+            'updateTime'=>time(),
+            'startTime'=>input('startTime'),
+            'endTime'=>input('endTime'),
+            'isShow'=>input('isShow')?input('isShow'):0,
+            'mobile'=>input('mobile'),
+            'courseIntroduce'=>input('courseIntroduce'),
+            'sort'=>input('sort')?input('sort'):0
+        ];
+        $res=CourseModel::saveInfo($data);
+        if($res===1) return myJson('T','保存成功');
+        else return myJson('F',$res);
     }
 
     //=======================以下是课程分类方法=========================================
