@@ -4,7 +4,9 @@
             <li class="footer-animation">
                 <h3><a href="{:url('index/about')}" target="_blank">胡杨概况</a></h3>
                 <p><a href="{:url('index/introduction')}" target="_blank">学院介绍</a></p>
-                <p><a href="{:url('index/organization')}" target="_blank">组织架构</a></p>
+                {volist name='AB' id='vo'}
+                <p><a href="{:url('index/aboutMore',['id'=>$vo.id])}" target="_blank">{$vo.name}</a></p>
+                {/volist}
             </li>
             <li class="footer-animation">
                 <h3><a href="{:url('index/course')}" class="">核心课程</a></h3>
@@ -12,8 +14,8 @@
             </li>
             <li class="footer-animation">
                 <h3><a href="{:url('index/szll',['seriesNO'=>1])}" class="">师资力量</a></h3>
-                {volist name="footer_szll" id="vo"}
-                <p><a href="{:url('index/szll',['seriesNO'=>$vo.seriesNO])}" target="_blank">{$vo.series}</a></p>
+                {volist name="shizi" id="vo"}
+                <p><a href="{:url('index/szll',['seriesNO'=>$vo.seriesID])}" target="_blank">{$vo.series}</a></p>
                 {/volist}
             </li>
             <li class="footer-animation">

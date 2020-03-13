@@ -10,15 +10,11 @@ use app\common\model\Gallery;
 use think\Controller;
 use think\Db;
 
+
 class Index extends Controller
-{  //footer
-    public function footer(){
-        $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
-        $this->assign('footer_szll', $group);
-    }
+{
     //header
-    public function header(){
-      //  $SQL=model('Teachers')->alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
+    public function headFoot(){
        $xueYuan=model('series')->where('delete_time',null)->order('seriesSort desc')->select();
         $this->assign('shizi',$xueYuan);
         $AB=model('AboutMore')->where(['isDel'=>0,'isShow'=>1])->field('id,name')->order(['sort'=>'desc'])->select();
@@ -26,8 +22,8 @@ class Index extends Controller
     }
     //主页
     public function index()
-    {   $this->header();
-        $this->footer();
+    {   $this->headFoot();
+
         //获取学院类别
 /*        $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->group('seriesNO')->select();
         $this->assign('group', $group);*/
@@ -57,17 +53,16 @@ class Index extends Controller
     }
     //活动查询
     public function activity()
-    {  $this->header();
+    {  $this->headFoot();
         $this->left_bar();
-        $this->footer();
+
         $all_acticity=Activity::where('isShow',1)->order('createTime desc')->paginate(4);
         $this->assign('all_activity',$all_acticity);
         return view('chhcollege/activity/index');
     }
     public  function act_detail(){
-        $this->header();
+        $this->headFoot();
         $this->left_bar();
-        $this->footer();
         //获取参数
         $param=input('activityId');
         $act_id = Activity::where('activityId',$param)->find();
@@ -76,9 +71,9 @@ class Index extends Controller
     }
   //新闻查询
     public function news()
-    {   $this->header();
+    {   $this->headFoot();
         $this->left_bar();
-        $this->footer();
+
         $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $news = News::where('isShow',1)->order('createTime desc')->paginate(6);
@@ -88,9 +83,9 @@ class Index extends Controller
     }
     //新闻独立页面查询
     public  function news_detail(){
-        $this->header();
+        $this->headFoot();
         $this->left_bar();
-        $this->footer();
+
         $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         //获取参数
@@ -101,18 +96,18 @@ class Index extends Controller
     }
     //关于胡杨概况页面
     public function about()
-    {  $this->header();
+    {  $this->headFoot();
         $this->left_bar();
-        $this->footer();
+
         $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         return view('chhcollege/about/index');
     }
     //关于胡杨概况页面
     public function aboutMore()
-    {  $this->header();
+    {  $this->headFoot();
         $this->left_bar();
-        $this->footer();
+
         $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $id=input('id');
@@ -122,16 +117,16 @@ class Index extends Controller
     }
     //课程页面
     public function course()
-    {   $this->footer();
-        $this->header();
+    {   $this->headFoot();
+
         $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         return view('chhcollege/course/index');
     }
     //咨询页面
     public function contact()
-    {   $this->footer();
-        $this->header();
+    {   $this->headFoot();
+
         $this->left_bar();
         $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
@@ -140,8 +135,8 @@ class Index extends Controller
  //师资力量页面
     public function szll()
 
-    {   $this->footer();
-        $this->header();
+    {   $this->headFoot();
+
         $this->left_bar();
         //获取学院类别
       //  $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
@@ -206,9 +201,9 @@ class Index extends Controller
 
     //关于学院介绍页面
     public function introduction()
-    {  $this->header();
+    {  $this->headFoot();
         $this->left_bar();
-        $this->footer();
+
         $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $xueyuan=Series::where(['delete_time'=>null])->field('seriesID,series')->order(['seriesSort'=>'desc'])->select();
@@ -217,9 +212,9 @@ class Index extends Controller
     }
     //个人品牌学院
     public function college()
-    {  $this->header();
+    {  $this->headFoot();
         $this->left_bar();
-        $this->footer();
+
         $seriesID=input('seriesID');
         $res=Series::where('seriesID',$seriesID)->field('seriesID,series,introdution')->find();
         $this->assign('XYI',$res);
