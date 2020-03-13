@@ -28,7 +28,7 @@ class Course extends  Model
     }
 
     public static  function  getAll(){
-        $res=self::alias('C')->where(['isDel'=>0])->leftJoin('CourseType T','C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
+        $res=self::alias('C')->where(['C.isDel'=>0])->leftJoin('CourseType T','C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
         if($res) return $res;
         else return '未查询到任何信息';
     }
