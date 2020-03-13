@@ -1,1 +1,10 @@
 /*可以在这里添加你自己的css*/
+#edui1_toolbarbox {
+    position: relative !important;
+}
+.edui-editor div {
+    height: auto !important;
+}
+#edui1_iframeholder {
+    height: 300px !important;
+}
