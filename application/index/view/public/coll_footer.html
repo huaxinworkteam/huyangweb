@@ -81,18 +81,15 @@
 </div>
 <style>
     .footer-animation {
-        height: 300px; max-height: 300px; overflow: hidden; min-height: none;
-        transition:height 2s;
-        -moz-transition:height 2s, -moz-transform 2s; /* Firefox 4 */
-        -webkit-transition:height 2s, -webkit-transform 2s; /* Safari and Chrome */
-        -o-transition: height 2s, -o-transform 2s; /* Opera */
+        min-height: 200px;
+        max-height: 300px; overflow: hidden;
+        transition:max-height 2s;
+        -moz-transition:max-height 2s; /* Firefox 4 */
+        -webkit-transition:max-height 2s; /* Safari and Chrome */
+        -o-transition: max-height 2s; /* Opera */
     }
     .footer-animation:hover {
-        height: auto; min-height: 300px; max-height: none;
-        transition:height 2s;
-        -moz-transition:height 2s, -moz-transform 2s; /* Firefox 4 */
-        -webkit-transition:height 2s, -webkit-transform 2s; /* Safari and Chrome */
-        -o-transition: height 2s, -o-transform 2s; /* Opera */
+        min-height: 200px; max-height: 1200px;
     }
 </style>
 
