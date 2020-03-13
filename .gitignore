@@ -4,4 +4,6 @@
 thinkphp
 .DS_Store
 runtime
-.htaccess
+
+*.htaccess
+.user.ini
