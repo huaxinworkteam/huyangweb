@@ -17,15 +17,17 @@
                     :props="props" :show-all-levels="false" style="width: 100%;">
                 </el-cascader>
             </el-form-item>
+            <el-form-item label="课程时间：" prop="dataTime">
+                <el-time-picker is-range v-model="dataForm.dataTime" range-separator="-" start-placeholder="开始时间"
+                 end-placeholder="结束时间" placeholder="选择时间范围">
+                </el-time-picker>
+            </el-form-item>
             <el-form-item label="课程介绍：" prop="courseIntroduce">
                 <!-- 富文本 -->
                 <textarea id="content" name="content" type="text/plain" style="width: auto; height: 300px;"></textarea>
             </el-form-item>
-            <el-form-item label="课程时间：" prop="dataTime">
-                <el-input v-model="dataForm.typeName"></el-input>
-            </el-form-item>
             <el-form-item label="联系电话：" prop="mobile">
-                <el-input v-model="dataForm.typeName"></el-input>
+                <el-input v-model="dataForm.mobile"></el-input>
             </el-form-item>
             <el-form-item label="是否显示：" prop="isShow">
                 <el-switch v-model="dataForm.isShow" :active-text="dataForm.isShow? '启用':'禁用'"></el-switch>
@@ -54,6 +56,18 @@
         new Vue({
             el: '#app',
             data: function() {
+                let checkPhone = (rule, value, callback) => {
+                    if (!value) {
+                    return callback(new Error('手机号不能为空'));
+                    } else {
+                    const reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
+                    if (reg.test(value)) {
+                        callback();
+                    } else {
+                        return callback(new Error('请输入正确的手机号'));
+                    }
+                    }
+                };
                 return {
                     options: [],
                     props: {
@@ -61,7 +75,7 @@
                         value: 'id',
                         label: 'typeName',
                         children: 'hasChuldren',
-                        multiple: true, // 开启多选
+                        multiple: false, // 开启多选
                         checkStrictly: true, // 父子不关联
                         emitPath: false,
                         lazy: true,
@@ -84,13 +98,22 @@
                         endTime: '', // 结束时间
                         dataTime: '', // 用于时间绑定--处理到startTime-endTime
                         mobile: '', // 联系电话
-                        isShow: 0, // 是否显示 0-false 1-true
+                        isShow: true, // 是否显示
                         click: '', // 浏览量
                         sort: 0, // 排序
                     },
                     rules: {
                         courseName: [
                             { required: true, message: '请输入名称', trigger: 'blur' }
+                        ],
+                        courseType: [
+                            { required: true, message: '请选择分类', trigger: 'change' }
+                        ],
+                        dataTime: [
+                            { required: true, message: '请输入名称', trigger: 'change' }
+                        ],
+                        mobile: [
+                            { validator: checkPhone, trigger: 'blur' }
                         ]
                     },
                     ue: '',
@@ -111,15 +134,17 @@
                             // 提交数据的请求
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                             this.dataForm.courseIntroduce = this.ue.getContent();
-                            console.log(this.dataForm.courseIntroduce)
+                            this.dataForm.startTime = this.dataForm.dataTime[0];
+                            this.dataForm.endTime = this.dataForm.dataTime[1];
+                            this.dataForm.isShow = this.dataForm.isShow ? 1:0;
                             setTimeout(()=> {
-                                http_post('/admin/course/typeSave', this.dataForm).then((res) => {
+                                http_post('/admin/course/saveInfo', this.dataForm).then((res) => {
                                     layer.close(index);
                                     this.$refs[formName].resetFields();
                                     layer.msg("提交成功", {icon:1});
                                 }).catch(err => {
                                     layer.close(index);
-                                    console.log(err)
+                                    console.log(err);
                                 });
                             }, 500);                            
                         } else {
