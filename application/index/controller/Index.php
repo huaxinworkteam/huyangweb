@@ -21,6 +21,8 @@ class Index extends Controller
       //  $SQL=model('Teachers')->alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
        $xueYuan=model('series')->where('delete_time',null)->order('seriesSort desc')->select();
         $this->assign('shizi',$xueYuan);
+        $AB=model('AboutMore')->where(['isDel'=>0,'isShow'=>1])->field('id,name')->order(['sort'=>'desc'])->select();
+        $this->assign('AB',$AB);
     }
     //主页
     public function index()
@@ -107,11 +109,16 @@ class Index extends Controller
         return view('chhcollege/about/index');
     }
     //关于胡杨概况页面
-    public function organization()
+    public function aboutMore()
     {  $this->header();
         $this->left_bar();
         $this->footer();
-        return view('chhcollege/about/organization');
+        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $this->assign('gallery',$gallery);
+        $id=input('id');
+        $content=model('AboutMore')->where('id',$id)->field('id,name,content')->find();
+        $this->assign('content',$content);
+        return view('chhcollege/about/about_more');
     }
     //课程页面
     public function course()
@@ -202,22 +209,31 @@ class Index extends Controller
     {  $this->header();
         $this->left_bar();
         $this->footer();
+        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $this->assign('gallery',$gallery);
+        $xueyuan=Series::where(['delete_time'=>null])->field('seriesID,series')->order(['seriesSort'=>'desc'])->select();
+        $this->assign('xueyuan',$xueyuan);
         return view('chhcollege/about/introduction');
     }
     //个人品牌学院
-    public function personalbrand()
+    public function college()
     {  $this->header();
         $this->left_bar();
         $this->footer();
-        return view('chhcollege/about/personalbrand');
+        $seriesID=input('seriesID');
+        $res=Series::where('seriesID',$seriesID)->field('seriesID,series,introdution')->find();
+        $this->assign('XYI',$res);
+        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $this->assign('gallery',$gallery);
+        return view('chhcollege/about/college');
     }
-    //财税学院
+/*    //财税学院
     public function financeandtax()
     {  $this->header();
         $this->left_bar();
         $this->footer();
         return view('chhcollege/about/financeandtax');
-    }
+    }*/
 
 
 }

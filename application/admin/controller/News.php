@@ -87,7 +87,7 @@ class News extends Base
     public function newsdel()
     {
         $newsinfo = model('News')->find(input('newsid'));
-        $result = $newsinfo->delete();
+        $result = $newsinfo->update(['delete_time'=>time()]);
         if ($result) {
             $this->success('新闻删除成功', 'admin/news/lists');
         } else {
@@ -149,7 +149,7 @@ class News extends Base
     //批量删除
     public function delnews(){
         if(request()->isAjax()){
-            $return=db('news')->whereIn('newsid',input('id'))->delete();
+            $return=db('news')->whereIn('newsid',input('id'))->update(['delete_time'=>time()]);
             if($return){
                 $this->success('删除成功','admin/news/lists');
             }else{
