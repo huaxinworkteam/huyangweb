@@ -47,6 +47,7 @@ class Course extends Base
 
     public function  saveInfo(){
         $data=[
+            'id'=>input('id'),
             'courseName'=>input('courseName'),
             'courseType'=>input('courseType'),
             'updateTime'=>time(),
