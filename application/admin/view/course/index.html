@@ -208,7 +208,7 @@
             del(id) {
                 layer.confirm('确认要删除吗？', function (index) {
                     layer.close(index);
-                    http_post('/admin/course/typeDel', {id:id}).then(res => {
+                    http_post('/admin/course/del', {id:id}).then(res => {
                         layer.msg("删除成功", {icon: 1});
                         location.reload();  // 刷新
                     });
