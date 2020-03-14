@@ -126,6 +126,11 @@
                 }).catch(err => {
 
                 });
+                http_post('/admin/course/edit',{id: this.dataForm.id}).then(res => {
+                    this.dataForm = res.data;
+                }).catch(err => {
+
+                });
                 this.ue = UE.getEditor('content'); // 初始化富文本编辑器
             },
             methods: {
