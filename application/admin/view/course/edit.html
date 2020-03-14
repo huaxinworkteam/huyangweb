@@ -128,6 +128,10 @@
                 });
                 http_post('/admin/course/edit',{id: this.dataForm.id}).then(res => {
                     this.dataForm = res.data;
+                    this.ue.addListener("ready",  () => {
+                        // editor准备好之后才可以使用
+                        this.ue.setContent(this.dataForm.courseIntroduce, true);
+                    });
                 }).catch(err => {
 
                 });
