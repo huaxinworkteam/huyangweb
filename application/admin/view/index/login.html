@@ -93,16 +93,12 @@
                    } else{
                        layer.open({
                            title:'登陆失败',
-                           content:data.msg,
                            icon:5,
                            anim:6,
                        })
                    }
 
-              },
-              error:function(xhr){
-                  alert(xhr.responseText);
-              },
+              }
           });
           return false;
 

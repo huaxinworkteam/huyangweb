@@ -25,9 +25,9 @@ class Index extends Controller
                 'code'=>input('code'),
             ];
           $return =model('Admin')->login($data);
-          if($return==1){
-              //$this->success('登陆成功!','admin/home/index');
-              $this->success('登陆成功!','admin/teachers/index');
+          if($return===1){
+              $this->success('登陆成功!','admin/home/index');
+            //  $this->success('登陆成功!','admin/teachers/index');
           }else{
               $this->error($return);
           }

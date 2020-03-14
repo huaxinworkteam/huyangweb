@@ -6,7 +6,7 @@ use think\Controller;
 
 class Base extends Controller
 {
-    public function initialize()
+    public function _initialize()
     {
         if(!session('?admin.id')){
             $this->redirect('admin/index/login');
