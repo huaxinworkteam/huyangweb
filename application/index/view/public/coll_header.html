@@ -36,7 +36,9 @@
                     <div class="sub_Nav">
                         <div class="line"></div>
                         <p><a href="{:url('index/introduction')}">学院介绍</a></p>
-                        <p><a href="{:url('index/organization')}">组织架构</a></p>
+                        {volist name='AB' id='vo'}
+                        <p><a href="{:url('index/aboutMore',['id'=>$vo.id])}">{$vo.name}</a></p>
+                        {/volist}
                     </div>
                 </li>
                 <li><a href="{:url('index/course')}" class="">培训课程</a>
