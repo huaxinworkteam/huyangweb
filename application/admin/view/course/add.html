@@ -33,7 +33,7 @@
                 <el-input v-model="dataForm.mobile"></el-input>
             </el-form-item>
             <el-form-item label="是否显示：" prop="isShow">
-                <el-switch v-model="dataForm.isShow" :active-text="dataForm.isShow? '启用':'禁用'"></el-switch>
+                <el-switch :active-value="1" :inactive-value="0" v-model="dataForm.isShow" :active-text="dataForm.isShow? '启用':'禁用'"></el-switch>
             </el-form-item>
             <el-form-item label="排序号：" prop="sort">
                 <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
@@ -102,7 +102,7 @@
                         endTime: '', // 结束时间
                         dataTime: '', // 用于时间绑定--处理到startTime-endTime
                         mobile: '', // 联系电话
-                        isShow: true, // 是否显示
+                        isShow: 0, // 是否显示
                         click: '', // 浏览量
                         sort: 0, // 排序
                     },
@@ -141,7 +141,6 @@
                             if (!this.dataForm.dataTime) return;
                             this.dataForm.startTime = this.dataForm.dataTime[0]/1000;
                             this.dataForm.endTime = this.dataForm.dataTime[1]/1000;
-                            // this.dataForm.isShow = this.dataForm.isShow ? 1:0;
                             setTimeout(()=> {
                                 http_post('/admin/course/saveInfo', this.dataForm).then((res) => {
                                     layer.close(index);
