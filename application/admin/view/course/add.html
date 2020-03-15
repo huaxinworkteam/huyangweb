@@ -141,7 +141,7 @@
                             if (!this.dataForm.dataTime) return;
                             this.dataForm.startTime = this.dataForm.dataTime[0]/1000;
                             this.dataForm.endTime = this.dataForm.dataTime[1]/1000;
-                            this.dataForm.isShow = this.dataForm.isShow ? 1:0;
+                            // this.dataForm.isShow = this.dataForm.isShow ? 1:0;
                             setTimeout(()=> {
                                 http_post('/admin/course/saveInfo', this.dataForm).then((res) => {
                                     layer.close(index);
