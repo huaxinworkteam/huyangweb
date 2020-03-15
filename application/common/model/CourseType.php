@@ -172,6 +172,10 @@ class CourseType extends Model
         }
         if($data['id']) {
            try {
+               $beforeLastId=self::where('id',$data['id'])->field('lastId')->find()['lastId'];
+               if($beforeLastId!=0){
+                   self::setOff($beforeLastId,$data['id']);
+               }
                 self::where('id', $data['id'])->update($data);
                 if($data['lastId']!=0){
                 $newstring=self::setGet($data['lastId']).$data['id'];
