@@ -11,7 +11,7 @@
         <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
             <el-form-item label="父类 (不选为添加顶层)：" prop="lastId">
                 <el-cascader v-model="dataForm.lastId" :options="options" 
-                :props="props" :show-all-levels="false" style="width: 100%;">
+                :props="props" :show-all-levels="false" style="width: 100%;" :disabled="dataForm.lastId==0?true:false">
             </el-cascader>
               </el-form-item>
             <el-form-item label="分类名称：" prop="typeName">
@@ -74,6 +74,11 @@
             mounted() {
                 http_post('/admin/course/courseType').then(res => {
                     this.options = res.data;
+                }).catch(err => {
+
+                });
+                http_post('/admin/course/typeEdit',{id: this.dataForm.id}).then(res => {
+                    this.dataForm = res.data;
                 }).catch(err => {
 
                 });
