@@ -51,4 +51,11 @@ class AboutMore extends Base
             if($res) return myJson('T','删除成功');
             else return myJson('F','删除失败');
         }
+
+        public  function shiftShow(){
+            $id=input('id');
+            $res=AboutMoreModel::shiftShow($id);
+            if($res) return myJson('T','修改成功');
+            return myJson('F','修改失败');
+        }
 }

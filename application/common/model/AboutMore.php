@@ -52,4 +52,11 @@ class AboutMore extends Model
         if($res) return 1;
         else return 0;
     }
+
+    public  static  function  shiftShow($id){
+        $isShow=input('isShow')?0:1;
+        $res=self::where('id',$id)->update(['isShow'=>$isShow]);
+        if($res) return 1;
+        else return 0;
+    }
 }
