@@ -64,6 +64,13 @@ class Course extends Base
         else return myJson('F',$res);
     }
 
+    public  function  shiftShow(){
+        $id=input('id');
+        $res=CourseModel::shiftShow($id);
+        if($res) return myJson('T','修改成功');
+        else return myJson('F','操作失败');
+    }
+
     //=======================以下是课程分类方法=========================================
 
     public  function  courseType(){
