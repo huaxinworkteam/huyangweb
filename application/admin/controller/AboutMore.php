@@ -44,6 +44,9 @@ class AboutMore extends Base
             if($res===1) return myJson('T','保存成功');
             else return myJson('F',$res);
         }
+        public  function  add(){
+            return view();
+        }
 
         public  function del(){
             $id=input('id');
