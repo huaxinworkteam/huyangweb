@@ -18,7 +18,6 @@ class Course extends Base
         if(request()->isAjax()){
             $courseType=input('courseType')?input('courseType'):null;
            $res= CourseModel::getAll($courseType);
-           halt($res);
            if($res) return myJson('T',$res);
            else  return myJson('F',$res);
         }
