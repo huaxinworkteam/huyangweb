@@ -157,7 +157,7 @@ class Teachers extends Base
                 'seriesID'=>input('seriesID'),
                 'series'=>input('series'),
                 'seriesSort'=>input('seriesSort'),
-                'introdution'=>input('introdution')?input('introdution'):null;
+                'introdution'=>input('introdution')?input('introdution'):null
             ];
             $result=model('Series')->add($data);
             if($result==1){
