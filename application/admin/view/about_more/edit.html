@@ -57,7 +57,7 @@
             },
             mounted() {
                 this.ue = UE.getEditor('content'); // 初始化富文本编辑器
-                http_post('/admin/AboutMore/edit',{id: this.dataForm.id}).then(res => {
+                http_post('/admin/about_more/edit',{id: this.dataForm.id}).then(res => {
                     this.dataForm = res.data;
                     this.ue.ready( () => {
                         // editor准备好之后才可以使用
@@ -75,7 +75,7 @@
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                             this.dataForm.content = this.ue.getContent();
                             setTimeout(()=> {
-                                http_post('/admin/AboutMore/saveInfo', this.dataForm).then((res) => {
+                                http_post('/admin/about_more/saveInfo', this.dataForm).then((res) => {
                                     layer.close(index);
                                     layer.msg("提交成功", {icon:1});
                                     //先得到当前iframe层的索引

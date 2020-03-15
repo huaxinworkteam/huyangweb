@@ -58,7 +58,7 @@
                 <div class="panel-body">
                     <div class="clearfix">
                         <el-button type="danger" size="medium" @click="batchDel"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</el-button>
-                        <el-button type="primary" size="medium" @click="add('新增','{:url(\'admin/AboutMore/add\')}')"
+                        <el-button type="primary" size="medium" @click="add('新增','{:url(\'admin/about_more/add\')}')"
                         ><i class="Hui-iconfont">&#xe600;</i> 添加</el-button>
                     </div>
                     <div class="mt-20 clearfix">  
@@ -112,7 +112,7 @@
             selectID: []
         },
         mounted() {
-            http_post('/admin/AboutMore/index').then(res => {
+            http_post('/admin/about_more/index').then(res => {
                 this.tableData = res.data;
             }).catch(err => {
 
@@ -161,7 +161,7 @@
                 layer.confirm('确认要删除吗？', index => {
                     layer.close(index);
 
-                    http_post('/admin/AboutMore/del', {id: this.selectID.toString()}).then(res => {
+                    http_post('/admin/about_more/del', {id: this.selectID.toString()}).then(res => {
                         layer.msg("删除成功", {icon: 1});
                         location.reload();  // 刷新
                     });
@@ -184,7 +184,7 @@
                 var index = layer.open({
                     type: 2,
                     title: '编辑课程',
-                    content: '/admin/AboutMore/edit?id=' + id,
+                    content: '/admin/about_more/edit?id=' + id,
                     area: ['700px', '600px'],
                     end : function() {
                         window.location.reload();  // 刷新
@@ -194,7 +194,7 @@
             del(id) {
                 layer.confirm('确认要删除吗？', function (index) {
                     layer.close(index);
-                    http_post('/admin/AboutMore/del', {id:id}).then(res => {
+                    http_post('/admin/about_more/del', {id:id}).then(res => {
                         layer.msg("删除成功", {icon: 1});
                         location.reload();  // 刷新
                     });
