@@ -18,9 +18,12 @@
                 </el-cascader>
             </el-form-item>
             <el-form-item label="课程时间：" prop="dataTime">
-                <el-time-picker is-range v-model="dataForm.dataTime" range-separator="-" start-placeholder="开始时间"
+                <!-- <el-time-picker is-range v-model="dataForm.dataTime" range-separator="-" start-placeholder="开始时间"
                  end-placeholder="结束时间" placeholder="选择时间范围">
-                </el-time-picker>
+                </el-time-picker> -->
+                <el-date-picker v-model="dataForm.dataTime" type="datetimerange" start-placeholder="开始日期"
+                    end-placeholder="结束日期" value-format="timestamp">
+                </el-date-picker>
             </el-form-item>
             <el-form-item label="课程介绍：" prop="courseIntroduce">
                 <!-- 富文本 -->
@@ -143,10 +146,7 @@
                                 http_post('/admin/course/saveInfo', this.dataForm).then((res) => {
                                     layer.close(index);
                                     this.$refs[formName].resetFields();
-                                    UE.getEditor('content').addListener("ready",  () => {
-                                        // editor准备好之后才可以使用
-                                        this.ue.setContent('', true);
-                                    });
+                                    this.ue.setContent('');
                                     layer.msg("提交成功", {icon:1});
                                 }).catch(err => {
                                     layer.close(index);
