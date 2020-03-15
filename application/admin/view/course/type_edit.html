@@ -92,8 +92,9 @@
                             setTimeout(()=> {
                                 http_post('/admin/course/typeSave', this.dataForm).then((res) => {
                                     layer.close(index);
-                                    this.$refs[formName].resetFields();
                                     layer.msg("提交成功", {icon:1});
+                                    //先得到当前iframe层的索引
+                                    parent.layer.close(parent.layer.getFrameIndex(window.name)); //再执行关闭 
                                 }).catch(err => {
                                     layer.close(index);
                                     console.log(err)
