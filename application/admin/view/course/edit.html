@@ -136,8 +136,9 @@
                     array.push(res.data.startTime*1000);
                     array.push(res.data.endTime*1000);
                     this.$set(this.dataForm, 'dataTime', array);
-                    UE.getEditor('content').addListener("ready",  () => {
+                    this.ue.ready( () => {
                         // editor准备好之后才可以使用
+                        console.log("set:", this.dataForm.courseIntroduce);
                         this.ue.setContent(this.dataForm.courseIntroduce);
                     });
                 }).catch(err => {
