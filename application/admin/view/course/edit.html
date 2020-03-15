@@ -18,9 +18,12 @@
                 </el-cascader>
             </el-form-item>
             <el-form-item label="课程时间：" prop="dataTime">
-                <el-time-picker is-range v-model="dataForm.dataTime" range-separator="-" start-placeholder="开始时间"
+                <!-- <el-time-picker is-range v-model="dataForm.dataTime" range-separator="-" start-placeholder="开始时间"
                  end-placeholder="结束时间" placeholder="选择时间范围">
-                </el-time-picker>
+                </el-time-picker> -->
+                <el-date-picker v-model="dataForm.dataTime" type="datetimerange" start-placeholder="开始日期"
+                    end-placeholder="结束日期" value-format="timestamp">
+                </el-date-picker>
             </el-form-item>
             <el-form-item label="课程介绍：" prop="courseIntroduce">
                 <!-- 富文本 -->
@@ -121,6 +124,7 @@
                 }
             },
             mounted() {
+                this.ue = UE.getEditor('content'); // 初始化富文本编辑器
                 http_post('/admin/course/courseType').then(res => {
                     this.options = res.data;
                 }).catch(err => {
@@ -128,14 +132,17 @@
                 });
                 http_post('/admin/course/edit',{id: this.dataForm.id}).then(res => {
                     this.dataForm = res.data;
-                    this.ue.addListener("ready",  () => {
+                    let array = [];
+                    array.push(res.data.startTime*1000);
+                    array.push(res.data.endTime*1000);
+                    this.$set(this.dataForm, 'dataTime', array);
+                    UE.getEditor('content').addListener("ready",  () => {
                         // editor准备好之后才可以使用
-                        this.ue.setContent(this.dataForm.courseIntroduce, true);
+                        this.ue.setContent(this.dataForm.courseIntroduce);
                     });
                 }).catch(err => {
 
                 });
-                this.ue = UE.getEditor('content'); // 初始化富文本编辑器
             },
             methods: {
                 submitForm(formName) {
@@ -144,14 +151,16 @@
                             // 提交数据的请求
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                             this.dataForm.courseIntroduce = this.ue.getContent();
-                            this.dataForm.startTime = this.dataForm.dataTime[0];
-                            this.dataForm.endTime = this.dataForm.dataTime[1];
+                            if (!this.dataForm.dataTime) return;
+                            this.dataForm.startTime = this.dataForm.dataTime[0]/1000;
+                            this.dataForm.endTime = this.dataForm.dataTime[1]/1000;
                             this.dataForm.isShow = this.dataForm.isShow ? 1:0;
                             setTimeout(()=> {
                                 http_post('/admin/course/saveInfo', this.dataForm).then((res) => {
                                     layer.close(index);
-                                    this.$refs[formName].resetFields();
                                     layer.msg("提交成功", {icon:1});
+                                    //先得到当前iframe层的索引
+                                    parent.layer.close(parent.layer.getFrameIndex(window.name)); //再执行关闭 
                                 }).catch(err => {
                                     layer.close(index);
                                     console.log(err);

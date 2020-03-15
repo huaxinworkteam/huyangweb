@@ -70,8 +70,8 @@
                                 <el-table-column prop="id" label="ID" min-width="8%" header-align="center"></el-table-column>
                                 <el-table-column prop="courseName" label="课程名称" min-width="30%" align="center"></el-table-column>
                                 <el-table-column prop="typeName" label="课程类型" min-width="30%" align="center"></el-table-column>
-                                <el-table-column prop="startTime" label="开始时间" min-width="30%" align="center"></el-table-column>
-                                <el-table-column prop="endTime" label="结束时间" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="startTime" label="开始时间" :formatter="dateFormat" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="endTime" label="结束时间" :formatter="dateFormat" min-width="30%" align="center"></el-table-column>
                                 <el-table-column prop="mobile" label="联系电话" min-width="20%" align="center"></el-table-column>
                                 <el-table-column prop="click" label="浏览量" min-width=8%" align="center"></el-table-column>
                                 <el-table-column prop="sort" label="排序" min-width="8%" align="center"></el-table-column>
@@ -107,6 +107,8 @@
 <script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.15/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="__ADMIN__/business/js/main.js"></script>
+<!-- element-ui 时间戳 转换插件 -->
+<script type="text/javascript" src="__ADMIN__/lib/moment/moment.js"></script>
 
 <script type="text/javascript">
     new Vue({
@@ -144,6 +146,14 @@
                     });
                 }, 500);
             },
+            //时间格式化  
+            dateFormat:function(row, column) {  
+                var date = row[column.property];  
+                if (date == undefined) {  
+                    return "";  
+                }  
+                return moment(date).format("YYYY-MM-DD HH:mm:ss");  
+            }, 
             handleSelectionChange(val){
                 val.forEach(item => {
                     this.selectID.push(item.id);
@@ -202,7 +212,10 @@
                     type: 2,
                     title: '编辑课程',
                     content: '/admin/course/edit?id=' + id,
-                    area: ['700px', '600px']
+                    area: ['700px', '600px'],
+                    end : function() {
+                        window.location.reload();  // 刷新
+                    }
                 });
             },
             del(id) {

@@ -135,13 +135,18 @@
                             // 提交数据的请求
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                             this.dataForm.courseIntroduce = this.ue.getContent();
-                            this.dataForm.startTime = this.dataForm.dataTime[0];
-                            this.dataForm.endTime = this.dataForm.dataTime[1];
+                            if (!this.dataForm.dataTime) return;
+                            this.dataForm.startTime = this.dataForm.dataTime[0]/1000;
+                            this.dataForm.endTime = this.dataForm.dataTime[1]/1000;
                             this.dataForm.isShow = this.dataForm.isShow ? 1:0;
                             setTimeout(()=> {
                                 http_post('/admin/course/saveInfo', this.dataForm).then((res) => {
                                     layer.close(index);
                                     this.$refs[formName].resetFields();
+                                    UE.getEditor('content').addListener("ready",  () => {
+                                        // editor准备好之后才可以使用
+                                        this.ue.setContent('', true);
+                                    });
                                     layer.msg("提交成功", {icon:1});
                                 }).catch(err => {
                                     layer.close(index);
