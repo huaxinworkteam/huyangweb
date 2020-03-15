@@ -80,7 +80,7 @@ class CourseType extends Model
        }
         return true;
     }
-
+//获取  neixtId集合
     public  static  function  setGet($id){
         try{
             $sql=self::where(['id'=>$id])->field('nextId')->find();
@@ -173,10 +173,10 @@ class CourseType extends Model
         if($data['id']) {
            try {
                 self::where('id', $data['id'])->update($data);
-                if($data['lastId']!=0)
+                if($data['lastId']!=0){
                 $newstring=self::setGet($data['lastId']).$data['id'];
                 self::setClear($data['lastId']);
-                self::setAdd($data['lastId'],$newstring);
+                self::setAdd($data['lastId'],$newstring);}
            }catch (\Exception $e){
                return $e->getMessage();
            }
