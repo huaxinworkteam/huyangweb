@@ -16,13 +16,14 @@ class Course extends Base
 {
     public function index(){
         if(request()->isAjax()){
-            $courseType=input('courseType')?input('courseType'):null;
-           $res= CourseModel::getAll($courseType);
-           if($res) return myJson('T',$res);
+            $courseName=input('courseName')?input('courseName'):null;
+           $res= CourseModel::getAll($courseName);
+           if(is_array($res)) return myJson('T',$res);
            else  return myJson('F',$res);
         }
         return view();
     }
+
     public  function  add(){
 
         return view();
