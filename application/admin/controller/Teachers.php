@@ -156,7 +156,8 @@ class Teachers extends Base
             $data=[
                 'seriesID'=>input('seriesID'),
                 'series'=>input('series'),
-                'seriesSort'=>input('seriesSort')
+                'seriesSort'=>input('seriesSort'),
+                'introdution'=>input('introdution')?input('introdution'):null;
             ];
             $result=model('Series')->add($data);
             if($result==1){
@@ -174,7 +175,7 @@ class Teachers extends Base
     public function editSeries(){
         $id=input('seriesID');
         if(request()->isAjax()){
-            $res=model('series')->where('seriesID',$id)->field(['seriesID,series,seriesSort'])->find();
+            $res=model('series')->where('seriesID',$id)->field(['seriesID,series,seriesSort,introdution'])->find();
             if($res) return json_encode(['code'=>1,'data'=>$res]);
             else return json_encode(['code'=>0,'message'=>'获取数据失败']);
         }
@@ -186,7 +187,7 @@ class Teachers extends Base
     public function delseries(){
         if(request()->isAjax()){
             $id=','.input('seriesID').',';
-           $return=db('series')->whereIn('seriesID',$id)->delete();
+           $return=model('series')->whereIn('seriesID',$id)->delete();
             if($return){
                 $this->success('删除成功','admin/teachers/series');
             }else{

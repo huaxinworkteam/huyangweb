@@ -123,7 +123,7 @@
         },
         mounted() {
             http_post('/admin/course/index').then(res => {
-                // console.log(res)
+                 console.log(res)
                 this.tableData = res.data;
             }).catch(err => {
 
