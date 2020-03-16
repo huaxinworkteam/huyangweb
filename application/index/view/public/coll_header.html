@@ -44,7 +44,9 @@
                 <li><a href="{:url('index/course')}" class="">培训课程</a>
                     <div class="sub_Nav">
                         <div class="line"></div>
-                        <p><a href="{:url('index/m402')}" target="_blank">工商管理类</a></p>
+                        {volist name='Course' id='vo'}
+                        <p><a href="{:url('index/course',['id'=>$vo.id])}" target="_blank">{$vo.typeName}</a></p>
+                        {/volist}
                     </div>
                 </li>
                 <li><a href="{:url('index/szll',['seriesNO'=>1])}" class="">师资力量</a>

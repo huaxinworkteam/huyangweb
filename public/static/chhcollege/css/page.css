@@ -104,7 +104,7 @@
 }
 
 .pageBanner .btn a.act {
-    background: #c49a81;
+    background: #E59906;
     color: #fff;
 }
 
@@ -141,7 +141,7 @@
 }
 
 .page .pageBody .leftBy .tit {
-    background: #c49a81;
+    background: #E59906;
     padding: 18px 20px 15px;
     margin-bottom: 20px;
 }
@@ -181,7 +181,7 @@
 }
 
 .page .pageBody .leftBy ul.list li a.title.cur {
-    background: #c49a81;
+    background: #E59906;
     border-left: lpx solid #d59c63;
     border-right: 1px solid #d59c63;
     border-top: 1px solid #d59c63;
@@ -516,7 +516,7 @@
 }
 
 .page .pageBody .rightBy .tool div.fr a.cur, .page .pageBody .rightBy .tool div.fr span.cur {
-    color: #c49a81;
+    color: #E59906;
 }
 
 .page .pageBody .rightBy .tool div.fr span {
@@ -778,7 +778,7 @@
     border: 1px solid #fff;
     color: #fff;
     border-radius: 4px;
-    background: #c49a81;
+    background: #E59906;
 }
 
 .activity .bottom a.off {
@@ -938,7 +938,7 @@
     width: 29%;
     padding-bottom: 5px;
     margin-left: 15px;
-    border: 1px solid #c49a81;
+    border: 1px solid #E59906;
     border-radius: 5px;
     position: relative;
 }
@@ -949,7 +949,7 @@
     text-align: center;
     line-height: 46px;
     font-size: 16px;
-    background: #c49a81;
+    background: #E59906;
     color: #fff;
 }
 
@@ -1115,7 +1115,7 @@
 }
 
 .contact table tr td .btn {
-    background: #c49a81;
+    background: #E59906;
     margin-right: 10px;
 }
 
@@ -1183,7 +1183,7 @@
     display: inline-block;
     text-align: center;
     line-height: 35px;
-    background: #c49a81;
+    background: #E59906;
     border-radius: 16px;
     margin: 23px 0;
     text-decoration: none;
@@ -1224,7 +1224,7 @@
 }
 
 .page .pageBody .leftBy ul.list2 li a.title.cur {
-    background: #c49a81;
+    background: #E59906;
     border-left: lpx solid #d59c63;
     border-right: 1px solid #d59c63;
     border-top: 1px solid #d59c63;
@@ -1253,7 +1253,7 @@
 }
 
 .page .pageBody .leftBy ul.list2 li dd a.cur {
-    color: #c49a81
+    color: #E59906
 }
 
 .page .pageBody .leftBy ul.list2 li dd a {
@@ -1316,7 +1316,7 @@
     display: inline-block;
     text-align: center;
     line-height: 35px;
-    background: #c49a81;
+    background: #E59906;
     border-radius: 16px;
     margin: 23px 0;
     text-decoration: none;
@@ -1431,7 +1431,7 @@
 }
 
 .Pagers ul.pagination li.active span {
-    background: #c49a81;
+    background: #E59906;
     border: 1px solid #d59c63;
     color: #fff;
 }

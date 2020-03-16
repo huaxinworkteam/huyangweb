@@ -266,7 +266,7 @@
 
 .index_btm_body .scroll_body .btn:hover {
     text-decoration: none;
-    background-color: #c49a81;
+    background-color: #E59906;
 }
 
 .index_btm_body .scroll_in {
@@ -294,7 +294,7 @@
 }
 
 .index_btm_body .scroll_in ul li:hover {
-    background-color: #c49a81;
+    background-color: #E59906;
     transform: translateY(-15px);
     transition:.9s;
 }
