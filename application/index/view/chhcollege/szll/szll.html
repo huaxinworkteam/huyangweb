@@ -11,25 +11,7 @@
 <header>
     {include file="public/coll_header" /}
 </header>
-<script type="text/javascript">
-    function searchAll() {
-        var str = $("#keys").val();
-        if (str == "")
-            alert("请输入要搜索的关键词");
-        else
-            location.href = "/index/search/index.html?q=" + str;
-    }
 
-    $(function () {
-        $("ul.nav_list li").hover(function () {
-            $("ul.nav_list li .sub_Nav").stop(false, true);
-            $(this).find(".sub_Nav").fadeIn();
-        }, function () {
-            $("ul.nav_list li .sub_Nav").stop(false, true);
-            $(this).find(".sub_Nav").fadeOut();
-        });
-    });
-</script>
 <div class="pageBanner">
     <div class="roll flexslider">
         <ul class="slides">
@@ -62,7 +44,7 @@
                 <ul class="list">
                     {volist name="group" id="vo"}
                     <li>
-                        <a href="{:url('index/szll',['seriesNO'=>$vo['seriesID']])}" class="title cur">{$vo.series}</a>
+                        <a  href="javascript: void(0)" onclick="reOnclick(this)" class="title cur">{$vo.series}</a>
                     </li>
                     {/volist}
                 </ul>
@@ -79,7 +61,7 @@
                     <div class="fr"><a href="/" target="_blank">首页</a><span class="cur">></span><a href="{:url('index/szll')}" target="_blank" class="cur">师资力量</a></div>
                 </div>
                 <div class="staff">
-                    <ul>
+                    <ul id="teacher-list">
                         {volist name="teachers" id="vo"}
                         <li>
                             <div class="item">
@@ -113,5 +95,51 @@
 <footer>
     {include file="public/coll_footer" /}
 </footer>
+<script type="text/javascript">
+    function searchAll() {
+        var str = $("#keys").val();
+        if (str == "")
+            alert("请输入要搜索的关键词");
+        else
+            location.href = "/index/search/index.html?q=" + str;
+    }
+        
+    $(function () {
+        $("ul.nav_list li").hover(function () {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+        }, function () {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+        });
+    });
+</script>
+<!-- ajax 请求数据 html 写入页面 -->
+<script type="text/javascript">
+    function reOnclick(event) {
+        window.location.replace("{:url('index/szll',['seriesNO'=>$vo['seriesID']])}");
+        // $.ajax({
+        //     url: url,
+        //     type:'post',
+        //     data: data,
+        //     dataType:'json',
+        //     success:function (res) {
+        //         // 格式化 json
+        //         if (!isJSON(res)) res = $.parseJSON( res );
+        //         console.log(res);
+        //         if (res.code == 1)  reslove(res);
+        //         else {
+        //             reject(res);
+        //             layer.msg('出错了，状态 code:' + res.code);
+        //         }
+        //     },
+        //     error: function (err) {
+        //         console.log(err);
+        //         reject(err);
+        //         layer.msg('出错了，状态 status:' + err.status);
+        //     }
+        // });
+    }
+</script>
 </body>
 </html>

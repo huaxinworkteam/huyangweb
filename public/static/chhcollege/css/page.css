@@ -187,6 +187,11 @@
     border-top: 1px solid #d59c63;
     color: #fff;
 }
+.page .pageBody .leftBy ul.list li a.title.cur:hover {
+    background: rgb(70, 56, 29);  
+    transition: background 2s;
+    /* color: #6d4a4a; */
+}
 
 .page .pageBody .leftBy ul.list li ul {
     padding: 10px 0;
