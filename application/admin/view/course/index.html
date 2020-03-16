@@ -70,7 +70,7 @@
                                 <el-table-column prop="isShow" label="是否显示" min-width="15%" align="center">
                                     <template slot-scope="scope">
                                         <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.isShow" :active-text="scope.row.isShow? '启用':'禁用'"
-                                        @change="changeSwitch($event, scope.row, scope.$index)"></el-switch>
+                                        @change="changeSwitch( scope.row, scope.$index)"></el-switch>
                                     </template>
                                 </el-table-column>
                                 <el-table-column fixed="right" label="操作" min-width="20%" align="center"> 
@@ -103,7 +103,7 @@
 <!-- element-ui 时间戳 转换插件 -->
 <script type="text/javascript" src="__ADMIN__/lib/moment/moment.js"></script>
 
-<script type="text/javascript">
+<script type="text/babel">
     new Vue({
         el: '#app',
         data: {
@@ -226,7 +226,7 @@
                     });
                 });
             },
-            changeSwitch(static, rowData, index) {
+            changeSwitch( rowData, index) {
                 http_post('/admin/course/shiftShow', {id: rowData.id, isShow: rowData.isShow}).then( res => {
                     layer.msg(rowData.isShow == 0?"已启用":"已禁用");
                     // layer.msg("删除成功");
