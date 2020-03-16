@@ -56,47 +56,15 @@
       <!--left start-->
       <div class="leftBy fl">
         <div class="tit">
-          <h3>核心课程</h3>
-          <h4>Main course</h4>
+          <h3>培训课程</h3>
+          <h4>Training courses</h4>
         </div>
+
         		<ul class="list2">
-                            <li> <a href="/index/course/index/cid/402.html" class="title cur" >工商管理类</a>
-                  <dl>
-                                                 <dd><a href="/index/course/index/cid/402.html" class="cur">> 荷兰商学院MBA/DBA学位课程</a></dd>
-                                                 <dd><a href="/index/course/index/cid/403.html" class="">> 上海交通大学高级研修课程</a></dd>
-                      	
-                  </dl>
+                    {volist name='concrete' id='vo'}
+                            <li> <a href="#" class="title cur" >{$vo.courseName}</a>
                 </li>
-                            <li> <a href="/index/course/index/cid/404.html" class="title " >创新创业类</a>
-                  <dl>
-                                                 <dd><a href="/index/course/index/cid/404.html" class="">> 「独角兽」创业成长计划 | 独步天下，角逐未来</a></dd>
-                                                 <dd><a href="/index/course/index/cid/405.html" class="">> 全球CEO创新领导力发展计划</a></dd>
-                      	
-                  </dl>
-                </li>
-                            <li> <a href="/index/course/index/cid/385.html" class="title " >金融实务类</a>
-                  <dl>
-                                                 <dd><a href="/index/course/index/cid/385.html" class="">> 股权激励实战特训营</a></dd>
-                                                 <dd><a href="/index/course/index/cid/384.html" class="">> 董事会秘书研修班</a></dd>
-                      	
-                  </dl>
-                </li>
-                            <li> <a href="/index/course/index/cid/375.html" class="title " >人文与领导力类</a>
-                  <dl>
-                                                 <dd><a href="/index/course/index/cid/375.html" class="">> 哲学与东方领导力学习坊</a></dd>
-                      	
-                  </dl>
-                </li>
-                            <li> <a href="/index/course/index/cid/380.html" class="title " >国际访学类</a>
-                  <dl>
-                                                 <dd><a href="/index/course/index/cid/380.html" class="">> 2019「创合汇」德国访学 | 隐形冠军与工匠精神</a></dd>
-                                                 <dd><a href="/index/course/index/cid/379.html" class="">> 美国访学</a></dd>
-                                                 <dd><a href="/index/course/index/cid/381.html" class="">> 英国访学</a></dd>
-                                                 <dd><a href="/index/course/index/cid/383.html" class="">> 日本访学</a></dd>
-                                                 <dd><a href="/index/course/index/cid/382.html" class="">> 以色列访学</a></dd>
-                      	
-                  </dl>
-                </li>
+                    {/volist}
                     </ul>
        
         
@@ -143,7 +111,7 @@
 </div>
 <div class="color_blank s_1"></div>
 <footer>
-    {include file="public/coll_foot er" /}
+    {include file="public/coll_footer" /}
 </footer>
 </body>
 </html>

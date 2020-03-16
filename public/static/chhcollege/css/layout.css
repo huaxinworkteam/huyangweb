@@ -41,15 +41,15 @@ header .nav_list li , header .nav_list li a{float:left;}
 header .nav_list li{margin-left:45px; position:relative;}
 header .nav_list li a{display:block;height:52px;line-height:52px;border-bottom:2px solid #fff;font-size:14px;color:#535353; z-index:9999;    position: relative;
 	padding:0 10px;}
-header .nav_list li a:hover , header .nav_list li a.cur{text-decoration:none;border-bottom:2px solid #c49a81;}
+header .nav_list li a:hover , header .nav_list li a.cur{text-decoration:none;border-bottom:2px solid #E59906;}
 
 header ul.nav_list li .sub_Nav {width: 170px;margin-top: 45px;position: absolute;left: -46px; z-index: 99999;display: none; background-color:#fff;}
-header ul.nav_list li .sub_Nav .line {height: 1px;background: #c49a81;width: 100%;}
+header ul.nav_list li .sub_Nav .line {height: 1px;background: #E59906;width: 100%;}
 header ul.nav_list li .sub_Nav p {height: 46px;background: #fff;}
 header ul.nav_list li .sub_Nav p a {font-size: 13px;color: #535353 ;line-height: 46px; height:46px; display:block; text-decoration:none; text-align:center;    padding: 0;width: 100%;border-bottom: 0;}
 
 header ul.nav_list li .sub_Nav p:hover{background:#fafaf7;}
-header ul.nav_list li .sub_Nav p:hover a{color:#c49a81}
+header ul.nav_list li .sub_Nav p:hover a{color:#E59906}
 
 footer{background-color:#5d5d5d;overflow:hidden;}
 footer .top_body{margin-top:50px;display:block;width:100%;}
@@ -62,7 +62,7 @@ footer .top_body ul li p a{color:#f3f3f3;font-size:14px;}
 
 footer .top_body .contactus_body{width:285px;}
 footer .top_body .contactus_body p{font-size:14px;line-height:24px;color:#e6e6e6;}
-footer .top_body .contactus_body p span{color:#c49a81;}
+footer .top_body .contactus_body p span{color:#E59906;}
 footer .top_body .contactus_body h6{margin-top:20px;}
 
 footer .copyright_bar{height:75px;line-height:75px;border-top:1px solid #c5c5c5;margin-top:40px;}

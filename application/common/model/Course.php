@@ -13,37 +13,42 @@ use think\Model;
 
 class Course extends  Model
 {
-    public static function saveInfo($data){
-        $validate=new \app\common\validate\Course();
-        if(!$validate->check($data)){
+    public static function saveInfo($data)
+    {
+        $validate = new \app\common\validate\Course();
+        if (!$validate->check($data)) {
             return $validate->getError();
         }
-        if($data['id']) $res=self::where('id',$data['id'])->update($data);
-        else{
+        if ($data['id']) $res = self::where('id', $data['id'])->update($data);
+        else {
             unset($data['id']);
-            $res=model('Course')->insert($data);
+            $res = model('Course')->insert($data);
         }
-        if($res) return 1 ;
+        if ($res) return 1;
         else return 0;
     }
 
-    public static  function  getAll($courseName=null){
+    public static function getAll($courseName = null)
+    {
+
         try {
             if (!$courseName) {
                 $res = self::alias('C')->where(['C.isDel' => 0])->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
 
             } else {
-                $condition['C.courseName']=['like','%'.$courseName];
-                $condition['C.isDel']=['=',0];
-                $res = self::alias('C')->where($condition)->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
+                $condition['C.courseName'] = ['like',"%{$courseName}%"];
+                $condition['C.isDel'] = ['=', 0];
+                $res= self::alias('C')->where($condition)->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
+
             }
-            $data['data'] = $res;
+            $data['data']  = $res;
             $data['count'] = sizeof($res);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
         return $data;
     }
+
 
     public static function del($id){
         $id=','.$id.',';
