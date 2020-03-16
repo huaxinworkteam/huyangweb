@@ -1,21 +1,177 @@
 <div class="float-qrcode">
     <p>关闭</p>
     <div class="option">
-        <span>小程序</span>
-        <span>公众号</span>
+        <span class="option_item">小程序</span>
+        <span class="option_item">公众号</span>
     </div>
+    <div class="option_active">&nbsp;</div>
     <img />
     <img />
 </div>
-
+<div class="tabbed_content">
+    <div class="tabs">
+        
+        <span class="tab_item">jquery图片特效</span>
+        <span class="tab_item">jquery导航菜单</span>
+        <span class="tab_item">jquery选项卡特效</span>
+        <span class="tab_item">jquery 文字特效</span>
+    </div>
+    
+    <div class="slide_content">						
+        <div class="tabslider" style="margin-left: -1800px;">
+            <ul>
+                <li><a href="http://www.mb5u.com/">jquery flow 图片切换滚动插件 带分页索引按钮控制图片左右滚动</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 图片滚动 xslider 插件 按钮控制自动图片左右滚动、上下滚动</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 图片特效插件 异步读取图片TOP排行榜特效</a></li>
+                <li><a href="http://www.mb5u.com/">jquery soChange 切换插件 支持焦点图片切换 选项卡切换 带按钮与分页索引按钮切换</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 图片切换特效 鼠标点击左右按钮焦点图切换滚动</a></li>
+            </ul>
+            <ul>
+                <li><a href="http://www.mb5u.com/">jquery导航菜单插件制作jquery动画菜单熔岩灯菜单效果</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 导航菜单 jquery和CSS3制作一个动画导航的向下滑动框菜单</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 导航插件 一个动画导航下拉菜单Apycom软件的Java下拉菜单</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 导航 鼠标滑过类似气泡放大缩小显示二级菜单</a></li>
+                <li><a href="http://www.mb5u.com/">jquery菜单特效 鼠标滑过菜单区域图标和文本类似flash动画酷炫移动展示</a></li>
+            </ul>
+            <ul>
+                <li><a href="http://www.mb5u.com/">jquery tab选项卡插件 轻量级tab选项卡插件支持鼠标滑过、点击、自动切换、数据回调等功能</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 图片延迟加载插件制作tab选项卡图片异步加载</a></li>
+                <li><a href="http://www.mb5u.com/">jquery tab选项卡 ajax选项卡 静态选项卡 鼠标点击选项卡 鼠标滑过选项卡</a></li>
+                <li><a href="http://www.mb5u.com/">jquery筛选器插件选项卡 css3制作一个漂亮的HTML5筛选容器插件选项卡</a></li>
+                <li><a href="http://www.mb5u.com/">基于jquery 选项卡插件jquery tab选项卡支持垂直选项卡滚动、水平选项卡滚动、自动选项卡切换等。</a></li>
+                <li><a href="http://www.mb5u.com/">灵活jquery ajax选项卡使用jQuery及CSS3制作选项卡切换异步请求数据</a></li>
+            </ul>
+            <ul>
+                <li><a href="http://www.mb5u.com/">jquery字体大小点击切换保存cookie支持大中小字体大小切换</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 文字闪烁支持自动文字闪烁、点击文字闪烁、验证文字闪烁</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 3D动画文字滚动标签云,鼠标光标定位触感特效</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 文字滚动大全 scroll 支持文字或图片 单行滚动 多行滚动 带按钮控制滚动</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 文字连续滚动 节奏感十足的齿轮式滚动图片展示与文字内容特效展示</a></li>
+                <li><a href="http://www.mb5u.com/">jquery 文字特效霓虹灯文字效果使用jQuery和CSS</a></li>
+            </ul>
+        </div>
+        <br style="clear:both">
+    </div>
+    
+</div>
 <style>
     .float-qrcode {
-        position: fixed; left: 36px; top: 72px; width: 150px; height: 180px; border-radius: 4px; background-color: rgba(255, 192, 0, 0.5);
+        position: fixed; left: 36px; top: 72px; width: 150px; height: 180px; border-radius: 4px; background-color: rgba(255, 192, 0, 0.5); z-index: 999;
     }
     .float-qrcode p {
         margin: -18px 0 0 126px;
     }
     .option {
-        padding: 10px; display: flex; justify-content: space-between;
+        padding: 10px 10px 0; display: flex; justify-content: space-between; border-bottom: 3px solid #eeeeee;
     }
+    .option_item {
+        display: block; padding: 0 5px 5px ; border-bottom: 3px solid rgba(255, 192, 0, 0); position: relative; top: 3px; cursor: pointer;
+    }
+    .option_active {
+        border-bottom: 3px solid #7f7f7f; width: 50px; height: 0; position: relative; left: 8px; top: -3px;
+    }
+
+
+
+
+    .tabbed_content {
+    background-color: #000000;
+    width: 620px;
+}
+.tabs {
+    height: 62px;
+    position: relative;
+}
+.tabs .moving_bg {
+    padding: 15px;
+    background-color: #7F822A;
+    background-image: url(images/arrow_down_green.gif);
+    position: absolute;
+    width: 125px;
+    z-index: 190;
+    left: 0;
+    padding-bottom: 29px;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+}
+.tabs .tab_item {
+    display: block;
+    float: left;
+    padding: 15px;
+    width: 125px;
+    color: #ffffff;
+    text-align: center;
+    z-index: 200;
+    position: relative;
+    cursor: pointer;
+    font-size: 12px;
+}
+.tabbed_content .slide_content {
+    overflow: hidden;
+    background-color: #000000;
+    padding: 20px 0 20px 20px;
+    position: relative;
+    width: 600px;
+}
+.tabslider {
+    width: 5000px;
+}
 </style>
+<!-- <script type="text/javascript" src="__COLL__/js/jquery.min.js"></script> -->
+<script>
+    var TabContent = {
+        init: function() {
+            $(".option_item").mouseover(function() {
+                var border = $(this).parent().find(".option_active");
+
+                $(border).stop().animate({
+                    left: $(this).position()['left']
+                }, {
+                    duration: 300
+                });
+
+                // TabContent.slideContent($(this));
+            });
+        }
+    }
+    $(document).ready(function() {
+        TabContent.init();
+    });
+</script>
+<script>
+    //tab effects
+var TabbedContent = {
+	init: function() {	
+		$(".tab_item").mouseover(function() {
+		
+			var background = $(this).parent().find(".moving_bg");
+			
+			$(background).stop().animate({
+				left: $(this).position()['left']
+			}, {
+				duration: 300
+			});
+			
+			TabbedContent.slideContent($(this));
+			
+		});
+	},
+	
+	slideContent: function(obj) {
+		
+		var margin = $(obj).parent().parent().find(".slide_content").width();
+		margin = margin * ($(obj).prevAll().size() - 1);
+		margin = margin * -1;
+		
+		$(obj).parent().parent().find(".tabslider").stop().animate({
+			marginLeft: margin + "px"
+		}, {
+			duration: 300
+		});
+	}
+}
+
+$(document).ready(function() {
+	TabbedContent.init();
+});
+</script>
