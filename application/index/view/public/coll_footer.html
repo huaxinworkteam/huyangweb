@@ -10,7 +10,9 @@
             </li>
             <li class="footer-animation">
                 <h3><a href="{:url('index/course')}" class="">核心课程</a></h3>
-                <p><a href="{:url('chhcollege/m402')}" target="_blank">工商管理类</a></p>
+                {volist name='Course' id='vo'}
+                <p><a href="{:url('index/course',['id'=>$vo.id])}" target="_blank">{$vo.typeName}</a></p>
+                {/volist}
             </li>
             <li class="footer-animation">
                 <h3><a href="{:url('index/szll',['seriesNO'=>1])}" class="">师资力量</a></h3>
