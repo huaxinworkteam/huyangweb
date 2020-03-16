@@ -36,16 +36,8 @@
             <div class="panel">
                 <div class="panel-body">
                     <el-form :inline="true" :model="queryForm" ref="queryForm">
-                        <el-form-item style="margin-bottom: 0;" prop="positionType">
-                            <el-select v-model="queryForm.positionType" placeholder="请选择分类">
-                                <el-option label="PC版" :value="1"></el-option>
-                                <el-option label="手机版" :value="2"></el-option>
-                                <el-option label="微信版" :value="3"></el-option>
-                                <el-option label="微信小程序" :value="4"></el-option>
-                            </el-select>
-                          </el-form-item>
-                          <el-form-item label="分类名称：" style="margin-bottom: 0;" prop="positionCode">
-                            <el-input v-model="queryForm.positionCode" placeholder="请填写分类名称"></el-input>
+                        <el-form-item label="课程名称：" style="margin-bottom: 0;" prop="courseName">
+                            <el-input v-model="queryForm.courseName" placeholder="请填写课程名称"></el-input>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 0;">
                             <el-button type="primary" size="medium" icon="el-icon-search" @click="submitForm('queryForm')">查询</el-button>
@@ -116,8 +108,7 @@
         el: '#app',
         data: {
             queryForm: {
-                positionType: '',
-                positionCode: ''
+                courseName: ''
             },
             tableData: [],
             selectID: []
@@ -167,8 +158,14 @@
                         // 提交数据的请求
                         var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                         setTimeout(()=> {
-                            location.replace('/admin/course/searchLocation?positionType=' +
-                            this.queryForm.positionType + '&positionCode=' + this.queryForm.positionCode);
+                            // location.replace('/admin/course/searchLocation?positionType=' +
+                            // this.queryForm.positionType + '&positionCode=' + this.queryForm.positionCode);
+                            http_post('/admin/course/index', this.queryForm).then(res => {
+                                this.tableData = res.data.data;
+                                layer.close(index);
+                            }).catch(err => {
+                                layer.close(index);
+                            });
                         }, 500);                            
                     } else {
                         layer.msg("查询条件不足");
