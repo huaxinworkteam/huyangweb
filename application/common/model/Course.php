@@ -33,7 +33,7 @@ class Course extends  Model
                 $res = self::alias('C')->where(['C.isDel' => 0])->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
 
             } else {
-                $res = self::alias('C')->where(['C.siDel' => 0, 'C.courseName' => '%' . $courseName . '%'])->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
+                $res = self::alias('C')->where(['C.isDel' => 0, 'C.courseName' => '%' . $courseName . '%'])->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
             }
             $data['data'] = $res;
             $data['count'] = sizeof($res);

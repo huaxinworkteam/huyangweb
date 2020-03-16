@@ -38,9 +38,12 @@
                     <el-form :inline="true" :model="queryForm" ref="queryForm">
                         <el-form-item style="margin-bottom: 0;" prop="typeLevel">
                             <el-select v-model="queryForm.typeLevel" placeholder="请选择分类等级">
-                                <el-option label="顶级" :value="0"></el-option>
-                                <el-option v-for="item in levelDeep" :key="item" :label="item" :value="item"></el-option>
+                                <el-option v-for="item in levelDeep" :key="item" :label="item + '级'" :value="item"></el-option>
                             </el-select>
+                        </el-form-item>
+                        <el-form-item style="margin-bottom: 0;">
+                            <el-button type="primary" size="medium" icon="el-icon-search" @click="submitForm('queryForm')">查询</el-button>
+                            <el-button size="medium" icon="el-icon-refresh-left" @click="resetForm('queryForm')">重置</el-button>
                         </el-form-item>
                     </el-form>
                 </div>
@@ -146,8 +149,9 @@
                             // this.queryForm.positionType + '&positionCode=' + this.queryForm.positionCode);
                             http_post('/admin/course/courseType', this.queryForm).then(res => {
                                 this.tableData = res.data;
+                                layer.close(index);
                             }).catch(err => {
-
+                                layer.close(index);
                             });
                         }, 500);                     
                     } else {
