@@ -36,20 +36,11 @@
             <div class="panel">
                 <div class="panel-body">
                     <el-form :inline="true" :model="queryForm" ref="queryForm">
-                        <el-form-item style="margin-bottom: 0;" prop="positionType">
-                            <el-select v-model="queryForm.positionType" placeholder="请选择分类">
-                                <el-option label="PC版" :value="1"></el-option>
-                                <el-option label="手机版" :value="2"></el-option>
-                                <el-option label="微信版" :value="3"></el-option>
-                                <el-option label="微信小程序" :value="4"></el-option>
+                        <el-form-item style="margin-bottom: 0;" prop="typeLevel">
+                            <el-select v-model="queryForm.typeLevel" placeholder="请选择分类等级">
+                                <el-option label="顶级" :value="0"></el-option>
+                                <el-option v-for="item in levelDeep" :key="item" :label="item" :value="item"></el-option>
                             </el-select>
-                          </el-form-item>
-                          <el-form-item label="分类名称：" style="margin-bottom: 0;" prop="positionCode">
-                            <el-input v-model="queryForm.positionCode" placeholder="请填写分类名称"></el-input>
-                        </el-form-item>
-                        <el-form-item style="margin-bottom: 0;">
-                            <el-button type="primary" size="medium" icon="el-icon-search" @click="submitForm('queryForm')">查询</el-button>
-                            <el-button size="medium" icon="el-icon-refresh-left" @click="resetForm('queryForm')">重置</el-button>
                         </el-form-item>
                     </el-form>
                 </div>
@@ -104,15 +95,20 @@
         el: '#app',
         data: {
             queryForm: {
-                positionType: '',
-                positionCode: ''
+                typeLevel: ''
             },
             tableData: [],
-            selectID: []
+            selectID: [],
+            levelDeep: 0,
         },
         mounted() {
             http_post('/admin/course/courseType').then(res => {
                 this.tableData = res.data;
+            }).catch(err => {
+
+            });
+            http_post('/admin/course/CLDepth').then(res => {
+                this.levelDeep = res.data;
             }).catch(err => {
 
             });
@@ -146,9 +142,14 @@
                         // 提交数据的请求
                         var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                         setTimeout(()=> {
-                            location.replace('/admin/course/searchLocation?positionType=' +
-                            this.queryForm.positionType + '&positionCode=' + this.queryForm.positionCode);
-                        }, 500);                            
+                            // location.replace('/admin/course/searchLocation?positionType=' +
+                            // this.queryForm.positionType + '&positionCode=' + this.queryForm.positionCode);
+                            http_post('/admin/course/courseType', this.queryForm).then(res => {
+                                this.tableData = res.data;
+                            }).catch(err => {
+
+                            });
+                        }, 500);                     
                     } else {
                         layer.msg("查询条件不足");
                         return false;
