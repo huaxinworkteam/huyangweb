@@ -112,7 +112,7 @@ $(function(){
                 <ul class="nav_list">
                     <li><a href="/" class="">首页</a></li>
                     <li><a href="/index/about/index.html" class="">学院介绍</a></li>
-                    <li><a href="/index/course/index.html" class="cur">核心课程</a>
+                    <li><a href="/index/course/index.html" class="cur">培训课程</a>
                         <div class="sub_Nav">
                             <div class="line"></div>
                                                         <p><a href="/index/course/index/cid/402.html" target="_blank">工商管理类</a></p>
@@ -179,7 +179,7 @@ $(function(){
       <!--left start-->
       <div class="leftBy fl">
         <div class="tit">
-          <h3>核心课程</h3>
+          <h3>培训课程</h3>
           <h4>Main course</h4>
         </div>
         		<ul class="list2">
@@ -231,7 +231,7 @@ $(function(){
           <div class="fl">
             <h3>  </h3>
           </div>
-          <div class="fr"> <a href="/" target="_blank">首页</a><span>></span><a href="/index/course/index/id/369.html">核心课程</a><span class="cur">></span><a href="javascript:;" class="cur"></a> </div>
+          <div class="fr"> <a href="/" target="_blank">首页</a><span>></span><a href="/index/course/index/id/369.html">培训课程</a><span class="cur">></span><a href="javascript:;" class="cur"></a> </div>
         </div>
         <div class="course">
 			<div class="contBody">
@@ -257,7 +257,7 @@ $(function(){
                     <p><a href="#" target="_blank">学习模式</a></p>
                 </li>
                 <li>
-                    <h3>核心课程</h3>
+                    <h3>培训课程</h3>
                                         <p><a href="/index/course/index/cid/402.html" target="_blank">工商管理类</a></p>
                                         <p><a href="/index/course/index/cid/404.html" target="_blank">创新创业类</a></p>
                                         <p><a href="/index/course/index/cid/385.html" target="_blank">金融实务类</a></p>
