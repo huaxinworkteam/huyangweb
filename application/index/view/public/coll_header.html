@@ -45,12 +45,15 @@
                     <div class="sub_Nav">
                         <div class="line"></div>
                         {volist name='Course' id='vo'}
-                        <p><a href="{:url('index/course',['id'=>$vo.id])}" target="_blank">{$vo.typeName}</a></p>
+                        <p><a href="{:url('index/course',['id'=>$vo.id])}" target="_blank" data-id="{$vo.id}" class="courseID">{$vo.typeName}</a></p>
                         {/volist}
                     </div>
                 </li>
                 <li><a href="{:url('index/szll',['seriesNO'=>1])}" class="">师资力量</a>
-                    <div class="sub_Nav">
+                    <!-- <div class="sub_Nav sub_szll">
+
+                    </div> -->
+                    <div class="sub_Nav sub_szll">
                         <div class="line"></div>
                         {volist name="shizi" id="vo"}
                         <p><a href="{:url('index/szll',['seriesNO'=>$vo.seriesID])}" target="_blank">{$vo.series}</a></p>
@@ -63,3 +66,43 @@
             </ul>
         </div>
     </div>
+<script type="text/javascript">
+    // $(document).ready(function() {
+    //     $(".courseID").mouseover(function(event){
+    //         var id = event.currentTarget.dataset.id;
+    //         $.ajax({
+    //             url: '/index/getSons',
+    //             type:'get',
+    //             data: {id: id},
+    //             dataType:'json',
+    //             success:function (res) {
+    //                 // 格式化 json
+    //                 if (!isJSON(res)) res = $.parseJSON( res );
+    //                 console.log(res);
+    //                 if (res.code == 1)  {
+    //                     $(".trainingCourses").append('<div class=""><div class="line"></div>' +
+    //                     '<p><a href = "javascript: void(0);" class="course"> '+ 
+    //                     res.data + '</a></div>');
+    //                     // 读取 left
+    //                     // <div class="sub_Nav">
+    //                     // <div class="line"></div>
+    //                     // {volist name='Course' id='vo'}
+    //                     // <p><a href="{:url('index/course',['id'=>$vo.id])}" target="_blank" class="course">{$vo.typeName}</a></p>
+    //                     // {/volist}
+    //                     // </div>
+    //                 } else {
+                        
+    //                 }
+    //             },
+    //             error: function (err) {
+    //                 console.log(err);
+    //             }
+    //         });
+    //     });
+    // });
+    // // 校验数据是否是json 数据
+    // function isJSON(str) {
+    //     var isjson = typeof(str) == "object" && Object.prototype.toString.call(str).toLowerCase() == "[object object]" && !str.length;
+    //     return isjson;
+    // }
+</script>

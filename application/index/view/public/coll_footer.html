@@ -1,31 +1,39 @@
 <div class="cw">
     <div class="top_body clearfix">
         <ul class="fl clearfix">
-            <li class="footer-animation">
+            <li>
                 <h3><a href="{:url('index/about')}" target="_blank">胡杨概况</a></h3>
-                <p><a href="{:url('index/introduction')}" target="_blank">学院介绍</a></p>
-                {volist name='AB' id='vo'}
-                <p><a href="{:url('index/aboutMore',['id'=>$vo.id])}" target="_blank">{$vo.name}</a></p>
-                {/volist}
+                <div  class="footer-animation">
+                    <p><a href="{:url('index/introduction')}" target="_blank">学院介绍</a></p>
+                    {volist name='AB' id='vo'}
+                    <p><a href="{:url('index/aboutMore',['id'=>$vo.id])}" target="_blank">{$vo.name}</a></p>
+                    {/volist}
+                </div>
             </li>
-            <li class="footer-animation">
-                <h3><a href="{:url('index/course')}" class="">核心课程</a></h3>
-                {volist name='Course' id='vo'}
-                <p><a href="{:url('index/course',['id'=>$vo.id])}" target="_blank">{$vo.typeName}</a></p>
-                {/volist}
+            <li >
+                <h3><a href="{:url('index/course')}" class="">培训课程</a></h3>
+                <div  class="footer-animation">
+                    {volist name='Course' id='vo'}
+                    <p><a href="{:url('index/course',['id'=>$vo.id])}" target="_blank">{$vo.typeName}</a></p>
+                    {/volist}
+                </div>
+                
             </li>
-            <li class="footer-animation">
+            <li >
                 <h3><a href="{:url('index/szll',['seriesNO'=>1])}" class="">师资力量</a></h3>
-                {volist name="shizi" id="vo"}
-                <p><a href="{:url('index/szll',['seriesNO'=>$vo.seriesID])}" target="_blank">{$vo.series}</a></p>
-                {/volist}
+                <div  class="footer-animation">
+                    {volist name="shizi" id="vo"}
+                    <p><a href="{:url('index/szll',['seriesNO'=>$vo.seriesID])}" target="_blank">{$vo.series}</a></p>
+                    {/volist}
+                </div>
+                
             </li>
-            <li class="footer-animation">
+            <li>
                 <h3 class="no_b"><a href="{:url('index/news')}" target="_blank">新闻动态</a></h3>
             </li>
-            <li class="footer-animation">
+            <!-- <li class="footer-animation">
                 <h3 class="no_b"><a href="http://www.massmakers.cn/category-9338.html" target="_blank" class="">培训报名</a></h3>
-            </li>
+            </li> -->
             <!--<li>-->
                 <!--<h3 class="no_b"><a href="{:url('index/contact')}" target="_blank">联系我们</a></h3>-->
             <!--</li>-->
@@ -86,14 +94,7 @@
 <style>
     .footer-animation {
         min-height: 200px;
-        max-height: 300px; overflow: hidden;
-        transition:max-height 2s;
-        -moz-transition:max-height 2s; /* Firefox 4 */
-        -webkit-transition:max-height 2s; /* Safari and Chrome */
-        -o-transition: max-height 2s; /* Opera */
-    }
-    .footer-animation:hover {
-        min-height: 200px; max-height: 1200px;
+        max-height: 300px; overflow: auto;
     }
 </style>
 {include file="public/float_QRcode" /}
