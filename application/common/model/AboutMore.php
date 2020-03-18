@@ -13,10 +13,20 @@ use think\Model;
 
 class AboutMore extends Model
 {
+
+
     public static function saveInfo($data){
             $validate=new \app\common\validate\AboutMore();
-            if(!$validate->check($data)){
+            if($data['id']){
+            if(!$validate->scene('edit')->check($data)){
+
                 return $validate->getError();
+            }}
+            else{
+                if(!$validate->check($data)){
+
+                    return $validate->getError();
+                }
             }
 
             try {

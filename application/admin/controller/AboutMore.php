@@ -40,6 +40,7 @@ class AboutMore extends Base
                 'sort'=>input('sort'),
                 'updateTime'=>time()
             ];
+
             $res=AboutMoreModel::saveInfo($data);
             if($res===1) return myJson('T','保存成功');
             else return myJson('F',$res);

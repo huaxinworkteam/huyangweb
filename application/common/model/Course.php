@@ -16,9 +16,14 @@ class Course extends  Model
     public static function saveInfo($data)
     {
         $validate = new \app\common\validate\Course();
-        if (!$validate->check($data)) {
+        if($data){
+        if (!$validate->scene('edit')->check($data)) {
             return $validate->getError();
-        }
+        }}else{
+            if (!$validate->check($data)) {
+                return $validate->getError();
+
+            }}
         if ($data['id']) $res = self::where('id', $data['id'])->update($data);
         else {
             unset($data['id']);

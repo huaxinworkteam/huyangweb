@@ -14,9 +14,15 @@ use think\Validate;
 class Course extends  Validate
 {
     protected $rule = [
-      'courseName'=>'require',
+      'courseName'=>'require|unique:Course',
         'courseType'=>'require',
         'startTime'=>'require',
         'endTime'=>'require'
     ];
+    public function sceneEdit(){
+        return $this->only(['courseName'=>'require|unique:Course',
+            'courseType'=>'require',
+            'startTime'=>'require',
+            'endTime'=>'require']);
+    }
 }
