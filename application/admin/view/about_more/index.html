@@ -182,8 +182,9 @@
                 });
             },
             changeSwitch(rowData, index) {
-                http_post('/admin/about_more/shiftShow', {id: rowData.id, isShow: rowData.isShow}).then( res => {
-                    layer.msg(rowData.isShow == 0?"已启用":"已禁用");
+                let isShow = rowData.isShow ? 0:1;
+                http_post('/admin/about_more/shiftShow', {id: rowData.id, isShow: isShow}).then( res => {
+                    layer.msg(rowData.isShow == 1?"已启用":"已禁用");
                     // layer.msg("删除成功");
                 }).catch (err => {
                     let newRowData = rowData;
