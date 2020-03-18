@@ -16,9 +16,14 @@ class Course extends  Model
     public static function saveInfo($data)
     {
         $validate = new \app\common\validate\Course();
-        if (!$validate->check($data)) {
+        if($data){
+        if (!$validate->scene('edit')->check($data)) {
             return $validate->getError();
-        }
+        }}else{
+            if (!$validate->check($data)) {
+                return $validate->getError();
+
+            }}
         if ($data['id']) $res = self::where('id', $data['id'])->update($data);
         else {
             unset($data['id']);
@@ -36,11 +41,10 @@ class Course extends  Model
                 $res = self::alias('C')->where(['C.isDel' => 0])->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
 
             } else {
-                $condition['C.courseName'] = ['like',"%{$courseName}%"];
-                $condition['C.isDel'] = ['=', 0];
-                $res= self::alias('C')->where($condition)->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
-
+                $res= self::alias('C')->where('C.isDel',0)->where('C.courseName','like',"%{$courseName}%")->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
+                $s=self::getLastSql();
             }
+
             $data['data']  = $res;
             $data['count'] = sizeof($res);
         } catch (\Exception $e) {
