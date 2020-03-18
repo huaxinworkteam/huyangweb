@@ -14,9 +14,9 @@ class Admin extends Model
         $validate = new \app\common\validate\Admin();
         if (!$validate->scene('login')->check($data)) {
             return $validate->getError();
-            if(!captcha_check($data['code'])){
-                return "验证码错误";
-            }
+        }
+        if(!captcha_check($data['code'])){
+            return "验证码错误";
         }
         $result = $this->where('username',$data['username'])->find();
         if ($result) {

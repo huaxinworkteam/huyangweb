@@ -187,7 +187,7 @@ class Teachers extends Base
     public function delseries(){
         if(request()->isAjax()){
             $id=','.input('seriesID').',';
-           $return=model('series')->whereIn('seriesID',$id)->delete();
+           $return=model('series')->whereIn('seriesID',$id)->update(['delete_time'=>time()]);
             if($return){
                 $this->success('删除成功','admin/teachers/series');
             }else{
