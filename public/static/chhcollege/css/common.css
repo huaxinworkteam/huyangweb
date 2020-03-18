@@ -18,3 +18,11 @@
 .fckBody h6{font-size:1em;}
 .fckBody h1,.fckBody h2,.fckBody h3,.fckBody h4,.fckBody h5,.fckBody h6 {margin:10px 0;font-weight:700;}
 
+/* layer-color */
+.layer-bg-color .layui-layer-title {
+	background-color:#FFBF0B; font-weight: bold;
+}
+.layer-bg-color .layui-layer-content {
+	padding: 20px;
+}
+
