@@ -2,7 +2,7 @@
 {include file="Common/meta" /}
 <!--/meta 作为公共模版分离出去-->
 
-<title>首页轮播管理 - 轮播图列表 - h-ui.admin.pro v1.0</title>
+<title>客服 - h-ui.admin.pro v1.0</title>
 <meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
@@ -27,35 +27,30 @@
         <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
             首页
             <span class="c-gray en">/</span>
-            配置管理
+            客服管理
             <span class="c-gray en">/</span>
-            配置管理
+            客服管理
         </nav>
 
         <article id="app" class="Hui-admin-content clearfix">
-   
             <div class="panel mt-20">
                 <div class="panel-body">
                     <div class="clearfix">
                         <el-button type="danger" size="medium" @click="batchDel"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</el-button>
-                        <el-button type="primary" size="medium" @click="add('新增','{:url(\'admin/about_more/add\')}')"
-                        ><i class="Hui-iconfont">&#xe600;</i> 添加</el-button>
+                        <el-button type="primary" size="medium" @click="add('新增客服','{:url(\'admin/config/add\')}')"
+                        ><i class="Hui-iconfont">&#xe600;</i> 添加客服</el-button>
                     </div>
                     <div class="mt-20 clearfix">  
-                        <el-table :data="tableData" style="width: 100%" row-key="id" border lazy stripe
-                            :header-cell-style="headClass":row-style="rowClass" @selection-change="handleSelectionChange">
-                            <el-table-column label="概况" style="width: 100%;">
+                        <el-table :data="tableData" style="width: 100%" row-key="id" border stripe
+                            :header-cell-style="headClass" :row-style="rowClass" @selection-change="handleSelectionChange">
+                            <el-table-column label="客服列表" style="width: 100%;">
                                 <el-table-column type="selection" align="center"></el-table-column>
                                 <el-table-column prop="id" label="ID" min-width="8%" header-align="center"></el-table-column>
-                                <el-table-column prop="name" label="栏目名称" min-width="30%" align="center"></el-table-column>
-                                <el-table-column prop="content" label="栏目内容" min-width="40%" align="center"></el-table-column>
-                                <el-table-column prop="sort" label="排序" min-width="8%" align="center"></el-table-column>
-                                <el-table-column prop="isShow" label="是否显示" min-width="15%" align="center">
-                                    <template slot-scope="scope">
-                                        <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.isShow" :active-text="scope.row.isShow? '启用':'禁用'" 
-                                        @change="changeSwitch(scope.row, scope.$index)"></el-switch>
-                                    </template>
-                                </el-table-column>
+                                <el-table-column prop="username" label="联系人" min-width="20%" align="center"></el-table-column>
+                                <el-table-column prop="kefuLink" label="客服链接" min-width="40%" align="center"></el-table-column>
+                                <el-table-column prop="mobile" label="手机" min-width="20%" align="center"></el-table-column>
+                                <el-table-column prop="email" label="邮箱" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="QQ" label="QQ" min-width="20%" align="center"></el-table-column>
                                 <el-table-column fixed="right" label="操作" min-width="20%" align="center"> 
                                     <template slot-scope="scope">
                                         <el-tooltip class="item" effect="dark" content="编辑" placement="left-start">
@@ -80,19 +75,16 @@
 <!--/_footer /作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
+
 <script type="text/babel">
     new Vue({
         el: '#app',
         data: {
-            queryForm: {
-                positionType: '',
-                positionCode: ''
-            },
             tableData: [],
             selectID: []
         },
         mounted() {
-            http_post('/admin/about_more/index').then(res => {
+            http_post('/admin/config/index').then(res => {
                 this.tableData = res.data;
             }).catch(err => {
 
@@ -122,7 +114,7 @@
                 layer.confirm('确认要删除吗？', index => {
                     layer.close(index);
 
-                    http_post('/admin/about_more/del', {id: this.selectID.toString()}).then(res => {
+                    http_post('/admin/config/del', {id: this.selectID.toString()}).then(res => {
                         layer.msg("删除成功", {icon: 1});
                         location.reload();  // 刷新
                     });
@@ -145,7 +137,7 @@
                 var index = layer.open({
                     type: 2,
                     title: '编辑课程',
-                    content: '/admin/about_more/edit?id=' + id,
+                    content: '/admin/config/edit?id=' + id,
                     area: ['700px', '600px'],
                     end : function() {
                         window.location.reload();  // 刷新
@@ -155,21 +147,10 @@
             del(id) {
                 layer.confirm('确认要删除吗？', function (index) {
                     layer.close(index);
-                    http_post('/admin/about_more/del', {id:id}).then(res => {
+                    http_post('/admin/config/del', {id:id}).then(res => {
                         layer.msg("删除成功", {icon: 1});
                         location.reload();  // 刷新
                     });
-                });
-            },
-            changeSwitch(rowData, index) {
-                let isShow = rowData.isShow ? 0:1;
-                http_post('/admin/about_more/shiftShow', {id: rowData.id, isShow: isShow}).then( res => {
-                    layer.msg(rowData.isShow == 1?"已启用":"已禁用");
-                    // layer.msg("删除成功");
-                }).catch (err => {
-                    let newRowData = rowData;
-                    newRowData.isShow = newRowData.isShow == 1 ? 0:1;
-                    this.tableData[index] = newRowData;
                 });
             }
         }
