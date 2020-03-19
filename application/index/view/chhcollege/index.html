@@ -104,79 +104,81 @@
     </div>
 </div>
 
-<div class="index_btm_body">
-    <div class="cw">
-
-        <h3 class="blank_tit"><a href="{:url('index/szll',['seriesNO'=>1])}"><span>师资力量</span></a></h3>
-
-
-        <div class="tab_con">
-
-            <div class="con">
-                <div class="scroll_body" id="scroll_1">
-                    <div class="scroll_in fl">
-                        {volist name="teachers" id="vo"}
-                        <ul>
-                            <li class="box_1">
-                                <div class="in teacher" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
-                                data-level="{$vo.teacherlevel}" data-description="{$vo.teacherdescription}">
-                                    <img src="{$vo.teacherphoto}"/>
-                                    <h3>{$vo.teachername}</h3>
-                                    <h4>{$vo.teacherlevel}</h4>
-                                    <p style="text-align: justify;">{$vo.teacherdescription}</p>
-                                </div>
-                            </li>
-
-                        </ul>
-                        {/volist}
+<div class="gradient">
+    <div class="index_btm_body">
+        <div class="cw">
+    
+            <h3 class="blank_tit"><a href="{:url('index/szll',['seriesNO'=>1])}"><span>师资力量</span></a></h3>
+    
+    
+            <div class="tab_con">
+    
+                <div class="con">
+                    <div class="scroll_body" id="scroll_1">
+                        <div class="scroll_in fl">
+                            {volist name="teachers" id="vo"}
+                            <ul>
+                                <li class="box_1">
+                                    <div class="in teacher" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
+                                    data-level="{$vo.teacherlevel}" data-description="{$vo.teacherdescription}">
+                                        <img src="{$vo.teacherphoto}"/>
+                                        <h3>{$vo.teachername}</h3>
+                                        <h4>{$vo.teacherlevel}</h4>
+                                        <p>{$vo.teacherdescription}</p>
+                                    </div>
+                                </li>
+    
+                            </ul>
+                            {/volist}
+                        </div>
+    
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="index_news_body">
-    <div class="cw">
-        <div class="clearfix">
-
-            <div class="news_body fl">
-                <h3 class="tit">
-                    <a href="{:url('index/news')}" target="_blank">更多 +</a>
-                    <span>新闻动态</span>
-                </h3>
-                <ul class="list">
-                    {volist name="news" id="vo"}
-                    <li><a href="{:url('index/news_detail',['newsid'=>$vo['newsid']])}" target="_blank"><em>{$vo.createTime}</em><span>{$vo.newstitle}</span></a>
-                    </li>
-                    {/volist}
-                </ul>
+    
+    
+    <div class="index_news_body">
+        <div class="cw">
+            <div class="clearfix">
+    
+                <div class="news_body fl">
+                    <h3 class="tit">
+                        <a href="{:url('index/news')}" target="_blank">更多 +</a>
+                        <span>新闻动态</span>
+                    </h3>
+                    <ul class="list">
+                        {volist name="news" id="vo"}
+                        <li><a href="{:url('index/news_detail',['newsid'=>$vo['newsid']])}" target="_blank"><em>{$vo.createTime}</em><span>{$vo.newstitle}</span></a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
+    
+                <div class="event_body fr">
+                    <h3 class="tit">
+                        <a href="http://www.massmakers.cn/category-9338.html" target="_blank">更多 +</a>
+                        <span>培训报名</span>
+                    </h3>
+                    <ul class="list">
+                        {volist name="index_activity" id="vo"}
+                        <li>
+                            <a href="{:url('index/act_detail',['activityId'=>$vo['activityId']])}" target="_blank">
+                                <img src="{$vo.activity_pic}" class="fl"/>
+    
+                                <div class="fl">
+                                    <h3>{$vo.activityTitle}</h3>
+                                    <h4>{$vo.createTime}</h4>
+                                    <p>{$vo.articleContent|raw}</p>
+                                </div>
+                            </a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
+    
             </div>
-
-            <div class="event_body fr">
-                <h3 class="tit">
-                    <a href="http://www.massmakers.cn/category-9338.html" target="_blank">更多 +</a>
-                    <span>培训报名</span>
-                </h3>
-                <ul class="list">
-                    {volist name="index_activity" id="vo"}
-                    <li>
-                        <a href="{:url('index/act_detail',['activityId'=>$vo['activityId']])}" target="_blank">
-                            <img src="{$vo.activity_pic}" class="fl"/>
-
-                            <div class="fl">
-                                <h3>{$vo.activityTitle}</h3>
-                                <h4>{$vo.createTime}</h4>
-                                <p>{$vo.articleContent|raw}</p>
-                            </div>
-                        </a>
-                    </li>
-                    {/volist}
-                </ul>
-            </div>
-
         </div>
     </div>
 </div>
@@ -197,10 +199,10 @@
                 anim: 2,
                 shadeClose: true, //开启遮罩关闭
                 area: ['620px', '500px'], //宽高
-                content: '<div style="position: relative;"><img style="width:240px; height: 150px;" src="'+
-                    $(this).data("photo")+'" />'+
-                    '<div style="display: inline;position: absolute;top: 50%;transform: translateY(-50%);"><h3>' + 
-                    $(this).data("name") + '</h3><h4>'+ $(this).data("level")+ '</h4></div></div><p>'+ 
+                content: '<div class="layer-teacher"><img src="'+
+                    $(this).data("photo")+'" />'+ '<div class="des"><h3>' + 
+                    $(this).data("name") + '</h3><h4>'+ $(this).data("level")+ 
+                    '</h4></div></div><p class="layer-teacher-desc">'+ 
                     $(this).data("description") +'</p>'
             });
         });

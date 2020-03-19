@@ -11,7 +11,7 @@ q:before, q:after{content:'';}
 h1, h2, h3, h4, h5, h6 {font-size:100%;font-weight:normal;}
 input, button, textarea, select {font-family:inherit;}
 a{outline:none;text-decoration:none;}
-a:hover{text-decoration:underline;}
+/* a:hover{text-decoration:underline;} */
 html{ overflow-y:scroll;}
 .arial{font-family:Arial;}
 

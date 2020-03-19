@@ -201,9 +201,25 @@
 }
 
 .index_btm_body {
-    background:#b6c6d7;
     overflow: hidden;
 }
+.gradient {
+    background-image: url(/static/chhcollege/images/home-partner-bg.png);
+    background-position: top;
+    background-size: cover;
+    position: relative;
+}
+/* .gradient{
+    background: #ffffff;
+    background: -moz-linear-gradient(top,  #ffffff 0%, #eee7c4 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eee7c4));
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#eee7c4 100%);
+    background: -o-linear-gradient(top,  #ffffff 0%,#eee7c4 100%);
+    background: -ms-linear-gradient(top,  #ffffff 0%,#eee7c4 100%);
+    background: linear-gradient(to bottom,  #ffffff 0%,#eee7c4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eee7c4',GradientType=0 );
+}
+:root .gradient{filter:none;} */
 
 .index_btm_body .blank_tit {
     margin-top: 35px;
@@ -211,11 +227,11 @@
 }
 
 .index_btm_body .blank_tit span {
-    background: -webkit-linear-gradient(left, #b6c6d7, #b6c6d7);
+    /* background: -webkit-linear-gradient(left, #b6c6d7, #b6c6d7);
     background: -o-linear-gradient(left, #b6c6d7,#b6c6d7);
     background: linear-gradient(to right, #b6c6d7, #b6c6d7);
-    background-color: #b6c6d7;
-    text-shadow: 2px 2px 2px #535353;
+    background-color: #b6c6d7; */
+    /* text-shadow: 2px 2px 2px #535353; */
     font-size: 30px;
     border: none;
 }
@@ -346,9 +362,15 @@
     line-height: 20px;
     color: grey;
 }
-
+.index_btm_body .scroll_in ul li .in p {
+    text-align: justify;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
 .index_news_body {
-    background-color: #fff;
     padding: 50px 0 30px;
     padding-top: 30px;
 }
@@ -472,4 +494,23 @@
     background-color: greenyellow;
     border-radius: 50%;
     overflow: hidden;
+}
+.layer-teacher {
+    position: relative;
+}
+.layer-teacher img {
+    width:240px; height: 150px;
+}
+.layer-teacher .des {
+    display: inline;position: absolute;top: 50%;transform: translateY(-50%); color: #df9856;
+    padding-left: 20px;
+}
+.layer-teacher .des h3{
+    font-size: 24px;
+}
+.layer-teacher .des h4{
+    font-size: 16px;
+}
+.layer-teacher-desc {
+    font-size: 16px; text-align: justify; max-height: 250px; overflow: auto; margin-top: 10px;
 }
