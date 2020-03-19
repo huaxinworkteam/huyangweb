@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 use app\common\model\Activity;
+use app\common\model\Config;
 use app\common\model\Course;
 use app\common\model\CourseType;
 use app\common\model\News;
@@ -15,6 +16,15 @@ use think\Db;
 
 class Index extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        global $kefu;
+        if(!$GLOBALS['kefu']){
+            $kefu=Config::getAll()->toArray();
+        }
+    }
+
     //header and footer
     public function headFoot(){
        $xueYuan=model('series')->where('delete_time',null)->order('seriesSort desc')->select();

@@ -16,3 +16,4 @@ function myJson($Sema,$data=null){
     if($Sema==='F')
     return json_encode(['code'=>0,'message'=>'fail','data'=>$data]);
 }
+
