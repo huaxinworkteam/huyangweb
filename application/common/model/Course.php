@@ -42,7 +42,6 @@ class Course extends  Model
 
             } else {
                 $res= self::alias('C')->where('C.isDel',0)->where('C.courseName','like',"%{$courseName}%")->leftJoin('CourseType T', 'C.courseType=T.id')->field('C.id,C.courseName,T.typeName,C.isShow,C.startTime,C.endTime,C.mobile,C.click,C.sort')->select();
-                $s=self::getLastSql();
             }
 
             $data['data']  = $res;
