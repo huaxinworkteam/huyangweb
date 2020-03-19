@@ -1,10 +1,181 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<!--_meta 作为公共模版分离出去-->
+{include file="Common/meta" /}
+<!--/meta 作为公共模版分离出去-->
+
+<title>首页轮播管理 - 轮播图列表 - h-ui.admin.pro v1.0</title>
+<meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+<meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
+<!--_menu 作为公共模版分离出去-->
+{include file="Common/leftbar" /}
+<!--/_menu 作为公共模版分离出去-->
 
+<div class="Hui-admin-dislpayArrow">
+    <a href="javascript:void(0);" onClick="displaynavbar(this)">
+        <i class="Hui-iconfont Hui-iconfont-left">&#xe6d4;</i>
+        <i class="Hui-iconfont Hui-iconfont-right">&#xe6d7;</i>
+    </a>
+</div>
+
+<section class="Hui-admin-article-wrapper">
+    <!--_header 作为公共模版分离出去-->
+    {include file="Common/header" /}
+    <!--/_header 作为公共模版分离出去-->
+
+    <div class="Hui-admin-article">
+        <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
+            首页
+            <span class="c-gray en">/</span>
+            配置管理
+            <span class="c-gray en">/</span>
+            配置管理
+        </nav>
+
+        <article id="app" class="Hui-admin-content clearfix">
+   
+            <div class="panel mt-20">
+                <div class="panel-body">
+                    <div class="clearfix">
+                        <el-button type="danger" size="medium" @click="batchDel"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</el-button>
+                        <el-button type="primary" size="medium" @click="add('新增','{:url(\'admin/about_more/add\')}')"
+                        ><i class="Hui-iconfont">&#xe600;</i> 添加</el-button>
+                    </div>
+                    <div class="mt-20 clearfix">  
+                        <el-table :data="tableData" style="width: 100%" row-key="id" border lazy stripe
+                            :header-cell-style="headClass":row-style="rowClass" @selection-change="handleSelectionChange">
+                            <el-table-column label="概况" style="width: 100%;">
+                                <el-table-column type="selection" align="center"></el-table-column>
+                                <el-table-column prop="id" label="ID" min-width="8%" header-align="center"></el-table-column>
+                                <el-table-column prop="name" label="栏目名称" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="content" label="栏目内容" min-width="40%" align="center"></el-table-column>
+                                <el-table-column prop="sort" label="排序" min-width="8%" align="center"></el-table-column>
+                                <el-table-column prop="isShow" label="是否显示" min-width="15%" align="center">
+                                    <template slot-scope="scope">
+                                        <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.isShow" :active-text="scope.row.isShow? '启用':'禁用'" 
+                                        @change="changeSwitch(scope.row, scope.$index)"></el-switch>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column fixed="right" label="操作" min-width="20%" align="center"> 
+                                    <template slot-scope="scope">
+                                        <el-tooltip class="item" effect="dark" content="编辑" placement="left-start">
+                                            <el-button style="padding: 0;" type="text" size="small" icon="el-icon-edit" @click="edit(scope.row.id)"></el-button>
+                                        </el-tooltip>
+                                        <el-tooltip class="item" effect="dark" content="删除" placement="right-start">
+                                            <el-button style="padding: 0;" type="text" size="small" icon="el-icon-delete" @click="del(scope.row.id)"></el-button>
+                                        </el-tooltip>
+                                    </template>
+                                </el-table-column>
+                            </el-table-column>
+                        </el-table>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!--_footer 作为公共模版分离出去-->
+{include file="Common/footer" /}
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/babel">
+    new Vue({
+        el: '#app',
+        data: {
+            queryForm: {
+                positionType: '',
+                positionCode: ''
+            },
+            tableData: [],
+            selectID: []
+        },
+        mounted() {
+            http_post('/admin/about_more/index').then(res => {
+                this.tableData = res.data;
+            }).catch(err => {
+
+            });
+        },
+        methods: {
+            // 表头样式设置
+            headClass () {
+                return 'background: #f5fafe;';
+            },
+            // 表格样式设置
+            rowClass () {
+                // return 'height: 5px;';
+            },
+            handleSelectionChange(val){
+                val.forEach(item => {
+                    this.selectID.push(item.id);
+                });              
+            },
+
+            batchDel() {
+                if (this.selectID.length === 0) {
+                    layer.msg('没有选中需要删除的数据！');
+                    return;
+                }
+                //询问框
+                layer.confirm('确认要删除吗？', index => {
+                    layer.close(index);
+
+                    http_post('/admin/about_more/del', {id: this.selectID.toString()}).then(res => {
+                        layer.msg("删除成功", {icon: 1});
+                        location.reload();  // 刷新
+                    });
+                });
+            },
+             // 新增
+            add(title, url) {
+                var index = layer.open({
+                    type: 2,
+                    title: title,
+                    content: url,
+                    area: ['700px', '600px'],
+                    end : function() {
+                        window.location.reload();  // 刷新
+                    }
+                });
+            },
+            // 编辑
+            edit(id) {
+                var index = layer.open({
+                    type: 2,
+                    title: '编辑课程',
+                    content: '/admin/about_more/edit?id=' + id,
+                    area: ['700px', '600px'],
+                    end : function() {
+                        window.location.reload();  // 刷新
+                    }
+                });
+            },
+            del(id) {
+                layer.confirm('确认要删除吗？', function (index) {
+                    layer.close(index);
+                    http_post('/admin/about_more/del', {id:id}).then(res => {
+                        layer.msg("删除成功", {icon: 1});
+                        location.reload();  // 刷新
+                    });
+                });
+            },
+            changeSwitch(rowData, index) {
+                let isShow = rowData.isShow ? 0:1;
+                http_post('/admin/about_more/shiftShow', {id: rowData.id, isShow: isShow}).then( res => {
+                    layer.msg(rowData.isShow == 1?"已启用":"已禁用");
+                    // layer.msg("删除成功");
+                }).catch (err => {
+                    let newRowData = rowData;
+                    newRowData.isShow = newRowData.isShow == 1 ? 0:1;
+                    this.tableData[index] = newRowData;
+                });
+            }
+        }
+    });
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

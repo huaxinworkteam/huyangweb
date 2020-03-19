@@ -118,7 +118,8 @@
                         {volist name="teachers" id="vo"}
                         <ul>
                             <li class="box_1">
-                                <div class="in">
+                                <div class="in teacher" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
+                                data-level="{$vo.teacherlevel}" data-description="{$vo.teacherdescription}">
                                     <img src="{$vo.teacherphoto}"/>
                                     <h3>{$vo.teachername}</h3>
                                     <h4>{$vo.teacherlevel}</h4>
@@ -184,7 +185,29 @@
 <footer>
     {include file="public/coll_footer" /}
 </footer>
+<!-- 请在此处下方写此页面业务相关的脚本 -->
+<script>
+    $(document).ready(function () {
+        $(".teacher").click(function () {
+            layer.open({
+                type: 1,
+                title: $(this).data("name"),
+                skin: 'layer-bg-color', //样式类名
+                closeBtn: 1, //不显示关闭按钮
+                anim: 2,
+                shadeClose: true, //开启遮罩关闭
+                area: ['620px', '500px'], //宽高
+                content: '<div style="position: relative;"><img style="width:240px; height: 150px;" src="'+
+                    $(this).data("photo")+'" />'+
+                    '<div style="display: inline;position: absolute;top: 50%;transform: translateY(-50%);"><h3>' + 
+                    $(this).data("name") + '</h3><h4>'+ $(this).data("level")+ '</h4></div></div><p>'+ 
+                    $(this).data("description") +'</p>'
+            });
+        });
 
+    });
+</script>
+<!-- 请在此处上方写此页面业务相关的脚本 -->
 </body>
 
 </html>
