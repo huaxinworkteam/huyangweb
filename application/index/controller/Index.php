@@ -130,7 +130,7 @@ class Index extends Controller
         $id=input('id');
         $concrete=model('Course')->where(['isDel'=>0,'courseType'=>$id])->field('id,courseName')->order('sort desc')->select();
         $this->assign('concrete',$concrete);
-        if($concrete) {
+        if($concrete->toArray()) {
             $indexId = $concrete[0]['id'];
             $content=Course::getOne($indexId);
             $this->assign('content',$content);
