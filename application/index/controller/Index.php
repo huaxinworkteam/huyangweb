@@ -120,14 +120,25 @@ class Index extends Controller
         $id=input('id');
         $concrete=model('Course')->where(['isDel'=>0,'courseType'=>$id])->field('id,courseName')->order('sort desc')->select();
         $this->assign('concrete',$concrete);
+        if($concrete) {
+            $indexId = $concrete[0]['id'];
+            $content=Course::getOne($indexId);
+            $this->assign('content',$content);
+        }else{
+            $typeName=model('CourseType')->where('id',$id)->field('typeName')->find()['typeName'];
+            $this->assign('content',['courseName'=>'暂无课程','courseIntroduce'=>'暂无课程内容','typeName'=>$typeName]);
+        }
         return view('chhcollege/course/index');
     }
+    //异步获取子分类
     public function getSons(){
         $id=input('id');
         $res=CourseType::getNextSons($id);
         if($res) return myJson('T',$res);
         else return myJson('F');
     }
+
+    //异步获取课程介绍
     public function introduce(){
         $id=input('id');
         $res=Course::getOne($id);

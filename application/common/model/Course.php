@@ -61,7 +61,7 @@ class Course extends  Model
     }
 
     public  static  function  getOne($id){
-        $res=self::alias('C')->where('id',$id)->field('C.id,C.courseName,C.courseIntroduce,C.courseType,C.isShow,C.startTime,C.endTime,C.mobile,C.sort')->find();
+        $res=self::alias('C')->leftJoin('CourseType T','C.courseType=T.id')->where('C.id',$id)->field('C.id,C.courseName,T.typeName,C.courseIntroduce,C.courseType,C.isShow,C.startTime,C.endTime,C.mobile,C.sort')->find();
         if($res) return $res;
         else return 0;
     }
