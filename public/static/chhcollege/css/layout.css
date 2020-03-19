@@ -43,8 +43,9 @@ header .nav_list li a{display:block;height:52px;line-height:52px;border-bottom:2
 	padding:0 10px;}
 header .nav_list li a:hover , header .nav_list li a.cur{text-decoration:none;border-bottom:2px solid #FFBF0B;}
 
-header ul.nav_list li .sub_szll { max-height: 300px; overflow: auto;}
+header ul.nav_list li .sub_szll { max-height: 300px; overflow-y: auto;}
 header ul.nav_list li .sub_Nav {width: 170px;margin-top: 45px;position: absolute;left: -46px; z-index: 99999;display: none; background-color:#fff;}
+header ul.nav_list li .sub_Nav::-webkit-scrollbar {display: none;}
 header ul.nav_list li .sub_Nav .line {height: 1px;background: #FFBF0B;width: 100%;}
 header ul.nav_list li .sub_Nav p {height: 46px;background: #fff;}
 header ul.nav_list li .sub_Nav p a {font-size: 13px;color: #535353 ;line-height: 46px; height:46px; display:block; text-decoration:none; text-align:center;    padding: 0;width: 100%;border-bottom: 0;}

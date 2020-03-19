@@ -499,7 +499,7 @@
     position: relative;
 }
 .layer-teacher img {
-    width:240px; height: 150px;
+    width:240px; height: 150px; border-radius: 4px;
 }
 .layer-teacher .des {
     display: inline;position: absolute;top: 50%;transform: translateY(-50%); color: #df9856;
@@ -512,5 +512,5 @@
     font-size: 16px;
 }
 .layer-teacher-desc {
-    font-size: 16px; text-align: justify; max-height: 250px; overflow: auto; margin-top: 10px;
+    font-size: 16px; text-align: justify; max-height: 250px; overflow-y: auto; margin-top: 10px;
 }

@@ -39,7 +39,7 @@ body {
     border: 1px solid #EAEAEA;
     box-shadow: 0 0 4px rgba(0, 0, 0, .14);
     padding-bottom: 30px;
-    height: 178px;
+    height: 78px;
     width: 64px;
     overflow: hidden;
     position: absolute;
@@ -57,7 +57,7 @@ body {
 }
 
 .quick_links_allow_gotop {
-    height: 256px;
+    height: 156px;
 }
 
 .quick_links_min .quick_links_allow_gotop {

@@ -48,8 +48,6 @@
                     </li>
                     {/volist}
                 </ul>
-
-                <!--{include file="public/coll_leftBy" /}-->
             </div>
             <!--left End-->
             <!--right start-->
@@ -64,7 +62,8 @@
                     <ul id="teacher-list">
                         {volist name="teachers" id="vo"}
                         <li>
-                            <div class="item">
+                            <div class="item teacher" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
+                            data-level="{$vo.teacherlevel}" data-description="{$vo.teacherdescription}">
                                 <div class="fl">
                                     <a href="javascript:;" class="pic"><img
                                             src="{$vo.teacherphoto}"></a>
@@ -140,6 +139,26 @@
         //     }
         // });
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $(".teacher").click(function () {
+            layer.open({
+                type: 1,
+                title: $(this).data("name"),
+                skin: 'layer-bg-color', //样式类名
+                closeBtn: 1, //不显示关闭按钮
+                anim: 2,
+                shadeClose: true, //开启遮罩关闭
+                area: ['620px', '500px'], //宽高
+                content: '<div class="layer-teacher"><img src="'+
+                    $(this).data("photo")+'" />'+ '<div class="des"><h3>' + 
+                    $(this).data("name") + '</h3><h4>'+ $(this).data("level")+ 
+                    '</h4></div></div><p class="layer-teacher-desc">'+ 
+                    $(this).data("description") +'</p>'
+            });
+        });
+    });
 </script>
 </body>
 </html>
