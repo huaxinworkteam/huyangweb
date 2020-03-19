@@ -71,8 +71,8 @@
         $(".courseType").mouseover(function(){
             var id = $(this).data('id');
             var count = $(this).data('count');
-            var that = this;
             var flag = true;
+            var that = this;
             array.forEach(element => {
                 if (element == id) flag = false;
             });
