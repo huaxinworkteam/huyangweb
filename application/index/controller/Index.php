@@ -64,6 +64,7 @@ class Index extends Controller
         $all_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->paginate(6);
        // $all_activity=Activity::where('isShow',1)->order('createTime desc')->paginate(4);
         $this->assign('all_activity',$all_activity);
+        //$this->assign
         return view('chhcollege/activity/index');
     }
     public  function act_detail(){
