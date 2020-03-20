@@ -51,7 +51,7 @@ header ul.nav_list li .sub_Nav p {height: 46px;background: #fff;}
 header ul.nav_list li .sub_Nav p a {font-size: 13px;color: #535353 ;line-height: 46px; height:46px; display:block; text-decoration:none; text-align:center;    padding: 0;width: 100%;border-bottom: 0;}
 
 header ul.nav_list li .sub_Nav p:hover{background:#fafaf7;}
-header ul.nav_list li .sub_Nav p:hover a{color:#FFBF0B}
+header ul.nav_list li .sub_Nav p:hover a{color:#FFBF0B !important;}
 
 footer{background-color:#5d5d5d;overflow:hidden;}
 footer .top_body{margin-top:50px;display:block;width:100%;}

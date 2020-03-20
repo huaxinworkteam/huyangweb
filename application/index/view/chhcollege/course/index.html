@@ -1,4 +1,4 @@
-﻿    <!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -60,12 +60,12 @@
           <h4>Training courses</h4>
         </div>
 
-        		<ul class="list2">
-                    {volist name='concrete' id='vo'}
-                            <li> <a href="#" class="title cur" id="{$vo.id}" >{$vo.courseName}</a>
+        <ul class="list">
+                {volist name='concrete' id='vo'}
+                <li> <a href="#" class="title cur" id="{$vo.id}" >{$vo.courseName}</a>
                 </li>
-                    {/volist}
-                    </ul>
+                {/volist}
+              </ul>
        
         
         <div class="list03">

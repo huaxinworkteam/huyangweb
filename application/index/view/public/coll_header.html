@@ -42,10 +42,10 @@
                     </div>
                 </li>
                 <li><a href="{:url('index/course')}" class="">培训课程</a>
-                    <div class="sub_Nav">
+                    <div class="sub_Nav sub_szll">
                         <div class="line"></div>
                         {volist name='Course' id='vo'}
-                        <p><a href="{:url('index/course',['id'=>$vo.id])}" data-id="{$vo.id}" class="courseID">{$vo.typeName}</a></p>
+                        <p class="courseType" data-id="{$vo.id}"><a href="{:url('index/course',['id'=>$vo.id])}">{$vo.typeName}</a></p>
                         {/volist}
                     </div>
                 </li>
@@ -63,43 +63,53 @@
             </ul>
         </div>
     </div>
+
 <script type="text/javascript">
-    // $(document).ready(function() {
-    //     $(".courseID").mouseover(function(event){
-    //         var id = event.currentTarget.dataset.id;
-    //         $.ajax({
-    //             url: '/index/getSons',
-    //             type:'get',
-    //             data: {id: id},
-    //             dataType:'json',
-    //             success:function (res) {
-    //                 // 格式化 json
-    //                 if (!isJSON(res)) res = $.parseJSON( res );
-    //                 console.log(res);
-    //                 if (res.code == 1)  {
-    //                     $(".trainingCourses").append('<div class=""><div class="line"></div>' +
-    //                     '<p><a href = "javascript: void(0);" class="course"> '+ 
-    //                     res.data + '</a></div>');
-    //                     // 读取 left
-    //                     // <div class="sub_Nav">
-    //                     // <div class="line"></div>
-    //                     // {volist name='Course' id='vo'}
-    //                     // <p><a href="{:url('index/course',['id'=>$vo.id])}" target="_blank" class="course">{$vo.typeName}</a></p>
-    //                     // {/volist}
-    //                     // </div>
-    //                 } else {
-                        
-    //                 }
-    //             },
-    //             error: function (err) {
-    //                 console.log(err);
-    //             }
-    //         });
-    //     });
-    // });
-    // // 校验数据是否是json 数据
-    // function isJSON(str) {
-    //     var isjson = typeof(str) == "object" && Object.prototype.toString.call(str).toLowerCase() == "[object object]" && !str.length;
-    //     return isjson;
-    // }
+    $(document).ready(function() {
+        var array = [];
+        var colorArray = ['e08181','3474ff','f3b461']
+        $(".courseType").mouseover(function(){
+            var id = $(this).data('id');
+            var count = $(this).data('count');
+            var flag = true;
+            var that = this;
+            array.forEach(element => {
+                if (element == id) flag = false;
+            });
+            if(flag) {
+                array.push(id);
+                $.ajax({
+                    url: '/index/index/getSons',
+                    type:'get',
+                    data: {id: id},
+                    dataType:'json',
+                    success:function (res) {
+                        // 格式化 json
+                        if (!isJSON(res)) res = $.parseJSON( res );
+                        if (res.code == 1)  {
+                            if (count) count++; else count=1;
+                            res.data.forEach(item => {
+                                $(that).after('<p class="courseType" data-id="' +
+                                item.id +'" data-count="' + count +'"><a href="javascript: void(0);" onClick="getCourse(\'course/\','+
+                                item.id + ')" style="color:#'+ colorArray[count] +';">'+item.typeName+'</a></p>');
+                            });
+                        } else {
+                            
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    });
+    // 校验数据是否是json 数据
+    function isJSON(str) {
+        var isjson = typeof(str) == "object" && Object.prototype.toString.call(str).toLowerCase() == "[object object]" && !str.length;
+        return isjson;
+    }
+    function getCourse(url, id) {
+        window.location.replace('/index/index/course/id/' + id + '.html');
+    }
 </script>
