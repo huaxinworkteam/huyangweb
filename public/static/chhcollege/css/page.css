@@ -1459,6 +1459,8 @@
     float: left;
     text-align: center;
     font-size: 14px;
+    display: grid;
+    align-items: center;
 }
 .contBody .item:hover{
     color: #ecae68;
