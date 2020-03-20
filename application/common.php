@@ -51,5 +51,7 @@ function curl_request($url, $data=null, $method='get', $header = array("Content-
     //curl_setopt($ch, CURLOPT_HEADER, false);//设置不需要头信息
     $result = curl_exec($ch);//执行请求
     curl_close($ch);//关闭curl，释放资源
+   if($result)
     return $result;
+   else return false;
 }

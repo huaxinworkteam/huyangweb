@@ -232,7 +232,7 @@ class Index extends Controller
     }
 
     public function test(){
-        $a=model('Xiaoe')->getAccessToken();
+        $a=model('Xiaoe')->test();
 
         var_dump($a);
     }
