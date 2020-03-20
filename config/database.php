@@ -61,4 +61,17 @@ return [
     'break_reconnect' => false,
     // 断线标识字符串
     'break_match_str' => [],
+    //数据库配置1
+    'db_config1'=>[
+        'type'=>'mysql',
+        'hostname'=>'115.159.66.98',
+        'database'=> 'kefu',
+        'username'=> 'root',
+        'password'=> 'Aa654321',
+        'charset'=> 'utf8',
+        'prefix'=> 'ims_',
+        'debug'=> true,
+        'break_reconnect'=> false,
+        'query'=> '\\think\\db\\Query'
+    ]
 ];
