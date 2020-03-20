@@ -1449,12 +1449,14 @@
 
 
 .contBody .item{
-    width: 258px;
-    margin: 0 30px 10px 0;
+    width: 190px;
+    background:  #efefef;
+    height: 110px;
+    border-radius: 4px;
+    margin: 0 20px 10px 0;
     padding: 10px;
     color: #000;
     float: left;
-    /* background-color: #efefef; */
     text-align: center;
     font-size: 14px;
 }

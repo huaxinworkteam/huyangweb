@@ -84,10 +84,22 @@
     </script>
 
     <script src="//at.alicdn.com/t/font_1471030_svadb868xjp.js"></script>
+    <script type="text/javascript" src="__COLL__/3.1.1/layer.js"></script>
     <script type="text/javascript">
         //Dialog icon base path
         ds.Dialog.defaults.iconBasePath = 'images/';
         ds.loadScript(baseJSUrl+'quick_links.js');
+        function openKefu() {
+            //页面层
+            layer.open({
+                type: 2,
+                title: '客服',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['500px', '90%'],
+                content: "http://test.v7mall.com/app/index.php?i=2&c=entry&toopenid=oTDSW0QW5XzQkSqtlSqBLSFtu3M0&do=chat&m=cy163_customerservice"
+            });
+        };
     </script>
 
 </div>
