@@ -45,7 +45,6 @@ header .nav_list li a:hover , header .nav_list li a.cur{text-decoration:none;bor
 header ul.nav_list li .dropdown {
 	margin-top: 45px;
 	position: absolute;
-	left: 10px; 
 	z-index: 99999;
     background-color: #fff;
     line-height: normal;
