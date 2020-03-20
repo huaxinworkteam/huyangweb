@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 
 /*文字排版*/
 .f12{font-size:12px;}
@@ -180,3 +180,374 @@
 .clear{ clear:both;}
 .fl{float:left;display:inline;}
 .fr{float:right;display:inline;}
+
+#app.hidden {
+    overflow: hidden;
+}
+.g-pc-top {
+    position: relative;
+    top: 60px;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.float-clear {
+    overflow: hidden;
+}
+.g-width-100 {
+    width: 100%;
+}
+.g-width {
+    width: 1200px;
+    margin: 0 auto;
+}
+.pc {
+    min-width: 1200px;
+}
+.word-break {
+    word-break: break-word;
+}
+/* color */
+ .white {
+    color: #fff;
+}
+.color3 {
+    color: #333;
+}
+.color10 {
+    color: #101010;
+}
+.color2b {
+    color: #2b2b2b;
+}
+.color28 {
+    color: #282828;
+}
+.color54 {
+    color: #545454;
+}
+.color57 {
+    color: #575757;
+}
+.color7e {
+    color: #7e7e7e;
+}
+.color9b {
+    color: #9b9b9b;
+}
+/* fontSize */
+ .fs10 {
+    font-size: 10px;
+}
+.fs12 {
+    font-size: 12px;
+}
+.fs14 {
+    font-size: 14px;
+}
+.fs16 {
+    font-size: 16px;
+}
+.fs18 {
+    font-size: 18px;
+}
+.fs20 {
+    font-size: 20px;
+}
+.fs22 {
+    font-size: 22px;
+}
+.fs24 {
+    font-size: 24px;
+}
+.fs28 {
+    font-size: 28px;
+}
+.fs38 {
+    font-size: 38px;
+}
+.fw-500 {
+    font-weight: 500;
+}
+.fw-bold {
+    font-weight: bold
+}
+/* margin */
+ .ml10 {
+    margin-left: 10px;
+}
+.ml74 {
+    margin-left: 74px;
+}
+.mr10 {
+    margin-right: 10px;
+}
+.mr28 {
+    margin-right: 28px;
+}
+.mb5 {
+    margin-bottom: 5px;
+}
+.mb10 {
+    margin-bottom: 10px;
+}
+.mb15 {
+    margin-bottom: 15px;
+}
+.mb20 {
+    margin-bottom: 20px;
+}
+.mb35 {
+    margin-bottom: 35px;
+}
+/* position center */
+ .pr {
+    position: relative;
+}
+.pa-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.pa-centerX {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.pa-centerY {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.center {
+    text-align: center;
+}
+/* 文字超过俩行显示省略号 */
+ .line-clamp1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.line-clamp2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+[v-cloak] {
+    display: none;
+}
+/* flex */
+
+/* flexbox */
+ .flex {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+}
+.flex_1 {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    flex: 1;
+    -webkit-flex: 1;
+}
+/* flex wrap */
+ .flexWrap {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+/* flexColumn */
+ .flexColumn {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    flex-direction: column;
+}
+.flexColumnCenter {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* flexRow */
+ .flexRow {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    flex-direction: row;
+}
+/* flexJustify */
+ .justifyCenter {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    justify-content: center;
+}
+.spaceAround {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    justify-content: space-around;
+}
+.spaceBetween {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    justify-content: space-between;
+}
+/* flexAlignCenter */
+ .alignCenter {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    align-items: center;
+}
+/* flexJustify-AlignCenter */
+ .flexCenter {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* flex Start End  */
+ .flexEnd {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    justify-content: flex-end;
+}
+.flexStart {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    justify-content: flex-start;
+}
+.flexDirection {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    flex-direction: row-reverse;
+}
+/* 右侧工具栏样式 */
+ .right-tools {
+    position: fixed;
+    right: 0;
+    bottom: 300px;
+    z-index: 4;
+}
+.right-tools .to-top, .right-tools .connect-phone, .right-tools .connect-online {
+    width: 60px;
+    height: 60px;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+.right-tools .connect-phone, .right-tools .connect-online {
+    background-color: #AA7550;
+    color: #fff;
+}
+.right-tools .connect-phone {
+    border-bottom: 1px solid #fff;
+    height: 70px;
+    position: relative;
+}
+.right-tools .connect-phone .hover-phone {
+    display: none;
+    width: 164px;
+    height: 46px;
+    line-height: 46px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.21);
+    font-size: 18px;
+    color: #AA7550;
+    position: absolute;
+    left: -176px;
+    top: 10px;
+    z-index: 1;
+    background-color: #fff;
+}
+.right-tools .connect-phone .hover-phone .triangle {
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
+}
+.right-tools .connect-phone:hover .hover-phone {
+    display: block;
+}
+.right-tools .to-top {
+    background-color: #fff;
+    color: #AA7550;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.21);
+}
+.right-tools .to-top .icon, .right-tools .connect-phone .icon, .right-tools .connect-online .icon {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 12px;
+}
+.right-tools .connect-phone .icon {
+    width: 20px;
+    height: 30px;
+    background-image: url(/static/images/tools-phone.png);
+}
+.right-tools .connect-online .icon {
+    width: 21px;
+    height: 19px;
+    background-image: url(/static/images/connect-online.png);
+}
+.right-tools .to-top .icon {
+    width: 16px;
+    height: 16px;
+    background-image: url(/static/images/to-top.png);
+}

@@ -1,0 +1,130 @@
+.g-message {
+    min-width: 380px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #EBEEF5;
+    position: fixed;
+    left: 50%;
+    top: 20px;
+    -webkit-transform: translate(-50%, -200%);
+    transform: translate(-50%, -200%);
+    background-color: #edf2fc;
+    opacity: 0;
+    -webkit-transition: opacity .3s,top .4s,-webkit-transform .4s;
+    transition: opacity .3s,top .4s,-webkit-transform .4s;
+    transition: opacity .3s,transform .4s,top .4s;
+    transition: opacity .3s,transform .4s,top .4s,-webkit-transform .4s;
+    padding: 15px 15px 15px 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.g-message.active {
+    opacity: 1;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+}
+.g-message.normal {
+    background-color: rgba(0, 0, 0, .6);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.g-message.info {
+    background-color: #edf2fc;
+}
+.g-message.success {
+    background-color: #f0f9eb;
+    border-color: #e1f3d8;
+}
+.g-message.error {
+    background-color: #fef0f0;
+    border-color: #fde2e2;
+}
+.g-message.warning {
+    background-color: #fdf6ec;
+    border-color: #faecd8;
+}
+.g-message .g-message__icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.g-message.info .g-message__icon {
+    background-image: url(/static/images/message-info.png);
+}
+.g-message.success .g-message__icon {
+    background-image: url(/static/images/message-success.png);
+}
+.g-message.error .g-message__icon {
+    background-image: url(/static/images/message-error.png);
+}
+.g-message.warning .g-message__icon {
+    background-image: url(/static/images/message-warning.png);
+}
+.g-message .g-message__content {
+    padding: 0;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.g-message.info .g-message__content {
+    color: #909399;
+}
+.g-message.success .g-message__content {
+    color: #67C23A;
+}
+.g-message.error .g-message__content {
+    color: #F56C6C;
+}
+.g-message.warning .g-message__content {
+    color: #E6A23C;
+}
+
+/* 适配移动端 */
+@media only screen and (min-width: 320px) {
+    .g-message {
+        min-width: 60%;
+    }
+}
+@media only screen and (min-width: 360px) and (max-width: 376px) {
+    .g-message {
+        min-width: 60%;
+    }
+}
+@media only screen and (min-width: 377px) and (max-width: 414px) {
+    .g-message {
+        min-width: 60%;
+    }
+}
+@media only screen and (device-width: 375px) and (device-height: 690px) and (-webkit-device-pixel-ratio: 3) {
+    .g-message {
+        min-width: 60%;
+    }
+}
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+    .g-message {
+        min-width: 60%;
+    }
+}
+@media screen and (min-width: 415px) {
+    .g-message {
+        min-width: 60%;
+    }
+}
+@media only screen and (min-width: 960px){
+    .g-message {
+        min-width: 380px;
+    }
+}

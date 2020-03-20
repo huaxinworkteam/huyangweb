@@ -12,8 +12,8 @@ body {
     font-size: 0;
     width: 66px;
     position: fixed;
-    right: 100px;
-    bottom: 100px;
+    right: 60px;
+    bottom: 60px;
     z-index: 11;
     -webkit-transition: width linear .4s;
     -moz-transition: width linear .4s;

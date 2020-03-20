@@ -178,13 +178,11 @@
     text-decoration: none;
     height: 38px;
     line-height: 38px;
-    transition: background 1s 0.3s, color 0.5s 0.5s;
+    transition: background 1s 0.3s;
 }
 
-
 .page .pageBody .leftBy ul.list li a.title:hover {
-    background: #FFBF0B;  
-    color: #ffffff;
+    background: #FFBF0B;
 }
 
 .page .pageBody .leftBy ul.list li ul {
@@ -657,7 +655,10 @@
     line-height: 24px;
 }
 
-.activity .item {
+
+
+/* activity 活动的不要了 */
+/* .activity .item {
     border-radius: 6px;
     border: 1px solid #babec0;
     display: inline-block;
@@ -789,7 +790,7 @@
     border-radius: 4px;
     margin: 0 3px;
     background: #fff;
-}
+} */
 
 .staff .item {
     border-radius: 16px;
@@ -1448,12 +1449,14 @@
 
 
 .contBody .item{
-    width: 258px;
-    margin: 0 30px 10px 0;
+    width: 190px;
+    background:  #efefef;
+    height: 110px;
+    border-radius: 4px;
+    margin: 0 20px 10px 0;
     padding: 10px;
     color: #000;
     float: left;
-    /* background-color: #efefef; */
     text-align: center;
     font-size: 14px;
 }
