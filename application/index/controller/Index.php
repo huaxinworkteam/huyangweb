@@ -71,7 +71,7 @@ class Index extends Controller
         $this->left_bar();
         //获取参数
         $param=input('activityId');
-        $act_id=Db::connect('db_config1')->table('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetiem,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey')->where(['id'=>$param])->find();
+        $act_id=Db::connect('db_config1')->name('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetime,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey')->where(['id'=>$param])->find();
         $this->assign('act_id', $act_id);
         return view('chhcollege/activity/detail');
     }
