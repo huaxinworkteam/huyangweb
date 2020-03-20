@@ -42,13 +42,36 @@
                     </div>
                 </li>
                 <li><a href="{:url('index/course')}" class="">培训课程</a>
-                    <div class="sub_Nav sub_szll">
+                    <!-- 重新设置 ： 1. 显示2条热门课程链接到课程 2. 更多跳转链接index/course -->
+                    <ul class="dropdown activity-center-dorp">
+                        <li>
+                            <a href="activitydetail?id=122" target="_blank" class="g-width-100">
+                                <p class="title">创合汇公开课公益直播：疾病、科幻与哲学反思</p>
+                                <div class="info float-clear">
+                                    <span class="left float-left">03-31</span>
+                                    <span class="right float-right">报名中</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="activitydetail?id=121" target="_blank" class="g-width-100">
+                                <p class="title">创合汇公开课公益直播：企业如何抓住疫情后的数字化转型机遇</p>
+                                <div class="info float-clear">
+                                    <span class="left float-left">03-28</span>
+                                    <span class="right float-right">报名中</span>
+                                </div>
+                            </a>
+                        </li>
+                        <a href="activity" target="_blank" class="more">更多活动</a>
+                    </ul>
+                    <!-- <div class="sub_Nav sub_szll">
                         <div class="line"></div>
                         {volist name='Course' id='vo'}
                         <p class="courseType" data-id="{$vo.id}"><a href="{:url('index/course',['id'=>$vo.id])}">{$vo.typeName}</a></p>
                         {/volist}
-                    </div>
+                    </div> -->
                 </li>
+                
                 <li><a href="{:url('index/szll',['seriesNO'=>0])}" class="">师资力量</a>
                     <div class="sub_Nav sub_szll">
                         <div class="line"></div>
@@ -57,7 +80,9 @@
                         {/volist}
                     </div>
                 </li>
-                <li><a href="{:url('index/activity')}" class="">培训报名</a></li>
+                <li><a href="{:url('index/activity')}" class="">培训报名</a>
+                    <!-- 重新设置 ： 1. 显示2条热门活动 链接到活动详情页面 2. 更多跳转链接index/activity -->
+                </li>
                 <!--http://www.massmakers.cn/category-9338.html-->
                 <li><a href="{:url('index/news')}" class="">新闻动态</a></li>
                 <li><a href="{:url('index/contact')}" class="" style="display: none;">联系我们</a></li>
@@ -113,4 +138,17 @@
     function getCourse(url, id) {
         window.location.replace('/index/index/course/id/' + id + '.html');
     }
+    $(function () {
+        $("ul.nav_list li").hover(function () {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+            $("ul.nav_list li .dropdown").stop(false, true);
+            $(this).find(".dropdown").fadeIn();
+        }, function () {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+            $("ul.nav_list li .dropdown").stop(false, true);
+            $(this).find(".dropdown").fadeOut();
+        });
+    });
 </script>

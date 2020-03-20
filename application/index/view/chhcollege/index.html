@@ -108,9 +108,8 @@
     <div class="index_btm_body">
         <div class="cw">
     
-            <h3 class="blank_tit"><a href="{:url('index/szll',['seriesNO'=>1])}"><span>师资力量</span></a></h3>
-    
-    
+            <h3 class="blank_tit"><a href="#"><span>师资力量</span></a></h3>
+            <a class="blank_add" href="{:url('index/szll',['seriesNO'=>1])}" target="_blank">更多 +</a>
             <div class="tab_con">
     
                 <div class="con">
@@ -142,21 +141,8 @@
     <div class="index_news_body">
         <div class="cw">
             <div class="clearfix">
-    
-                <div class="news_body fl">
-                    <h3 class="tit">
-                        <a href="{:url('index/news')}" target="_blank">更多 +</a>
-                        <span>新闻动态</span>
-                    </h3>
-                    <ul class="list">
-                        {volist name="news" id="vo"}
-                        <li><a href="{:url('index/news_detail',['newsid'=>$vo['newsid']])}" target="_blank"><em>{$vo.createTime}</em><span>{$vo.newstitle}</span></a>
-                        </li>
-                        {/volist}
-                    </ul>
-                </div>
-    
-                <div class="event_body fr">
+                
+                <div class="event_body fl">
                     <h3 class="tit">
                         <a href="{:url('index/activity')}" target="_blank">更多 +</a>
                         <span>培训报名</span>
@@ -176,7 +162,18 @@
                         {/volist}
                     </ul>
                 </div>
-    
+                <div class="news_body fr">
+                    <h3 class="tit">
+                        <a href="{:url('index/news')}" target="_blank">更多 +</a>
+                        <span>新闻动态</span>
+                    </h3>
+                    <ul class="list">
+                        {volist name="news" id="vo"}
+                        <li><a href="{:url('index/news_detail',['newsid'=>$vo['newsid']])}" target="_blank"><em>{$vo.createTime}</em><span>{$vo.newstitle}</span></a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
