@@ -138,17 +138,17 @@
     function getCourse(url, id) {
         window.location.replace('/index/index/course/id/' + id + '.html');
     }
-    // $(function () {
-    //     $("ul.nav_list li").hover(function () {
-    //         $("ul.nav_list li .sub_Nav").stop(false, true);
-    //         $(this).find(".sub_Nav").fadeIn();
-    //         $("ul.nav_list li .dropdown").stop(false, true);
-    //         $(this).find(".dropdown").fadeIn();
-    //     }, function () {
-    //         $("ul.nav_list li .sub_Nav").stop(false, true);
-    //         $(this).find(".sub_Nav").fadeOut();
-    //         $("ul.nav_list li .dropdown").stop(false, true);
-    //         $(this).find(".dropdown").fadeOut();
-    //     });
-    // });
+    $(function () {
+        $("ul.nav_list li").hover(function () {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeIn();
+            $("ul.nav_list li .dropdown").stop(false, true);
+            $(this).find(".dropdown").fadeIn();
+        }, function () {
+            $("ul.nav_list li .sub_Nav").stop(false, true);
+            $(this).find(".sub_Nav").fadeOut();
+            $("ul.nav_list li .dropdown").stop(false, true);
+            $(this).find(".dropdown").fadeOut();
+        });
+    });
 </script>
