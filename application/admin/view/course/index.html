@@ -36,7 +36,7 @@
             <div class="panel">
                 <div class="panel-body">
                     <el-form :inline="true" :model="queryForm" ref="queryForm">
-                          <el-form-item label="课程名称：" style="margin-bottom: 0;" prop="courseName">
+                        <el-form-item label="课程名称：" style="margin-bottom: 0;" prop="courseName">
                             <el-input v-model="queryForm.courseName" placeholder="请填写课程名称"></el-input>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 0;">
@@ -70,7 +70,7 @@
                                 <el-table-column prop="isShow" label="是否显示" min-width="15%" align="center">
                                     <template slot-scope="scope">
                                         <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.isShow" :active-text="scope.row.isShow? '启用':'禁用'"
-                                        @change="changeSwitch($event, scope.row, scope.$index)"></el-switch>
+                                        @change="changeSwitch( scope.row, scope.$index)"></el-switch>
                                     </template>
                                 </el-table-column>
                                 <el-table-column fixed="right" label="操作" min-width="20%" align="center"> 
@@ -103,13 +103,12 @@
 <!-- element-ui 时间戳 转换插件 -->
 <script type="text/javascript" src="__ADMIN__/lib/moment/moment.js"></script>
 
-<script type="text/javascript">
+<script type="text/babel">
     new Vue({
         el: '#app',
         data: {
             queryForm: {
-                positionType: '',
-                positionCode: ''
+                courseName: ''
             },
             tableData: [],
             selectID: []
@@ -159,8 +158,14 @@
                         // 提交数据的请求
                         var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                         setTimeout(()=> {
-                            location.replace('/admin/course/index?courseName=' +
-                            this.queryForm.courseName);
+                            // location.replace('/admin/course/searchLocation?positionType=' +
+                            // this.queryForm.positionType + '&positionCode=' + this.queryForm.positionCode);
+                            http_post('/admin/course/index', this.queryForm).then(res => {
+                                this.tableData = res.data.data;
+                                layer.close(index);
+                            }).catch(err => {
+                                layer.close(index);
+                            });
                         }, 500);                            
                     } else {
                         layer.msg("查询条件不足");
@@ -221,9 +226,10 @@
                     });
                 });
             },
-            changeSwitch(static, rowData, index) {
-                http_post('/admin/course/shiftShow', {id: rowData.id, isShow: rowData.isShow}).then( res => {
-                    layer.msg(rowData.isShow == 0?"已启用":"已禁用");
+            changeSwitch( rowData, index) {
+                let isShow = rowData.isShow ? 0:1;
+                http_post('/admin/course/shiftShow', {id: rowData.id, isShow: isShow}).then( res => {
+                    layer.msg(rowData.isShow == 1?"已启用":"已禁用");
                     // layer.msg("删除成功");
                 }).catch (err => {
                     let newRowData = rowData;

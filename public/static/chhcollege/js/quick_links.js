@@ -5,10 +5,9 @@
  */
 jQuery(function($){
     //创建DOM
-    var
-        quickHTML = '<div class="quick_links_panel"><div id="quick_links" class="quick_links"><a href="#top" class="return_top"><i class="top"><svg class="icon" aria-hidden="true"> <use xlink:href="#icon-gotop"></use> </svg></i><span>返回</span></a>' +
-            '<a href="#" class="qq"><i class="view"><svg class="icon" aria-hidden="true"> <use xlink:href="#icon-qq"></use> </svg></i><span>QQ</span></a>' +
-            '<a href="http://test.v7mall.com/app/index.php?i=2&c=entry&toopenid=oTDSW0ZrpxX-BL_F-CgBG794E2NA&do=chat&m=cy163_customerservice" class="leave_message"><i class="qa"><svg class="icon" aria-hidden="true"> <use xlink:href="#icon-service"></use> </svg> </i><span>联系客服</span></a></div>' +
+    // '<a href="#" class="qq"><i class="view"><svg class="icon" aria-hidden="true"> <use xlink:href="#icon-qq"></use> </svg></i><span>QQ</span></a>' +
+    var quickHTML = '<div class="quick_links_panel"><div id="quick_links" class="quick_links"><a href="#top" class="return_top"><i class="top"><svg class="icon" aria-hidden="true"> <use xlink:href="#icon-gotop"></use> </svg></i><span>返回</span></a>' +
+            '<a href="javascript: void(0);" onClick="openKefu()" class="leave_message"><i class="qa"><svg class="icon" aria-hidden="true"> <use xlink:href="#icon-service"></use> </svg> </i><span>联系客服</span></a></div>' +
             '<div class="quick_toggle"><a href="javascript:;" class="toggle" title="展开/收起"><svg class="icon" >\n' +
             '    <use xlink:href="#icon-btn"></use>\n' +
             '</svg></a></div></div>' +
@@ -228,3 +227,4 @@ jQuery(function($){
         });
     }
 });
+

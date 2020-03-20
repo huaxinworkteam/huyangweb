@@ -1,0 +1,119 @@
+<!--_meta 作为公共模版分离出去-->
+{include file="Common/meta" /}
+	<!--/meta 作为公共模版分离出去-->
+	<title>新增客服 </title>
+	<meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+    <meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+
+<body>
+	<article class="clearfix pd-20" id="app">
+        <el-form :model="configData" :rules="rules" ref="configData" label-width="120px">
+            <el-form-item label="QQ: " prop="QQ">
+                <el-input v-model="configData.QQ" placeholder="QQ"></el-input>
+            </el-form-item>
+            <el-form-item label="客服链接: " prop="kefuLink">
+                <el-input v-model="configData.kefuLink" placeholder="客服链接"></el-input>
+            </el-form-item>
+            <el-form-item label="手机: " prop="mobile">
+                <el-input v-model="configData.mobile" placeholder="手机"></el-input>
+            </el-form-item>
+            <el-form-item label="联系人: " prop="username">
+                <el-input v-model="configData.username" placeholder="联系人"></el-input>
+            </el-form-item>
+            <el-form-item label="邮箱: " prop="email">
+                <el-input v-model="configData.email" placeholder="邮箱"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" size="medium" @click="submitForm('configData')">保存</el-button>
+                <el-button size="medium" @click="resetForm('configData')">重置</el-button>
+            </el-form-item>
+        </el-form>
+    </article>
+
+    <!-- footer 作为公共模板分离出去 -->
+    {include file="Common/footer" /}
+    <!--请在下方写此页面业务相关的脚本-->
+	<script type="text/babel">
+        new Vue({
+            el: '#app',
+            data: function() {
+                let checkPhone = (rule, value, callback) => {
+                    if (!value) {
+                        return callback(new Error('手机号不能为空'));
+                    } else {
+                        const reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
+                        if (reg.test(value)) {
+                            callback();
+                        } else {
+                            return callback(new Error('请输入正确的手机号'));
+                        }
+                    }
+                };
+                return {
+                    configData: {
+                        id: {$id},
+                        QQ: '',
+                        username: '',
+                        kefuLink: '',
+                        email: '',
+                        mobile: ''
+                    },
+                    rules: {
+                        mobile: [
+                            { required: true, message: '请输入手机号', trigger: 'blur' },
+                            { validator: checkPhone, trigger: 'blur' }
+                        ],
+                        email: [
+                            { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                            { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
+                        ],
+                        kefuLink: [
+                            { required: true, message: '请输入客服链接', trigger: 'blur' },
+                        ],
+                        username: [
+                            { required: true, message: '请输入用户名', trigger: 'blur' },
+                        ]
+                    }
+                }
+            },
+            mounted() {
+                http_post('/admin/config/edit', {id: this.configData.id}).then(res => {
+                    this.configData = res.data;
+                }).catch(err => {
+    
+                });
+            },
+            methods: {
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            // 提交数据的请求
+                            var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+                            setTimeout(()=> {
+                                http_post('/admin/config/saveInfo', this.configData).then((res) => {
+                                    layer.close(index);
+                                    layer.msg("提交成功", {icon:1});
+                                    //先得到当前iframe层的索引
+                                    parent.layer.close(parent.layer.getFrameIndex(window.name)); //再执行关闭 
+                                }).catch(err => {
+                                    layer.close(index);
+                                    console.log(err);
+                                });
+                            }, 500);                            
+                        } else {
+                            layer.msg("填写数据与要求不符");
+                            return false;
+                        }
+                    });
+                    
+                },
+                resetForm(formName) {
+                    this.$refs[formName].resetFields();
+                }
+            }
+        });
+    
+    </script>
+    <!--请在上方写此页面业务相关的脚本-->
+</body>

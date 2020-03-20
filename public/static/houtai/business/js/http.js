@@ -1,6 +1,10 @@
+// <!-- IE 兼容 插件 -->
+//<script type="text/javascript"  src="__ADMIN__/lib/babel-polyfill/polyfill.min.js"></script>
+//<script type="text/javascript"  src="__ADMIN__/lib/babel-polyfill/browser.min.js"></script>
+
 /** post jQuery ajax */
 function http_post(url, data) {
-    return new Promise((reslove, reject) => {
+    return new Promise( function(reslove, reject) {
         $.ajax({
             url: url,
             type:'post',
@@ -26,7 +30,7 @@ function http_post(url, data) {
 }
 
 function http_get(url, data) {
-    return new Promise((reslove, reject) => {
+    return new Promise(function(reslove, reject) {
         $.ajax({
             url:url,
             type:'get',

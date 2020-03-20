@@ -8,7 +8,7 @@
 .blank_tit span{background-color:#fff;color:#535353;font-size:35px;padding:0 35px;}
 
 .color_blank{height:6px;overflow:hidden;}
-.color_blank.s_1{background-color:#c49a81;}
+.color_blank.s_1{background-color:#FFBF0B;}
 
 .fckBody h1{font-size:1.5em;}
 .fckBody h2{font-size:1.4em;}
@@ -17,4 +17,12 @@
 .fckBody h5{font-size:1.1em;}
 .fckBody h6{font-size:1em;}
 .fckBody h1,.fckBody h2,.fckBody h3,.fckBody h4,.fckBody h5,.fckBody h6 {margin:10px 0;font-weight:700;}
+
+/* layer-color */
+.layer-bg-color .layui-layer-title {
+	background-color:#FFBF0B; font-weight: bold;
+}
+.layer-bg-color .layui-layer-content {
+	padding: 20px;
+}
 

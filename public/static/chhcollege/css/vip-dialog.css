@@ -1,0 +1,89 @@
+/* dialog */
+.dialog .mask{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    overflow: auto;
+}
+
+.join-vip-dialog {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    overflow: auto;
+
+    opacity: 0;
+    visibility: hidden;
+}
+.join-vip-dialog.active {
+    opacity: 1;
+    visibility: visible;
+}
+.join-vip-dialog .wrapper {
+    width: 583px;
+    padding: 28px 36px;
+    z-index: 11;
+    margin: 180px auto 100px;
+    background-color: #fff;
+    border-radius: 4px;
+
+    -webkit-transform: translateY(-200%);
+    -moz-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    transform: translateY(-200%);
+    opacity: 1;
+    -webkit-transition: all 0.3s 0.1s;
+    -moz-transition: all 0.3s 0.1s;
+    transition: all 0.3s 0.1s;
+}
+.join-vip-dialog.active .wrapper {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+}
+.join-vip-dialog .dialog-header{
+    padding-bottom: 22px;
+    border-bottom: 1px dashed #262626;
+    position: relative;
+    margin-bottom: 40px;
+}
+.join-vip-dialog .dialog-header .dialog-close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 8px;
+    background-image: url(/static/images/course-detail-order-close.png);
+    background-size: cover;
+    cursor: pointer;
+}
+.join-vip-dialog .dialog-header {
+    border-bottom: none;
+}
+.join-vip-dialog .dialog-body .title {
+    margin: 26px 0 12px;
+    color: #181818;
+}
+.join-vip-dialog .dialog-body .text {
+    color: #7F8993;
+    line-height: 30px;
+}
+.join-vip-dialog .dialog-body .text span {
+    color: #AA7550;
+    font-weight: bold;
+}
+.join-vip-dialog .dialog-body .vip-qrcode {
+    margin-top: 46px;
+}
+.join-vip-dialog .dialog-body .vip-qrcode p {
+    margin-top: 18px;
+    color: #7A848F;
+}

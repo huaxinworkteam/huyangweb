@@ -1,0 +1,269 @@
+.activity .banner {
+    height: 320px;
+    
+}
+.activity .banner .swiper-container {
+    height: 100%;
+}
+.activity .banner .swiper-wrapper .banner-bg {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+.activity .banner .swiper-wrapper .banner-bg .banner-bg-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(36, 36, 36, .77); */
+    cursor: pointer;
+}
+.banner .swiper-pagination-bullets {bottom: 19px;}
+.banner .swiper-pagination-bullet {
+    width: 39px;
+    height: 4px;
+    background: #979797;
+    border-radius: 0;
+}
+.banner .swiper-pagination-bullet-active {background: #fff;}
+
+.activity .banner .wrapper {
+    padding: 0 14px;
+    height: 100%;
+    position: relative;
+}
+.activity .banner .wrapper .info {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 310px;
+    padding: 16px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .6);
+}
+.activity .banner .wrapper .info .title {
+    color: #fff;
+    padding: 0 10px 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #979797;
+}
+.activity .banner .wrapper .info .address,
+.activity .banner .wrapper .info .time,
+.activity .banner .wrapper .info .num {
+    margin-bottom: 18px;
+    padding-left: 10px;
+}
+.activity .banner .wrapper .info .num {
+    margin-bottom: 36px;
+}
+.activity .banner .wrapper .info .address .icon,
+.activity .banner .wrapper .info .time .icon,
+.activity .banner .wrapper .info .num .icon {
+    background-size: cover;
+    vertical-align: middle;
+    margin-right: 12px;
+}
+
+.activity .banner .wrapper .info .address .icon {
+    width: 12px;
+    height: 15px;
+    background-image: url(/static/images/activity-address-icon.png);
+}
+.activity .banner .wrapper .info .time .icon {
+    width: 14px;
+    height: 14px;
+    background-image: url(/static/images/activity-time-icon.png);
+}
+.activity .banner .wrapper .info .num .icon {
+    width: 14px;
+    height: 11px;
+    background-image: url(/static/images/activity-num-icon.png);
+}
+.activity .banner .wrapper .info .btn .item {
+    color: #fff;
+    width: 130px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 18px;
+    background-color: #B48A61;
+    text-align: center;
+}
+.activity .banner .wrapper .info .btn .item.disabled {
+    cursor: not-allowed;
+    background-color: #BCBCBC;
+}
+.activity .banner .wrapper .info .btn .item:first-child {
+    margin: 0 auto;
+}
+/* 筛选 */
+.activity .filter {
+    background-color: #fff;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, .18);
+}
+.activity .filter .wrapper {
+    padding: 0 36px;
+}
+.activity .filter .wrapper .list {
+    padding: 20px 0 20px 4px;
+    border-bottom: 1px dashed #CFCFCF;
+}
+.activity .filter .wrapper .list:last-child {
+    border-bottom: none;
+}
+.activity .filter .wrapper .list .label {
+    color: #494949;
+    margin-right: 10px;
+}
+.activity .filter .wrapper .list .item {
+    color: #7A848F;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.activity .filter .wrapper .list .item.active {
+    color: #B48A61;
+    cursor: default;
+}
+
+.activity .content {
+    background-color: #fff;
+    margin-top: 30px;
+}
+.activity .content .wrapper {
+    padding: 0 10px;
+}
+.activity .content .wrapper .listItem {
+    width: 368px;
+    margin: 0 10px 56px;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.activity .content .wrapper .listItem:hover {
+    -webkit-box-shadow: 0 10px 15px 0 rgba(0,0,0,.05), 0 15px 40px 0 rgba(0,0,0,.08);
+    box-shadow: 0 10px 15px 0 rgba(0,0,0,.05), 0 15px 40px 0 rgba(0,0,0,.08);
+}
+
+.activity .content .wrapper .listItem img {
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    vertical-align: bottom;
+}
+.activity .content .wrapper .listItem .not-start,
+.activity .content .wrapper .listItem .processing,
+.activity .content .wrapper .listItem .is-over {
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    top: 14px;
+    left: 0;
+    padding: 0 10px;
+    height: 20px;
+    line-height: 20px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background-color: rgba(0, 0, 0, .5);
+}
+.activity .content .wrapper .listItem .not-start .dot,
+.activity .content .wrapper .listItem .is-over .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.activity .content .wrapper .listItem .not-start .dot {
+    background-color: #FF8800;
+}
+.activity .content .wrapper .listItem .is-over .dot {
+    background-color: #BEBEBE;
+}
+.activity .content .wrapper .listItem .processing .dot {
+    width: 11px;
+    height: 11px;
+    vertical-align: middle;
+    background-image: url(/static/images/activity-processing.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+}
+.activity .content .wrapper .listItem .listItem-body {
+    padding: 8px 18px 48px;
+    color: #494949;
+    border: 1px solid #CCCCCC;
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.activity .content .wrapper .listItem .listItem-body .title {
+    padding: 0 4px 11px;
+    border-bottom: 1px dashed #CFCFCF;
+    color: #494949;
+    line-height: 24px;
+    height: 54px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+.activity .content .wrapper .listItem .listItem-body .address {
+    margin-bottom: 12px;
+}
+.activity .content .wrapper .listItem .listItem-body .address .icon,
+.activity .content .wrapper .listItem .listItem-body .time .icon {
+    vertical-align: middle;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+.activity .content .wrapper .listItem .listItem-body .address .icon {
+    width: 15px;
+    height: 17px;
+    background-image: url(/static/images/activity-content-address-icon.png);
+}
+.activity .content .wrapper .listItem .listItem-body .time .icon {
+    width: 14px;
+    height: 14px;
+    background-image: url(/static/images/activity-content-time-icon.png);
+}
+
+.activity .content .show-more p {
+    width: 133px;
+    height: 33px;
+    line-height: 33px;
+    margin: 0 auto;
+    color: #B48A61;
+    border: 1px solid #B48A61;
+    cursor: pointer;
+    margin-bottom: 108px;
+}
+.activity .content .show-more p.no-border {
+    border: none;
+}
+
+.activity .content .no-more p {
+    color: #aeaeae;
+    position: relative;
+    text-align: center;
+    width: 500px;
+    margin: 0 auto 108px;
+}
+.activity .content .no-more p::before,
+.activity .content .no-more p::after {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '';
+    width: 100px;
+    border-top: 1px solid #aeaeae;
+}
+.activity .content .no-more p::before {
+    left: 85px;
+}
+.activity .content .no-more p::after {
+    right: 85px;
+}
+.activity .content .no-data img {
+    width: 508px;
+    margin: 100px auto 242px;
+}

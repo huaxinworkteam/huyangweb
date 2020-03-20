@@ -253,5 +253,10 @@ class CourseType extends Model
       }
     }
 
+    public  static  function  getDepth(){
+        $res=self::where('isDel',0)->field('id,typeLevel')->order('typeLevel desc')->find()['typeLevel'];
+        if($res) { return $res;}
+        else return 0;
+    }
 
 }

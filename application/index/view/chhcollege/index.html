@@ -4,9 +4,9 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>首页</title>
-    <meta name='keywords' content="创合汇，商学院，，商学院课程"/>
+    <meta name='keywords' content="胡杨大学，商学院，商学院课程"/>
     <meta name='description'
-          content="是基于上海交通大学等国内外知名院校优质资源的基础上成立的全球新一代平台型商学院。致力于打破大学围墙，突破教育界与产业界的界限，打造中国乃至世界领先的创业者、企业家及其管理团队最有价值的学习与发展平台"/>
+          content="华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。 <br/>学校致力于系统性的培养企业家及其管理团队，打造最有价值的学习与发展平台，为中国创新创业事业和实业发展贡献力量。"/>
 
     {include file="public/head" /}
 </head>
@@ -104,80 +104,77 @@
     </div>
 </div>
 
-<div class="index_btm_body">
-    <div class="cw">
-
-        <h3 class="blank_tit"><a href="{:url('index/szll',['seriesNO'=>1])}"><span>师资力量</span></a></h3>
-
-
-        <div class="tab_con">
-
-            <div class="con">
-                <div class="scroll_body" id="scroll_1">
-                    <div class="scroll_in fl">
-                        {volist name="teachers" id="vo"}
-                        <ul>
-                            <li class="box_1">
-                                <a href="#">
-                                    <div class="in">
+<div class="gradient">
+    <div class="index_btm_body">
+        <div class="cw">
+    
+            <h3 class="blank_tit"><a href="#"><span>师资力量</span></a></h3>
+            <a class="blank_add" href="{:url('index/szll',['seriesNO'=>1])}" target="_blank">更多 +</a>
+            <div class="tab_con">
+    
+                <div class="con">
+                    <div class="scroll_body" id="scroll_1">
+                        <div class="scroll_in fl">
+                            {volist name="teachers" id="vo"}
+                            <ul>
+                                <li class="box_1">
+                                    <div class="in teacher" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
+                                    data-level="{$vo.teacherlevel}" data-description="{$vo.teacherdescription}">
                                         <img src="{$vo.teacherphoto}"/>
                                         <h3>{$vo.teachername}</h3>
                                         <h4>{$vo.teacherlevel}</h4>
-                                        <p style="text-align: justify;">{$vo.teacherdescription}</p>
+                                        <p>{$vo.teacherdescription}</p>
                                     </div>
-                                </a>
-                            </li>
-
-                        </ul>
-                        {/volist}
+                                </li>
+    
+                            </ul>
+                            {/volist}
+                        </div>
+    
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="index_news_body">
-    <div class="cw">
-        <div class="clearfix">
-
-            <div class="news_body fl">
-                <h3 class="tit">
-                    <a href="{:url('index/news')}" target="_blank">更多 +</a>
-                    <span>新闻动态</span>
-                </h3>
-                <ul class="list">
-                    {volist name="news" id="vo"}
-                    <li><a href="{:url('index/news_detail',['newsid'=>$vo['newsid']])}" target="_blank"><em>{$vo.createTime}</em><span>{$vo.newstitle}</span></a>
-                    </li>
-                    {/volist}
-                </ul>
+    
+    
+    <div class="index_news_body">
+        <div class="cw">
+            <div class="clearfix">
+                
+                <div class="event_body fl">
+                    <h3 class="tit">
+                        <a href="{:url('index/activity')}" target="_blank">更多 +</a>
+                        <span>培训报名</span>
+                    </h3>
+                    <ul class="list">
+                        {volist name="index_activity" id="vo"}
+                        <li>
+                            <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" target="_blank">
+                                <img src="{$vo.thumb}" class="fl"/>
+    
+                                <div class="fl">
+                                    <h3>{$vo.title}</h3>
+                                    <p>{$vo.intro|raw}</p>
+                                </div>
+                            </a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
+                <div class="news_body fr">
+                    <h3 class="tit">
+                        <a href="{:url('index/news')}" target="_blank">更多 +</a>
+                        <span>新闻动态</span>
+                    </h3>
+                    <ul class="list">
+                        {volist name="news" id="vo"}
+                        <li><a href="{:url('index/news_detail',['newsid'=>$vo['newsid']])}" target="_blank"><em>{$vo.createTime}</em><span>{$vo.newstitle}</span></a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
             </div>
-
-            <div class="event_body fr">
-                <h3 class="tit">
-                    <a href="http://www.massmakers.cn/category-9338.html" target="_blank">更多 +</a>
-                    <span>培训报名</span>
-                </h3>
-                <ul class="list">
-                    {volist name="index_activity" id="vo"}
-                    <li>
-                        <a href="{:url('index/act_detail',['activityId'=>$vo['activityId']])}" target="_blank">
-                            <img src="{$vo.activity_pic}" class="fl"/>
-
-                            <div class="fl">
-                                <h3>{$vo.activityTitle}</h3>
-                                <h4>{$vo.createTime}</h4>
-                                <p>{$vo.articleContent|raw}</p>
-                            </div>
-                        </a>
-                    </li>
-                    {/volist}
-                </ul>
-            </div>
-
         </div>
     </div>
 </div>
@@ -186,7 +183,28 @@
 <footer>
     {include file="public/coll_footer" /}
 </footer>
-
+<!-- 请在此处下方写此页面业务相关的脚本 -->
+<script>
+    $(document).ready(function () {
+        $(".teacher").click(function () {
+            layer.open({
+                type: 1,
+                title: $(this).data("name"),
+                skin: 'layer-bg-color', //样式类名
+                closeBtn: 1, //不显示关闭按钮
+                anim: 2,
+                shadeClose: true, //开启遮罩关闭
+                area: ['620px', '500px'], //宽高
+                content: '<div class="layer-teacher"><img src="'+
+                    $(this).data("photo")+'" />'+ '<div class="des"><h3>' + 
+                    $(this).data("name") + '</h3><h4>'+ $(this).data("level")+ 
+                    '</h4></div></div><p class="layer-teacher-desc">'+ 
+                    $(this).data("description") +'</p>'
+            });
+        });
+    });
+</script>
+<!-- 请在此处上方写此页面业务相关的脚本 -->
 </body>
 
 </html>

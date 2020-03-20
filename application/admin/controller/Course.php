@@ -131,6 +131,11 @@ class Course extends Base
         else return myJson('F');
     }
 
+    public function CLDepth(){
+        $res=CourseType::getDepth();
+        if($res) return myJson('T',$res);
+        else return myJson('F','获取数值失败');
+    }
     public function  test(){
        CourseModel::getAll();
     }

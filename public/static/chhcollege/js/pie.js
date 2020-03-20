@@ -2,7 +2,7 @@
 <html>
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>创合汇学院——全球开放式平台型商学院</title>
+<title>胡杨大学学院——全球开放式平台型商学院</title>
 <meta name='keywords' content="——全球开放式平台型商学院" />
 <meta name='description' content="——全球开放式平台型商学院" />
 
@@ -98,21 +98,21 @@ $(function(){
                     <input type="text" id="keys" placeholder="Search" />
                     <a href="javascript:;" onclick="searchAll()"></a>
                 </div>
-                <div class="website_change"><span>创合汇网群</span><i></i>
+                <div class="website_change"><span>胡杨大学网群</span><i></i>
                     <ul>
-                        <li><a href="http://www.chuanghehui.cn/" target="_blank">创合汇总站</a></li>
-                        <li><a href="http://chhcapital.cn/" target="_blank">创合汇资本</a></li>
+                        <li><a href="http://www.chuanghehui.cn/" target="_blank">胡杨大学总站</a></li>
+                        <li><a href="http://chhcapital.cn/" target="_blank">胡杨大学资本</a></li>
 
                         <li><a href="http://www.chhcollege.org/" target="_blank"></a></li>
-                        <li><a href="http://www.chhconsulting.cn/" target="_blank">创合汇咨询</a></li>
-                        <li><a href="http://www.chhcollege.org/index/mooc/index.html" target="_blank">创合汇APP</a></li>
+                        <li><a href="http://www.chhconsulting.cn/" target="_blank">胡杨大学咨询</a></li>
+                        <li><a href="http://www.chhcollege.org/index/mooc/index.html" target="_blank">胡杨大学APP</a></li>
                     </ul>
                 </div>
                 <!-- <a href="javascript:;" class="wechat"><span><img src="/public/index/images/common/qr_code_top.jpg" /></span></a> </div> -->
                 <ul class="nav_list">
                     <li><a href="/" class="">首页</a></li>
                     <li><a href="/index/about/index.html" class="">学院介绍</a></li>
-                    <li><a href="/index/course/index.html" class="cur">核心课程</a>
+                    <li><a href="/index/course/index.html" class="cur">培训课程</a>
                         <div class="sub_Nav">
                             <div class="line"></div>
                                                         <p><a href="/index/course/index/cid/402.html" target="_blank">工商管理类</a></p>
@@ -179,7 +179,7 @@ $(function(){
       <!--left start-->
       <div class="leftBy fl">
         <div class="tit">
-          <h3>核心课程</h3>
+          <h3>培训课程</h3>
           <h4>Main course</h4>
         </div>
         		<ul class="list2">
@@ -212,7 +212,7 @@ $(function(){
                 </li>
                             <li> <a href="/index/course/index/cid/380.html" class="title " >国际访学类</a>
                   <dl>
-                                                 <dd><a href="/index/course/index/cid/380.html" class="">> 2019「创合汇」德国访学 | 隐形冠军与工匠精神</a></dd>
+                                                 <dd><a href="/index/course/index/cid/380.html" class="">> 2019「胡杨大学」德国访学 | 隐形冠军与工匠精神</a></dd>
                                                  <dd><a href="/index/course/index/cid/379.html" class="">> 美国访学</a></dd>
                                                  <dd><a href="/index/course/index/cid/381.html" class="">> 英国访学</a></dd>
                                                  <dd><a href="/index/course/index/cid/383.html" class="">> 日本访学</a></dd>
@@ -231,7 +231,7 @@ $(function(){
           <div class="fl">
             <h3>  </h3>
           </div>
-          <div class="fr"> <a href="/" target="_blank">首页</a><span>></span><a href="/index/course/index/id/369.html">核心课程</a><span class="cur">></span><a href="javascript:;" class="cur"></a> </div>
+          <div class="fr"> <a href="/" target="_blank">首页</a><span>></span><a href="/index/course/index/id/369.html">培训课程</a><span class="cur">></span><a href="javascript:;" class="cur"></a> </div>
         </div>
         <div class="course">
 			<div class="contBody">
@@ -257,7 +257,7 @@ $(function(){
                     <p><a href="#" target="_blank">学习模式</a></p>
                 </li>
                 <li>
-                    <h3>核心课程</h3>
+                    <h3>培训课程</h3>
                                         <p><a href="/index/course/index/cid/402.html" target="_blank">工商管理类</a></p>
                                         <p><a href="/index/course/index/cid/404.html" target="_blank">创新创业类</a></p>
                                         <p><a href="/index/course/index/cid/385.html" target="_blank">金融实务类</a></p>

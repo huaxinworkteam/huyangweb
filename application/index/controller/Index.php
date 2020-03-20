@@ -3,43 +3,50 @@
 namespace app\index\controller;
 
 use app\common\model\Activity;
+use app\common\model\Config;
+use app\common\model\Course;
+use app\common\model\CourseType;
 use app\common\model\News;
 use app\common\model\Series;
 use app\common\model\Teachers;
 use app\common\model\Gallery;
+use app\common\model\Xiaoe;
 use think\Controller;
 use think\Db;
 
 
 class Index extends Controller
 {
-    //header
+    public function __construct()
+    {
+        parent::__construct();
+        global $kefu;
+        if(!$GLOBALS['kefu']){
+            $kefu=Config::getAll()->toArray();
+        }
+    }
+
+    //header and footer
     public function headFoot(){
        $xueYuan=model('series')->where('delete_time',null)->order('seriesSort desc')->select();
         $this->assign('shizi',$xueYuan);
         $AB=model('AboutMore')->where(['isDel'=>0,'isShow'=>1])->field('id,name')->order(['sort'=>'desc'])->select();
         $this->assign('AB',$AB);
+        $course=model('CourseType')->where(['isDel'=>0,'typeLevel'=>1])->field('id,typeName')->order('sort desc')->select();
+        $this->assign('Course',$course);
     }
     //主页
     public function index()
     {   $this->headFoot();
-
-        //获取学院类别
-/*        $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->group('seriesNO')->select();
-        $this->assign('group', $group);*/
         $gallery=Gallery::where('webno',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
-        //获取教师信息
-    /*    $t = input('seriesNO');
-       if (!$t)*/
             $list = Teachers::where('isShow',1)->where('delete_time',null)->where('isTop',1)->limit(8)->order('sort desc')->select();
-      /*  else  $list = Teachers::where('seriesNO', $t)->limit(4)->select();*/
         $this->assign('teachers', $list);
         //主页下方左侧新闻
         $news=News::where('isShow',1)->order('createTime desc')->limit(6)->select();
         $this->assign('news',$news);
         //主页下方右侧活动
-        $index_activity=Activity::where('isShow',1)->order('createTime desc')->limit(2)->select();
+        $index_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->limit(3)->select();
         $this->assign('index_activity',$index_activity);
 
         return view('chhcollege/index');
@@ -55,17 +62,18 @@ class Index extends Controller
     public function activity()
     {  $this->headFoot();
         $this->left_bar();
-
-        $all_acticity=Activity::where('isShow',1)->order('createTime desc')->paginate(4);
-        $this->assign('all_activity',$all_acticity);
+        $all_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->paginate(6);
+        $this->assign('all_activity',$all_activity);
         return view('chhcollege/activity/index');
     }
     public  function act_detail(){
+
         $this->headFoot();
         $this->left_bar();
         //获取参数
         $param=input('activityId');
-        $act_id = Activity::where('activityId',$param)->find();
+        $act_id=Db::connect('db_config1')->name('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetime,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey')->where(['id'=>$param])->find();
+       $act_id['qrCode']='https://test.v7mall.com/app/index.php?i=2&c=entry&m=fx_activity&do=activity&ac=detail&op=display&activityid='.$param;
         $this->assign('act_id', $act_id);
         return view('chhcollege/activity/detail');
     }
@@ -121,7 +129,33 @@ class Index extends Controller
 
         $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
+        $id=input('id');
+        $concrete=model('Course')->where(['isDel'=>0,'courseType'=>$id])->field('id,courseName')->order('sort desc')->select();
+        $this->assign('concrete',$concrete);
+        if($concrete->toArray()) {
+            $indexId = $concrete[0]['id'];
+            $content=Course::getOne($indexId);
+            $this->assign('content',$content);
+        }else{
+            $typeName=model('CourseType')->where('id',$id)->field('typeName')->find()['typeName'];
+            $this->assign('content',['courseName'=>'暂无课程','courseIntroduce'=>'暂无课程内容','typeName'=>$typeName]);
+        }
         return view('chhcollege/course/index');
+    }
+    //异步获取子分类
+    public function getSons(){
+        $id=input('id');
+        $res=CourseType::getNextSons($id);
+        if($res) return myJson('T',$res);
+        else return myJson('F');
+    }
+
+    //异步获取课程介绍
+    public function introduce(){
+        $id=input('id');
+        $res=Course::getOne($id);
+        if($res) return myJson('T',$res);
+        else return myJson('F','获取数据失败');
     }
     //咨询页面
     public function contact()
@@ -172,32 +206,6 @@ class Index extends Controller
             }
         }
     }
-    //header栏搜索
-
-/*    public function  search(){
-        $this->header();
-        $this->left_bar();
-        $searchresult=new class{};
-        if(request()->isAjax()){
-            $data=[
-              'key'=>input('keys'),
-            ];
-           $searchresult=News::where('newstitle','like','%'.$data['key'].'%')->whereOr('writer','like','%'.$data['key'].'%')->whereOr('articleContent','like','%'.$data['key'].'%')->select();
-           if(!empty($searchresult)&&input('keys')){
-                $this->success('','search');
-            }else{
-                if(input('keys'))
-                $this->error('没找到内容');
-                else{
-                    $this->error('请输入内容');
-                }
-            }
-        }
-        $this->assign("all",$searchresult);
-        return view('chhcollege/search/index');
-
-    }*/
-
 
     //关于学院介绍页面
     public function introduction()
@@ -222,13 +230,10 @@ class Index extends Controller
         $this->assign('gallery',$gallery);
         return view('chhcollege/about/college');
     }
-/*    //财税学院
-    public function financeandtax()
-    {  $this->header();
-        $this->left_bar();
-        $this->footer();
-        return view('chhcollege/about/financeandtax');
-    }*/
 
+    public function test(){
+        $a=model('Xiaoe')->getAccessToken();
 
+        var_dump($a);
+    }
 }

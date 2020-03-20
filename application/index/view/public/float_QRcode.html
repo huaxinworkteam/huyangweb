@@ -1,0 +1,74 @@
+<div class="float-qrcode">
+    <p class="close">关闭</p>
+    <div class="option">
+        <span class="option_item">培训课程</span>
+        <span class="option_item">公众号</span>
+    </div>
+    <div class="option_active">&nbsp;</div>
+    <div class="qrcode_content">
+        <div class="qrcode_slider">
+            <img class="qrcode" src="__COLL__/images/huyang.png"/>
+            <img class="qrcode" src="__COLL__/images/huachuang.jpg"/>
+        </div>
+        <br style="clear:both">				
+    </div>
+</div>
+<style>
+    .float-qrcode {
+        position: fixed; left: 36px; top: 140px; width: 150px; height: 180px; border-radius: 4px; background-color: #e08181; z-index: 999;
+    }
+    .close {
+        margin: -18px 0 0 126px; cursor: pointer;
+    }
+    .option {
+        padding: 10px 10px 0; display: flex; justify-content: space-between; border-bottom: 3px solid #eeeeee;
+    }
+    .option_item {
+        display: block; border-bottom: 3px solid rgba(0, 0, 0, 0); position: relative; top: 3px; cursor: pointer;
+        width: 60px; text-align: center; padding-bottom: 5px;
+    }
+    .option_active {
+        border-bottom: 3px solid #7f7f7f; width: 60px; height: 0; position: relative; left: 10px; top: -3px;
+    }
+    .qrcode_content {
+        overflow: hidden; position: relative; width: 100%;
+    }
+    .qrcode {
+        width: 120px; height: 120px; border-radius: 2px; margin: 10px 15px 0;
+    }
+    .qrcode_slider {
+        width: 310px; font-size:0
+    }
+
+</style>
+<script>
+    var TabContent = {
+        init: function() {
+            $(".option_item").mouseover(function() {
+                $(".option_active").stop().animate({
+                    left: $(this).position()['left']
+                }, {
+                    duration: 300
+                });
+                TabContent.qrcodeContent($(this));
+            });
+        },
+        qrcodeContent: function(obj) {
+		
+            var margin = $(".qrcode_content").width();
+            margin = margin * $(obj).prevAll().size()* -1;
+            $(".qrcode_slider").stop().animate({
+                marginLeft: margin + "px"
+            }, {
+                duration: 300
+            });
+	    }
+    }
+    $(document).ready(function() {
+        TabContent.init();
+
+        $(".close").click(function(){
+            $(".float-qrcode").slideToggle();
+        });
+    });
+</script>

@@ -201,21 +201,44 @@
 }
 
 .index_btm_body {
-    background:#b6c6d7;
     overflow: hidden;
 }
+.gradient {
+    background-image: url(/static/chhcollege/images/home-partner-bg.png);
+    background-position: top;
+    background-size: cover;
+    position: relative;
+}
+/* .gradient{
+    background: #ffffff;
+    background: -moz-linear-gradient(top,  #ffffff 0%, #eee7c4 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eee7c4));
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#eee7c4 100%);
+    background: -o-linear-gradient(top,  #ffffff 0%,#eee7c4 100%);
+    background: -ms-linear-gradient(top,  #ffffff 0%,#eee7c4 100%);
+    background: linear-gradient(to bottom,  #ffffff 0%,#eee7c4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eee7c4',GradientType=0 );
+}
+:root .gradient{filter:none;} */
 
 .index_btm_body .blank_tit {
     margin-top: 35px;
     width: 280px;
 }
-
+.index_btm_body .blank_add {
+    float: right;
+    font-size: 16px;
+    color: #535353;
+    margin-top: -40px;
+    padding: 5px 20px;
+    border: 2px solid #808080;
+}
 .index_btm_body .blank_tit span {
-    background: -webkit-linear-gradient(left, #b6c6d7, #b6c6d7);
+    /* background: -webkit-linear-gradient(left, #b6c6d7, #b6c6d7);
     background: -o-linear-gradient(left, #b6c6d7,#b6c6d7);
     background: linear-gradient(to right, #b6c6d7, #b6c6d7);
-    background-color: #b6c6d7;
-    text-shadow: 2px 2px 2px #535353;
+    background-color: #b6c6d7; */
+    /* text-shadow: 2px 2px 2px #535353; */
     font-size: 30px;
     border: none;
 }
@@ -266,15 +289,15 @@
 
 .index_btm_body .scroll_body .btn:hover {
     text-decoration: none;
-    background-color: #c49a81;
+    background-color: #FFBF0B;
 }
 
 .index_btm_body .scroll_in {
 
-    width: 1125px;
+    /* width: 1125px; */
     /*overflow: hidden;*/
-    position: relative;
-    margin: 0 7px;
+    /* position: relative; */
+    /* margin: 0 7px; */
 }
 
 .index_btm_body .scroll_in ul {
@@ -287,20 +310,19 @@
     width: 268px;
     height: 386px;
     background-color: #e4e4e4;
-    overflow: hidden;
-
-    margin: 30px;
+    overflow: hidden;    
+    margin: 30px 50px 30px 0;
     box-shadow: 10px 10px 5px #6c6c6c   ;
 }
 
 .index_btm_body .scroll_in ul li:hover {
-    background-color: #c49a81;
+    background-color: #FFBF0B;
     transform: translateY(-15px);
     transition:.9s;
 }
 
 .index_btm_body .scroll_in ul li:hover h3, .index_btm_body .scroll_in ul li:hover h4, .index_btm_body .scroll_in ul li:hover p {
-    color: #fff;
+    color: #292929;
 }
 
 .index_btm_body .scroll_in ul li:hover h4 {
@@ -346,9 +368,15 @@
     line-height: 20px;
     color: grey;
 }
-
+.index_btm_body .scroll_in ul li .in p {
+    text-align: justify;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
 .index_news_body {
-    background-color: #fff;
     padding: 50px 0 30px;
     padding-top: 30px;
 }
@@ -472,4 +500,23 @@
     background-color: greenyellow;
     border-radius: 50%;
     overflow: hidden;
+}
+.layer-teacher {
+    position: relative;
+}
+.layer-teacher img {
+    width:240px; height: 150px; border-radius: 4px;
+}
+.layer-teacher .des {
+    display: inline;position: absolute;top: 50%;transform: translateY(-50%); color: #df9856;
+    padding-left: 20px;
+}
+.layer-teacher .des h3{
+    font-size: 24px;
+}
+.layer-teacher .des h4{
+    font-size: 16px;
+}
+.layer-teacher-desc {
+    font-size: 16px; text-align: justify; max-height: 250px; overflow-y: auto; margin-top: 10px;
 }

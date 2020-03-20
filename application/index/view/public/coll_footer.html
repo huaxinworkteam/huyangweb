@@ -1,29 +1,39 @@
 <div class="cw">
     <div class="top_body clearfix">
         <ul class="fl clearfix">
-            <li class="footer-animation">
-                <h3><a href="{:url('index/about')}" target="_blank">胡杨概况</a></h3>
-                <p><a href="{:url('index/introduction')}" target="_blank">学院介绍</a></p>
-                {volist name='AB' id='vo'}
-                <p><a href="{:url('index/aboutMore',['id'=>$vo.id])}" target="_blank">{$vo.name}</a></p>
-                {/volist}
+            <li>
+                <h3 class="no_b"><a href="{:url('index/about')}" target="_blank">胡杨概况</a></h3>
+                <!-- <div  class="footer-animation">
+                    <p><a href="{:url('index/introduction')}" target="_blank">学院介绍</a></p>
+                    {volist name='AB' id='vo'}
+                    <p><a href="{:url('index/aboutMore',['id'=>$vo.id])}" target="_blank">{$vo.name}</a></p>
+                    {/volist}
+                </div> -->
             </li>
-            <li class="footer-animation">
-                <h3><a href="{:url('index/course')}" class="">核心课程</a></h3>
-                <p><a href="{:url('chhcollege/m402')}" target="_blank">工商管理类</a></p>
+            <li >
+                <h3 class="no_b"><a href="{:url('index/course')}" class="">培训课程</a></h3>
+                <!-- <div  class="footer-animation">
+                    {volist name='Course' id='vo'}
+                    <p><a href="{:url('index/course',['id'=>$vo.id])}" target="_blank">{$vo.typeName}</a></p>
+                    {/volist}
+                </div> -->
+                
             </li>
-            <li class="footer-animation">
-                <h3><a href="{:url('index/szll',['seriesNO'=>1])}" class="">师资力量</a></h3>
-                {volist name="shizi" id="vo"}
-                <p><a href="{:url('index/szll',['seriesNO'=>$vo.seriesID])}" target="_blank">{$vo.series}</a></p>
-                {/volist}
+            <li >
+                <h3 class="no_b"><a href="{:url('index/szll',['seriesNO'=>1])}" class="">师资力量</a></h3>
+                <!-- <div  class="footer-animation">
+                    {volist name="shizi" id="vo"}
+                    <p><a href="{:url('index/szll',['seriesNO'=>$vo.seriesID])}" target="_blank">{$vo.series}</a></p>
+                    {/volist}
+                </div> -->
+                
             </li>
-            <li class="footer-animation">
+            <li>
                 <h3 class="no_b"><a href="{:url('index/news')}" target="_blank">新闻动态</a></h3>
             </li>
-            <li class="footer-animation">
+            <!-- <li class="footer-animation">
                 <h3 class="no_b"><a href="http://www.massmakers.cn/category-9338.html" target="_blank" class="">培训报名</a></h3>
-            </li>
+            </li> -->
             <!--<li>-->
                 <!--<h3 class="no_b"><a href="{:url('index/contact')}" target="_blank">联系我们</a></h3>-->
             <!--</li>-->
@@ -74,27 +84,32 @@
     </script>
 
     <script src="//at.alicdn.com/t/font_1471030_svadb868xjp.js"></script>
+    <script type="text/javascript" src="__COLL__/3.1.1/layer.js"></script>
     <script type="text/javascript">
         //Dialog icon base path
         ds.Dialog.defaults.iconBasePath = 'images/';
         ds.loadScript(baseJSUrl+'quick_links.js');
+        function openKefu() {
+            //页面层
+            layer.open({
+                type: 2,
+                title: '客服',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['500px', '90%'],
+                content: "http://test.v7mall.com/app/index.php?i=2&c=entry&toopenid=oTDSW0QW5XzQkSqtlSqBLSFtu3M0&do=chat&m=cy163_customerservice"
+            });
+        };
     </script>
 
 </div>
 <style>
     .footer-animation {
         min-height: 200px;
-        max-height: 300px; overflow: hidden;
-        transition:max-height 2s;
-        -moz-transition:max-height 2s; /* Firefox 4 */
-        -webkit-transition:max-height 2s; /* Safari and Chrome */
-        -o-transition: max-height 2s; /* Opera */
-    }
-    .footer-animation:hover {
-        min-height: 200px; max-height: 1200px;
+        max-height: 300px; overflow: auto;
     }
 </style>
-
+{include file="public/float_QRcode" /}
 <!--在线咨询--><!--
 <div class="consultation">
     <div class="consultation_head">
@@ -127,3 +142,32 @@
         </a>
     </div>
 </div>-->
+
+
+<!-- 此处引用 js 脚本 -->
+<script src="__COLL__/js/vue.min.js"></script>
+    
+<script src="__COLL__/js/swiper.min.js"></script>
+
+<script src="__COLL__/js/vue-awesome-swiper.js"></script>
+<script>Vue.use(window.VueAwesomeSwiper)</script>
+
+
+<script src="__COLL__/js/baiduStatistics.js"></script>
+<script src="__COLL__/js/time.js"></script>
+<script src="__COLL__/js/global.js"></script>
+
+<script src="__COLL__/js/promise.js"></script>
+<script src="__COLL__/js/request.js"></script>
+<script src="__COLL__/js/api.js"></script>
+
+<script src="__COLL__/js/header.js"></script>
+<script src="__COLL__/js/footer.js"></script>
+<script src="__COLL__/js/right-tools.js"></script>
+<script src="__COLL__/js/message.js"></script>
+<script src="__COLL__/js/vip-dialog.js"></script>
+<script src="__COLL__/js/tooth.js"></script>
+<script src="__COLL__/js/qrcode.min.js"></script>
+
+<script src="__COLL__/js/baidustatistics.js"></script>
+<!-- 此处上方引用 js 脚本 -->
