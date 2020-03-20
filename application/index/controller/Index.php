@@ -10,6 +10,7 @@ use app\common\model\News;
 use app\common\model\Series;
 use app\common\model\Teachers;
 use app\common\model\Gallery;
+use app\common\model\Xiaoe;
 use think\Controller;
 use think\Db;
 
@@ -62,12 +63,11 @@ class Index extends Controller
     {  $this->headFoot();
         $this->left_bar();
         $all_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->paginate(6);
-       // $all_activity=Activity::where('isShow',1)->order('createTime desc')->paginate(4);
         $this->assign('all_activity',$all_activity);
-        //$this->assign
         return view('chhcollege/activity/index');
     }
     public  function act_detail(){
+
         $this->headFoot();
         $this->left_bar();
         //获取参数
@@ -231,5 +231,9 @@ class Index extends Controller
         return view('chhcollege/about/college');
     }
 
+    public function test(){
+        $a=model('Xiaoe')->getAccessToken();
 
+        var_dump($a);
+    }
 }
