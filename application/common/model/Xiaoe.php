@@ -32,7 +32,14 @@ class Xiaoe extends Model
     public  function getAccessToken(){
         $url='https://api.xiaoe-tech.com/token';
         $method='get';
-        curlRequest('https://api.xiaoe-tech.com/token','GET',);
+      //  $headers=array("app_id:".self::$app_id,"client_id".self::$client_id,"secret_key:".self::$secret_key,"grant_type:".self::$grant_type);
+        $data=array('app_id'=>self::$app_id,'client_id'=>self::$client_id,"secret_key"=>self::$secret_key,"grant_type"=>self::$grant_type);
+     //  halt($data);
+      //  $data=json_encode($data);
+        $res=curl_request($url,$data,$method);
+        halt($res);
+        if(is_object($res)) return $res;
+        else return 0;
     }
 
 }

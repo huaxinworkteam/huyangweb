@@ -18,54 +18,38 @@ function myJson($Sema,$data=null){
 }
 
 /**
- * 提交数据
- * @param  string $url 请求Url
- * @param  string $method 请求方式
- * @param  array/string $headers Headers信息
- * @param  array/string $params 请求参数
- * @return 返回的
+ * @Description: curl请求
+ * @Author: Yang
+ * @param $url
+ * @param null $data
+ * @param string $method
+ * @param array $header
+ * @param bool $https
+ * @param int $timeout
+ * @return mixed
  */
-function curlRequest($url, $method, $headers=null, $params=null){
-    if (is_array($params)) {
-        $requestString = http_build_query($params);
-    } else {
-        $requestString = $params ? : '';
+function curl_request($url, $data=null, $method='get', $header = array("Content-Type: application/json"), $https=true, $timeout = 5){
+    $method = strtoupper($method);
+    $ch = curl_init();//初始化
+    curl_setopt($ch, CURLOPT_URL, $url);//访问的URL
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//只获取页面内容，但不输出
+    if($https){
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);//https请求 不验证证书
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);//https请求 不验证HOST
     }
-    if (empty($headers)) {
-        $headers = array('Content-type: text/json');
-    } elseif (!is_array($headers)) {
-        parse_str($headers,$headers);
+    if ($method != "GET") {
+        if($method == 'POST'){
+            curl_setopt($ch, CURLOPT_POST, true);//请求方式为post请求
+        }
+        if ($method == 'PUT' || $method == 'DELETE') {
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method); //设置请求方式
+        }
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);//请求数据
     }
-    // setting the curl parameters.
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_VERBOSE, 1);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    // turning off the server and peer verification(TrustManager Concept).
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    // setting the POST FIELD to curl
-    switch ($method){
-        case "GET" : curl_setopt($ch, CURLOPT_HTTPGET, 1);break;
-        case "POST": curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString);break;
-        case "PUT" : curl_setopt ($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString);break;
-        case "DELETE":  curl_setopt ($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $requestString);break;
-    }
-    // getting response from server
-    $response = curl_exec($ch);
-
-    //close the connection
-    curl_close($ch);
-
-    //return the response
-    if (stristr($response, 'HTTP 404') || $response == '') {
-        return array('Error' => '请求错误');
-    }
-    return $response;
+    curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $header); //模拟的header头
+    //curl_setopt($ch, CURLOPT_HEADER, false);//设置不需要头信息
+    $result = curl_exec($ch);//执行请求
+    curl_close($ch);//关闭curl，释放资源
+    return $result;
 }
-
