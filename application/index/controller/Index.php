@@ -45,7 +45,7 @@ class Index extends Controller
         $news=News::where('isShow',1)->order('createTime desc')->limit(6)->select();
         $this->assign('news',$news);
         //主页下方右侧活动
-        $index_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->limit(3)->select();
+        $index_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->limit(3)->select();
         $this->assign('index_activity',$index_activity);
 
         return view('chhcollege/index');
@@ -61,7 +61,7 @@ class Index extends Controller
     public function activity()
     {  $this->headFoot();
         $this->left_bar();
-        $all_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->paginate(5);
+        $all_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->paginate(6);
        // $all_activity=Activity::where('isShow',1)->order('createTime desc')->paginate(4);
         $this->assign('all_activity',$all_activity);
         return view('chhcollege/activity/index');
