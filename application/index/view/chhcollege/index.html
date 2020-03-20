@@ -164,13 +164,12 @@
                     <ul class="list">
                         {volist name="index_activity" id="vo"}
                         <li>
-                            <a href="{:url('index/act_detail',['activityId'=>$vo['activityId']])}" target="_blank">
-                                <img src="{$vo.activity_pic}" class="fl"/>
+                            <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" target="_blank">
+                                <img src="{$vo.thumb}" class="fl"/>
     
                                 <div class="fl">
-                                    <h3>{$vo.activityTitle}</h3>
-                                    <h4>{$vo.createTime}</h4>
-                                    <p>{$vo.articleContent|raw}</p>
+                                    <h3>{$vo.title}</h3>
+                                    <p>{$vo.intro|raw}</p>
                                 </div>
                             </a>
                         </li>
