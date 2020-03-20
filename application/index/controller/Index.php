@@ -10,6 +10,7 @@ use app\common\model\News;
 use app\common\model\Series;
 use app\common\model\Teachers;
 use app\common\model\Gallery;
+use app\common\model\Xiaoe;
 use think\Controller;
 use think\Db;
 
@@ -45,7 +46,7 @@ class Index extends Controller
         $news=News::where('isShow',1)->order('createTime desc')->limit(6)->select();
         $this->assign('news',$news);
         //主页下方右侧活动
-        $index_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->limit(3)->select();
+        $index_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->limit(3)->select();
         $this->assign('index_activity',$index_activity);
 
         return view('chhcollege/index');
@@ -61,17 +62,18 @@ class Index extends Controller
     public function activity()
     {  $this->headFoot();
         $this->left_bar();
-        $all_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->paginate(5);
-       // $all_activity=Activity::where('isShow',1)->order('createTime desc')->paginate(4);
+        $all_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->paginate(6);
         $this->assign('all_activity',$all_activity);
         return view('chhcollege/activity/index');
     }
     public  function act_detail(){
+
         $this->headFoot();
         $this->left_bar();
         //获取参数
         $param=input('activityId');
         $act_id=Db::connect('db_config1')->name('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetime,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey')->where(['id'=>$param])->find();
+       $act_id['qrCode']='https://test.v7mall.com/app/index.php?i=2&c=entry&m=fx_activity&do=activity&ac=detail&op=display&activityid='.$param;
         $this->assign('act_id', $act_id);
         return view('chhcollege/activity/detail');
     }
@@ -229,5 +231,9 @@ class Index extends Controller
         return view('chhcollege/about/college');
     }
 
+    public function test(){
+        $a=model('Xiaoe')->getAccessToken();
 
+        var_dump($a);
+    }
 }
