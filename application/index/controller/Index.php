@@ -73,6 +73,7 @@ class Index extends Controller
         //获取参数
         $param=input('activityId');
         $act_id=Db::connect('db_config1')->name('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetime,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey')->where(['id'=>$param])->find();
+       $act_id['qrCode']='https://test.v7mall.com/app/index.php?i=2&c=entry&m=fx_activity&do=activity&ac=detail&op=display&activityid='.$param;
         $this->assign('act_id', $act_id);
         return view('chhcollege/activity/detail');
     }
