@@ -2,7 +2,7 @@
 <html>
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>近期活动</title>
+    <title>培训报名</title>
     <meta name='keywords' content="——全球开放式平台型商学院"/>
     <meta name='description' content="——全球开放式平台型商学院"/>
 
@@ -51,7 +51,7 @@
             <!--left start-->
             <div class="leftBy fl">
                 <div class="tit">
-                    <h3>新闻动态</h3>
+                    <h3>培训报名</h3>
                     <h4>News</h4>
                 </div>
                 {include file="public/coll_leftBy" /}
@@ -61,10 +61,10 @@
             <div class="rightBy fr">
                 <div class="tool clearfix">
                     <div class="fl">
-                        <h3> 平台<span>活动</span></h3>
+                        <h3>培训<span>报名</span></h3>
                     </div>
                     <div class="fr"><a href="{:url('index/index')}" >首页</a><span class="cur">></span><a
-                            href="javascript:;" class="cur">平台活动</a></div>
+                            href="javascript:;" class="cur">培训报名</a></div>
                 </div>
                 <div class="activity">
                     <ul class="ullist">
@@ -72,7 +72,7 @@
                         <li>
                             <div class="item">
                                 <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" class="pic"><img
-                                        src="{$vo.thumb}"></a>
+                                        src="http://test.v7mall.com/attachment/{$vo.thumb}"></a>
                                 <h3>{$vo.title}</h3>
                                 <p>{$vo.intro |raw}</p>
                             </div>
