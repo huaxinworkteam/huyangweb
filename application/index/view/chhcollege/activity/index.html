@@ -44,9 +44,6 @@
         </div>
     </div>
     <div class="line"></div>
-    <div class="btn">
-        <div class="cw"><a href="/index/contact/message.html" class="act" target="_blank">在线报名</a></div>
-    </div>
 </div>
 <div class="page">
     <div class="cw">
@@ -66,7 +63,7 @@
                     <div class="fl">
                         <h3> 平台<span>活动</span></h3>
                     </div>
-                    <div class="fr"><a href="{:url('index/index')}" target="_blank">首页</a><span class="cur">></span><a
+                    <div class="fr"><a href="{:url('index/index')}" >首页</a><span class="cur">></span><a
                             href="javascript:;" class="cur">平台活动</a></div>
                 </div>
                 <div class="activity">
@@ -74,11 +71,10 @@
                         {volist name="all_activity" id="vo"}
                         <li>
                             <div class="item">
-                                <a href="{:url('index/act_detail',['activityId'=>$vo['activityId']])}" class="pic"><img
-                                        src="{$vo.activity_pic}"></a>
-                                <h3>{$vo.activityTitle}</h3>
-                                <p>{$vo.articleContent |raw}</p>
-                                <i>{$vo.createTime}</i>
+                                <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" class="pic"><img
+                                        src="{$vo.thumb}"></a>
+                                <h3>{$vo.title}</h3>
+                                <p>{$vo.intro |raw}</p>
                             </div>
                         </li>
                         {/volist}

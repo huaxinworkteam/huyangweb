@@ -61,9 +61,9 @@ class Index extends Controller
     public function activity()
     {  $this->headFoot();
         $this->left_bar();
-
-        $all_acticity=Activity::where('isShow',1)->order('createTime desc')->paginate(4);
-        $this->assign('all_activity',$all_acticity);
+        $all_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->paginate(5);
+       // $all_activity=Activity::where('isShow',1)->order('createTime desc')->paginate(4);
+        $this->assign('all_activity',$all_activity);
         return view('chhcollege/activity/index');
     }
     public  function act_detail(){
@@ -71,7 +71,7 @@ class Index extends Controller
         $this->left_bar();
         //获取参数
         $param=input('activityId');
-        $act_id = Activity::where('activityId',$param)->find();
+        $act_id=Db::connect('db_config1')->name('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetime,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey')->where(['id'=>$param])->find();
         $this->assign('act_id', $act_id);
         return view('chhcollege/activity/detail');
     }
