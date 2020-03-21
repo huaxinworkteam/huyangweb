@@ -232,7 +232,7 @@ class Index extends Controller
     }
 
     public function test(){
-        $a=model('Xiaoe')->test();
+        $a=model('Xiaoe')->getGoodsDetail('v_5e71c6f0141e2_nwOUD4JO',3);
        var_dump($a);
     }
 }
