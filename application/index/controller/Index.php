@@ -233,7 +233,6 @@ class Index extends Controller
 
     public function test(){
         $a=model('Xiaoe')->test();
-
-        var_dump($a);
+       var_dump($a);
     }
 }
