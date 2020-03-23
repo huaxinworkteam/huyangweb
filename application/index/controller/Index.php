@@ -62,6 +62,8 @@ class Index extends Controller
     //活动查询
     public function activity()
     {  $this->headFoot();
+        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $this->assign('gallery',$gallery);
         if(request()->isAjax()) {
             $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime')->where('show', 1)->order('displayorder desc')->paginate(6);
             if($all_activity) return myJson('T',$all_activity);
@@ -73,6 +75,8 @@ class Index extends Controller
 
         $this->headFoot();
         $this->left_bar();
+        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $this->assign('gallery',$gallery);
         //获取参数
         $param=input('activityId');
         $act_id=Db::connect('db_config1')->name('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetime,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey')->where(['id'=>$param])->find();
