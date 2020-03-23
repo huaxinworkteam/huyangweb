@@ -212,7 +212,14 @@
                 }
             },
             methods: {
-                
+                getIndex: function() {
+                    http_get('activity').then( res => {
+                        this.activityData = res.data.data;
+                        this.page.total = res.data.total;
+                    }).catch(err => {
+
+                    });
+                },
                 showVipDialog: function () {
                     this.joinVipDialog = !this.joinVipDialog;
                 },
@@ -370,7 +377,7 @@
                 this.fetchData();
                 this.fetchActivityType();
                 this.fetchActivityBanner();
-
+                this.getIndex();
             }
         });
     </script>

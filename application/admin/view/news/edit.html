@@ -62,7 +62,7 @@
                         newsid: '{$newsinfo.newsid}',
                         articleTitle: '{$newsinfo.newstitle}',  // 新闻标题
                         articleKey: '{$newsinfo.articleKey}',  // 关键字
-                        content: '{$newsinfo.articleContent}', // 新闻内容 富文本内容
+                        content: '{$newsinfo.articleContent | raw}', // 新闻内容 富文本内容
                         newspicture: '{$newsinfo.newspicture}', // 图片路径
                         articleAuthor: '{$newsinfo.writer}', // 作者
                         isShow: '{$newsinfo.isShow}'// 是否显示 0-隐藏 1-显示
@@ -83,6 +83,7 @@
                 this.ue = UE.getEditor('content'); // 初始化富文本编辑器
                 this.ue.ready( () => {
                     // editor准备好之后才可以使用
+                    console.log(this.dataForm.content)
                     this.ue.setContent(this.dataForm.content);
                 });
             },

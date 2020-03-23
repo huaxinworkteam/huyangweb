@@ -138,6 +138,7 @@
                     this.$set(this.dataForm, 'dataTime', array);
                     this.ue.ready( () => {
                         // editor准备好之后才可以使用
+                        console.log(this.dataForm.courseIntroduce)
                         this.ue.setContent(this.dataForm.courseIntroduce);
                     });
                 }).catch(err => {

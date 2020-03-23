@@ -1,11 +1,8 @@
 var bsApi = (function() {
     var g = {};
     g.config = {
-        // prefix: "https://test.chuanghehui.com/api",
-        // prefix: "http://localhost:8082/api",
-        // prefix: "https://cbc.chuanghehui.com/api"
-        prefix: "https://www.chuanghehui.com/api",
-        // prefix: ""
+        // prefix: "https://www.chuanghehui.com/api",
+        // prefix: "http://test.v7mall.com/"
     };
 
     if (RequestSender) {
