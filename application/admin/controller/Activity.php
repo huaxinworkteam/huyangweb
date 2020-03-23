@@ -91,10 +91,9 @@ class Activity extends Base
     //删除
     public function activitydel()
     {
-        $activityinfo = model('activity')->find(input('activityId'));
-        $result = $activityinfo->delete();
+        $result = model('activity')->where('activityId',input('activityId'))->update(['delete_time'=>time()]);
         if ($result) {
-            $this->success('新闻删除成功', 'admin/activity/lists');
+            $this->success('活动删除成功', 'admin/activity/lists');
         } else {
             $this->error($result);
         }
@@ -154,7 +153,7 @@ class Activity extends Base
     //批量删除
     public function delactivity(){
         if(request()->isAjax()){
-            $return=db('activity')->whereIn('activityId',input('id'))->delete();
+            $return=db('activity')->whereIn('activityId',input('id'))->update(['delete_time'=>time()]);
             if($return){
                 $this->success('删除成功','admin/activity/lists');
             }else{
