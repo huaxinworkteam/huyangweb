@@ -366,10 +366,11 @@
                     common.toPage(url);
                 }
             },
-            mounted: function () {
+            created: function () {
                 this.fetchData();
                 this.fetchActivityType();
                 this.fetchActivityBanner();
+
             }
         });
     </script>

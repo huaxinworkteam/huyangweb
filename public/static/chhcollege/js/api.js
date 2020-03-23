@@ -5,6 +5,7 @@ var bsApi = (function() {
         // prefix: "http://localhost:8082/api",
         // prefix: "https://cbc.chuanghehui.com/api"
         prefix: "https://www.chuanghehui.com/api",
+        // prefix: ""
     };
 
     if (RequestSender) {
