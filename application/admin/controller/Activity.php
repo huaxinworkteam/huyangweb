@@ -33,6 +33,8 @@ class Activity extends Base
                 'articleContent' => input('content'),
                 'staffId'=>session('admin.id'),
                 'activity_pic'=>"/upload/activitypic/".input('activity_pic'),
+                'startTime'=>input('startTime'),
+                'endTime'=>input('endTime')
             ];
             $result = model('activity')->add($data);
             if ($result == 1) {
@@ -71,6 +73,8 @@ class Activity extends Base
                 'articleKey' => input('articleKey'),
                 'writer' => input('articleAuthor'),
                 'activity_pic'=>"/upload/activitypic/".input('activity_pic'),
+                'startTime'=>input('startTime'),
+                'endTime'=>input('endTime')
             ];
             $result = model('activity')->activityedit($data);
             if ($result) {

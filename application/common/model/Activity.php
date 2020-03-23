@@ -38,6 +38,8 @@ class Activity extends  Model
         $sql->isShow = $data['isShow'];
         $sql->writer = $data['writer'];
         $sql->articleKey = $data['articleKey'];
+        $sql->startTime = $data['startTime'];
+        $sql->endTime = $data['endTime'];
         if($data['activity_pic'])
         {$sql->activity_pic = $data['activity_pic'];}
         $sql->articleContent = $data['articleContent'];

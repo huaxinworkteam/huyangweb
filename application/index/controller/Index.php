@@ -62,9 +62,11 @@ class Index extends Controller
     //活动查询
     public function activity()
     {  $this->headFoot();
-        $this->left_bar();
-        $all_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->paginate(6);
-        $this->assign('all_activity',$all_activity);
+        if(request()->isAjax) {
+            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show', 1)->order('displayorder desc')->paginate(6);
+            if($all_activity) return myJson('T',$all_activity);
+            else return myJson('F','暂无数据');
+        }
         return view('chhcollege/activity/index');
     }
     public  function act_detail(){
