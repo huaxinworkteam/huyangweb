@@ -110,7 +110,8 @@
                                 <th>标题</th>
                                 <th width="80">作者</th>
                                 <th width="80">来源</th>
-                                <th width="120">活动时间</th>
+                                <th width="120">开始时间</th>
+                                <th width="120">结束时间</th>
                                 <th width="120">发布时间</th>
                                 <th width="60">发布状态</th>
                                 <th width="120">操作</th>
@@ -126,7 +127,8 @@
                                                       title="查看">{$vo.activityTitle}</a></td>
                                 <td>{$vo.writer}</td>
                                 <td>{$vo.nickname}</td>
-                                <td>{$vo.createTime}</td>
+                                <td>{:date('Y-m-d H:i:s',$vo.startTime)}</td>
+                                <td>{:date('Y-m-d H:i:s',$vo.endTime)}</td>
                                 <td>{$vo.createTime}</td>
                                 <td class="td-status"><span class="label label-success radius">{if $vo.isShow ==1}已发布{else /}已下架{/if}
                                 </td>
