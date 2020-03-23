@@ -63,7 +63,7 @@ class Index extends Controller
     public function activity()
     {  $this->headFoot();
         if(request()->isAjax()) {
-            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show', 1)->order('displayorder desc')->paginate(6);
+            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime')->where('show', 1)->order('displayorder desc')->paginate(6);
             if($all_activity) return myJson('T',$all_activity);
             else return myJson('F','暂无数据');
         }

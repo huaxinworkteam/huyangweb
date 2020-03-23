@@ -24,7 +24,7 @@
                 <div class="banner">
                     <swiper class="swiper-container" :options="bannerOption" ref="banner-swiper">
                         <swiper-slide class="swiper-wrapper" v-for="(item, index) in bannerData" :key="index" v-cloak="">
-                            <div class="banner-bg g-width-100 pr" :style="{backgroundImage: 'url(' + item.banner_equip_url + ')'}" @click="toActivityDetail(item)">
+                            <div class="banner-bg g-width-100 pr" :style="{backgroundImage: 'url(' + item + ')'}" @click="toActivityDetail(item)">
                                 <!-- <div class="banner-bg-wrapper">
                                     <div class="wrapper g-width">
                                         <div class="info">
@@ -68,7 +68,7 @@
                     <div class="wrapper g-width flexWrap" v-if="activityData.length !== 0">
                         <div class="listItem" v-for="(item, index) in activityData" :key="index" v-cloak="" @click="toActivityDetail(item)">
                             <div class="listItem-head pr">
-                                <img class="g-width-100" :src="item.cover_url" alt="活动封面">
+                                <img class="g-width-100" :src="''+item.cover_url" alt="活动封面">
                                 
                                 <span :class="item.isOverClass">
                                     <i class="dot"></i>
@@ -120,7 +120,7 @@
             data: function () {
                 return {
                     userInfo: localStorage.getItem('userInfo'), 
-                    bannerData: [],
+                    bannerData: '{$}',
                     bannerOption: {
                         autoplay: true,
                         speed: 2000,
