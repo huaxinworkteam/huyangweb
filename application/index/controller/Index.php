@@ -65,7 +65,7 @@ class Index extends Controller
         $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         if(request()->isAjax()) {
-            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime')->where('show', 1)->order('displayorder desc')->paginate(6);
+            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime')->where(['show'=>1,'merchanid'=>19])->order('displayorder desc')->paginate(6);
             if($all_activity) return myJson('T',$all_activity);
             else return myJson('F','暂无数据');
         }
