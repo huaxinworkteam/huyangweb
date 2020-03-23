@@ -9,7 +9,7 @@ class Activity extends Base
     {
         $title="输入查找";
         $this->assign('title',$title);
-        $activity = model('activity')->alias('n')->join('admin a', 'a.id=n.staffId')->order('createTime desc')->paginate(10);
+        $activity = model('activity')->alias('n')->where('n.delete_time','null')->join('admin a', 'a.id=n.staffId')->order('createTime desc')->paginate(10);
         $viewdata = [
             'activity' => $activity,
         ];
