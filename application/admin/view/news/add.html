@@ -9,8 +9,8 @@
 <body>
 	<article class="clearfix pd-20" id="app">
         <el-form :model="dataForm" label-width="130px" :rules="rules" ref="dataForm">
-            <el-form-item label="文章标题：" prop="activityTitle">
-                <el-input v-model="dataForm.activityTitle"></el-input>
+            <el-form-item label="文章标题：" prop="articleTitle">
+                <el-input v-model="dataForm.articleTitle"></el-input>
             </el-form-item>
             <el-form-item label="关键词：" prop="articleKey">
                 <el-input v-model="dataForm.articleKey"></el-input>
@@ -18,13 +18,13 @@
             <el-form-item label="文章作者：" prop="articleAuthor">
                 <el-input v-model="dataForm.articleAuthor"></el-input>
             </el-form-item>
-            <el-form-item label="图片 (370*220 px)：" prop="activity_pic">
+            <el-form-item label="图片 (370*220 px)：" prop="newspicture">
                 <el-upload drag :action="uploadAction" :show-file-list="false"
                     :on-success="uploadImageSuccess" :on-error="uploadImageError" 
                     :before-upload="beforeImageUpload" accept="image/*">
-                    <i class="el-icon-upload" v-show="!dataForm.activity_pic"></i>
-                    <img v-show="dataForm.activity_pic" :src="dataForm.activity_pic"  class="el-upload-dragger"/>
-                    <div class="el-upload__text"v-show="!dataForm.activity_pic">将文件拖到此处，或<em>点击上传</em></div>
+                    <i class="el-icon-upload" v-show="!dataForm.newspicture"></i>
+                    <img v-show="dataForm.newspicture" :src="dataForm.newspicture"  class="el-upload-dragger"/>
+                    <div class="el-upload__text"v-show="!dataForm.newspicture">将文件拖到此处，或<em>点击上传</em></div>
                     <div class="el-upload__tip" slot="tip" style="margin-top: -15px;">图片大小(370*220px)</div>
                 </el-upload>
             </el-form-item>
@@ -67,7 +67,7 @@
                         isShow: 1 // 是否显示 0-隐藏 1-显示
                     },
                     rules: {
-                        activityTitle: [
+                        articleTitle: [
                             { required: true, message: '请输入标题', trigger: 'blur' }
                         ],
                         articleAuthor: [
@@ -110,9 +110,6 @@
                             // 提交数据的请求
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
                             this.dataForm.content = this.ue.getContent();
-                            if (!this.dataForm.dataTime) return;
-                            this.dataForm.startTime = this.dataForm.dataTime[0]/1000;
-                            this.dataForm.endTime = this.dataForm.dataTime[1]/1000;
                             setTimeout(()=> {
                                 http_post('/admin/news/add', this.dataForm).then((res) => {
                                     layer.close(index);
