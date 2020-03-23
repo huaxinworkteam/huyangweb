@@ -134,7 +134,7 @@
                             this.dataForm.startTime = this.dataForm.dataTime[0]/1000;
                             this.dataForm.endTime = this.dataForm.dataTime[1]/1000;
                             setTimeout(()=> {
-                                http_post('/admin/course/saveInfo', this.dataForm).then((res) => {
+                                http_post('/admin/activity/activityedit', this.dataForm).then((res) => {
                                     layer.close(index);
                                     layer.msg("提交成功", {icon:1});
                                     //先得到当前iframe层的索引

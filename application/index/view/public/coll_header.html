@@ -13,7 +13,6 @@
                     }else{
                         alert(data.msg);
                     }
-
                 }
             });
             return false;
@@ -41,8 +40,8 @@
                         {/volist}
                     </div>
                 </li>
-               <li><a href="{:url('index/course')}" class="">培训课程</a>
-                     <!-- 重新设置 ： 1. 显示2条热门活动 链接到活动详情页面 2. 更多跳转链接index/activity -->
+                <li><a href="{:url('index/course')}" class="">培训课程</a>
+                    <!-- 重新设置 ： 1. 显示2条热门课程链接到课程 2. 更多跳转链接index/course -->
                     <ul class="dropdown activity-center-dorp">
                         <li>
                             <a href="activitydetail?id=122" target="_blank" class="g-width-100">
@@ -64,6 +63,12 @@
                         </li>
                         <a href="activity" target="_blank" class="more">更多活动</a>
                     </ul>
+                    <!-- <div class="sub_Nav sub_szll">
+                        <div class="line"></div>
+                        {volist name='Course' id='vo'}
+                        <p class="courseType" data-id="{$vo.id}"><a href="{:url('index/course',['id'=>$vo.id])}">{$vo.typeName}</a></p>
+                        {/volist}
+                    </div> -->
                 </li>
                 
                 <li><a href="{:url('index/szll',['seriesNO'=>0])}" class="">师资力量</a>
@@ -75,7 +80,7 @@
                     </div>
                 </li>
                 <li><a href="{:url('index/activity')}" class="">培训报名</a>
-                   
+                    <!-- 重新设置 ： 1. 显示2条热门活动 链接到活动详情页面 2. 更多跳转链接index/activity -->
                 </li>
                 <!--http://www.massmakers.cn/category-9338.html-->
                 <li><a href="{:url('index/news')}" class="">新闻动态</a></li>
