@@ -6,12 +6,12 @@
  * Time: 11:57
  */
 namespace app\common\model;
-use think\model\concern\SoftDelete;
+
 use think\Model;
 
 class Activity extends  Model
 {
-    use SoftDelete;
+
 
     public function add($data)
     {

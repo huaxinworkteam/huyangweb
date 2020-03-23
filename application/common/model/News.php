@@ -13,7 +13,7 @@ use think\model\concern\SoftDelete;
 
 class News extends Model
 {
-    use SoftDelete;
+
 
     public function add($data)
     {
