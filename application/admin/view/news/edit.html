@@ -1,4 +1,4 @@
-<!--_meta 作为公共模版分离出去-->
+    <!--_meta 作为公共模版分离出去-->
 {include file="Common/meta" /}
 	<!--/meta 作为公共模版分离出去-->
 
@@ -60,11 +60,11 @@
                     uploadAction: '/admin/News/fileUpload', // 图片上传服务器地址
                     dataForm: {
                         newsid: '{$newsinfo.newsid}',
-                        articleTitle: '{$newsinfo.articleTitle}',  // 新闻标题
+                        articleTitle: '{$newsinfo.newstitle}',  // 新闻标题
                         articleKey: '{$newsinfo.articleKey}',  // 关键字
-                        content: '{$newsinfo.content}', // 新闻内容 富文本内容
+                        content: '{$newsinfo.articleContent}', // 新闻内容 富文本内容
                         newspicture: '{$newsinfo.newspicture}', // 图片路径
-                        articleAuthor: '{$newsinfo.articleAuthor}', // 作者
+                        articleAuthor: '{$newsinfo.writer}', // 作者
                         isShow: '{$newsinfo.isShow}'// 是否显示 0-隐藏 1-显示
                     },
                     rules: {
