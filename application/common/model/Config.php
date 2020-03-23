@@ -42,8 +42,15 @@ class Config extends Model
 
         public static  function  saveInfo($data){
             $validate = new \app\common\validate\Config();
-            if(!$validate->check($data)){
-                return $validate->getError();
+            if(!$data['id']) {
+                if (!$validate->check($data)) {
+                    return $validate->getError();
+                }
+            }
+            else {
+                if (!$validate->scene('edit')->check($data)) {
+                    return $validate->getError();
+                }
             }
             try{
                 if($data['id']){

@@ -19,4 +19,8 @@ class Config extends Validate
         'email|邮箱'=>'require|unique:config|email',
         'mobile|手机'=>'require|unique:config|mobile',
         ];
+
+    public  function sceneEdit(){
+        return $this->only($this->rule);
+    }
 }
