@@ -23,6 +23,7 @@ class Index extends Controller
         global $kefu;
         if(!$GLOBALS['kefu']){
             $kefu=Config::getAll()->toArray();
+            $this->assign('config',$kefu);
         }
     }
 
