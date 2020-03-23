@@ -97,6 +97,7 @@
                                     class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
 							<a class="btn btn-primary radius" href="javascript:;" onclick="news_add('新闻添加','newsadd.html')"><i
                                     class="Hui-iconfont">&#xe600;</i> 添加新闻</a>
+                            <a class="btn radius" href="javascript:;" onclick="refresh()">刷新</a>
 							</span>
                         <span class="f-r">共有数据：<strong>{$total}</strong> 条</span>
                     </div>
@@ -162,6 +163,9 @@
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">
+    function refresh() {
+        window.location.reload();  // 刷新
+    }
     function QuanXuan()
     {
         $(".ckc").prop("checked",$("#ckAll").prop("checked"))
