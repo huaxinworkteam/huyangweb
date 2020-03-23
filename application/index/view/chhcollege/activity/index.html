@@ -25,7 +25,7 @@
                     <swiper class="swiper-container" :options="bannerOption" ref="banner-swiper">
                         <swiper-slide class="swiper-wrapper" v-for="(item, index) in bannerData" :key="index" v-cloak="">
                             <div class="banner-bg g-width-100 pr" :style="{backgroundImage: 'url(' + item.banner_equip_url + ')'}" @click="toActivityDetail(item)">
-                                <div class="banner-bg-wrapper">
+                                <!-- <div class="banner-bg-wrapper">
                                     <div class="wrapper g-width">
                                         <div class="info">
                                             <p class="title fs16">{{item.title}}</p>
@@ -48,7 +48,7 @@
                                             
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </swiper-slide>
                         <div class="swiper-pagination" slot="pagination" v-if="bannerData.length > 1"></div>
@@ -124,7 +124,6 @@
                     bannerOption: {
                         autoplay: true,
                         speed: 2000,
-                        
                         pagination: {
                             el: '.swiper-pagination' 
                         },
