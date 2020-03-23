@@ -64,7 +64,7 @@
                 return {
                     uploadAction: '/admin/Activity/fileUpload', // 图片上传服务器地址
                     dataForm: {
-                        activityTitle: '',  // 活动标题
+                        articleTitle: '',  // 活动标题
                         articleKey: '',  // 关键字
                         content: '', // 活动内容 富文本内容
                         activity_pic: '', // 图片路径
@@ -120,7 +120,7 @@
                         if (valid) {
                             // 提交数据的请求
                             var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
-                            this.dataForm.articleContent = this.ue.getContent();
+                            this.dataForm.content = this.ue.getContent();
                             if (!this.dataForm.dataTime) return;
                             this.dataForm.startTime = this.dataForm.dataTime[0]/1000;
                             this.dataForm.endTime = this.dataForm.dataTime[1]/1000;
