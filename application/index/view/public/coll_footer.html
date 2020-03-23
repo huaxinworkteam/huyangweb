@@ -144,6 +144,114 @@
     </div>
 </div>-->
 
+<script type="text/javascript">
+    //base
+    var _baseUrl = '';
+    var baseJSUrl = '__COLL__/js/';
+    var baseCSSUrl = '__COLL__/css/';
+</script>
+<script type="text/javascript">
+
+    $(function () {
+
+        $.fn.banner(".index_kv_body", 5000);
+
+
+
+        $("#scroll_1 a.btn").powerSwitch({
+
+            container: $("#scroll_1 .scroll_in"),
+
+            number: 4
+
+        });
+
+
+
+        $("#scroll_2 a.btn").powerSwitch({
+
+            container: $("#scroll_2 .scroll_in"),
+
+            number: 4
+
+        });
+
+
+
+        $("#scroll_3 a.btn").powerSwitch({
+
+            container: $("#scroll_3 .scroll_in"),
+
+            number: 4
+
+        });
+
+
+
+        $(".index_btm_body .tab_body a").click(function () {
+
+            var index = $(".index_btm_body .tab_body a").index($(this));
+
+            $(".index_btm_body .tab_body a").removeClass("cur").eq(index).addClass("cur");
+
+            $(".index_btm_body .tab_con .con").hide().eq(index).fadeIn();
+
+
+
+
+
+        }).eq(0).click();
+
+
+
+
+
+    });
+
+</script>
+<script type="text/javascript">
+    $(function () {
+
+        $('.flexslider').flexslider({
+
+            animation: "fade",
+
+            slideshow: true,
+
+            slideshowSpeed: 3000,
+
+            animationSpeed: 2000,
+
+            touch: false,
+
+            controlNav: true,
+
+            directionNav: false,
+
+            pauseOnHover: false
+
+        });
+
+
+
+        $(".index_btm_body .tab_body a").click(function () {
+
+            var index = $(".index_btm_body .tab_body a").index($(this));
+
+            $(".index_btm_body .tab_body a").removeClass("cur").eq(index).addClass("cur");
+
+            $(".index_btm_body .tab_con .con").hide().eq(index).fadeIn();
+
+        }).eq(0).click();
+
+
+
+
+
+    });
+</script>
+
+
 
 <!-- 此处引用 js 脚本 -->
 <script src="__COLL__/js/vue.min.js"></script>
