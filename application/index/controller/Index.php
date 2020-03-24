@@ -68,7 +68,7 @@ class Index extends Controller
         if(request()->isAjax()) {
             $p=input('page');
             if(!$p) return myJson('F','参数异常');
-            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime')->where(['show'=>1,'merchantid'=>19])->order('displayorder desc')->limit(($p['current_page']-1)*$p['per_page'],$p['per_page'])->select();
+            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime,joinstime,joinetime')->where(['show'=>1,'merchantid'=>19])->order('displayorder desc')->limit(($p['current_page']-1)*$p['per_page'],$p['per_page'])->select();
             $total=Db::connect('db_config1')->where(['show'=>1,'merchantid'=>19])->name('fx_activity')->count();
             if($all_activity) return myJson('T',['info'=>$all_activity,'total'=>$total]);
             else return myJson('T',['info'=>'','total'=>0]);
