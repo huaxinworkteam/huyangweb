@@ -1,10 +1,210 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<!--_meta 作为公共模版分离出去-->
+{include file="Common/meta" /}
+<!--/meta 作为公共模版分离出去-->
+
+<title>专栏管理 - 专栏列表 - h-ui.admin.pro v1.0</title>
+<meta name="keywords" content="h-ui.admin.pro v1.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+<meta name="description" content="h-ui.admin.pro v1.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
+<!--_menu 作为公共模版分离出去-->
+{include file="Common/leftbar" /}
+<!--/_menu 作为公共模版分离出去-->
 
+<div class="Hui-admin-dislpayArrow">
+    <a href="javascript:void(0);" onClick="displaynavbar(this)">
+        <i class="Hui-iconfont Hui-iconfont-left">&#xe6d4;</i>
+        <i class="Hui-iconfont Hui-iconfont-right">&#xe6d7;</i>
+    </a>
+</div>
+
+<section class="Hui-admin-article-wrapper">
+    <!--_header 作为公共模版分离出去-->
+    {include file="Common/header" /}
+    <!--/_header 作为公共模版分离出去-->
+
+    <div class="Hui-admin-article">
+        <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px">
+            首页
+            <span class="c-gray en">/</span>
+            专栏管理
+            <span class="c-gray en">/</span>
+            专栏管理
+        </nav>
+
+        <article id="app" class="Hui-admin-content clearfix">
+            <div class="panel">
+                <div class="panel-body">
+                    <el-form :inline="true" :model="queryForm" ref="queryForm">
+                        <el-form-item label="专栏名称：" style="margin-bottom: 0;" prop="courseName">
+                            <el-input v-model="queryForm.courseName" placeholder="请填写专栏名称"></el-input>
+                        </el-form-item>
+                        <el-form-item style="margin-bottom: 0;">
+                            <el-button type="primary" size="medium" icon="el-icon-search" @click="submitForm('queryForm')">查询</el-button>
+                            <el-button size="medium" icon="el-icon-refresh-left" @click="resetForm('queryForm')">重置</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
+            </div>
+            <div class="panel mt-20">
+                <div class="panel-body">
+                    <div class="clearfix">
+                        <el-button type="danger" size="medium" @click="batchDel"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</el-button>
+                        <el-button type="primary" size="medium" @click="add('新增专栏','{:url(\'admin/zhuanlan/add\')}')"
+                        ><i class="Hui-iconfont">&#xe600;</i> 添加专栏</el-button>
+                    </div>
+                    <div class="mt-20 clearfix">  
+                        <el-table :data="tableData" style="width: 100%" row-key="id" border stripe
+                            :header-cell-style="headClass" :row-style="rowClass" @selection-change="handleSelectionChange">
+                            <el-table-column label="专栏列表" style="width: 100%;">
+                                <el-table-column type="selection" align="center"></el-table-column>
+                                <el-table-column prop="id" label="序列号" min-width="8%" header-align="center"></el-table-column>
+                                <el-table-column prop="goods_id" label="专栏ID" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="goods_name" label="专栏名称" min-width="30%" align="center"></el-table-column>
+                                <el-table-column prop="goods_type" label="专栏类型" min-width="30%" align="center">
+                                    <template slot-scope="scope">
+                                        {{scope.row.goods_type==5?"会员":scope.row.goods_type==6?"专栏":"大专栏"}}
+                                    </template>
+                                </el-table-column>
+                                <el-table-column fixed="right" label="操作" min-width="20%" align="center"> 
+                                    <template slot-scope="scope">
+                                        <el-tooltip class="item" effect="dark" content="编辑" placement="left-start">
+                                            <el-button style="padding: 0;" type="text" size="small" icon="el-icon-edit" @click="edit(scope.row.id)"></el-button>
+                                        </el-tooltip>
+                                        <el-tooltip class="item" effect="dark" content="删除" placement="right-start">
+                                            <el-button style="padding: 0;" type="text" size="small" icon="el-icon-delete" @click="del(scope.row.id)"></el-button>
+                                        </el-tooltip>
+                                    </template>
+                                </el-table-column>
+                            </el-table-column>
+                        </el-table>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!--_footer 作为公共模版分离出去-->
+{include file="Common/footer" /}
+<!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__ADMIN__/lib/datatables/1.10.15/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ADMIN__/business/js/main.js"></script>
+<!-- element-ui 时间戳 转换插件 -->
+<script type="text/javascript" src="__ADMIN__/lib/moment/moment.js"></script>
+
+<script type="text/babel">
+    new Vue({
+        el: '#app',
+        data: {
+            queryForm: {
+                courseName: ''
+            },
+            tableData: [],
+            selectID: []
+        },
+        mounted() {
+            http_post('/admin/zhuanlan/index').then(res => {
+                this.tableData = res.data;
+            }).catch(err => {
+
+            });
+        },
+        methods: {
+            // 表头样式设置
+            headClass () {
+                return 'background: #f5fafe;';
+            },
+            // 表格样式设置
+            rowClass () {
+                // return 'height: 5px;';
+            },
+            handleSelectionChange(val){
+                val.forEach(item => {
+                    this.selectID.push(item.id);
+                });              
+            },
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        // 提交数据的请求
+                        var index = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+                        setTimeout(()=> {
+                            // location.replace('/admin/course/searchLocation?positionType=' +
+                            // this.queryForm.positionType + '&positionCode=' + this.queryForm.positionCode);
+                            http_post('/admin/course/index', this.queryForm).then(res => {
+                                this.tableData = res.data.data;
+                                layer.close(index);
+                            }).catch(err => {
+                                layer.close(index);
+                            });
+                        }, 500);                            
+                    } else {
+                        layer.msg("查询条件不足");
+                        return false;
+                    }
+                });
+                
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+
+            batchDel() {
+                if (this.selectID.length === 0) {
+                    layer.msg('没有选中需要删除的数据！');
+                    return;
+                }
+                //询问框
+                layer.confirm('确认要删除吗？', index => {
+                    layer.close(index);
+
+                    http_post('/admin/zhuanlan/del', {id: this.selectID.toString()}).then(res => {
+                        layer.msg("删除成功", {icon: 1});
+                        location.reload();  // 刷新
+                    });
+                });
+            },
+             // 新增
+            add(title, url) {
+                var index = layer.open({
+                    type: 2,
+                    title: title,
+                    content: url,
+                    area: ['700px', '600px'],
+                    end : function() {
+                        window.location.reload();  // 刷新
+                    }
+                });
+            },
+            // 编辑
+            edit(id) {
+                var index = layer.open({
+                    type: 2,
+                    title: '编辑专栏',
+                    content: '/admin/zhuanlan/edit?id=' + id,
+                    area: ['700px', '600px'],
+                    end : function() {
+                        window.location.reload();  // 刷新
+                    }
+                });
+            },
+            del(id) {
+                layer.confirm('确认要删除吗？', function (index) {
+                    layer.close(index);
+                    http_post('/admin/zhuanlan/del', {id:id}).then(res => {
+                        layer.msg("删除成功", {icon: 1});
+                        location.reload();  // 刷新
+                    });
+                });
+            }
+        }
+    });
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>
