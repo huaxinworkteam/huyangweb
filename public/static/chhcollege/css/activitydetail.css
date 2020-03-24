@@ -128,7 +128,7 @@ select:-webkit-autofill {
     width: 184px;
     height: 42px;
     line-height: 300px;
-    background-image: url(../images/logo.png);
+    background-image: url(/static/chhcollege/images/logo.png);
     background-repeat: no-repeat;
     background-size: contain;
     position: relative;
@@ -198,17 +198,17 @@ select:-webkit-autofill {
 .activity-detail .head .wrapper .info .time .icon {
     width: 16px;
     height: 16px;
-    background-image: url(../images/activity-content-time-icon.png);
+    background-image: url(/static/chhcollege/images/activity-content-time-icon.png);
 }
 .activity-detail .head .wrapper .info .address .icon {
     width: 15px;
     height: 17px;
-    background-image: url(../images/activity-content-address-icon.png);
+    background-image: url(/static/chhcollege/images/activity-content-address-icon.png);
 }
 .activity-detail .head .wrapper .info .num .icon {
     width: 13px;
     height: 15px;
-    background-image: url(../images/activity-content-num-icon.png);
+    background-image: url(/static/chhcollege/images/activity-content-num-icon.png);
 }
 .activity-detail .head .wrapper .info .btn .item {
     padding: 8px 40px;
@@ -228,7 +228,7 @@ select:-webkit-autofill {
 .activity-detail .head .wrapper .info .share-wechat .icon {
     width: 30px;
     height: 30px;
-    background-image: url(../images/activity-share-wechat.png);
+    background-image: url(/static/chhcollege/images/activity-share-wechat.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -354,7 +354,7 @@ select:-webkit-autofill {
     position: absolute;
     right: 0;
     top: 8px;
-    background-image: url(../images/course-detail-order-close.png);
+    background-image: url(/static/chhcollege/images/course-detail-order-close.png);
     background-size: cover;
     cursor: pointer;
 }
@@ -450,7 +450,7 @@ select:-webkit-autofill {
 .submit-success-dialog .mini-program .scan .icon {
     width: 16px;
     height: 16px;
-    background-image: url(../images/activity-detail-scan.png);
+    background-image: url(/static/chhcollege/images/activity-detail-scan.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
