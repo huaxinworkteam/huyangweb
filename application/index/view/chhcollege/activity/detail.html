@@ -79,10 +79,11 @@
     </div>
 
     <g-message ref="g-message"></g-message>
+    <footer v-show="loading">
+        {include file="public/coll_footer" /}
+    </footer>
 </div>
-<footer style="display: none;" :style="loading?'display: block;'">
-    {include file="public/coll_footer" /}
-</footer>
+
 <script>
     new Vue({
         el: '#app',
