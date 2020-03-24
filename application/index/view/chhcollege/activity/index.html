@@ -19,7 +19,7 @@
         <div class="activity g-width-100">
             <section>
                 <div class="banner">
-                    <swiper class="swiper-container" :options="bannerOption" ref="banner-swiper">
+                    <swiper class="swiper-container" ref="banner-swiper">
                         <swiper-slide class="swiper-wrapper" v-for="(item, index) in bannerData" :key="index" v-cloak="">
                             <div class="banner-bg g-width-100 pr" :style="{backgroundImage: 'url(' + item.path + ')'}" @click="toActivityDetail(item)">
                                 <!-- <div class="banner-bg-wrapper">
@@ -104,9 +104,7 @@
                     </div>
                 </div>
             </section>
-            <!-- <g-footer></g-footer> -->
         </div>
-        <vip-dialog :visible="joinVipDialog"></vip-dialog>
         <footer v-show="loading">
             {include file="public/coll_footer" /}
         </footer>
@@ -117,18 +115,10 @@
             el: '#app',
             data: function () {
                 return {
-                    userInfo: localStorage.getItem('userInfo'), 
                     bannerData: '{$gallery | raw}',
-                    bannerOption: {
-                        autoplay: true,
-                        speed: 2000,
-                        pagination: {
-                            el: '.swiper-pagination' 
-                        },
-                    },
                     page: {
-                        size: 6,
-                        current: 1,
+                        per_page: 6,
+                        current_page: 1,
                         total: 0
                     },
                     filterOption: {
@@ -181,13 +171,12 @@
                     },
                     activityData: [],
                     showMoreFlag: false,
-                    joinVipDialog: false,
                     loading: false
                 }
             },
             methods: {
                 getIndex: function() {
-                    http_get('activity').then( res => {
+                    http_post('activity',this.page).then( res => {
                         this.activityData = res.data.data;
                         this.page.total = res.data.total;
                         let newTime = new Date();
@@ -200,166 +189,38 @@
                             item.starttime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
                             item.endtime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
                         });
-                        this.activityData = Object.assign({},this.activityData);
+                        this.activityData = this.activityData;
                     }).catch(err => {
 
                     });
+                },
+                showMore: function () {
+                    this.showMoreFlag = true;
+                    this.page.current_page++;
+                    this.fetchData(true);
                 },
 
                 toActivityDetail: function (item) {
                     var url = 'act_detail?activityId=' + item.id;
                     common.toPage(url);
                 },
-
-
-                showVipDialog: function () {
-                    this.joinVipDialog = !this.joinVipDialog;
-                },
-                
                 fetchData: function (flag) {
-                    var self = this;
-                    var params = {
-                        page: this.page.current,
-                        size: this.page.size,
-                        plat_id: 3 
-                    }
-                    if (this.userInfo) {
-                        params.uid = JSON.parse(this.userInfo).id;
-                    }
-                    for (var key in this.currentFilterTerm) {
-                        if (this.currentFilterTerm[key] !== 0) {
-                            key = Number(key);
-                            if (key === 0) { 
-                                params.type_id = this.currentFilterTerm[key];
-                            } else if (key === 1) { 
-                                params.activity_type = this.currentFilterTerm[key];
-                            } else if (key === 2) { 
-                                if (this.currentFilterTerm[key] === 1) { 
-                                    params.start_time = time.getWeekStartDate();
-                                    params.end_time = time.getWeekEndDate();
-                                } else { 
-                                    params.start_time = time.getMonthStartDate();
-                                    params.end_time = time.getMonthEndDate();
-                                }
-                            } else if (key === 3) { 
-                                params.status = this.currentFilterTerm[key];
-                            }
+                    let newTime = new Date();
+                    http_post('activity',this.page).then( res => {
+                        this.showMoreFlag = false;
+                        for (var i = 0; i < res.data.data.length; i++) {
+                            let timeStart = DateUtil.getDate(res.data.data[i].starttime);
+                            let timeEnd = DateUtil.getDate(res.data.data[i].endtime);
+                            if( timeStart > newTime ) res.data.data[i].isOver = 0;
+                            else if (newTime > timeEnd ) res.data.data[i].isOver = 1;
+                            else res.data.data[i].isOver = 2;
+                            res.data.data[i].starttime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
+                            res.data.data[i].endtime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
+                            this.activityData.push(res.data.data[i]);
                         }
-                    }
-                    bsApi.fetchActivityList(params).then(function (res) {
-                        console.log(res);
-                        if (res.code === 0) {
-                            self.showMoreFlag = false;
-                            self.page.total = res.data.count;
-                            if (flag) {
-                                for (var i = 0; i < res.data.activityList.length; i++) {
-                                    var m = common.handleAvtivity(res.data.activityList[i], res.data.time_now);
-                                    self.activityData.push(m);
-                                }
-                            } else {
-                                for (var i = 0; i < res.data.activityList.length; i++) {
-                                    res.data.activityList[i] = common.handleAvtivity(res.data.activityList[i], res.data.time_now);
-                                }
-                                self.activityData = res.data.activityList;
-                            }
-                        }
+                    }).catch(err => {
+
                     });
-                },
-                
-                fetchActivityBanner: function () {
-                    var self = this;
-                    var params = {};
-                    if (this.userInfo) {
-                        params.uid = JSON.parse(this.userInfo).id;
-                    }
-                    bsApi.fetchActivityBanner(params).then(function (res) {
-                        console.log(res);
-                        if (res.code === 0) {
-                            var now = new Date();
-                            for (var i = 0; i < res.data.banner.length; i++) {
-                                var m = common.handleAvtivity(res.data.banner[i], res.data.time_now);
-                            }
-                            self.bannerData = res.data.banner;
-                            console.log(self.bannerData);
-                        }
-                    });
-                },
-                
-                fetchActivityType: function () {
-                    var self = this;
-                    bsApi.fetchActivityType({}).then(function (res) {
-                        if (res.code === 0) {
-                            var types = [{
-                                label: '全部',
-                                value: 0
-                            }];
-                            for (var i = 0; i < res.data.length; i++) {
-                                var m = res.data[i];
-                                
-                                if (m.id !== 4) {
-                                    types.push({
-                                        label: m.name,
-                                        value: m.id 
-                                    });
-                                }
-                            }
-                            self.filterOption.types.data = types;
-                        }
-                    });
-                },
-                
-                fliterActivity: function (type, value) {
-                    if (this.currentFilterTerm[type] === value) {
-                        return;
-                    }
-                    this.currentFilterTerm[type] = value;
-                    this.fetchData();
-                },
-                
-                showMore: function () {
-                    this.showMoreFlag = true;
-                    this.page.current++;
-                    this.fetchData(true);
-                },
-                
-                
-                
-                offlineClick (item) { 
-                    common.checkLogin();
-                    var status = item.status;
-                    console.log('offlineClick', status);
-                    if (status === 0) {
-                        var url = 'activitydetail?id=' + item.id + '&offline=1';
-                        common.toPage(url);
-                    } else if (status === 1) {
-                        return;
-                    } else if (status === 2) {
-                        this.$refs['g-message'].sentMessageOption(true, 'warning', '您的报名信息已提交！本次活动主办方需要审核，报名结果请以短信告知为准。');
-                        return;
-                    } else if (status === 3) {
-                        this.$refs['g-message'].sentMessageOption(true, 'success', '已报名成功，请不要重复报名');
-                        return;
-                    } else if (status === 4) {
-                        this.$refs['g-message'].sentMessageOption(true, 'warning', '抱歉由于现场名额限制，您的活动报名未通过审核，感谢参与！');
-                    }
-                },
-                onlineClick (item) { 
-                    console.log(item)
-                    common.checkLogin();
-                    var status = item.status;
-                    console.log('onlineClick', status);
-                    if (status === -1) {
-                        var url = 'activitydetail?id=' + item.id + '&online=1';
-                        common.toPage(url);
-                    } else if (status === 1) {
-                        return;
-                    } else if (status === 2 || status === 3) {
-                        this.toLive(item.url);
-                    }
-                },
-                
-                toLive: function (url) {
-                    common.toPage(url);
                 }
             },
             created: function () {
