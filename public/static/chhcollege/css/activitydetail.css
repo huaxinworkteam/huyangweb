@@ -224,6 +224,20 @@ select:-webkit-autofill {
     cursor: not-allowed;
     background-color: #BCBCBC;
 }
+.activity-detail .head .wrapper .info .weChatRQcode {
+    position: absolute;
+    top: -56px;
+    border-radius: 2px;
+    left: 130px;
+    padding: 10px 20px;
+    border: 1px solid #929292;
+    text-align: center;
+    background-color: #ffffff;
+}
+.activity-detail .head .wrapper .info .weChatRQcode p {
+    color: #e43333;
+    padding-bottom: 10px;
+}
 .activity-detail .head .wrapper .info .share-wechat {cursor: pointer;}
 .activity-detail .head .wrapper .info .share-wechat .icon {
     width: 30px;
