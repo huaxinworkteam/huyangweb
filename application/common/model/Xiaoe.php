@@ -126,7 +126,10 @@ class Xiaoe extends Model
             ]
         ]);
         $res=curl_request($url,$data,$method);
-        halt($res);
 
+    }
+
+    public function  getAllGoods($name,$ZLtype){
+        $goods_id= input（‘id’）；
     }
 }
