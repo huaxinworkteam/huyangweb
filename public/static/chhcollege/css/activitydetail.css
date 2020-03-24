@@ -170,7 +170,7 @@ select:-webkit-autofill {
 }
 
 .activity-detail .head .wrapper .cover {
-    width: 500px;
+    width: 500px; border-radius: 4px;
 }
 .activity-detail .head .wrapper .info {
     margin-left: 40px;
@@ -223,6 +223,20 @@ select:-webkit-autofill {
 .activity-detail .head .wrapper .info .btn .item.disabled {
     cursor: not-allowed;
     background-color: #BCBCBC;
+}
+.activity-detail .head .wrapper .info .weChatRQcode {
+    position: absolute;
+    top: -56px;
+    border-radius: 2px;
+    left: 130px;
+    padding: 10px 20px;
+    border: 1px solid #929292;
+    text-align: center;
+    background-color: #ffffff;
+}
+.activity-detail .head .wrapper .info .weChatRQcode p {
+    color: #e43333;
+    padding-bottom: 10px;
 }
 .activity-detail .head .wrapper .info .share-wechat {cursor: pointer;}
 .activity-detail .head .wrapper .info .share-wechat .icon {
@@ -278,6 +292,9 @@ select:-webkit-autofill {
 .activity-detail .body .hot .info .item {
     margin-bottom: 10px;
     cursor: pointer;
+}
+.activity-detail .body .hot .info .item img {
+    border-radius: 4px;
 }
 
 /* dialog */

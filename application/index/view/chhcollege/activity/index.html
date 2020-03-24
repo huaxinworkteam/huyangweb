@@ -11,14 +11,11 @@
     {include file="public/head" /}
 </head>
 <body>
-    
-    <div id="app" class="pc">
+    <header>
+        {include file="public/coll_header" /}
+    </header>
+    <div id="app" class="pc" v-cloak>
         <g-message ref="g-message"></g-message>
-        <!-- <right-tools></right-tools> -->
-        <header>
-            {include file="public/coll_header" /}
-        </header>
-        <!-- <g-header :current="3"></g-header> -->
         <div class="activity g-width-100">
             <section>
                 <div class="banner">
@@ -110,10 +107,11 @@
             <!-- <g-footer></g-footer> -->
         </div>
         <vip-dialog :visible="joinVipDialog"></vip-dialog>
+        <footer v-show="loading">
+            {include file="public/coll_footer" /}
+        </footer>
     </div>
-    <footer>
-        {include file="public/coll_footer" /}
-    </footer>
+    
     <script>
         new Vue({
             el: '#app',
@@ -184,6 +182,7 @@
                     activityData: [],
                     showMoreFlag: false,
                     joinVipDialog: false,
+                    loading: false
                 }
             },
             methods: {
@@ -366,6 +365,7 @@
             created: function () {
                 if (!isJSON(this.bannerData)) this.bannerData = $.parseJSON( this.bannerData );
                 this.getIndex();
+                this.loading=true;
             }
         });
     </script>

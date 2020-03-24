@@ -110,7 +110,6 @@
         max-height: 300px; overflow: auto;
     }
 </style>
-{include file="public/float_QRcode" /}
 <!--在线咨询--><!--
 <div class="consultation">
     <div class="consultation_head">
@@ -146,9 +145,37 @@
 
 
 
-
-
-
+{include file="public/float_QRcode" /}
+<script>
+    var TabContent = {
+        init: function() {
+            $(".option_item").mouseover(function() {
+                $(".option_active").stop().animate({
+                    left: $(this).position()['left']
+                }, {
+                    duration: 300
+                });
+                TabContent.qrcodeContent($(this));
+            });
+        },
+        qrcodeContent: function(obj) {
+		
+            var margin = $(".qrcode_content").width();
+            margin = margin * $(obj).prevAll().size()* -1;
+            $(".qrcode_slider").stop().animate({
+                marginLeft: margin + "px"
+            }, {
+                duration: 300
+            });
+	    }
+    }
+    $(document).ready(function() {
+        TabContent.init();
+        $(".close").click(function(){
+            $(".float-qrcode").slideToggle();
+        });
+    });
+</script>
 <!-- 此处引用 js 脚本 -->
 <script src="__COLL__/js/vue.min.js"></script>
     

@@ -14,37 +14,22 @@
 <header>
     {include file="public/coll_header" /}
 </header>
-<!--  :class="{hidden: signUpDialog || submitSuccessDialog}" -->
-<div id="app" class="pc">
-    <!-- <right-tools></right-tools> -->
-    <!-- <g-header :active="showHead" :current="3"></g-header> -->
-    <!-- <div class="activity-detail-header" :class="{active: showHead}">
-        <div class="wrapper g-width">
-            <h1 class="logo float-left">
-                <a href="/" title="官网首页"></a>
-            </h1>
-            
-            <div class="lr-head float-right">
-                <span class="btn" :class="{disabled: activityInfo.offlineBtn.disabled}" v-if="activityInfo.offlineBtn.show" @click="offlineClick(activityInfo.offlineBtn)">{{activityInfo.offlineBtn.name}}</span>
-                <span class="btn" :class="{disabled: activityInfo.onlineBtn.disabled}" v-if="activityInfo.onlineBtn.show" @click="onlineClick(activityInfo.onlineBtn)">{{activityInfo.onlineBtn.name}}</span>
-            </div>
-        </div>
-    </div> -->
+<div id="app" class="pc" v-cloak>
 
     <div class="activity-detail g-width-100">
-        <section v-if="!ifreamFlag">
+        <section>
             <div class="head" ref="activity-detail-head">
-                <div class="wrapper g-width alignCenter" v-cloak>
+                <div class="wrapper g-width alignCenter" >
                     <img class="cover" :src="'http://test.v7mall.com/attachment/'+activityInfo.thumb">
                     <div class="info flexColumn justifyCenter flex_1">
                         <p class="title fs22 line-clamp2">{{activityInfo.title}}</p>
                         <p class="time fs16 mb15">
                             <i class="icon"></i>
-                            <span v-if="activityInfo.isOver === 0">未开始</span>
-                            <span v-if="activityInfo.isOver === 1">进行中</span>
-                            <span v-if="activityInfo.isOver === 2">已结束</span>
+                            <span v-if="activityInfo.isOver == 0">未开始</span>
+                            <span v-if="activityInfo.isOver == 1">进行中</span>
+                            <span v-if="activityInfo.isOver == 2">已结束</span>
                              ·
-                            <span>{{activityInfo.timeStr2}}</span>
+                            <span>{{activityInfo.startTime}} - {{activityInfo.endTime}}</span>
                         </p>
                         <p class="address fs16 mb15">
                             <i class="icon"></i>
@@ -54,16 +39,19 @@
                             <i class="icon"></i>
                             {{activityInfo.joinNum}}人已报名
                         </p>
-                        <div>
+                        <div style="position: relative;">
                             <div class="btn float-left">
-                                <!-- <span class="item" :class="{disabled: activityInfo.offlineBtn.disabled}" v-if="activityInfo.offlineBtn.show" @click="offlineClick(activityInfo.offlineBtn)">{{activityInfo.offlineBtn.name}}</span>
-                                <span class="item" :class="{disabled: activityInfo.onlineBtn.disabled}" v-if="activityInfo.onlineBtn.show" @click="onlineClick(activityInfo.onlineBtn)">{{activityInfo.onlineBtn.name}}</span> -->
-                                <span class="item">看回放</span>
+                                <span class="item" :class="{disabled: !activityInfo.isOver==0}" v-if="activityInfo.isOver==0"
+                                @mouseenter="qrCodeShow=true" @mouseleave="qrCodeShow=false">去报名</span>
+                                <!-- <span class="item" :class="{disabled: !activityInfo.isOver==1}" v-if="activityInfo.isOver==1" 
+                                    @click="offlineClick()">
+                                    看直播</span>
+                                <span class="item" :class="{disabled: !activityInfo.isOver==2}" v-if="activityInfo.isOver==2" 
+                                    @click="onlineClick()">
+                                    看回放</span> -->
                             </div>
-                            <div class="share-wechat float-right fs14 pr">
-                                分享到
-                                <i class="icon"></i>
-                                <div class="qrcode" id="qrcode"></div>
+                            <div class="weChatRQcode" id="qrcode" v-show="qrCodeShow">
+                                <p>请使用微信扫码报名</p>
                             </div>
                         </div>
                     </div>
@@ -80,387 +68,77 @@
                     <div class="hot float-right">
                         <p class="title fs22">热门活动</p>
                         <div class="info">
-                            <!-- <p class="item" v-for="(item, index) in recommendActivity" :key="index" @click="toActivityDetail(item)">
-                                <img class="g-width-100" :src="static/picture/item.cover_url" alt="">
-                            </p> -->
+                            <p class="item" v-for="(item, index) in recommendActivity" :key="index" @click="toActivityDetail(item)">
+                                <img class="g-width-100" :src="'http://test.v7mall.com/attachment/'+item.thumb" alt="">
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="ifreamBack" v-else>
-            <div class="back" @click="ifreamFlag = !ifreamFlag">返回活动页 &gt;</div>
-            <iframe class="myiframe" :src="ifreamUrl" style="width: 1240px; height: 730px; overflow:hidden;" scrolling="no" frameborder="0" allowFullScreen></iframe>
-        </section>
-        <!-- <g-footer></g-footer> -->
     </div>
 
-    <!-- <div class="dialog">
-        <div class="mask" v-show="signUpDialog"></div>
-        <div class="sign-up-dialog" :class="{active: signUpDialog}">
-            <div class="wrapper">
-                <div class="dialog-header">
-                    <p class="title fs24">报名去现场</p>
-                    <i class="dialog-close" @click="signUpDialog = false"></i>
-                </div>
-                <div class="dialog-body">
-                    <div class="input-item alignCenter" v-for="(item, index) in signUpForm" :key="index">
-                        <label class="fs18">{{item.label}}：</label>
-                        <input class="flex_1 fs18" type="text" :placeholder="item.placeholder" v-model="signInfo[item.prop]">
-                        <span class="error-tip fs14" :class="{show: errorInfo[item.error] && errorInfo[item.error].length > 0}">{{errorInfo[item.error]}}</span>
-                    </div>
-                </div>
-                <div class="dialog-btn">
-                    <span @click="submitCheck">提交报名</span>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-    
-    <!-- <div class="dialog">
-        <div class="mask" v-show="submitSuccessDialog"></div>
-        <div class="submit-success-dialog" :class="{active: submitSuccessDialog}">
-            <div class="wrapper">
-                <div class="dialog-header">
-                    <i class="dialog-close" @click="submitSuccessDialog = false"></i>
-                </div>
-                <div class="dialog-body">
-                    <div class="review" v-if="submitSuccessStatus === 1">
-                        <img src="static/picture/activity-detail-submit-success.png" alt="待审核">
-                        <p class="title fs20">报名数据已提交成功</p>
-                        <p class="message fs18">本次活动主办方需要审核，报名结果请以收到提醒短信为准。</p>
-                    </div>
-                    <div class="sign-up-success" v-if="submitSuccessStatus === 0">
-                        <img src="static/picture/activity-detail-signup-success.png" alt="报名成功">
-                        <p class="title fs20">恭喜您报名成功！</p>
-                        <p class="message fs18">活动开始前我们会短信通知难，请留意消息通知。</p>
-                    </div>
-                    <div class="mini-program" v-if="isMp === 1">
-                        <img :src="static/picture/activityinfo.share_qrcode" alt="小程序二维码">
-                        <span class="scan fs16">
-                            <i class="icon"></i>
-                            微信扫码邀请好友一同参与
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-    
-    <!-- <vip-dialog :visible="joinVipDialog"></vip-dialog> -->
-
     <g-message ref="g-message"></g-message>
+    <footer v-show="loading">
+        {include file="public/coll_footer" /}
+    </footer>
 </div>
-<footer>
-    {include file="public/coll_footer" /}
-</footer>
+
 <script>
     new Vue({
         el: '#app',
         data: function () {
             return {
-                // userInfo: localStorage.getItem('userInfo'), 
-                // activityId: getParamsCode('id'),
-                // offline: getParamsCode('offline'),
-                // online: getParamsCode('online'),
-                
                 activityInfo: {
-                    thumb: '{$act_id.thumb}',
-                    title: "{$act_id.title}",
-                    address: '{$act_id.address}',
-                    joinNum: '{$act_id.gnum}',
-                    introduce: '{$act_id.detail | raw}'
+                    thumb: '{$act_id.thumb | raw}',
+                    title: "{$act_id.title | raw}",
+                    address: '{$act_id.address | raw}',
+                    joinNum: '{$act_id.gnum | raw}',
+                    introduce: '{$act_id.detail | raw}',
+                    qrCode: '{$act_id.qrCode | raw}',
+                    startTime: '{$act_id.starttime | raw}',
+                    endTime: '{$act_id.endtime | raw}',
+                    isOver: 0
 
-                    // onlineBtn: {
-                    //     name: '约直播',
-                    //     disabled: false,
-                    //     show: false,
-                    //     status: -1 
-                    // },
-                    // offlineBtn: {
-                    //     name: '去现场',
-                    //     status: 0, 
-                    //     disabled: false,
-                    //     show: false,
-                    // }
                 }, 
-                // recommendActivity: [], 
-                // showHead: false,
-                // wechatQrcode: '',
-                
-                // isMp: 0,
-                signUpDialog: false,
-                // signUpForm: [],
-                // signInfo: {
-                //     name: '',
-                //     mobile: '',
-                //     company: '',
-                //     job: '',
-                //     wechat: ''
-                // },
-                // errorInfo: {
-                //     nameError: '',
-                //     mobileError: '',
-                //     companyError: '',
-                //     jobError: '',
-                //     wechatError: ''
-                // },
-
-                
-                // submitSuccessDialog: false,
-                // submitSuccessStatus: 0,
-                
-                // joinVipDialog: false,
-                ifreamFlag: false,
-                // ifreamUrl: ''
+                recommendActivity: '',
+                qrCodeShow: false,
+                loading: false,
             }
         },
         methods: {
-            
-            showVipDialog: function () {
-                this.joinVipDialog = !this.joinVipDialog;
-            },
-            
-            fetchData: function () {
-                var params = {
-                    activity_id: Number(this.activityId)
-                }
-                if (this.userInfo) {
-                    params.uid = JSON.parse(this.userInfo).id;
-                    params.phone = JSON.parse(this.userInfo).login;
-                }
-                var self = this;
-                bsApi.fetchActivityDetail(params).then(function (res) {
-                    if (res.code === 0) {
-                        
-                        console.log(res.data.activity_info);
-                        self.activityInfo = common.handleAvtivity(res.data.activity_info, res.data.time_now);
-
-                        self.recommendActivity = res.data.recommend_activity;
-
-                        
-                        if (res.data.palt_id.indexOf(1) >= 0) {
-                            self.isMp = 1;
-                        }
-                        var audienceInfo = res.data.activity_info.sign_up_info.split(',');
-                        var signUpForm = [];
-                        if (audienceInfo.length !== 0) {
-                            for (var i = 0; i < audienceInfo.length; i++) {
-                                var m = audienceInfo[i];
-                                var obj = self.settingForm(m);
-                                signUpForm.push(obj);
-                            }
-                            self.signUpForm = signUpForm.sort(function (a, b) { return a.val - b.val; });
-                        }
-                    } else {
-                        window.location.href="/view/activity"
-                    }
-                });
-            },
-            handleScroll: function () {
-                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-                var clientHeight = this.$refs['activity-detail-head'].offsetHeight;
-                if (scrollTop >= clientHeight) {
-                    this.showHead = true;
-                } else {
-                    this.showHead = false;
-                }
-            },
-            
-            toActivityDetail: function (item) {
-                var url = 'activitydetail?id=' + item.id;
-                common.toPage(url);
-            },
-            
             getQrcode: function () {
                 var qrcode = new QRCode('qrcode', {
                     width : 108,
                     height : 108
                 });
-                qrcode.makeCode(window.location.href);
+                qrcode.makeCode(this.activityInfo.qrCode);
             },
-            settingForm: function (val) {
-                var obj = {};
-                switch (val) {
-                    case '我的姓名':
-                        obj = {
-                            val: 1,
-                            label: val,
-                            placeholder: '请输入真实姓名',
-                            error: 'nameError',
-                            prop: 'name'
-                        };
-                        break;
-                    case '公司名称':
-                        obj = {
-                            val: 2,
-                            label: val,
-                            placeholder: '请输入你所在的公司名称',
-                            error: 'companyError',
-                            prop: 'company'
-                        };
-                        break;
-                    case '我的职务':
-                        obj = {
-                            val: 3,
-                            label: val,
-                            placeholder: '请输入你目前的职务',
-                            error: 'jobError',
-                            prop: 'job'
-                        };
-                        break;
-                    case '手机号':
-                        obj = {
-                            val: 4,
-                            label: val,
-                            placeholder: '输入手机号码',
-                            error: 'mobileError',
-                            errorMsg: '请输入有效的手机号!',
-                            prop: 'mobile'
-                        };
-                        break;
-                    case '微信号':
-                        obj = {
-                            val: 5,
-                            label: val,
-                            placeholder: '输入您的微信号',
-                            error: 'wechatError',
-                            prop: 'wechat'
-                        };
-                        break;
-                }
-                return obj;
-            },
-            checkSignUp: function () {
-                if (this.offline) { 
-                    console.log(this.offline);
-                    this.joinActivity();
-                }
-                if (this.online) {
-                    this.submit(true);
-                    
-                }
-            },
-            
-            offlineClick (item) { 
-                common.checkLogin();
-                var status = item.status;
-                console.log('offlineClick', status);
-                if (status === 0) {
-                    this.joinActivity();
-                } else if (status === 1) {
-                    return;
-                } else if (status === 2) {
-                    this.submitSuccessDialog = true;
-                    this.submitSuccessStatus = 1;
-                    return;
-                } else if (status === 3) {
-                    this.submitSuccessDialog = true;
-                    this.submitSuccessStatus = 0;
-                    return;
-                } else if (status === 4) {
-                    this.$refs['g-message'].sentMessageOption(true, 'warning', '抱歉由于现场名额限制，您的活动报名未通过审核，感谢参与！');
-                }
-            },
-            onlineClick (item) { 
-                common.checkLogin();
-                var status = item.status;
-                console.log('onlineClick', status);
-                if (status === -1) {
-                    this.submit(true);
-                } else if (status === 1) {
-                    return;
-                } else if (status === 2 || status === 3) {
-                    
-                    this.ifreamUrl = item.url + '?whole'
-                    this.ifreamFlag = true
-                }
-            },
-            
-            toLive: function (url) {
+            toActivityDetail: function (item) {
+                var url = 'act_detail?activityId=' + item.id;
                 common.toPage(url);
             },
-            joinActivity: function () {
-                this.signUpDialog = true;
-                
-                this.errorInfo.nameError = '';
-                this.errorInfo.mobileError = '';
-                this.errorInfo.companyError = '';
-                this.errorInfo.jobError = '';
-                this.errorInfo.wechatError = '';
-                this.signInfo.name = '';
-                this.signInfo.mobile = '';
-                this.signInfo.company = '';
-                this.signInfo.job = '';
-                this.signInfo.wechat = '';
-            },
-            
-            submitCheck: function () {
-                var reg = /^1((3[\d])|(4[5,6,7,9])|(5[0-3,5-9])|(6[5-7])|(7[0-8])|(8[\d])|(9[1,8,9]))\d{8}$/;
-                var flag = true;
-                for (var i = 0; i < this.signUpForm.length; i++) {
-                    var m = this.signUpForm[i];
-                    this.errorInfo[m.error] = '';
-                    if (this.signInfo[m.prop].length === 0) {
-                        this.errorInfo[m.error] = m.placeholder;
-                        flag = false;
-                        break;
-                    }
-                    if (m.val === 4 && !reg.test(this.signInfo[m.prop])) { 
-                        this.errorInfo[m.error] = m.errorMsg;
-                        flag = false;
-                        break;
-                    }
-                }
-                if (!flag) {
-                    return;
-                }
-                this.submit();
-            },
-            
-            submit: function (type) {
-                
-                var params = {
-                    user_id: JSON.parse(this.userInfo).id,
-                    activity_id: Number(this.activityId),
-                    phone: JSON.parse(this.userInfo).login,
-                    type: type ? 2 : 1,
-                    source: 3,
-                    name: '',
-                    mobile: '',
-                    job: '',
-                    company: '',
-                    wechat: ''
-                };
-                if (!type) {
-                    for (var i = 0; i < this.signUpForm.length; i++) {
-                        var m = this.signUpForm[i];
-                        params[m.prop] = this.signInfo[m.prop];
-                    }
-                }
-                var self = this;
-                bsApi.fetchActivitySignUp(params).then(function (res) {
-                    if (res.code === 0) {
-                        
-                        if (!type) {
-                            self.signUpDialog = false;
-                            self.submitSuccessDialog = true;
-                            self.submitSuccessStatus = 1;
-                        } else {
-                            self.$refs['g-message'].sentMessageOption(true, 'success', '预约成功');
-                        }
-                        self.fetchData();
-                    }
+
+            getRecommendActivity() {
+                http_post('getRecommend').then(res=>{
+                    this.recommendActivity = res.data;
                 });
-            }
+            },
+     
         },
         mounted: function () {
             // window.addEventListener('scroll', this.handleScroll);
-            // this.getQrcode();
-            // this.fetchData();
-            // this.checkSignUp();
+            let timeStart = DateUtil.getDate(this.activityInfo.startTime);
+            let timeEnd = DateUtil.getDate(this.activityInfo.endTime);
+            let newTime = new Date();
+            if( timeStart > newTime ) this.activityInfo.isOver = 0;
+            else if (newTime > timeEnd ) this.activityInfo.isOver = 1;
+            else this.activityInfo.isOver = 2;
+            this.activityInfo.startTime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
+            this.activityInfo.endTime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
+            this.getQrcode();
+            this.getRecommendActivity();
+            this.loading=true;
         }
     });
 </script>
