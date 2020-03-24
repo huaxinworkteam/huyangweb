@@ -126,10 +126,33 @@ class Xiaoe extends Model
             ]
         ]);
         $res=curl_request($url,$data,$method);
+        if(is_object($res)) return $res;
+        else return 0;
 
     }
 
-    public function  getAllGoods($name,$ZLtype){
-        $goods_id= input（‘id’）；
+    public function  getAllGoods($goods_name,$lastId,$pageSize,$resource_type){
+        $access_token=self::$access_token;
+        $data=Xetzhuanlan::where("goods_name",$goods_name)->find();
+        if(!$data) return $data->getError();
+        $url="https://api.xiaoe-tech.com/xe.goods.relation.get/3.0.0";
+        $method="post";
+        $data=json_encode([
+            "access_token"=>$access_token,
+            "data"=>[
+                "goods_id"=>$data['goods_id'],
+                "goods_type"=>$data['goods_type'],
+                "resource_type"=>$resource_type,
+                "last_id"=>$lastId,
+                "page_size"=>$pageSize
+            ]
+        ]);
+        $res=curl_request($url,$data,$method);
+        if($res) {
+            return $res;
+        }
+        else{
+            return false;
+        }
     }
 }

@@ -61,11 +61,14 @@ class Index extends Controller
     }
     //活动查询
     public function activity()
-    {  $this->headFoot();
+    {
+        $this->headFoot();
         $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         if(request()->isAjax()) {
-            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime')->where(['show'=>1,'merchantid'=>19])->order('displayorder desc')->paginate(6);
+            $p=input('page');
+            if(!$p) return myJson('F','参数异常');
+            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime')->where(['show'=>1,'merchantid'=>19])->order('displayorder desc')->limit(($p->current_page-1)*$p->per_page,$p->current_page*$p->per_page);
             if($all_activity) return myJson('T',$all_activity);
             else return myJson('F','暂无数据');
         }
@@ -247,8 +250,21 @@ class Index extends Controller
         return view('chhcollege/about/college');
     }
 
-    public function test(){
-        $a=model('Xiaoe')->getGoodsDetail('v_5e71c6f0141e2_nwOUD4JO',3);
-       var_dump($a);
+    public function getCourse(){
+        $goods_name=input('goods_name');
+        $last_id=input('last_id')?:'';
+        $page_size=input('page_size')?:20;
+        $resource_type='['.(input('resource_type')?:'3,4').']';
+        $a=model('Xiaoe')->getAllGoods($goods_name,$last_id,$page_size,$resource_type);
+        if(is_object($a)) return $a;
+        else return false;
+    }
+
+    public  function  getCourseDetail(){
+        $goods_id=input('goods_id');
+        $goods_type=input('goods_type');
+        $a=model('Xiaoe')->getGoodsDetail($goods_id,$goods_type);
+        if(is_object($a)) return $a;
+        else return false;  
     }
 }
