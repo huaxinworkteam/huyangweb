@@ -1,5 +1,5 @@
 .activity .banner {
-    height: 320px;
+    height: 350px;
     
 }
 .activity .banner .swiper-container {
@@ -68,17 +68,17 @@
 .activity .banner .wrapper .info .address .icon {
     width: 12px;
     height: 15px;
-    background-image: url(/static/images/activity-address-icon.png);
+    background-image: url(/static/chhcollege/images/activity-address-icon.png);
 }
 .activity .banner .wrapper .info .time .icon {
     width: 14px;
     height: 14px;
-    background-image: url(/static/images/activity-time-icon.png);
+    background-image: url(/static/chhcollege/images/activity-time-icon.png);
 }
 .activity .banner .wrapper .info .num .icon {
     width: 14px;
     height: 11px;
-    background-image: url(/static/images/activity-num-icon.png);
+    background-image: url(/static/chhcollege/images/activity-num-icon.png);
 }
 .activity .banner .wrapper .info .btn .item {
     color: #fff;
@@ -148,6 +148,7 @@
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
     vertical-align: bottom;
+    height: 220px;
 }
 .activity .content .wrapper .listItem .not-start,
 .activity .content .wrapper .listItem .processing,
@@ -182,7 +183,7 @@
     width: 11px;
     height: 11px;
     vertical-align: middle;
-    background-image: url(/static/images/activity-processing.png);
+    background-image: url(/static/chhcollege/images/activity-processing.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -219,12 +220,12 @@
 .activity .content .wrapper .listItem .listItem-body .address .icon {
     width: 15px;
     height: 17px;
-    background-image: url(/static/images/activity-content-address-icon.png);
+    background-image: url(/static/chhcollege/images/activity-content-address-icon.png);
 }
 .activity .content .wrapper .listItem .listItem-body .time .icon {
     width: 14px;
     height: 14px;
-    background-image: url(/static/images/activity-content-time-icon.png);
+    background-image: url(/static/chhcollege/images/activity-content-time-icon.png);
 }
 
 .activity .content .show-more p {

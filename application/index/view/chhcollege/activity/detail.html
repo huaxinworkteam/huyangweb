@@ -14,10 +14,11 @@
 <header>
     {include file="public/coll_header" /}
 </header>
-<div id="app" class="pc" :class="{hidden: signUpDialog || submitSuccessDialog}">
-    <right-tools></right-tools>
+<!--  :class="{hidden: signUpDialog || submitSuccessDialog}" -->
+<div id="app" class="pc">
+    <!-- <right-tools></right-tools> -->
     <!-- <g-header :active="showHead" :current="3"></g-header> -->
-    <div class="activity-detail-header" :class="{active: showHead}">
+    <!-- <div class="activity-detail-header" :class="{active: showHead}">
         <div class="wrapper g-width">
             <h1 class="logo float-left">
                 <a href="/" title="官网首页"></a>
@@ -28,13 +29,13 @@
                 <span class="btn" :class="{disabled: activityInfo.onlineBtn.disabled}" v-if="activityInfo.onlineBtn.show" @click="onlineClick(activityInfo.onlineBtn)">{{activityInfo.onlineBtn.name}}</span>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="activity-detail g-pc-top g-width-100">
+    <div class="activity-detail g-width-100">
         <section v-if="!ifreamFlag">
             <div class="head" ref="activity-detail-head">
                 <div class="wrapper g-width alignCenter" v-cloak>
-                    <img class="cover" :src="static/picture/activityinfo.cover_url">
+                    <img class="cover" :src="'http://test.v7mall.com/attachment/'+activityInfo.thumb">
                     <div class="info flexColumn justifyCenter flex_1">
                         <p class="title fs22 line-clamp2">{{activityInfo.title}}</p>
                         <p class="time fs16 mb15">
@@ -51,13 +52,13 @@
                         </p>
                         <p class="num fs16 mb15">
                             <i class="icon"></i>
-                            {{activityInfo.initial_join_num}}人已报名
+                            {{activityInfo.joinNum}}人已报名
                         </p>
                         <div>
-                            
                             <div class="btn float-left">
-                                <span class="item" :class="{disabled: activityInfo.offlineBtn.disabled}" v-if="activityInfo.offlineBtn.show" @click="offlineClick(activityInfo.offlineBtn)">{{activityInfo.offlineBtn.name}}</span>
-                                <span class="item" :class="{disabled: activityInfo.onlineBtn.disabled}" v-if="activityInfo.onlineBtn.show" @click="onlineClick(activityInfo.onlineBtn)">{{activityInfo.onlineBtn.name}}</span>
+                                <!-- <span class="item" :class="{disabled: activityInfo.offlineBtn.disabled}" v-if="activityInfo.offlineBtn.show" @click="offlineClick(activityInfo.offlineBtn)">{{activityInfo.offlineBtn.name}}</span>
+                                <span class="item" :class="{disabled: activityInfo.onlineBtn.disabled}" v-if="activityInfo.onlineBtn.show" @click="onlineClick(activityInfo.onlineBtn)">{{activityInfo.onlineBtn.name}}</span> -->
+                                <span class="item">看回放</span>
                             </div>
                             <div class="share-wechat float-right fs14 pr">
                                 分享到
@@ -79,9 +80,9 @@
                     <div class="hot float-right">
                         <p class="title fs22">热门活动</p>
                         <div class="info">
-                            <p class="item" v-for="(item, index) in recommendActivity" :key="index" @click="toActivityDetail(item)">
+                            <!-- <p class="item" v-for="(item, index) in recommendActivity" :key="index" @click="toActivityDetail(item)">
                                 <img class="g-width-100" :src="static/picture/item.cover_url" alt="">
-                            </p>
+                            </p> -->
                         </div>
                     </div>
                 </div>
@@ -91,10 +92,10 @@
             <div class="back" @click="ifreamFlag = !ifreamFlag">返回活动页 &gt;</div>
             <iframe class="myiframe" :src="ifreamUrl" style="width: 1240px; height: 730px; overflow:hidden;" scrolling="no" frameborder="0" allowFullScreen></iframe>
         </section>
-        <g-footer></g-footer>
+        <!-- <g-footer></g-footer> -->
     </div>
 
-    <div class="dialog">
+    <!-- <div class="dialog">
         <div class="mask" v-show="signUpDialog"></div>
         <div class="sign-up-dialog" :class="{active: signUpDialog}">
             <div class="wrapper">
@@ -114,10 +115,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     
-    <div class="dialog">
+    <!-- <div class="dialog">
         <div class="mask" v-show="submitSuccessDialog"></div>
         <div class="submit-success-dialog" :class="{active: submitSuccessDialog}">
             <div class="wrapper">
@@ -145,10 +146,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     
-    <vip-dialog :visible="joinVipDialog"></vip-dialog>
+    <!-- <vip-dialog :visible="joinVipDialog"></vip-dialog> -->
 
     <g-message ref="g-message"></g-message>
 </div>
@@ -160,53 +161,60 @@
         el: '#app',
         data: function () {
             return {
-                userInfo: localStorage.getItem('userInfo'), 
-                activityId: getParamsCode('id'),
-                offline: getParamsCode('offline'),
-                online: getParamsCode('online'),
-                activityInfo: {
-                    onlineBtn: {
-                        name: '约直播',
-                        disabled: false,
-                        show: false,
-                        status: -1 
-                    },
-                    offlineBtn: {
-                        name: '去现场',
-                        status: 0, 
-                        disabled: false,
-                        show: false,
-                    }
-                }, 
-                recommendActivity: [], 
-                showHead: false,
-                wechatQrcode: '',
+                // userInfo: localStorage.getItem('userInfo'), 
+                // activityId: getParamsCode('id'),
+                // offline: getParamsCode('offline'),
+                // online: getParamsCode('online'),
                 
-                isMp: 0,
+                activityInfo: {
+                    thumb: '{$act_id.thumb}',
+                    title: "{$act_id.title}",
+                    address: '{$act_id.address}',
+                    joinNum: '{$act_id.gnum}',
+                    introduce: '{$act_id.detail | raw}'
+
+                    // onlineBtn: {
+                    //     name: '约直播',
+                    //     disabled: false,
+                    //     show: false,
+                    //     status: -1 
+                    // },
+                    // offlineBtn: {
+                    //     name: '去现场',
+                    //     status: 0, 
+                    //     disabled: false,
+                    //     show: false,
+                    // }
+                }, 
+                // recommendActivity: [], 
+                // showHead: false,
+                // wechatQrcode: '',
+                
+                // isMp: 0,
                 signUpDialog: false,
-                signUpForm: [],
-                signInfo: {
-                    name: '',
-                    mobile: '',
-                    company: '',
-                    job: '',
-                    wechat: ''
-                },
-                errorInfo: {
-                    nameError: '',
-                    mobileError: '',
-                    companyError: '',
-                    jobError: '',
-                    wechatError: ''
-                },
+                // signUpForm: [],
+                // signInfo: {
+                //     name: '',
+                //     mobile: '',
+                //     company: '',
+                //     job: '',
+                //     wechat: ''
+                // },
+                // errorInfo: {
+                //     nameError: '',
+                //     mobileError: '',
+                //     companyError: '',
+                //     jobError: '',
+                //     wechatError: ''
+                // },
 
                 
-                submitSuccessDialog: false,
-                submitSuccessStatus: 0,
+                // submitSuccessDialog: false,
+                // submitSuccessStatus: 0,
                 
-                joinVipDialog: false,
+                // joinVipDialog: false,
                 ifreamFlag: false,
-                ifreamUrl: ''
+                // ifreamUrl: ''
             }
         },
         methods: {
@@ -449,10 +457,10 @@
             }
         },
         mounted: function () {
-            window.addEventListener('scroll', this.handleScroll);
-            this.getQrcode();
-            this.fetchData();
-            this.checkSignUp();
+            // window.addEventListener('scroll', this.handleScroll);
+            // this.getQrcode();
+            // this.fetchData();
+            // this.checkSignUp();
         }
     });
 </script>

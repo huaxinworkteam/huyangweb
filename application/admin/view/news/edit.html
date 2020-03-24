@@ -83,6 +83,7 @@
                 this.ue = UE.getEditor('content'); // 初始化富文本编辑器
                 this.ue.ready( () => {
                     // editor准备好之后才可以使用
+                    console.log(this.dataForm.content)
                     this.ue.setContent(this.dataForm.content);
                 });
             },

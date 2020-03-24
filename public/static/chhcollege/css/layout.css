@@ -1,6 +1,6 @@
 .cw{width:1220px;margin:0 auto;min-width:1220px;}
 
-header{background-color:#fff;height:115px;}
+header{background-color:#fff;height:115px;box-shadow: 0 2px 6px 2px rgba(100, 100, 100, 0.1); z-index: 1; position: relative;}
 header .logo{background:url(../images/logo1.png) no-repeat;width:300px;height:80px;margin-top:30px;}
 header .tools_bar .tools_top{width:860px;}
 
@@ -36,7 +36,7 @@ header .wechat span{position:absolute;top:35px;left:50%;margin-left:-75px;displa
 header .wechat span img{width:150px;height:150px;}
 header .wechat:hover span{display:block;}
 
-header .nav_list{height:54px;float:right;}
+header .nav_list{height:54px;position: absolute; right: 0;}
 header .nav_list li , header .nav_list li a{float:left;}
 header .nav_list li{margin-left:45px; position:relative;}
 header .nav_list li a{display:block;height:52px;line-height:52px;border-bottom:2px solid #fff;font-size:14px;color:#535353; z-index:9999;    position: relative;
