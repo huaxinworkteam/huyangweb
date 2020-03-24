@@ -101,7 +101,7 @@ header ul.nav_list li .activity-center-dorp li a:hover {
     border-bottom: none;
 }
 header ul.nav_list li .sub_szll { max-height: 300px; overflow-y: auto;}
-header ul.nav_list li .sub_Nav {width: 170px;margin-top: 45px;position: absolute;left: -46px; z-index: 99999;display: none; background-color:#fff;}
+header ul.nav_list li .sub_Nav {width: 170px;margin-top: 45px;position: absolute;left: -46px; z-index: 99;display: none; background-color:#fff;}
 header ul.nav_list li .sub_Nav::-webkit-scrollbar {display: none;}
 header ul.nav_list li .sub_Nav .line {height: 1px;background: #FFBF0B;width: 100%;}
 header ul.nav_list li .sub_Nav p {height: 46px;background: #fff;}

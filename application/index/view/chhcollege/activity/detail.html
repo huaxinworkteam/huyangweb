@@ -90,14 +90,14 @@
         data: function () {
             return {
                 activityInfo: {
-                    thumb: '{$act_id.thumb}',
-                    title: "{$act_id.title}",
-                    address: '{$act_id.address}',
-                    joinNum: '{$act_id.gnum}',
+                    thumb: '{$act_id.thumb | raw}',
+                    title: "{$act_id.title | raw}",
+                    address: '{$act_id.address | raw}',
+                    joinNum: '{$act_id.gnum | raw}',
                     introduce: '{$act_id.detail | raw}',
-                    qrCode: '{$act_id.qrCode}',
-                    startTime: '{$act_id.starttime}',
-                    endTime: '{$act_id.endtime}',
+                    qrCode: '{$act_id.qrCode | raw}',
+                    startTime: '{$act_id.starttime | raw}',
+                    endTime: '{$act_id.endtime | raw}',
                     isOver: 0
 
                 }, 

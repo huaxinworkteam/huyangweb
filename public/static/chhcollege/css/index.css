@@ -520,3 +520,30 @@
 .layer-teacher-desc {
     font-size: 16px; text-align: justify; max-height: 250px; overflow-y: auto; margin-top: 10px;
 }
+
+/* qrcode */
+.float-qrcode {
+    position: fixed; left: 36px; top: 140px; width: 150px; height: 180px; border-radius: 4px; background-color: #e4e4e4; z-index: 999;
+}
+.close {
+    margin: -18px 0 0 126px; cursor: pointer;
+}
+.option {
+    padding: 10px 10px 0; display: flex; justify-content: space-between; border-bottom: 3px solid #eeeeee;
+}
+.option_item {
+    display: block; border-bottom: 3px solid rgba(0, 0, 0, 0); position: relative; top: 3px; cursor: pointer;
+    width: 60px; text-align: center; padding-bottom: 5px;
+}
+.option_active {
+    border-bottom: 3px solid #7f7f7f; width: 60px; height: 0; position: relative; left: 10px; top: -3px;
+}
+.qrcode_content {
+    overflow: hidden; position: relative; width: 100%;
+}
+.qrcode {
+    width: 120px; height: 120px; border-radius: 2px; margin: 10px 15px 0;
+}
+.qrcode_slider {
+    width: 310px; font-size:0
+}

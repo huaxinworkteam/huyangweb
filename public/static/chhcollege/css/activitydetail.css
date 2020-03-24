@@ -170,7 +170,7 @@ select:-webkit-autofill {
 }
 
 .activity-detail .head .wrapper .cover {
-    width: 500px;
+    width: 500px; border-radius: 4px;
 }
 .activity-detail .head .wrapper .info {
     margin-left: 40px;
@@ -292,6 +292,9 @@ select:-webkit-autofill {
 .activity-detail .body .hot .info .item {
     margin-bottom: 10px;
     cursor: pointer;
+}
+.activity-detail .body .hot .info .item img {
+    border-radius: 4px;
 }
 
 /* dialog */
