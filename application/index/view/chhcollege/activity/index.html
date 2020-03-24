@@ -177,10 +177,10 @@
             methods: {
                 getIndex: function() {
                     http_post('activity',{page: this.page}).then( res => {
-                        this.activityData = res.data.data;
+                        this.showMoreFlag = false;
                         this.page.total = res.data.total;
                         let newTime = new Date();
-                        this.activityData.forEach(item => {
+                        res.data.info.forEach(item => {
                             let timeStart = DateUtil.getDate(item.starttime);
                             let timeEnd = DateUtil.getDate(item.endtime);
                             if( timeStart > newTime ) item.isOver = 0;
@@ -188,8 +188,8 @@
                             else item.isOver = 2;
                             item.starttime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
                             item.endtime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
+                            this.activityData.push(item);
                         });
-                        this.activityData = this.activityData;
                     }).catch(err => {
 
                     });
@@ -197,31 +197,13 @@
                 showMore: function () {
                     this.showMoreFlag = true;
                     this.page.current_page++;
-                    this.fetchData(true);
+                    this.getIndex();
                 },
 
                 toActivityDetail: function (item) {
                     var url = 'act_detail?activityId=' + item.id;
                     common.toPage(url);
                 },
-                fetchData: function (flag) {
-                    let newTime = new Date();
-                    http_post('activity',this.page).then( res => {
-                        this.showMoreFlag = false;
-                        for (var i = 0; i < res.data.data.length; i++) {
-                            let timeStart = DateUtil.getDate(res.data.data[i].starttime);
-                            let timeEnd = DateUtil.getDate(res.data.data[i].endtime);
-                            if( timeStart > newTime ) res.data.data[i].isOver = 0;
-                            else if (newTime > timeEnd ) res.data.data[i].isOver = 1;
-                            else res.data.data[i].isOver = 2;
-                            res.data.data[i].starttime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
-                            res.data.data[i].endtime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
-                            this.activityData.push(res.data.data[i]);
-                        }
-                    }).catch(err => {
-
-                    });
-                }
             },
             created: function () {
                 if (!isJSON(this.bannerData)) this.bannerData = $.parseJSON( this.bannerData );
