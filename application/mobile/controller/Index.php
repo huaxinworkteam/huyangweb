@@ -1,6 +1,6 @@
 <?php
 
-namespace app\index\controller;
+namespace app\mobile\controller;
 
 use app\common\model\Activity;
 use app\common\model\Config;
@@ -79,19 +79,10 @@ class Index extends Controller
         $this->assign('gallery',$gallery);
         //获取参数
         $param=input('activityId');
-        $act_id=Db::connect('db_config1')->name('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetime,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey,recommend')->where(['id'=>$param])->find();
+        $act_id=Db::connect('db_config1')->name('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetime,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey')->where(['id'=>$param])->find();
        $act_id['qrCode']='https://test.v7mall.com/app/index.php?i=2&c=entry&m=fx_activity&do=activity&ac=detail&op=display&activityid='.$param;
-     //  halt($act_id);
         $this->assign('act_id', $act_id);
         return view('chhcollege/activity/detail');
-    }
-
-    public function getRecommend(){
-        if(request()->isAjax()){
-            $recommendAct = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime')->where(['show'=>1,'merchanid'=>19,'recommend'=>1])->order('displayorder desc')->select();
-             return myJson('T',$recommendAct);
-        }
-        return myJson('F','请求被拒绝');
     }
   //新闻查询
     public function news()
