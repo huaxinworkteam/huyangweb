@@ -68,9 +68,9 @@
                     <div class="hot float-right">
                         <p class="title fs22">热门活动</p>
                         <div class="info">
-                            <!-- <p class="item" v-for="(item, index) in recommendActivity" :key="index" @click="toActivityDetail(item)">
-                                <img class="g-width-100" :src="static/picture/item.cover_url" alt="">
-                            </p> -->
+                            <p class="item" v-for="(item, index) in recommendActivity" :key="index" @click="toActivityDetail(item)">
+                                <img class="g-width-100" :src="'http://test.v7mall.com/attachment/'+item.thumb" alt="">
+                            </p>
                         </div>
                     </div>
                 </div>
