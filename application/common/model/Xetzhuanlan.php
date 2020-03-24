@@ -25,19 +25,27 @@ class Xetzhuanlan extends Model
             if(!$validate->check($data)){
                 return $validate->getError();
             }
+            unset($data['id']);
             self::insert($data);
             return 1;
         }
     }
 
-    public function getOneInfo($id){
+    public static function getOneInfo($id){
         $res=self::where('id',$id)->find();
         if($res) return $res;
         else return 0;
     }
 
-    public function  getAllInfo(){
+    public static function  getAllInfo(){
         $res=self::where('is_del',0)->select();
         return $res;
+    }
+
+    public static function del($id){
+        $id=','.$id.',';
+        $res=model('xetzhuanlan')->whereIn('id',$id)->update('is_del',1);
+        if($res) return 1;
+        else return 0;
     }
 }
