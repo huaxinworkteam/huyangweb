@@ -176,7 +176,7 @@
             },
             methods: {
                 getIndex: function() {
-                    http_post('activity',this.page).then( res => {
+                    http_post('activity',{page:this.page}).then( res => {
                         this.activityData = res.data.data;
                         this.page.total = res.data.total;
                         let newTime = new Date();
