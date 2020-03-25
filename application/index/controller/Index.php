@@ -67,9 +67,64 @@ class Index extends Controller
         $this->assign('gallery',$gallery);
         if(request()->isAjax()) {
             $p=input('page');
+            $t=input('time');
+            $s=input('status');
             if(!$p) return myJson('F','参数异常');
-            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime,address')->where(['show'=>1,'merchantid'=>19])->order('displayorder desc')->limit(($p['current_page']-1)*$p['per_page'],$p['per_page'])->select();
-            $total=Db::connect('db_config1')->where(['show'=>1,'merchantid'=>19])->name('fx_activity')->count();
+            //用于分类本周本月
+            switch ($t){
+                case 'week': break;
+                case 'month':break;
+                default:
+                    $t=`*`;
+                    break;
+            }
+            //用于分类开始结束时间
+            $p1='id';
+            $p2='>';
+            $p3=0;
+            $p4='id';
+            $p5='>';
+            $p6=0;
+            $time=time();
+            switch ($s){
+                case 0:
+                    $p1='starttime';
+                    $p2='>=time';
+                    $p3=$time;
+                    break;
+                case -1:
+                    $p1='endtime';
+                    $p2='<time';
+                    $p3=$time;
+                    break;
+                case 1:
+                    $p1='starttime';
+                    $p2='<time';
+                    $p3=$time;
+                    $p4='endtime';
+                    $p5='>=time';
+                    $p6=$time;
+                    break;
+                default:
+                    break;
+            }
+            $all_activity = Db::connect('db_config1')
+                ->name('fx_activity')
+                ->field('id,title,thumb,intro,starttime,endtime,address')
+                ->where(['show' => 1, 'merchantid' => 19])
+                ->whereTime('starttime',$t)
+                ->where($p1,$p2,$p3)
+                ->where($p4,$p5,$p6)
+                ->order('displayorder desc')
+                ->limit(($p['current_page'] - 1) * $p['per_page'], $p['per_page'])
+                ->select();
+            $total = Db::connect('db_config1')
+                ->name('fx_activity')
+                ->where(['show' => 1, 'merchantid' => 19])
+                ->whereTime('starttime',$t)
+                ->where($p1,$p2,$p3)
+                ->where($p4,$p5,$p6)
+                ->count();
             if($all_activity) return myJson('T',['info'=>$all_activity,'total'=>$total]);
             else return myJson('T',['info'=>'','total'=>0]);
         }
@@ -89,6 +144,7 @@ class Index extends Controller
         $this->assign('act_id', $act_id);
         return view('chhcollege/activity/detail');
     }
+
 
     public function getRecommend(){
         if(request()->isAjax()){
