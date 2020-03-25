@@ -14,7 +14,7 @@ use think\Model;
 class Xetzhuanlan extends Model
 {
     public static  function saveInfo($data){
-       $validate=new \app\common\model\Xetzhuanlan();
+       $validate=new \app\common\validate\Xetzhuanlan();
         if($data['id']){
             if(!$validate->scene('edit')->check($data)){
                 return $validate->getError();
@@ -44,7 +44,7 @@ class Xetzhuanlan extends Model
 
     public static function del($id){
         $id=','.$id.',';
-        $res=model('xetzhuanlan')->whereIn('id',$id)->update('is_del',1);
+        $res=model('xetzhuanlan')->whereIn('id',$id)->update(['is_del'=>1]);
         if($res) return 1;
         else return 0;
     }

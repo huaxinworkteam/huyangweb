@@ -22,4 +22,5 @@ class Xetzhuanlan extends Validate
     public function sceneEdit(){
         return $this->only($this->rule);
     }
+
 }
