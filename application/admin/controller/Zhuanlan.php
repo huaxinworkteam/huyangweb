@@ -45,7 +45,8 @@ class Zhuanlan extends Base
             'id'=>input('id'),
             'goods_id'=>input('goods_id'),
             'goods_name'=>input('goods_name'),
-            'goods_type'=>input('goods_type')
+            'goods_type'=>input('goods_type'),
+            'sort'=>input('sort')
         ];
         $res=Xetzhuanlan::saveInfo($data);
         if($res===1) return myJson('T','保存成功');
