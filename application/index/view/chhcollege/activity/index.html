@@ -21,7 +21,7 @@
                 <div class="banner">
                     <swiper class="swiper-container" ref="banner-swiper">
                         <swiper-slide class="swiper-wrapper" v-for="(item, index) in bannerData" :key="index" v-cloak="">
-                            <div class="banner-bg g-width-100 pr" :style="{backgroundImage: 'url(' + item.path + ')'}" @click="toActivityDetail(item)">
+                            <div class="banner-bg g-width-100 pr" :style="{backgroundImage: 'url(' + item.path + ')'}" >
                                 <!-- <div class="banner-bg-wrapper">
                                     <div class="wrapper g-width">
                                         <div class="info">

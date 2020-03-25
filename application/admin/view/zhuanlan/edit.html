@@ -22,7 +22,9 @@
             <el-form-item label="专栏名称：" prop="goods_name">
                 <el-input v-model="dataForm.goods_name"></el-input>
             </el-form-item>
-            
+            <el-form-item label="排序号：" prop="sort">
+                <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
+            </el-form-item>
             <el-form-item>
                 <el-button size="medium" type="primary" @click="submitForm('dataForm')">立即提交</el-button>
                 <el-button size="medium" @click="resetForm('dataForm')">重置</el-button>
@@ -42,7 +44,8 @@
                         id: '{$id}',
                         goods_name: '',  // 专栏名称
                         goods_id: '',  // 专栏id
-                        goods_type: '' // 专栏类型
+                        goods_type: '', // 专栏类型
+                        sort: 0, // 排序
                     },
                     rules: {
                         goods_id: [

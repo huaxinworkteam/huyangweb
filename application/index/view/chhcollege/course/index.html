@@ -14,18 +14,60 @@
     <header>
         {include file="public/coll_header" /}
     </header>
-    <div class="pageBanner">
-        <div class="roll flexslider">
-            <ul class="slides">
-                {volist name="gallery" id="vo"}
-                <li><img src="{$vo.path}"></li>
-                {/volist}
-            </ul>
+    <div id="app" class="pc">
+        <g-message ref="g-message"></g-message>
+        <div class="activity public-course g-width-100">
+            <section>
+                <div class="banner">
+                    <swiper class="swiper-container" ref="banner-swiper">
+                        <swiper-slide class="swiper-wrapper" v-for="(item, index) in bannerData" :key="index" v-cloak="">
+                            <div class="banner-bg g-width-100 pr" :style="{backgroundImage: 'url(' + item.path + ')'}">   
+                            </div>
+                        </swiper-slide>
+                        <div class="swiper-pagination" slot="pagination" v-if="bannerData.length > 1"></div>
+                    </swiper>
+                </div>
+                <div class="nav" ref="tab-nav" :style="{position: navPosition}" v-cloak>
+                    <ul class="wrapper g-width ">
+                        <li class="fs16 tab-nav-item"
+                            :class="{active: index === Number(currentTabIndex)}"
+                            v-cloak
+                            v-for="(item, index) in tabs" :key="index" @click="changePublicCourse(item.value)">
+                            {{item.name}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-container">
+                    <div v-if="zhuanlanData.length !== 0">
+                        <div class="wrapper g-width">
+                            <div class="listItem pr" v-for="(item, index) in zhuanlanData" :key="item.resource_id" v-cloak @click="toDetail(item)">
+                                <div class="listItem-head pr">
+                                    <img class="g-width-100" :src="item.img_url" alt="课程封面">
+                                    <span class="newest" v-if="index === 0">最新</span>
+                                    <!-- <span class="newposter" v-if="item.is_whole === 0">预告</span> -->
+                                </div>
+                                <div class="listItem-body pr">
+                                    <p class="title fs16 line-clamp2">{{item.title}}</p>
+                                    <div class="teacher alignCenter fs12">
+                                        <span class="name line-clamp1">{{item.view_count}}</span>
+                                        <span class="job line-clamp1">{{item.resource_type}}</span>
+                                    </div>
+                                    <div class="info fs12">
+                                        <span class="lesson-num">{{item.resource_type}}节</span>
+                                        
+                                        <span class="people-num">{{item.resource_type}}人加入学习</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="no-data center" v-else>
+                        <img src="__COLL__/images/no-data.png" alt="暂无数据">
+                    </div>
+                </div>
+            </section>
         </div>
-    
-    </div>
-    <div id="app" class="pc"> vvzxvcxz
-        <footer v-show="loading"  v-cloak>
+        <footer v-show="loading" v-cloak>
             {include file="public/coll_footer" /}
         </footer>
     </div>
@@ -34,15 +76,48 @@
             el: '#app',
             data: function() {
                 return {
-                    loading: true
+                    bannerData: '{$gallery | raw}',
+                    navPosition: 'static',
+                    loading: true,
+                    zhuanlanData: [],
+                    page: {
+                        per_page: 6,
+                        current_page: 1,
+                        total: 0
+                    },
+                    tabs: [
+                        {
+                            name: '直播',
+                            value: 3,
+                        },
+                        {
+                            name: '视频',
+                            value: 4,
+                        },
+                    ],
+                    currentTabIndex: 0
                 }
             },
             mounted() {
+                window.addEventListener('scroll', this.handleScroll);
+                if (!isJSON(this.bannerData)) this.bannerData = $.parseJSON( this.bannerData );
+                this.loading=true;
                 http_post('getCourse',{goods_name: 'sasgfdsgf'}).then(res=>{
-
+                    this.zhuanlanData = res.data.goods_list;
                 });
             },
             methods: {
+                handleScroll: function () {
+                    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                    var offsetTop = this.$refs['tab-nav'].offsetTop;
+                    console.log("scrollTop: ",scrollTop)
+                    console.log("offsetTop: ",offsetTop)
+                    if (scrollTop > offsetTop ) {
+                        this.navPosition = 'fixed';
+                    } else {
+                        this.navPosition = 'static';
+                    }
+                },
 
             }
         });
