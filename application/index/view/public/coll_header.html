@@ -53,7 +53,7 @@
                 </li>
                 <li><a href="{:url('index/activity')}" class="">培训报名</a>
                     <!-- 重新设置 ： 1. 显示2条热门活动 链接到活动详情页面 2. 更多跳转链接index/activity -->
-                    <!-- <ul class="dropdown activity-center-dorp">
+                    <ul class="dropdown activity-center-dorp">
                         <li>
                             <a href="activitydetail?id=122" target="_blank" class="g-width-100">
                                 <p class="title">创合汇公开课公益直播：疾病、科幻与哲学反思</p>
@@ -72,8 +72,12 @@
                                 </div>
                             </a>
                         </li>
-                        <a href="activity" target="_blank" class="more">更多活动</a>
-                    </ul> -->
+                        <li style="width: 100%; padding: 0;"><a style="height: 25px; text-align: center;" href="activity" target="_blank" class="more">更多活动</a></li>
+                    </ul>
+                </li>
+                <li><a href="{:url('index/course')}" class="">专业栏目</a>
+                    <!-- 重新设置 ： 1. 显示2条热门活动 链接到活动详情页面 2. 更多跳转链接index/activity -->
+                    
                 </li>
                 <!--http://www.massmakers.cn/category-9338.html-->
                 <li><a href="{:url('index/news')}" class="">新闻动态</a></li>
@@ -81,55 +85,51 @@
                 <li><a href="{:url('index/course')}" class=""  style="display: none;">培训课程</a>
                     
                 </li>
+                
             </ul>
         </div>
     </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        var array = [];
-        var colorArray = ['e08181','3474ff','f3b461']
-        $(".courseType").mouseover(function(){
-            var id = $(this).data('id');
-            var count = $(this).data('count');
-            var flag = true;
-            var that = this;
-            array.forEach(element => {
-                if (element == id) flag = false;
-            });
-            if(flag) {
-                array.push(id);
-                $.ajax({
-                    url: '/index/index/getSons',
-                    type:'get',
-                    data: {id: id},
-                    dataType:'json',
-                    success:function (res) {
-                        // 格式化 json
-                        if (!isJSON(res)) res = $.parseJSON( res );
-                        if (res.code == 1)  {
-                            if (count) count++; else count=1;
-                            res.data.forEach(item => {
-                                $(that).after('<p class="courseType" data-id="' +
-                                item.id +'" data-count="' + count +'"><a href="javascript: void(0);" onClick="getCourse(\'course/\','+
-                                item.id + ')" style="color:#'+ colorArray[count] +';">'+item.typeName+'</a></p>');
-                            });
-                        } else {
+    // $(document).ready(function() {
+    //     var array = [];
+    //     var colorArray = ['e08181','3474ff','f3b461']
+    //     $(".courseType").mouseover(function(){
+    //         var id = $(this).data('id');
+    //         var count = $(this).data('count');
+    //         var flag = true;
+    //         var that = this;
+    //         array.forEach(element => {
+    //             if (element == id) flag = false;
+    //         });
+    //         if(flag) {
+    //             array.push(id);
+    //             $.ajax({
+    //                 url: '/index/index/getSons',
+    //                 type:'get',
+    //                 data: {id: id},
+    //                 dataType:'json',
+    //                 success:function (res) {
+    //                     // 格式化 json
+    //                     if (!isJSON(res)) res = $.parseJSON( res );
+    //                     if (res.code == 1)  {
+    //                         if (count) count++; else count=1;
+    //                         res.data.forEach(item => {
+    //                             $(that).after('<p class="courseType" data-id="' +
+    //                             item.id +'" data-count="' + count +'"><a href="javascript: void(0);" onClick="getCourse(\'course/\','+
+    //                             item.id + ')" style="color:#'+ colorArray[count] +';">'+item.typeName+'</a></p>');
+    //                         });
+    //                     } else {
                             
-                        }
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-            }
-        });
-    });
-    // 校验数据是否是json 数据
-    function isJSON(str) {
-        var isjson = typeof(str) == "object" && Object.prototype.toString.call(str).toLowerCase() == "[object object]" && !str.length;
-        return isjson;
-    }
+    //                     }
+    //                 },
+    //                 error: function (err) {
+    //                     console.log(err);
+    //                 }
+    //             });
+    //         }
+    //     });
+    // });
     function getCourse(url, id) {
         window.location.replace('/index/index/course/id/' + id + '.html');
     }

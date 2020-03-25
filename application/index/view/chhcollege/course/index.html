@@ -7,373 +7,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>培训课程</title>
+    <title>专业栏目</title>
     {include file="public/head" /}
 </head>
 <body>
-    
-    <div id="app" class="pc">
-        <g-message ref="g-message"></g-message>
-        <!-- <right-tools></right-tools> -->
-        <header>
-            {include file="public/coll_header" /}
-        </header>
-        <!-- <g-header :current="3"></g-header> -->
-        <div class="activity g-width-100">
-            <section>
-                <div class="banner">
-                    <swiper class="swiper-container" :options="bannerOption" ref="banner-swiper">
-                        <swiper-slide class="swiper-wrapper" v-for="(item, index) in bannerData" :key="index" v-cloak="">
-                            <div class="banner-bg g-width-100 pr" :style="{backgroundImage: 'url(' + item.banner_equip_url + ')'}" @click="toActivityDetail(item)">
-                                <div class="banner-bg-wrapper">
-                                    <div class="wrapper g-width">
-                                        <div class="info">
-                                            <p class="title fs16">{{item.title}}</p>
-                                            <p class="address fs14 white">
-                                                <i class="icon"></i>
-                                                <span>{{item.address}}</span>
-                                            </p>
-                                            <p class="time fs14 white">
-                                                <i class="icon"></i>
-                                                <span>{{item.start_time}}</span>
-                                            </p>
-                                            <p class="num fs14 white">
-                                                <i class="icon"></i>
-                                                <span>{{item.participant_nums}}人已报名</span>
-                                            </p>
-                                            <div class="btn">
-                                                <p class="item" :class="{disabled: item.offlineBtn.disabled}" v-if="item.offlineBtn.show" @click.stop="offlineClick(item.offlineBtn)">{{item.offlineBtn.name}}</p>
-                                                <p class="item" :class="{disabled: item.onlineBtn.disabled}" v-if="item.onlineBtn.show" @click.stop="onlineClick(item.onlineBtn)">{{item.onlineBtn.name}}</p>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </swiper-slide>
-                        <div class="swiper-pagination" slot="pagination" v-if="bannerData.length > 1"></div>
-                    </swiper>
-                </div>
-                <div class="filter">
-                    <div class="wrapper g-width" v-cloak="">
-                        <ul class="list fs16 float-clear" v-for="(item, key) in filterOption">
-                            <li class="label float-left">{{item.name}}:</li>
-                            <li class="item float-left" :class="{active: currentFilterTerm[item.value] === listItem.value}" v-for="(listItem, index) in item.data" @click="fliterActivity(item.value, listItem.value)">
-                                {{listItem.label}}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="wrapper g-width flexWrap" v-if="activityData.length !== 0">
-                        <div class="listItem" v-for="(item, index) in activityData" :key="index" v-cloak="" @click="toActivityDetail(item)">
-                            <div class="listItem-head pr">
-                                <img class="g-width-100" :src="item.cover_url" alt="活动封面">
-                                
-                                <span :class="item.isOverClass">
-                                    <i class="dot"></i>
-                                    <span v-if="item.isOver === 0">未开始</span>
-                                    <span v-if="item.isOver === 1">进行中</span>
-                                    <span v-if="item.isOver === 2">已结束</span>
-                                </span>
-                            </div>
-                            <div class="listItem-body pr">
-                                <p class="title fs16 line-clamp2">{{item.title}}</p>
-                                <p class="address fs14">
-                                    <i class="icon"></i>
-                                    {{item.address}}
-                                </p>
-                                <div class="float-clear">
-                                    <p class="time fs14 float-left">
-                                        <i class="icon"></i>
-                                        {{item.timeStr}}
-                                    </p>
-                                    <p class="num float-right">{{item.initial_join_num}}人已报名</p>
-                                </div>
-                            </div>
-                        </div>                       
-                    </div>
-                    <div v-if="activityData.length !== 0">
-                        <div class="show-more center" v-if="activityData.length < page.total">
-                            <p @click="showMore" v-if="!showMoreFlag">加载更多</p>
-                            <p class="no-border" v-else="">加载中。。。</p>
-                        </div>
-                        <div class="no-more center" v-else="">
-                            <p>没有更多了</p>
-                        </div>
-                    </div>
-                    <div class="no-data center" v-if="activityData.length === 0">
-                        <img src="__COLL__/images/no-data.png" alt="暂无数据">
-                    </div>
-                </div>
-            </section>
-            <!-- <g-footer></g-footer> -->
+    <header>
+        {include file="public/coll_header" /}
+    </header>
+    <div class="pageBanner">
+        <div class="roll flexslider">
+            <ul class="slides">
+                {volist name="gallery" id="vo"}
+                <li><img src="{$vo.path}"></li>
+                {/volist}
+            </ul>
         </div>
-        <vip-dialog :visible="joinVipDialog"></vip-dialog>
+    
     </div>
-    <footer>
-        {include file="public/coll_footer" /}
-    </footer>
+    <div id="app" class="pc"> vvzxvcxz
+        <footer v-show="loading"  v-cloak>
+            {include file="public/coll_footer" /}
+        </footer>
+    </div>
     <script>
         new Vue({
             el: '#app',
-            data: function () {
+            data: function() {
                 return {
-                    userInfo: localStorage.getItem('userInfo'), 
-                    bannerData: [],
-                    bannerOption: {
-                        autoplay: true,
-                        speed: 2000,
-                        
-                        pagination: {
-                            el: '.swiper-pagination' 
-                        },
-                    },
-                    
-                    
-                    page: {
-                        size: 6,
-                        current: 1,
-                        total: 0
-                    },
-                    filterOption: {
-                        types: {
-                            name: '类型',
-                            value: 0,
-                            data: []
-                        },
-                        forms: {
-                            name: '形式',
-                            value: 1,
-                            data: [
-                                {
-                                    label: '全部',
-                                    value: 0
-                                },
-                                {
-                                    label: '线下活动',
-                                    value: 1
-                                },
-                                {
-                                    label: '线上直播',
-                                    value: 2
-                                }
-                            ]
-                        },
-                        times: {
-                            name: '时间',
-                            value: 2,
-                            data: [
-                                {
-                                    label: '全部',
-                                    value: 0
-                                },
-                                {
-                                    label: '本周',
-                                    value: 1
-                                },
-                                {
-                                    label: '本月',
-                                    value: 2
-                                },
-                            ]
-                        },
-                        status: {
-                            name: '状态',
-                            value: 3,
-                            data: [
-                                {
-                                    label: '全部',
-                                    value: 0
-                                },
-                                {
-                                    label: '未开始',
-                                    value: 1
-                                },
-                                {
-                                    label: '已结束',
-                                    value: 2
-                                },
-                                {
-                                    label: '进行中',
-                                    value: 3
-                                },
-                            ]
-                        }
-                    },
-                    currentFilterTerm: {
-                        0: 0, 
-                        1: 0, 
-                        2: 0, 
-                        3: 0  
-                    },
-                    activityData: [],
-                    showMoreFlag: false,
-                    joinVipDialog: false,
+                    loading: true
                 }
+            },
+            mounted() {
+                http_post('getCourse',{goods_name: 'sasgfdsgf'}).then(res=>{
+
+                });
             },
             methods: {
-                
-                showVipDialog: function () {
-                    this.joinVipDialog = !this.joinVipDialog;
-                },
-                
-                fetchData: function (flag) {
-                    var self = this;
-                    var params = {
-                        page: this.page.current,
-                        size: this.page.size,
-                        plat_id: 3 
-                    }
-                    if (this.userInfo) {
-                        params.uid = JSON.parse(this.userInfo).id;
-                    }
-                    for (var key in this.currentFilterTerm) {
-                        if (this.currentFilterTerm[key] !== 0) {
-                            key = Number(key);
-                            if (key === 0) { 
-                                params.type_id = this.currentFilterTerm[key];
-                            } else if (key === 1) { 
-                                params.activity_type = this.currentFilterTerm[key];
-                            } else if (key === 2) { 
-                                if (this.currentFilterTerm[key] === 1) { 
-                                    params.start_time = time.getWeekStartDate();
-                                    params.end_time = time.getWeekEndDate();
-                                } else { 
-                                    params.start_time = time.getMonthStartDate();
-                                    params.end_time = time.getMonthEndDate();
-                                }
-                            } else if (key === 3) { 
-                                params.status = this.currentFilterTerm[key];
-                            }
-                        }
-                    }
-                    bsApi.fetchActivityList(params).then(function (res) {
-                        console.log(res);
-                        if (res.code === 0) {
-                            self.showMoreFlag = false;
-                            self.page.total = res.data.count;
-                            if (flag) {
-                                for (var i = 0; i < res.data.activityList.length; i++) {
-                                    var m = common.handleAvtivity(res.data.activityList[i], res.data.time_now);
-                                    self.activityData.push(m);
-                                }
-                            } else {
-                                for (var i = 0; i < res.data.activityList.length; i++) {
-                                    res.data.activityList[i] = common.handleAvtivity(res.data.activityList[i], res.data.time_now);
-                                }
-                                self.activityData = res.data.activityList;
-                            }
-                        }
-                    });
-                },
-                
-                fetchActivityBanner: function () {
-                    var self = this;
-                    var params = {};
-                    if (this.userInfo) {
-                        params.uid = JSON.parse(this.userInfo).id;
-                    }
-                    bsApi.fetchActivityBanner(params).then(function (res) {
-                        console.log(res);
-                        if (res.code === 0) {
-                            var now = new Date();
-                            for (var i = 0; i < res.data.banner.length; i++) {
-                                var m = common.handleAvtivity(res.data.banner[i], res.data.time_now);
-                            }
-                            self.bannerData = res.data.banner;
-                            console.log(self.bannerData);
-                        }
-                    });
-                },
-                
-                fetchActivityType: function () {
-                    var self = this;
-                    bsApi.fetchActivityType({}).then(function (res) {
-                        if (res.code === 0) {
-                            var types = [{
-                                label: '全部',
-                                value: 0
-                            }];
-                            for (var i = 0; i < res.data.length; i++) {
-                                var m = res.data[i];
-                                
-                                if (m.id !== 4) {
-                                    types.push({
-                                        label: m.name,
-                                        value: m.id 
-                                    });
-                                }
-                            }
-                            self.filterOption.types.data = types;
-                        }
-                    });
-                },
-                
-                fliterActivity: function (type, value) {
-                    if (this.currentFilterTerm[type] === value) {
-                        return;
-                    }
-                    this.currentFilterTerm[type] = value;
-                    this.fetchData();
-                },
-                
-                showMore: function () {
-                    this.showMoreFlag = true;
-                    this.page.current++;
-                    this.fetchData(true);
-                },
-                
-                toActivityDetail: function (item) {
-                    var url = 'activitydetail?id=' + item.id;
-                    common.toPage(url);
-                },
-                
-                offlineClick (item) { 
-                    common.checkLogin();
-                    var status = item.status;
-                    console.log('offlineClick', status);
-                    if (status === 0) {
-                        var url = 'activitydetail?id=' + item.id + '&offline=1';
-                        common.toPage(url);
-                    } else if (status === 1) {
-                        return;
-                    } else if (status === 2) {
-                        this.$refs['g-message'].sentMessageOption(true, 'warning', '您的报名信息已提交！本次活动主办方需要审核，报名结果请以短信告知为准。');
-                        return;
-                    } else if (status === 3) {
-                        this.$refs['g-message'].sentMessageOption(true, 'success', '已报名成功，请不要重复报名');
-                        return;
-                    } else if (status === 4) {
-                        this.$refs['g-message'].sentMessageOption(true, 'warning', '抱歉由于现场名额限制，您的活动报名未通过审核，感谢参与！');
-                    }
-                },
-                onlineClick (item) { 
-                    console.log(item)
-                    common.checkLogin();
-                    var status = item.status;
-                    console.log('onlineClick', status);
-                    if (status === -1) {
-                        var url = 'activitydetail?id=' + item.id + '&online=1';
-                        common.toPage(url);
-                    } else if (status === 1) {
-                        return;
-                    } else if (status === 2 || status === 3) {
-                        this.toLive(item.url);
-                    }
-                },
-                
-                toLive: function (url) {
-                    common.toPage(url);
-                }
-            },
-            mounted: function () {
-                this.fetchData();
-                this.fetchActivityType();
-                this.fetchActivityBanner();
+
             }
         });
     </script>
-    
 </body>
 </html>
