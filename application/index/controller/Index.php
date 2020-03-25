@@ -87,17 +87,17 @@ class Index extends Controller
             $p6=0;
             $time=time();
             switch ($s){
-                case 0:
+                case 1:
                     $p1='starttime';
                     $p2='> time';
                     $p3=$time;
                     break;
-                case -1:
+                case 3:
                     $p1='endtime';
                     $p2='< time';
                     $p3=$time;
                     break;
-                case 1:
+                case 2:
                     $p1='starttime';
                     $p2='< time';
                     $p3=$time;
