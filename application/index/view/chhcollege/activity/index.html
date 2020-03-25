@@ -55,7 +55,7 @@
                     <div class="wrapper g-width" v-cloak="">
                         <ul class="list fs16 float-clear" v-for="(item, key) in filterOption" :key="key">
                             <li class="label float-left">{{item.name}}:</li>
-                            <li class="item float-left" :class="{active:  listItem===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
+                            <li class="item float-left" :class="{active: listItem.value===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
                                 {{listItem.label}}
                             </li>
                         </ul>
@@ -124,7 +124,7 @@
                     filterOption: {
                         times: {
                             name: '时间',
-                            value: 2,
+                            value: 'times',
                             currentIndex: '',
                             data: [
                                 {
@@ -143,7 +143,7 @@
                         },
                         status: {
                             name: '状态',
-                            value: 3,
+                            value: 'status',
                             currentIndex: 0,
                             data: [
                                 {
@@ -171,12 +171,13 @@
                 }
             },
             methods: {
-                getIndex: function() {
+                getIndex: function(flag) {
                     let data = {
                         page: this.page,
-                        time: '',
-                        status: '',
+                        time: this.filterOption.times.currentIndex,
+                        status: this.filterOption.status.currentIndex,
                     }
+                    if (flag) this.activityData = [];
                     http_post('activity',data).then( res => {
                         this.showMoreFlag = false;
                         this.page.total = res.data.total;
@@ -198,13 +199,18 @@
                 showMore: function () {
                     this.showMoreFlag = true;
                     this.page.current_page++;
-                    this.getIndex();
+                    this.getIndex(false);
                 },
 
                 toActivityDetail: function (item) {
                     var url = 'act_detail?activityId=' + item.id;
                     common.toPage(url);
                 },
+                fliterActivity(key, value) {
+                    if (key == 'times') this.filterOption.times.currentIndex = value;
+                    else if (key == 'status') this.filterOption.status.currentIndex = value;
+                    this.getIndex(true);
+                }
             },
             created: function () {
                 if (!isJSON(this.bannerData)) this.bannerData = $.parseJSON( this.bannerData );
