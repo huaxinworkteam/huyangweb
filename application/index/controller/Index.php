@@ -312,8 +312,7 @@ class Index extends Controller
         $page_size=input('page_size')?:20;
         $resource_type=input('resource_type')?:['3','4'];
         $a=model('Xiaoe')->getAllGoods($goods_name,$last_id,$page_size,$resource_type);
-        if(is_object($a)) return $a;
-        else return false;
+        return $a;
     }
 
     public  function  getCourseDetail(){
