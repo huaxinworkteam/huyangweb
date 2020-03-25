@@ -37,13 +37,13 @@ header .wechat span img{width:150px;height:150px;}
 header .wechat:hover span{display:block;}
 
 header .nav_list{height:54px;position: absolute; right: 0;}
-header .nav_list li , header .nav_list li a{float:left;}
+header .nav_list li {float:left;}
 header .nav_list li{margin-left:45px; position:relative;}
 header .nav_list li a{display:block;height:52px;line-height:52px;border-bottom:2px solid #fff;font-size:14px;color:#535353; z-index:9999;    position: relative;
 	padding:0 10px;}
 header .nav_list li a:hover , header .nav_list li a.cur{text-decoration:none;border-bottom:2px solid #FFBF0B;}
 header ul.nav_list li .dropdown {
-	margin-top: 45px;
+	margin-top: 0;
 	position: absolute;
 	z-index: 99999;
     background-color: #fff;
@@ -101,7 +101,7 @@ header ul.nav_list li .activity-center-dorp li a:hover {
     border-bottom: none;
 }
 header ul.nav_list li .sub_szll { max-height: 300px; overflow-y: auto;}
-header ul.nav_list li .sub_Nav {width: 170px;margin-top: 45px;position: absolute;left: -46px; z-index: 99;display: none; background-color:#fff;}
+header ul.nav_list li .sub_Nav {width: 170px;margin-top: 0;position: absolute;left: -46px; z-index: 99;display: none; background-color:#fff;}
 header ul.nav_list li .sub_Nav::-webkit-scrollbar {display: none;}
 header ul.nav_list li .sub_Nav .line {height: 1px;background: #FFBF0B;width: 100%;}
 header ul.nav_list li .sub_Nav p {height: 46px;background: #fff;}
