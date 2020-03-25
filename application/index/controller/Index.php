@@ -69,6 +69,7 @@ class Index extends Controller
             $p=input('page');
             $t=input('time');
             $s=input('status');
+          //  halt($s);
             if(!$p) return myJson('F','参数异常');
             //用于分类本周本月
             switch ($t){
