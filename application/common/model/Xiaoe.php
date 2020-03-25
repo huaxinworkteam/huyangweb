@@ -76,7 +76,6 @@ class Xiaoe extends Model
         $method='get';
         $data=array('app_id'=>self::$app_id,'client_id'=>self::$client_id,"secret_key"=>self::$secret_key,"grant_type"=>self::$grant_type);
       $param=http_build_query($data);
-      //  $data=json_encode($data);
         $res=curl_request($url.'?'.$param,'',$method);
         if($res) {
             $result=json_decode($res,true);

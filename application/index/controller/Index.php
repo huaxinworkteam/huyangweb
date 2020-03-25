@@ -202,10 +202,9 @@ class Index extends Controller
     //课程页面
     public function course()
     {   $this->headFoot();
-
         $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
-        $id=input('id');
+      /*  $id=input('id');
         $concrete=model('Course')->where(['isDel'=>0,'courseType'=>$id])->field('id,courseName')->order('sort desc')->select();
         $this->assign('concrete',$concrete);
         if($concrete->toArray()) {
@@ -215,7 +214,7 @@ class Index extends Controller
         }else{
             $typeName=model('CourseType')->where('id',$id)->field('typeName')->find()['typeName'];
             $this->assign('content',['courseName'=>'暂无课程','courseIntroduce'=>'暂无课程内容','typeName'=>$typeName]);
-        }
+        }*/
         return view('chhcollege/course/index');
     }
     //异步获取子分类
@@ -311,7 +310,7 @@ class Index extends Controller
         $goods_name=input('goods_name');
         $last_id=input('last_id')?:'';
         $page_size=input('page_size')?:20;
-        $resource_type='['.(input('resource_type')?:'3,4').']';
+        $resource_type=input('resource_type')?:['3','4'];
         $a=model('Xiaoe')->getAllGoods($goods_name,$last_id,$page_size,$resource_type);
         if(is_object($a)) return $a;
         else return false;
