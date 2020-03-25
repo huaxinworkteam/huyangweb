@@ -89,20 +89,20 @@ class Index extends Controller
             switch ($s){
                 case 0:
                     $p1='starttime';
-                    $p2='>=time';
+                    $p2='> time';
                     $p3=$time;
                     break;
                 case -1:
                     $p1='endtime';
-                    $p2='<time';
+                    $p2='< time';
                     $p3=$time;
                     break;
                 case 1:
                     $p1='starttime';
-                    $p2='<time';
+                    $p2='< time';
                     $p3=$time;
                     $p4='endtime';
-                    $p5='>=time';
+                    $p5='> time';
                     $p6=$time;
                     break;
                 default:
