@@ -16,7 +16,7 @@
     </header>
     <div id="app" class="pc">
         <g-message ref="g-message"></g-message>
-        <div class="activity public-course g-width-100">
+        <div class="activity g-width-100">
             <section>
                 <div class="banner">
                     <swiper class="swiper-container" ref="banner-swiper">
@@ -27,7 +27,17 @@
                         <div class="swiper-pagination" slot="pagination" v-if="bannerData.length > 1"></div>
                     </swiper>
                 </div>
-                <div class="nav" ref="tab-nav" :style="{position: navPosition}" v-cloak>
+                <div class="filter">
+                    <div class="wrapper g-width" v-cloak="">
+                        <ul class="list fs16 float-clear" v-for="(item, key) in tabs" :key="key">
+                            <li class="label float-left">{{item.name}}:</li>
+                            <li class="item float-left" :class="{active: listItem.value===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
+                                {{listItem.label}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="nav" ref="tab-nav" :style="{position: navPosition}" v-cloak>
                     <ul class="wrapper g-width ">
                         <li class="fs16 tab-nav-item"
                             :class="{active: index === Number(currentTabIndex)}"
@@ -36,41 +46,38 @@
                             {{item.name}}
                         </li>
                     </ul>
-                </div>
-                <div class="list-container" ref="content">
+                </div> -->
+                <div class="list-container " ref="content">
                     <div v-if="zhuanlanData.length !== 0">
                         <div class="wrapper g-width">
                             <div class="listItem pr" v-for="(item, index) in zhuanlanData" :key="item.resource_id" v-cloak @click="toDetail(item)">
                                 <div class="listItem-head pr">
                                     <img class="g-width-100" :src="item.img_url" alt="课程封面">
-                                    <span class="newest" v-if="index === 0">最新</span>
+                                    <!-- <span class="newest" v-if="index === 0">最新</span> -->
                                     <!-- <span class="newposter" v-if="item.is_whole === 0">预告</span> -->
                                 </div>
                                 <div class="listItem-body pr">
                                     <p class="title fs16 line-clamp2">{{item.title}}</p>
                                     <div class="teacher alignCenter fs12">
-                                        <span class="name line-clamp1">{{item.view_count}}</span>
-                                        <span class="job line-clamp1">{{item.resource_type}}</span>
+                                        <!-- <span class="name">有 {{item.view_count}} 人浏览</span> -->
+                                        <span class="job line-clamp1">有 {{item.view_count}} 人浏览</span>
                                     </div>
-                                    <div class="info fs12">
+                                    <!-- <div class="info fs12">
                                         <span class="lesson-num">{{item.resource_type}}节</span>
-                                        
                                         <span class="people-num">{{item.resource_type}}人加入学习</span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div v-if="zhuanlanData.length !== 0">
-                        <div class="show-more center" v-if="zhuanlanData.length < page.total">
-                            <p @click="showMore" v-if="!showMoreFlag">加载更多</p>
-                            <p class="no-border" v-else="">加载中。。。</p>
+                        <div class="show-more center" v-if="!noMoreFlag">
+                            <span @click="showMore" v-if="!showMoreFlag">加载更多</span>
+                            <span class="no-border" v-else>加载中。。。</span>
                         </div>
-                        <div class="no-more center" v-else="">
-                            <p>没有更多了</p>
+                        <div class="no-more center" v-else>
+                            <span>没有更多了</span>
                         </div>
                     </div>
-                    <div class="no-data center" v-else>
+                    <div class="no-data center" v-if="zhuanlanData.length === 0">
                         <img src="__COLL__/images/no-data.png" alt="暂无数据">
                     </div>
                 </div>
@@ -87,6 +94,8 @@
                 return {
                     bannerData: '{$gallery | raw}',
                     navPosition: 'static',
+                    showMoreFlag: false,
+                    noMoreFlag: false,
                     loading: true,
                     zhuanlanData: [],
                     page: {
@@ -94,19 +103,33 @@
                         current_page: 1,
                         total: 0
                     },
-                    tabs: [
-                        {
-                            name: '直播',
-                            value: 3,
+                    tabs: {
+                        zhuanlan: {
+                            name: '专栏',
+                            value: 'zhuanlan',
+                            currentIndex: '',
+                            data: []
                         },
-                        {
-                            name: '视频',
-                            value: 4,
-                        },
-                    ],
-                    resource_type: 3,
-                    currentTabIndex: 0,
-                    goods_name: '',
+                        type: {
+                            name: '类型',
+                            value: 'type',
+                            currentIndex: '',
+                            data: [
+                                {
+                                    label: '全部',
+                                    value: ''
+                                },
+                                {
+                                    label: '直播',
+                                    value: 4
+                                },
+                                {
+                                    label: '视频',
+                                    value: 3
+                                }
+                            ]
+                        }
+                    },
                     last_id: ''
                 }
             },
@@ -114,37 +137,62 @@
                 window.addEventListener('scroll', this.handleScroll);
                 if (!isJSON(this.bannerData)) this.bannerData = $.parseJSON( this.bannerData );
                 this.loading=true;
-                http_get('getGoodsName').then(res=>{
-                    this.goods_name = res.data;
-                });
-                // http_post('getCourse',{goods_name: 'sasgfdsgf'}).then(res=>{
-                //     this.zhuanlanData = res.data.goods_list;
-                // });
+                this.getGoodsName();
             },
             methods: {
-                getIndex() {
+                async getGoodsName() {
+                    await http_get('getGoodsName').then(res=>{
+                        res.data.forEach(item => {
+                            let array = {label: '', value: ''};
+                            array.label = item.goods_name;
+                            array.value = item.goods_name;
+                            this.tabs.zhuanlan.data.push(array);
+                        });
+                    });
+                    this.tabs.zhuanlan.currentIndex = this.tabs.zhuanlan.data[0].value;
+                    this.getIndex();
+                },
+                getIndex(flag) {
+                    if (flag) {this.zhuanlanData = [],this.last_id=''}; 
                     let data = {
-                        goods_name: this.goods_name,
+                        goods_name: this.tabs.zhuanlan.currentIndex,
                         last_id: this.last_id,
                         page_size: this.page.per_page,
-                        resource_type: this.resource_type,
+                        resource_type: this.tabs.type.currentIndex,
                     }
                     http_post('getCourse',data).then(res=>{
-                        this.zhuanlanData = res.data.goods_list;
+                        this.showMoreFlag = false;
+                        if (res.data.goods_list.length < 8) this.noMoreFlag = true;
+                        if (!res.data) return;
+                        res.data.goods_list.forEach(item => {
+                            this.zhuanlanData.push(item);
+                        });
                     });
                 },
                 handleScroll: function () {
                     // var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-                    var offsetHeight = this.$refs['tab-nav'].offsetHeight; // 元素距离顶部
-                    var offsetTop = this.$refs['content'].getBoundingClientRect().top; // 元素距离顶部
-                    if ( offsetTop < offsetHeight ) {
-                        this.navPosition = 'fixed';
-                    } else {
-                        this.navPosition = 'static';
-                    }
+                    // var offsetHeight = this.$refs['tab-nav'].offsetHeight; // 元素距离顶部
+                    // var offsetTop = this.$refs['content'].getBoundingClientRect().top; // 元素距离顶部
+                    // if ( offsetTop < offsetHeight ) {
+                    //     this.navPosition = 'fixed';
+                    // } else {
+                    //     this.navPosition = 'static';
+                    // }
                 },
-                changeActive(index) {
-                    this.currentTabIndex = index;
+                toActivityDetail: function (item) {
+                    var url = 'getCourseDetail?goods_id=' + item.id + '& goods_type=' + item.id;
+                    common.toPage(url);
+                },
+                showMore: function () {
+                    this.showMoreFlag = true;
+                    this.last_id = this.zhuanlanData[this.zhuanlanData.length -1].resource_id;
+                    this.getIndex(false);
+                },
+                fliterActivity(key, value) {
+                    if (key == 'zhuanlan') this.tabs.zhuanlan.currentIndex = value;
+                    else if (key == 'type') this.tabs.type.currentIndex = value;
+                    this.getIndex(true);
+                    this.noMoreFlag = false;
                 }
 
             }

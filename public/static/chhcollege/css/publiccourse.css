@@ -94,6 +94,8 @@
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
     vertical-align: bottom;
+    height: 180px;
+    object-fit: cover;
 }
 .list-container .listItem .listItem-head .newest {
     position: absolute;
@@ -127,11 +129,11 @@
     color: #272727;
     line-height: 25px;
     height: 54px;
-    padding-bottom: 12px;
-    border-bottom: 1px dashed #E9E9E9;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 .list-container .listItem .listItem-body .teacher {
+    padding-top: 12px;
+    border-top: 1px dashed #E9E9E9;
     margin-bottom: 8px;
 }
 .list-container .listItem .listItem-body .teacher .name {
