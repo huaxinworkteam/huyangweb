@@ -10,6 +10,7 @@ use app\common\model\News;
 use app\common\model\Series;
 use app\common\model\Teachers;
 use app\common\model\Gallery;
+use app\common\model\Xetzhuanlan;
 use app\common\model\Xiaoe;
 use think\Controller;
 use think\Db;
@@ -321,5 +322,10 @@ class Index extends Controller
         $a=model('Xiaoe')->getGoodsDetail($goods_id,$goods_type);
         if(is_object($a)) return $a;
         else return false;  
+    }
+
+    public function getGoodsName(){
+        $res=Xetzhuanlan::where('is_del',0)->order('sort desc')->field('id,goods_name')->select();
+        return myJson('T',$res);
     }
 }
