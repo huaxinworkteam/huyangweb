@@ -53,9 +53,9 @@
                 </div>
                 <div class="filter">
                     <div class="wrapper g-width" v-cloak="">
-                        <ul class="list fs16 float-clear" v-for="(item, key) in filterOption">
+                        <ul class="list fs16 float-clear" v-for="(item, key) in filterOption" :key="key">
                             <li class="label float-left">{{item.name}}:</li>
-                            <li class="item float-left" :class="{active: currentFilterTerm[item.value] === listItem.value}" v-for="(listItem, index) in item.data" @click="fliterActivity(item.value, listItem.value)">
+                            <li class="item float-left" :class="{active:  listItem===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
                                 {{listItem.label}}
                             </li>
                         </ul>
@@ -125,24 +125,26 @@
                         times: {
                             name: '时间',
                             value: 2,
+                            currentIndex: '',
                             data: [
                                 {
                                     label: '全部',
-                                    value: 0
+                                    value: ''
                                 },
                                 {
                                     label: '本周',
-                                    value: 1
+                                    value: 'week'
                                 },
                                 {
                                     label: '本月',
-                                    value: 2
+                                    value: 'month'
                                 },
                             ]
                         },
                         status: {
                             name: '状态',
                             value: 3,
+                            currentIndex: 0,
                             data: [
                                 {
                                     label: '全部',
@@ -153,21 +155,15 @@
                                     value: 1
                                 },
                                 {
-                                    label: '已结束',
+                                    label: '进行中',
                                     value: 2
                                 },
                                 {
-                                    label: '进行中',
+                                    label: '已结束',
                                     value: 3
                                 },
                             ]
                         }
-                    },
-                    currentFilterTerm: {
-                        0: 0, 
-                        1: 0, 
-                        2: 0, 
-                        3: 0  
                     },
                     activityData: [],
                     showMoreFlag: false,
@@ -176,7 +172,12 @@
             },
             methods: {
                 getIndex: function() {
-                    http_post('activity',{page: this.page}).then( res => {
+                    let data = {
+                        page: this.page,
+                        time: '',
+                        status: '',
+                    }
+                    http_post('activity',data).then( res => {
                         this.showMoreFlag = false;
                         this.page.total = res.data.total;
                         let newTime = new Date();
