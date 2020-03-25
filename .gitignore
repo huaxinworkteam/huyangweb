@@ -7,3 +7,5 @@ runtime
 
 *.htaccess
 .user.ini
+
+access_token.php

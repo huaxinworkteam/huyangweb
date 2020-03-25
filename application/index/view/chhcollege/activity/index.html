@@ -171,13 +171,18 @@
                 }
             },
             methods: {
+                /**
+                * flag boolen 用于判断是分页加载还是换分类
+                */
                 getIndex: function(flag) {
+                    if (flag) {
+                        this.activityData = []; this.page.current_page = 1;
+                    }
                     let data = {
                         page: this.page,
                         time: this.filterOption.times.currentIndex,
                         status: this.filterOption.status.currentIndex,
                     }
-                    if (flag) this.activityData = [];
                     http_post('activity',data).then( res => {
                         this.showMoreFlag = false;
                         this.page.total = res.data.total;
