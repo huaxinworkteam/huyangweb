@@ -114,12 +114,13 @@
                     <ul class="list">
                         {volist name="index_activity" id="vo"}
                         <li>
-                            <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" target="_blank">
+                            <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" target="_blank" style="position: relative;">
                                 <img src="http://test.v7mall.com/attachment/{$vo.thumb}" class="fl"/>
     
                                 <div class="fl">
                                     <h3>{$vo.title}</h3>
                                     <p>{$vo.intro|raw}</p>
+                                    <span style="position: absolute; bottom: 0; right: 0;">查看详情 >></span>
                                 </div>
                             </a>
                         </li>
@@ -142,7 +143,7 @@
                                     <p>介绍</p>
                                     
                                 </div>
-                                <p style="    position: absolute; bottom: 2px; right: 0;"><em>{$vo.createTime}</em></p>
+                                <p style=" position: absolute; bottom: 2px; right: 0;"><em>{$vo.createTime}</em></p>
                             </a>
                         </li>
                         {/volist}
