@@ -157,7 +157,8 @@ class Teachers extends Base
                 'seriesID'=>input('seriesID'),
                 'series'=>input('series'),
                 'seriesSort'=>input('seriesSort'),
-                'introdution'=>input('introdution')?input('introdution'):null
+                'introdution'=>input('introdution')?input('introdution'):null,
+                'icon'=>input('icon')?input('icon'):null
             ];
             $result=model('Series')->add($data);
             if($result==1){
@@ -175,7 +176,7 @@ class Teachers extends Base
     public function editSeries(){
         $id=input('seriesID');
         if(request()->isAjax()){
-            $res=model('series')->where('seriesID',$id)->field(['seriesID,series,seriesSort,introdution'])->find();
+            $res=model('series')->where('seriesID',$id)->field(['seriesID,series,seriesSort,introdution,icon'])->find();
             if($res) return json_encode(['code'=>1,'data'=>$res]);
             else return json_encode(['code'=>0,'message'=>'获取数据失败']);
         }
