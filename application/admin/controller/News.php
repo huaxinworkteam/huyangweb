@@ -139,7 +139,7 @@ class News extends Base
             $serverFile = $filetemp->move(ROOT_PATH . '/public/upload/newspic');
             if($serverFile) {
                 //访问地址
-                return json_encode('/upload/newspic'.$serverFile->getSaveName());
+                return json_encode('/upload/newspic/'.$serverFile->getSaveName());
             }else{
                 echo $filetemp->getError();
             }
