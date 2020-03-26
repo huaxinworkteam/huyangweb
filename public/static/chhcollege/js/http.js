@@ -15,11 +15,8 @@ function http_post(url, data) {
                 // 格式化 json
                 if (!isJSON(res)) res = $.parseJSON( res );
                 console.log(res);
-                if (res.code == 1)  reslove(res);
-                else {
-                    reject(res);
-                    layer.msg('出错了，状态 code:' + res.code);
-                }
+                reslove(res);
+                
             },
             error: function (err) {
                 console.log(err);
@@ -41,11 +38,7 @@ function http_get(url, data) {
                 // 格式化 json
                 if (!isJSON(res)) res = $.parseJSON( res );
                 console.log(res);
-                if (res.code == 1)  reslove(res);
-                else {
-                    reject(res);
-                    layer.msg('出错了，状态 code:' + res.code);
-                }
+                reslove(res);
             },
             error: function (err) {
                 console.log(err);
