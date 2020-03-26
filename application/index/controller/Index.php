@@ -159,7 +159,7 @@ class Index extends Controller
     {   $this->headFoot();
         $this->left_bar();
 
-        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->paginate(6);
         $this->assign('news', $news);
@@ -171,7 +171,7 @@ class Index extends Controller
         $this->headFoot();
         $this->left_bar();
 
-        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         //获取参数
         $param=input('newsid');
@@ -203,7 +203,7 @@ class Index extends Controller
     //课程页面
     public function course()
     {   $this->headFoot();
-        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
       /*  $id=input('id');
         $concrete=model('Course')->where(['isDel'=>0,'courseType'=>$id])->field('id,courseName')->order('sort desc')->select();
