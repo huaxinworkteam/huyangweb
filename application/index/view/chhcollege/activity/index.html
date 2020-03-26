@@ -55,8 +55,10 @@
                     <div class="wrapper g-width" v-cloak="">
                         <ul class="list fs16 float-clear" v-for="(item, key) in filterOption" :key="key">
                             <li class="label float-left">{{item.name}}:</li>
-                            <li class="item float-left" :class="{active: listItem.value===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
-                                {{listItem.label}}
+                            <li>
+                                <span class="item float-left" :class="{active: listItem.value===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
+                                    {{listItem.label}}
+                                </span>
                             </li>
                         </ul>
                     </div>

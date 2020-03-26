@@ -105,8 +105,9 @@
     padding: 0 36px;
 }
 .activity .filter .wrapper .list {
-    padding: 20px 0 20px 4px;
+    padding: 20px 0 10px 4px;
     border-bottom: 1px dashed #CFCFCF;
+    display: flex;
 }
 .activity .filter .wrapper .list:last-child {
     border-bottom: none;
@@ -114,11 +115,13 @@
 .activity .filter .wrapper .list .label {
     color: #494949;
     margin-right: 10px;
+    flex: none;
 }
 .activity .filter .wrapper .list .item {
     color: #7A848F;
     margin-right: 20px;
     cursor: pointer;
+    padding-bottom: 10px;
 }
 .activity .filter .wrapper .list .item.active {
     color: #B48A61;

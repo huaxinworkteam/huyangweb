@@ -29,9 +29,9 @@
                 </div>
                 <div class="filter">
                     <div class="wrapper g-width" v-cloak="">
-                        <ul class="list fs16 float-clear" style="display: flex;"  v-for="(item, key) in tabs" :key="key">
-                            <li class="label float-left" style="flex: none;"><span>{{item.name}}:</span></li>
-                            <li style="flex: none;">
+                        <ul class="list fs16 float-clear" v-for="(item, key) in tabs" :key="key">
+                            <li class="label float-left"><span>{{item.name}}:</span></li>
+                            <li>
                                 <span class="item float-left" :class="{active: listItem.value===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
                                     {{listItem.label}}
                                 </span>
@@ -144,30 +144,6 @@
             methods: {
                 async getGoodsName() {
                     await http_get('getGoodsName').then(res=>{
-                        res.data.forEach(item => {
-                            let array = {label: '', value: ''};
-                            array.label = item.goods_name;
-                            array.value = item.goods_name;
-                            this.tabs.zhuanlan.data.push(array);
-                        });
-                        res.data.forEach(item => {
-                            let array = {label: '', value: ''};
-                            array.label = item.goods_name;
-                            array.value = item.goods_name;
-                            this.tabs.zhuanlan.data.push(array);
-                        });
-                        res.data.forEach(item => {
-                            let array = {label: '', value: ''};
-                            array.label = item.goods_name;
-                            array.value = item.goods_name;
-                            this.tabs.zhuanlan.data.push(array);
-                        });
-                        res.data.forEach(item => {
-                            let array = {label: '', value: ''};
-                            array.label = item.goods_name;
-                            array.value = item.goods_name;
-                            this.tabs.zhuanlan.data.push(array);
-                        });
                         res.data.forEach(item => {
                             let array = {label: '', value: ''};
                             array.label = item.goods_name;
