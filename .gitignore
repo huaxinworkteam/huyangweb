@@ -7,4 +7,5 @@ runtime
 upload
 *.htaccess
 .user.ini
+ueditor
 access_token.php
