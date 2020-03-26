@@ -252,7 +252,7 @@ class Index extends Controller
       //  $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
         $group=Series::where('delete_time',null)->order('seriesSort desc')->field('series,seriesID')->select();
         $this->assign('group', $group);
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $t = input('seriesNO');
         //获取教师信息
