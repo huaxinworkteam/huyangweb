@@ -80,7 +80,7 @@ class News extends Base
         }
         $newsinfo = model('News')->find(input('newsid'));
         $this->assign('newsinfo', $newsinfo);
-        return view('News/edit');
+        return view('news/edit');
     }
 
     //删除
