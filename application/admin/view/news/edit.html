@@ -59,13 +59,13 @@
                 return {
                     uploadAction: '/admin/News/fileUpload', // 图片上传服务器地址
                     dataForm: {
-                        newsid: '{$newsinfo.newsid}',
-                        articleTitle: '{$newsinfo.newstitle}',  // 新闻标题
-                        articleKey: '{$newsinfo.articleKey}',  // 关键字
-                        content: '{$newsinfo.articleContent | raw}', // 新闻内容 富文本内容
-                        newspicture: '{$newsinfo.newspicture}', // 图片路径
-                        articleAuthor: '{$newsinfo.writer}', // 作者
-                        isShow: Number('{$newsinfo.isShow}')// 是否显示 0-隐藏 1-显示
+                        newsid: '{$newsid}',
+                        articleTitle: '',  // 新闻标题
+                        articleKey: '',  // 关键字
+                        content: '', // 新闻内容 富文本内容
+                        newspicture: '', // 图片路径
+                        articleAuthor: '', // 作者
+                        isShow: 1// 是否显示 0-隐藏 1-显示
                     },
                     rules: {
                         articleTitle: [
@@ -81,10 +81,14 @@
             },
             mounted() {
                 this.ue = UE.getEditor('content'); // 初始化富文本编辑器
-                this.ue.ready( () => {
-                    // editor准备好之后才可以使用
-                    console.log(this.dataForm.content)
-                    this.ue.setContent(this.dataForm.content);
+                http_post('/admin/news/newsInfo',{id: this.dataForm.newsid}).then(res => {
+                    this.dataForm = res.data;
+                    this.ue.ready( () => {
+                        // editor准备好之后才可以使用
+                        this.ue.setContent(this.dataForm.content);
+                    });
+                }).catch(err => {
+
                 });
             },
             methods: {
