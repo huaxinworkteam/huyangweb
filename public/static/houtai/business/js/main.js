@@ -75,7 +75,7 @@ function news_edit(title, url, id) {
     var index = layer.open({
         type: 2,
         title: title,
-        content: url+'?newsid'+id,
+        content: url+'?newsid='+id,
     });
     layer.full(index);
 }
