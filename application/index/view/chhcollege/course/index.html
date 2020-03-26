@@ -32,7 +32,7 @@
                         <ul class="list fs16 float-clear" v-for="(item, key) in tabs" :key="key">
                             <li class="label float-left"><span>{{item.name}}:</span></li>
                             <li>
-                                <span class="item float-left" :class="{active: listItem.value===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
+                                <span class="item float-left" :class="{active: listItem.value===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value, listItem.label)">
                                     {{listItem.label}}
                                 </span>
                             </li>
@@ -61,13 +61,13 @@
                                 <div class="listItem-body pr">
                                     <p class="title fs16 line-clamp2">{{item.title}}</p>
                                     <div class="teacher alignCenter fs12">
-                                        <!-- <span class="name">有 {{item.view_count}} 人浏览</span> -->
-                                        <span class="job line-clamp1">有 {{item.view_count}} 人浏览</span>
+                                        <!-- <span class="name" >免费</span> -->
+                                        <span class="job line-clamp1">{{school}}</span>
                                     </div>
-                                    <!-- <div class="info fs12">
-                                        <span class="lesson-num">{{item.resource_type}}节</span>
-                                        <span class="people-num">{{item.resource_type}}人加入学习</span>
-                                    </div> -->
+                                    <div class="info fs12">
+                                        <span class="lesson-num" style="color: #fa4f4f;">免费</span>
+                                        <span class="people-num">有 {{item.view_count}} 人浏览</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -99,6 +99,7 @@
                     showMoreFlag: false,
                     noMoreFlag: false,
                     loading: true,
+                    school: '',
                     zhuanlanData: [],
                     page: {
                         per_page: 8,
@@ -152,6 +153,7 @@
                         });
                     });
                     this.tabs.zhuanlan.currentIndex = this.tabs.zhuanlan.data[0].value;
+                    this.school = this.tabs.zhuanlan.data[0].label;
                     this.getIndex();
                 },
                 getIndex(flag) {
@@ -190,8 +192,11 @@
                     this.last_id = this.zhuanlanData[this.zhuanlanData.length -1].resource_id;
                     this.getIndex(false);
                 },
-                fliterActivity(key, value) {
-                    if (key == 'zhuanlan') this.tabs.zhuanlan.currentIndex = value;
+                fliterActivity(key, value, school) {
+                    if (key == 'zhuanlan') {
+                        this.tabs.zhuanlan.currentIndex = value;
+                        this.school = school;
+                    }
                     else if (key == 'type') this.tabs.type.currentIndex = value;
                     this.getIndex(true);
                     this.noMoreFlag = false;
