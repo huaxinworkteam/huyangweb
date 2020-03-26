@@ -42,7 +42,7 @@
                         <div style="position: relative;">
                             <div class="btn float-left">
                                 <span class="item" :class="{disabled: !(activityInfo.isOver==0)}"
-                                @mouseenter="activityInfo.isOver==0 ? qrCodeShow=true : ''" @mouseleave="qrCodeShow=false">
+                                @click="activityInfo.isOver==0 ? qrCodeShow=!qrCodeShow : ''">
                                 {{activityInfo.isOver==0?'火热报名中':'报名已结束'}}</span>
                                 <!-- <span class="item" :class="{disabled: !activityInfo.isOver==1}" v-if="activityInfo.isOver==1" 
                                     @click="offlineClick()">
@@ -51,9 +51,11 @@
                                     @click="onlineClick()">
                                     看回放</span> -->
                             </div>
-                            <div class="weChatRQcode" id="qrcode" v-show="qrCodeShow">
-                                <p>请使用微信扫码报名</p>
-                            </div>
+                            <transition name="qrcode">
+                                <div class="weChatRQcode" id="qrcode" v-show="qrCodeShow">
+                                    <p>请使用微信扫码报名</p>
+                                </div>
+                            </transition>
                         </div>
                     </div>
                 </div>
