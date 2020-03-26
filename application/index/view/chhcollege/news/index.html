@@ -55,11 +55,11 @@
                                         <img src="{$vo.newspicture}">
                                     </div>
                                     <div class="fr">
-                                        <h3>{$vo.newstitle}</h3>
-                                        <p>作者：{$vo.writer}</p>
+                                        <h3>{$vo.newstitle | raw}</h3>
+                                        <p>作者：{$vo.writer | raw}</p>
                                         <!-- <p>点赞：{$vo.newsup}</p> -->
                                     </div>
-                                    <span style=" position: absolute; bottom: 2px;left:283px; color: #6f6f6f;"><em>{$vo.createTime}</em></span>
+                                    <span style=" position: absolute; bottom: 2px;left:283px; color: #6f6f6f;"><em>{$vo.createTime | raw}</em></span>
                                     <span style="position: absolute; bottom: 2px; right: 30px;">查看详情 >></span>
                                 </div>
                             </a>
