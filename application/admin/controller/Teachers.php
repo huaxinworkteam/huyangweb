@@ -135,6 +135,7 @@ class Teachers extends Base
     public function series(){
 
         $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,seriesSort,count(t.seriesNO) as sums')->group('a.seriesID')->select()->toArray();
+      // halt($teachers);
         $has='';
         foreach ($teachers as $k=>$v){
             $has=$has.$teachers[$k]['seriesID'].',';

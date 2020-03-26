@@ -293,7 +293,7 @@ class Index extends Controller
         $this->assign('more',$more);
         $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
-        $xueyuan=Series::where(['delete_time'=>null])->field('seriesID,series')->order(['seriesSort'=>'desc'])->select();
+        $xueyuan=Series::where(['delete_time'=>null])->field('seriesID,series,icon')->order(['seriesSort'=>'desc'])->select();
         $this->assign('xueyuan',$xueyuan);
         return view('chhcollege/about/introduction');
     }
