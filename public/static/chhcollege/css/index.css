@@ -477,6 +477,7 @@
 .index_news_body .event_body .list div.fl h3 {
     font-size: 18px;
     color: #535353;
+    padding-bottom: 5px;
 }
 
 .index_news_body .event_body .list div.fl h4 {
@@ -490,6 +491,18 @@
     line-height: 22px;
     color: #6f6f6f;
 }
+.index_news_body .event_body .list div.fl span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 4px;
+    padding: 8px 40px;
+    border-radius: 20px;
+    background-color: #B48A61;
+    text-align: center;
+    color: #fff;
+}
+
 #gotop{
     position:fixed;
     right:80px;
