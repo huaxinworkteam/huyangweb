@@ -4,9 +4,8 @@
 thinkphp
 .DS_Store
 runtime
-upload
 *.htaccess
 .user.ini
 upload
-ueditor
+public/ueditor
 access_token.php
