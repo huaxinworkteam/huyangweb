@@ -1450,7 +1450,7 @@
 
 .contBody .item{
     width: 190px;
-    background:  #efefef;
+    /* background:  #efefef; */
     height: 110px;
     border-radius: 4px;
     margin: 0 20px 10px 0;
@@ -1462,9 +1462,17 @@
     display: grid;
     align-items: center;
 }
+
+.contBody .item img{
+    width: 86px;
+    height: 86px;
+    margin: 0 auto 8px;
+    background: #efefef;
+    border-radius: 50%;
+}
+
 .contBody .item:hover{
     color: #ecae68;
-    background-color: #FFBF0B;
     transition: background-color 2s;
     transform: translateY(-5px);
     transition:.5s;

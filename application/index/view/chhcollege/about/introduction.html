@@ -70,9 +70,13 @@
                 </div>
                 <div class="contBody" style="width: 950px;">
                     {volist name='xueyuan' id='vo'}
-                    <div class="item">
+                    <!-- <div class="item">
                         <a href="{:url('index/college',['seriesID'=>$vo.seriesID])}">{$vo.series}</a>
-                    </div>
+                    </div> -->
+                    <a class="item" href="{:url('index/college',['seriesID'=>$vo.seriesID])}">
+                        <img alt="{$vo.series}" src="{$vo.icon}"/>
+                        <span>{$vo.series}</span>
+                    </a>
                     {/volist}
                 </div>
                 <!--<div class="contBody">
