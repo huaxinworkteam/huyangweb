@@ -30,7 +30,7 @@ class News extends Base
                 'writer' => input('articleAuthor'),
                 'isShow' => input('isShow') ? 1 : 0,
                 'articleContent' => input('content'),
-                'newspicture'=>"/upload/newspic/".input('newspicture'),
+                'newspicture'=>input('newspicture'),
             ];
             $result = model('News')->add($data);
             if ($result == 1) {
@@ -68,7 +68,7 @@ class News extends Base
                 'articleContent' => input('content'),
                 'articleKey' => input('articleKey'),
                 'writer' => input('articleAuthor'),
-                'newspicture'=>"/upload/newspic/".input('newspicture'),
+                'newspicture'=>input('newspicture'),
 
             ];
             $result = model('News')->newsedit($data);
