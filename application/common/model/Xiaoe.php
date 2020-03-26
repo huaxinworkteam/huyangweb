@@ -125,8 +125,7 @@ class Xiaoe extends Model
             ]
         ]);
         $res=curl_request($url,$data,$method);
-        if(is_object($res)) return $res;
-        else return 0;
+         return $res;
 
     }
 
