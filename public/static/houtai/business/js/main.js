@@ -84,7 +84,7 @@ function news_del(obj, id) {
     layer.confirm('确认要删除吗？', function (index) {
         layer.close(index);
         $.ajax({
-            url:"./newsdel",
+            url:"/admin/news/newsdel",
             type:'POST',
             data:{newsid:id},
             dataType:'json',
@@ -107,6 +107,9 @@ function news_del(obj, id) {
                         }
                     );
                 }
+            },
+            error: function(err) {
+                console.log(err)
             }
         });
     });
