@@ -7,5 +7,4 @@ runtime
 upload
 *.htaccess
 .user.ini
-
 access_token.php
