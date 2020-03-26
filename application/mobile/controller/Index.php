@@ -1,6 +1,6 @@
 <?php
 
-namespace app\mobile\controller;
+namespace app\index\controller;
 
 use app\common\model\Activity;
 use app\common\model\Config;
@@ -10,6 +10,7 @@ use app\common\model\News;
 use app\common\model\Series;
 use app\common\model\Teachers;
 use app\common\model\Gallery;
+use app\common\model\Xetzhuanlan;
 use app\common\model\Xiaoe;
 use think\Controller;
 use think\Db;
@@ -44,7 +45,7 @@ class Index extends Controller
             $list = Teachers::where('isShow',1)->where('delete_time',null)->where('isTop',1)->limit(8)->order('sort desc')->select();
         $this->assign('teachers', $list);
         //主页下方左侧新闻
-        $news=News::where('isShow',1)->order('createTime desc')->limit(6)->select();
+        $news=News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->limit(6)->select();
         $this->assign('news',$news);
         //主页下方右侧活动
         $index_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->limit(3)->select();
@@ -61,13 +62,72 @@ class Index extends Controller
     }
     //活动查询
     public function activity()
-    {  $this->headFoot();
-        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+    {
+        $this->headFoot();
+        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         if(request()->isAjax()) {
-            $all_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime')->where(['show'=>1,'merchanid'=>19])->order('displayorder desc')->paginate(6);
-            if($all_activity) return myJson('T',$all_activity);
-            else return myJson('F','暂无数据');
+            $p=input('page');
+            $t=input('time');
+            $s=input('status');
+            if(!$p) return myJson('F','参数异常');
+            //用于分类本周本月
+            switch ($t){
+                case 'week': break;
+                case 'month':break;
+                default:
+                    $t=`*`;
+                    break;
+            }
+            //用于分类开始结束时间
+            $p1='id';
+            $p2='>';
+            $p3=0;
+            $p4='id';
+            $p5='>';
+            $p6=0;
+            $time=time();
+            switch ($s){
+                case 1:
+                    $p1='starttime';
+                    $p2='> time';
+                    $p3=$time;
+                    break;
+                case 3:
+                    $p1='endtime';
+                    $p2='< time';
+                    $p3=$time;
+                    break;
+                case 2:
+                    $p1='starttime';
+                    $p2='< time';
+                    $p3=$time;
+                    $p4='endtime';
+                    $p5='> time';
+                    $p6=$time;
+                    break;
+                default:
+                    break;
+            }
+            $all_activity = Db::connect('db_config1')
+                ->name('fx_activity')
+                ->field('id,title,thumb,intro,starttime,endtime,address')
+                ->where(['show' => 1, 'merchantid' => 19])
+                ->whereTime('starttime',$t)
+                ->where($p1,$p2,$p3)
+                ->where($p4,$p5,$p6)
+                ->order('displayorder desc')
+                ->limit(($p['current_page'] - 1) * $p['per_page'], $p['per_page'])
+                ->select();
+            $total = Db::connect('db_config1')
+                ->name('fx_activity')
+                ->where(['show' => 1, 'merchantid' => 19])
+                ->whereTime('starttime',$t)
+                ->where($p1,$p2,$p3)
+                ->where($p4,$p5,$p6)
+                ->count();
+            if($all_activity) return myJson('T',['info'=>$all_activity,'total'=>$total]);
+            else return myJson('T',['info'=>'','total'=>0]);
         }
         return view('chhcollege/activity/index');
     }
@@ -79,19 +139,29 @@ class Index extends Controller
         $this->assign('gallery',$gallery);
         //获取参数
         $param=input('activityId');
-        $act_id=Db::connect('db_config1')->name('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetime,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey')->where(['id'=>$param])->find();
+        $act_id=Db::connect('db_config1')->name('fx_activity')->field('id,title,pagetitle,freetitle,aprice,marketprice,mprice,tel,intro,detail,starttime,endtime,joinstime,joinetime,thumb,atlas,gnum,lng,lat,adinfo,addname,address,prize,form,midkey,recommend')->where(['id'=>$param])->find();
        $act_id['qrCode']='https://test.v7mall.com/app/index.php?i=2&c=entry&m=fx_activity&do=activity&ac=detail&op=display&activityid='.$param;
+     //  halt($act_id);
         $this->assign('act_id', $act_id);
         return view('chhcollege/activity/detail');
+    }
+
+
+    public function getRecommend(){
+        if(request()->isAjax()){
+            $recommendAct = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro,starttime,endtime')->where(['show'=>1,'merchantid'=>19,'recommend'=>1])->order('displayorder desc')->select();
+             return myJson('T',$recommendAct);
+        }
+        return myJson('F','请求被拒绝');
     }
   //新闻查询
     public function news()
     {   $this->headFoot();
         $this->left_bar();
 
-        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
-        $news = News::where('isShow',1)->order('createTime desc')->paginate(6);
+        $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->paginate(6);
         $this->assign('news', $news);
 
         return view('chhcollege/news/index');
@@ -101,7 +171,7 @@ class Index extends Controller
         $this->headFoot();
         $this->left_bar();
 
-        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         //获取参数
         $param=input('newsid');
@@ -113,7 +183,8 @@ class Index extends Controller
     public function about()
     {  $this->headFoot();
         $this->left_bar();
-
+        $more=model('AboutMore')->where(['isShow'=>1,'isDel'=>0])->order('sort desc')->field('id,name')->select();
+        $this->assign('more',$more);
         $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         return view('chhcollege/about/index');
@@ -123,20 +194,21 @@ class Index extends Controller
     {  $this->headFoot();
         $this->left_bar();
 
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $id=input('id');
         $content=model('AboutMore')->where('id',$id)->field('id,name,content')->find();
         $this->assign('content',$content);
+        $more=model('AboutMore')->where(['isShow'=>1,'isDel'=>0])->order('sort desc')->field('id,name')->select();
+        $this->assign('more',$more);
         return view('chhcollege/about/about_more');
     }
     //课程页面
     public function course()
     {   $this->headFoot();
-
-        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
-        $id=input('id');
+      /*  $id=input('id');
         $concrete=model('Course')->where(['isDel'=>0,'courseType'=>$id])->field('id,courseName')->order('sort desc')->select();
         $this->assign('concrete',$concrete);
         if($concrete->toArray()) {
@@ -146,7 +218,7 @@ class Index extends Controller
         }else{
             $typeName=model('CourseType')->where('id',$id)->field('typeName')->find()['typeName'];
             $this->assign('content',['courseName'=>'暂无课程','courseIntroduce'=>'暂无课程内容','typeName'=>$typeName]);
-        }
+        }*/
         return view('chhcollege/course/index');
     }
     //异步获取子分类
@@ -161,6 +233,8 @@ class Index extends Controller
     public function introduce(){
         $id=input('id');
         $res=Course::getOne($id);
+        $more=model('AboutMore')->where(['isShow'=>1,'isDel'=>0])->order('sort desc')->field('id,name')->select();
+        $this->assign('more',$more);
         if($res) return myJson('T',$res);
         else return myJson('F','获取数据失败');
     }
@@ -183,7 +257,7 @@ class Index extends Controller
       //  $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
         $group=Series::where('delete_time',null)->order('seriesSort desc')->field('series,seriesID')->select();
         $this->assign('group', $group);
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $t = input('seriesNO');
         //获取教师信息
@@ -219,7 +293,7 @@ class Index extends Controller
     {  $this->headFoot();
         $this->left_bar();
 
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $xueyuan=Series::where(['delete_time'=>null])->field('seriesID,series')->order(['seriesSort'=>'desc'])->select();
         $this->assign('xueyuan',$xueyuan);
@@ -238,8 +312,33 @@ class Index extends Controller
         return view('chhcollege/about/college');
     }
 
-    public function test(){
-        $a=model('Xiaoe')->getGoodsDetail('v_5e71c6f0141e2_nwOUD4JO',3);
-       var_dump($a);
+    public function getCourse(){
+        $goods_name=input('goods_name');
+        $last_id=input('last_id')?:'';
+        $page_size=input('page_size')?:20;
+        $resource_type=input('resource_type')?:['3','4'];
+        $a=model('Xiaoe')->getAllGoods($goods_name,$last_id,$page_size,$resource_type);
+        return $a;
+    }
+
+    public  function  getCourseDetail(){
+        $this->headFoot();
+        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $this->assign('gallery',$gallery);
+        $goods_id = input('goods_id');
+        $goods_type = input('goods_type');
+        $goods_title=input('goods_title');
+        if(request()->isAjax()) {
+            $a = model('Xiaoe')->getGoodsDetail($goods_id, $goods_type);
+            return $a;
+        }
+        $this->assign('goods',['goods_id'=>$goods_id,'goods_type'=>$goods_type,'goods_title'=>$goods_title]);
+        return view('chhcollege/course/detail');
+    }
+
+    public function getGoodsName(){
+        $res=Xetzhuanlan::where('is_del',0)->order('sort desc')->field('id,goods_name')->select();
+        return myJson('T',$res);
     }
 }
+
