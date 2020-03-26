@@ -60,6 +60,7 @@ class News extends Base
     //编辑
     public function newsedit()
     {
+        $id=input('newsid');
         if (request()->isAjax()) {
             $data = [
                 'newsid' => input('newsid'),
@@ -78,9 +79,18 @@ class News extends Base
                 $this->error($result);
             }
         }
-        $newsinfo = model('News')->find(input('newsid'));
-        $this->assign('newsinfo', $newsinfo);
+        $this->assign('newsid', $id);
         return view('news/edit');
+    }
+
+    public function newsInfo(){
+        $id=input('newsid');
+        if($id){
+            $newsinfo=model('News')->find($id);
+            if($newsinfo) return myJson('T',$newsinfo);
+            else return myJson('F','无数据');
+        }
+
     }
 
     //删除
