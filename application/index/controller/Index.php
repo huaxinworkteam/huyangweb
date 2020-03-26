@@ -317,6 +317,9 @@ class Index extends Controller
     }
 
     public  function  getCourseDetail(){
+        $this->headFoot();
+        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $this->assign('gallery',$gallery);
         $goods_id = input('goods_id');
         $goods_type = input('goods_type');
         $goods_title=input('goods_title');
