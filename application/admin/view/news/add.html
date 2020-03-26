@@ -85,7 +85,7 @@
                 uploadImageSuccess(res, file) {
                     layer.close(this.uploadLoading);
                     layer.msg('上传成功', {icon: 1});
-                    this.dataForm.path = '/upload/newspic/'+ res;
+                    this.dataForm.newspicture = res;
                 },
                 uploadImageError(err, file) {
                     layer.close(this.uploadLoading);
