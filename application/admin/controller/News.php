@@ -14,7 +14,7 @@ class News extends Base
         ];
         $this->assign($viewdata);
 
-        $total = count(model('news')->select());
+        $total = count(model('news')->where('delete_time',null)->select());
         $this->assign('total', $total);
         return view();
     }
