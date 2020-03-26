@@ -20,7 +20,7 @@
         <section>
             <div class="head" ref="activity-detail-head" v-cloak>
                 <div class="wrapper g-width alignCenter" >
-                    <img class="cover" :src="zhuanlanInfo.img_url">
+                    <img class="cover" style="height: 320px;" :src="zhuanlanInfo.img_url">
                     <div class="info flexColumn justifyCenter flex_1">
                         <p class="title fs22 line-clamp2">{{zhuanlanInfo.title}}</p>
                         <!-- <p class="time fs16 mb15">
@@ -60,7 +60,7 @@
                                     看回放</span> -->
                             </div>
                             <div class="weChatRQcode" id="qrcode" v-show="qrCodeShow">
-                                <p>请使用微信扫码报名</p>
+                                <p>请使用微信扫码观看</p>
                             </div>
                         </div>
                     </div>

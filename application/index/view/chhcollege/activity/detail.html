@@ -31,14 +31,6 @@
                              ·
                             <span>{{activityInfo.startTime}} - {{activityInfo.endTime}}</span>
                         </p>
-                        <p class="time fs16 mb15" style="padding: 0; border:none;">
-                            <i class="icon"></i>
-                            <span v-if="activityInfo.isBOver == 0">报名未开始</span>
-                            <span v-if="activityInfo.isBOver == 1">报名进行中</span>
-                            <span v-if="activityInfo.isBOver == 2">报名已结束</span>
-                             ·
-                            <span>{{activityInfo.joinstime}} - {{activityInfo.joinetime}}</span>
-                        </p>
                         <p class="address fs16 mb15">
                             <i class="icon"></i>
                             {{activityInfo.address}}
@@ -49,9 +41,9 @@
                         </p>
                         <div style="position: relative;">
                             <div class="btn float-left">
-                                <span class="item" :class="{disabled: !(activityInfo.isBOver==1)}"
-                                @mouseenter="activityInfo.isBOver==1 ? qrCodeShow=true : ''" @mouseleave="qrCodeShow=false">
-                                {{activityInfo.isBOver==0?'报名未开始': activityInfo.isBOver==1?'火热报名中':'报名已结束'}}</span>
+                                <span class="item" :class="{disabled: !(activityInfo.isBOver!=2)}"
+                                @mouseenter="activityInfo.isBOver!=2 ? qrCodeShow=true : ''" @mouseleave="qrCodeShow=false">
+                                {{activityInfo.isBOver!=2?'火热报名中':'报名已结束'}}</span>
                                 <!-- <span class="item" :class="{disabled: !activityInfo.isOver==1}" v-if="activityInfo.isOver==1" 
                                     @click="offlineClick()">
                                     看直播</span>
@@ -109,8 +101,7 @@
                     endTime: '{$act_id.endtime | raw}',
                     joinstime: '{$act_id.joinstime | raw}',
                     joinetime: '{$act_id.joinetime | raw}',
-                    isOver: 0,
-                    isBOver: 0
+                    isOver: 0
                 }, 
                 recommendActivity: '',
                 qrCodeShow: false,
@@ -141,19 +132,12 @@
             // window.addEventListener('scroll', this.handleScroll);
             let timeStart = DateUtil.getDate(this.activityInfo.startTime);
             let timeEnd = DateUtil.getDate(this.activityInfo.endTime);
-            let timeStartJoin = DateUtil.getDate(this.activityInfo.joinstime);
-            let timeEndJoin = DateUtil.getDate(this.activityInfo.joinetime);
             let newTime = new Date();
             if( timeStart > newTime ) this.activityInfo.isOver = 0;
             else if (newTime > timeEnd ) this.activityInfo.isOver = 1;
             else this.activityInfo.isOver = 2;
-            if( timeStartJoin > newTime ) this.activityInfo.isBOver = 0;
-            else if (newTime > timeEndJoin ) this.activityInfo.isBOver = 1;
-            else this.activityInfo.isBOver = 2;
-            this.activityInfo.startTime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
-            this.activityInfo.endTime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
-            this.activityInfo.joinstime = DateUtil.formatDateTime(timeStartJoin,"MM月dd日 HH:mm" );
-            this.activityInfo.joinetime = DateUtil.formatDateTime(timeEndJoin,"MM月dd日 HH:mm" );
+            this.activityInfo.startTime = DateUtil.formatDateTime(timeStart,date_formate.normDatetimeMinutePattern );
+            this.activityInfo.endTime = DateUtil.formatDateTime(timeEnd,date_formate.normDatetimeMinutePattern );
             this.getQrcode();
             this.getRecommendActivity();
             this.loading=true;
