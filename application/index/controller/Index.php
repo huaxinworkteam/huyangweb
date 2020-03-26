@@ -64,7 +64,7 @@ class Index extends Controller
     public function activity()
     {
         $this->headFoot();
-        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         if(request()->isAjax()) {
             $p=input('page');
@@ -193,7 +193,7 @@ class Index extends Controller
     {  $this->headFoot();
         $this->left_bar();
 
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $id=input('id');
         $content=model('AboutMore')->where('id',$id)->field('id,name,content')->find();
@@ -252,7 +252,7 @@ class Index extends Controller
       //  $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
         $group=Series::where('delete_time',null)->order('seriesSort desc')->field('series,seriesID')->select();
         $this->assign('group', $group);
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $t = input('seriesNO');
         //获取教师信息
@@ -288,7 +288,7 @@ class Index extends Controller
     {  $this->headFoot();
         $this->left_bar();
 
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $xueyuan=Series::where(['delete_time'=>null])->field('seriesID,series')->order(['seriesSort'=>'desc'])->select();
         $this->assign('xueyuan',$xueyuan);
