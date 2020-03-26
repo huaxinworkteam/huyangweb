@@ -45,7 +45,7 @@ class Index extends Controller
             $list = Teachers::where('isShow',1)->where('delete_time',null)->where('isTop',1)->limit(8)->order('sort desc')->select();
         $this->assign('teachers', $list);
         //主页下方左侧新闻
-        $news=News::where('isShow',1)->order('createTime desc')->limit(6)->select();
+        $news=News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->limit(6)->select();
         $this->assign('news',$news);
         //主页下方右侧活动
         $index_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->limit(3)->select();
@@ -161,7 +161,7 @@ class Index extends Controller
 
         $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
-        $news = News::where('isShow',1)->order('createTime desc')->paginate(6);
+        $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->paginate(6);
         $this->assign('news', $news);
 
         return view('chhcollege/news/index');
