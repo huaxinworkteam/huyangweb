@@ -319,11 +319,12 @@ class Index extends Controller
     public  function  getCourseDetail(){
         $goods_id = input('goods_id');
         $goods_type = input('goods_type');
+        $goods_title=input('goods_title');
         if(request()->isAjax()) {
             $a = model('Xiaoe')->getGoodsDetail($goods_id, $goods_type);
             return $a;
         }
-        $this->assign('goods',['goods_id'=>$goods_id,'goods_type'=>$goods_type]);
+        $this->assign('goods',['goods_id'=>$goods_id,'goods_type'=>$goods_type,'goods_title'=>$goods_title]);
         return view('chhcollege/course/detail');
     }
 
