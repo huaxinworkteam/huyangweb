@@ -86,8 +86,7 @@ class News extends Base
     //删除
     public function newsdel()
     {
-        $newsinfo = model('News')->find(input('newsid'));
-        $result = $newsinfo->update(['delete_time'=>time()]);
+        $result = model('News')->where('newsid',input('newsid'))->update(['delete_time'=>time()]);
         if ($result) {
             $this->success('新闻删除成功', 'admin/news/lists');
         } else {
