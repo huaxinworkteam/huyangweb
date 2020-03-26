@@ -41,9 +41,9 @@
                         </p>
                         <div style="position: relative;">
                             <div class="btn float-left">
-                                <span class="item" :class="{disabled: !(activityInfo.isBOver!=2)}"
-                                @mouseenter="activityInfo.isBOver!=2 ? qrCodeShow=true : ''" @mouseleave="qrCodeShow=false">
-                                {{activityInfo.isBOver!=2?'火热报名中':'报名已结束'}}</span>
+                                <span class="item" :class="{disabled: !(activityInfo.isBOver==0)}"
+                                @mouseenter="activityInfo.isBOver==0 ? qrCodeShow=true : ''" @mouseleave="qrCodeShow=false">
+                                {{activityInfo.isBOver==0?'火热报名中':'报名已结束'}}</span>
                                 <!-- <span class="item" :class="{disabled: !activityInfo.isOver==1}" v-if="activityInfo.isOver==1" 
                                     @click="offlineClick()">
                                     看直播</span>
