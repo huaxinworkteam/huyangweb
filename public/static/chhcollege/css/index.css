@@ -477,6 +477,7 @@
 .index_news_body .event_body .list div.fl h3 {
     font-size: 18px;
     color: #535353;
+    padding-bottom: 5px;
 }
 
 .index_news_body .event_body .list div.fl h4 {
@@ -497,7 +498,7 @@
     border-radius: 4px;
     padding: 8px 40px;
     border-radius: 20px;
-    background-color: #FFBF0B;
+    background-color: #B48A61;
     text-align: center;
     color: #fff;
 }
