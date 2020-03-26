@@ -29,10 +29,12 @@
                 </div>
                 <div class="filter">
                     <div class="wrapper g-width" v-cloak="">
-                        <ul class="list fs16 float-clear" v-for="(item, key) in tabs" :key="key">
-                            <li class="label float-left">{{item.name}}:</li>
-                            <li class="item float-left" :class="{active: listItem.value===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
-                                {{listItem.label}}
+                        <ul class="list fs16 float-clear"  v-for="(item, key) in tabs" :key="key">
+                            <li class="label float-left"><span>{{item.name}}:</span></li>
+                            <li>
+                                <span class="item float-left" :class="{active: listItem.value===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
+                                    {{listItem.label}}
+                                </span>
                             </li>
                         </ul>
                     </div>
@@ -148,6 +150,30 @@
                             array.value = item.goods_name;
                             this.tabs.zhuanlan.data.push(array);
                         });
+                        res.data.forEach(item => {
+                            let array = {label: '', value: ''};
+                            array.label = item.goods_name;
+                            array.value = item.goods_name;
+                            this.tabs.zhuanlan.data.push(array);
+                        });
+                        res.data.forEach(item => {
+                            let array = {label: '', value: ''};
+                            array.label = item.goods_name;
+                            array.value = item.goods_name;
+                            this.tabs.zhuanlan.data.push(array);
+                        });
+                        res.data.forEach(item => {
+                            let array = {label: '', value: ''};
+                            array.label = item.goods_name;
+                            array.value = item.goods_name;
+                            this.tabs.zhuanlan.data.push(array);
+                        });
+                        res.data.forEach(item => {
+                            let array = {label: '', value: ''};
+                            array.label = item.goods_name;
+                            array.value = item.goods_name;
+                            this.tabs.zhuanlan.data.push(array);
+                        });
                     });
                     this.tabs.zhuanlan.currentIndex = this.tabs.zhuanlan.data[0].value;
                     this.getIndex();
@@ -179,8 +205,8 @@
                     //     this.navPosition = 'static';
                     // }
                 },
-                toActivityDetail: function (item) {
-                    var url = 'getCourseDetail?goods_id=' + item.id + '& goods_type=' + item.id;
+                toDetail: function (item) {
+                    var url = 'getCourseDetail?goods_id=' + item.resource_id + '& goods_type=' + item.resource_type;
                     common.toPage(url);
                 },
                 showMore: function () {
