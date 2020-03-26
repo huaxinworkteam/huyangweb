@@ -134,13 +134,13 @@ class Teachers extends Base
     //院系列表
     public function series(){
 
-        $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,seriesSort,count(t.seriesNO) as sums')->group('a.seriesID')->select()->toArray();
-      // halt($teachers);
+        $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,seriesSort,count(t.seriesNO) as sums,a.icon')->group('a.seriesID')->select()->toArray();
+       halt($teachers);
         $has='';
         foreach ($teachers as $k=>$v){
             $has=$has.$teachers[$k]['seriesID'].',';
         }
-        $miss=model('series')->whereNotIn('seriesID',$has)->where('delete_time',null)->field('series,seriesID,seriesSort')->select()->toArray();
+        $miss=model('series')->whereNotIn('seriesID',$has)->where('delete_time',null)->field('series,seriesID,seriesSort,icon')->select()->toArray();
        foreach ($miss as $k=>$v) {
             $miss[$k]['sums']=0;
        }
