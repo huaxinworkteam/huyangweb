@@ -51,9 +51,8 @@
                 <div class="staff">
                     <ul id="teacher-list">
                         {volist name="teachers" id="vo"}
-                        <li>
-                            <div class="item teacher" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
-                            data-level="{$vo.teacherlevel}" data-description="{$vo.teacherdescription}">
+                        <li onclick="layerTeacher(this.type)" type='{"teacherphone": "{$vo.teacherphoto}","name":"{$vo.teachername}","level":"{$vo.teacherlevel}","description":"{$vo.teacherdescription}"}'>
+                            <div class="item teacher" >
                                 <div class="fl">
                                     <a href="javascript:;" class="pic"><img
                                             src="{$vo.teacherphoto}"></a>
@@ -104,24 +103,23 @@
 </script>
 <!-- ajax 请求数据 html 写入页面 -->
 <script>
-    $(document).ready(function () {
-        $(".teacher").click(function () {
-            layer.open({
-                type: 1,
-                title: $(this).data("name"),
-                skin: 'layer-bg-color', //样式类名
-                closeBtn: 1, //不显示关闭按钮
-                anim: 2,
-                shadeClose: true, //开启遮罩关闭
-                area: ['620px', '500px'], //宽高
-                content: '<div class="layer-teacher"><img src="'+
-                    $(this).data("photo")+'" />'+ '<div class="des"><h3>' + 
-                    $(this).data("name") + '</h3><h4>'+ $(this).data("level")+ 
-                    '</h4></div></div><p class="layer-teacher-desc">'+ 
-                    $(this).data("description") +'</p>'
-            });
+    function layerTeacher(type) {
+        if (!isJSON(type)) type = $.parseJSON( type ); 
+        layer.open({
+            type: 1,
+            title: type.name,
+            skin: 'layer-bg-color', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            area: ['620px', '500px'], //宽高
+            content: '<div class="layer-teacher"><img src="'+
+                type.teacherphone+'" />'+ '<div class="des"><h3>' + 
+                type.name + '</h3><h4>'+ type.level+ 
+                '</h4></div></div><p class="layer-teacher-desc">'+ 
+                type.description +'</p>'
         });
-    });
+    }
 </script>
 </body>
 </html>
