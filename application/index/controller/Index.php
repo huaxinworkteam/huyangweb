@@ -317,10 +317,14 @@ class Index extends Controller
     }
 
     public  function  getCourseDetail(){
-        $goods_id=input('goods_id');
-        $goods_type=input('goods_type');
-        $a=model('Xiaoe')->getGoodsDetail($goods_id,$goods_type);
-        return $a;
+        $goods_id = input('goods_id');
+        $goods_type = input('goods_type');
+        if(request()->isAjax()) {
+            $a = model('Xiaoe')->getGoodsDetail($goods_id, $goods_type);
+            return $a;
+        }
+        $this->assign('goods',['goods_id'=>$goods_id,'goods_type'=>$goods_type]);
+        return view('chhcollege/course/detail');
     }
 
     public function getGoodsName(){
