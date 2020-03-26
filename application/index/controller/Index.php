@@ -320,8 +320,7 @@ class Index extends Controller
         $goods_id=input('goods_id');
         $goods_type=input('goods_type');
         $a=model('Xiaoe')->getGoodsDetail($goods_id,$goods_type);
-        if(is_object($a)) return $a;
-        else return false;  
+        return $a;
     }
 
     public function getGoodsName(){
