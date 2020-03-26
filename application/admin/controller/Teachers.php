@@ -133,9 +133,9 @@ class Teachers extends Base
     }
     //院系列表
     public function series(){
-
-        $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,seriesSort,count(t.seriesNO) as sums,a.icon')->group('a.seriesID')->select()->toArray();
-    //  halt($teachers);
+    $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,seriesSort,IFNULL(count(t.seriesNO),0) as sums,a.icon')->group('a.seriesID')->select()->toArray();
+/*
+       $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,seriesSort,count(t.seriesNO)as sums,a.icon')->group('a.seriesID')->select()->toArray();
         $has='';
         foreach ($teachers as $k=>$v){
             $has=$has.$teachers[$k]['seriesID'].',';
@@ -144,7 +144,7 @@ class Teachers extends Base
        foreach ($miss as $k=>$v) {
             $miss[$k]['sums']=0;
        }
-        $teachers=array_merge($teachers,$miss);
+        $teachers=array_merge($teachers,$miss);*/
         $this->assign('series',$teachers);
         $total=count(model('series')->where('delete_time',null)->select());
         $this->assign('total',$total);
