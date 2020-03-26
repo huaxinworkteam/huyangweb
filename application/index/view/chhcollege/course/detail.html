@@ -14,16 +14,16 @@
 <header>
     {include file="public/coll_header" /}
 </header>
-<div id="app" class="pc" v-cloak>
+<div id="app" class="pc">
 
     <div class="activity-detail g-width-100">
         <section>
-            <div class="head" ref="activity-detail-head">
+            <div class="head" ref="activity-detail-head" v-cloak>
                 <div class="wrapper g-width alignCenter" >
-                    <img class="cover" :src="'http://test.v7mall.com/attachment/'+activityInfo.thumb">
+                    <img class="cover" :src="zhuanlanInfo.img_url">
                     <div class="info flexColumn justifyCenter flex_1">
-                        <p class="title fs22 line-clamp2">{{activityInfo.title}}</p>
-                        <p class="time fs16 mb15">
+                        <p class="title fs22 line-clamp2">{{zhuanlanInfo.title}}</p>
+                        <!-- <p class="time fs16 mb15">
                             <i class="icon"></i>
                             <span v-if="activityInfo.isOver == 0">未开始</span>
                             <span v-if="activityInfo.isOver == 1">进行中</span>
@@ -38,20 +38,20 @@
                             <span v-if="activityInfo.isBOver == 2">已结束</span>
                              ·
                             <span>{{activityInfo.joinstime}} - {{activityInfo.joinetime}}</span>
-                        </p>
-                        <p class="address fs16 mb15">
+                        </p> -->
+                        <p class="num fs16 mb15" style=" padding-top: 16px; border-top: 1px dashed #ACACAC;">
                             <i class="icon"></i>
-                            {{activityInfo.address}}
+                            作者：{{zhuanlanInfo.author}}
                         </p>
                         <p class="num fs16 mb15">
                             <i class="icon"></i>
-                            {{activityInfo.joinNum}}人已报名
+                            有 {{zhuanlanInfo.view_count}} 人浏览
                         </p>
                         <div style="position: relative;">
                             <div class="btn float-left">
-                                <span class="item" :class="{disabled: !(activityInfo.isBOver==1)}"
-                                @mouseenter="activityInfo.isBOver==1 ? qrCodeShow=true : ''" @mouseleave="qrCodeShow=false">
-                                {{activityInfo.isBOver==0?'报名未开始': activityInfo.isBOver==1?'火热报名中':'报名已结束'}}</span>
+                                <span class="item"
+                                @mouseenter="qrCodeShow=true" @mouseleave="qrCodeShow=false">
+                                {{goods_type==3?'看视频': '看直播'}}</span>
                                 <!-- <span class="item" :class="{disabled: !activityInfo.isOver==1}" v-if="activityInfo.isOver==1" 
                                     @click="offlineClick()">
                                     看直播</span>
@@ -69,17 +69,9 @@
             <div class="body g-width-100">
                 <div class="wrapper g-width float-clear">
                     <div class="detail-content float-left">
-                        <p class="title fs22">活动详情</p>
-                        <div class="info flexColumnCenter" v-html="activityInfo.introduce">
+                        <p class="title fs22">详情</p>
+                        <div class="info flexColumnCenter" v-html="zhuanlanInfo.content">
                             
-                        </div>
-                    </div>
-                    <div class="hot float-right">
-                        <p class="title fs22">热门活动</p>
-                        <div class="info">
-                            <p class="item" v-for="(item, index) in recommendActivity" :key="index" @click="toActivityDetail(item)">
-                                <img class="g-width-100" :src="'http://test.v7mall.com/attachment/'+item.thumb" alt="">
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -88,7 +80,7 @@
     </div>
 
     <g-message ref="g-message"></g-message>
-    <footer v-show="loading">
+    <footer v-show="loading" v-cloak>
         {include file="public/coll_footer" /}
     </footer>
 </div>
@@ -98,32 +90,30 @@
         el: '#app',
         data: function () {
             return {
-                activityInfo: {
-                    thumb: '{$act_id.thumb | raw}',
-                    title: "{$act_id.title | raw}",
-                    address: '{$act_id.address | raw}',
-                    joinNum: '{$act_id.gnum | raw}',
-                    introduce: '{$act_id.detail | raw}',
-                    qrCode: '{$act_id.qrCode | raw}',
-                    startTime: '{$act_id.starttime | raw}',
-                    endTime: '{$act_id.endtime | raw}',
-                    joinstime: '{$act_id.joinstime | raw}',
-                    joinetime: '{$act_id.joinetime | raw}',
-                    isOver: 0,
-                    isOver: 0
-                }, 
-                recommendActivity: '',
+                goods_id: '{$goods.goods_id}',
+                goods_type: '{$goods.goods_type}',
+                zhuanlanInfo: '',
                 qrCodeShow: false,
                 loading: false,
+                link:'https://wx058c82772f505e9c.h5.xiaoe-tech.com/v1/course/'
             }
         },
         methods: {
             getQrcode: function () {
+                console.log(this.goods_id)
+                let qrCodeLink = '';
+                if (this.goods_type == 4) qrCodeLink = this.link + 'alive/' + this.goods_id + '?type=2';
+                else qrCodeLink = this.link + 'video/' + this.goods_id + '?type=2';
                 var qrcode = new QRCode('qrcode', {
                     width : 128,
                     height : 128
                 });
-                qrcode.makeCode(this.activityInfo.qrCode);
+                qrcode.makeCode(qrCodeLink);
+            },
+            getDetail() {
+                http_get('getCourseDetail',{goods_id: this.goods_id, goods_type: this.goods_type}).then(res=>{
+                    this.zhuanlanInfo = res.data.resource_info;
+                });
             },
             toActivityDetail: function (item) {
                 var url = 'act_detail?activityId=' + item.id;
@@ -139,23 +129,8 @@
         },
         mounted: function () {
             // window.addEventListener('scroll', this.handleScroll);
-            let timeStart = DateUtil.getDate(this.activityInfo.startTime);
-            let timeEnd = DateUtil.getDate(this.activityInfo.endTime);
-            let timeStartJoin = DateUtil.getDate(this.activityInfo.joinstime);
-            let timeEndJoin = DateUtil.getDate(this.activityInfo.joinetime);
-            let newTime = new Date();
-            if( timeStart > newTime ) this.activityInfo.isOver = 0;
-            else if (newTime > timeEnd ) this.activityInfo.isOver = 1;
-            else this.activityInfo.isOver = 2;
-            if( timeStartJoin > newTime ) this.activityInfo.isBOver = 0;
-            else if (newTime > timeEndJoin ) this.activityInfo.isBOver = 1;
-            else this.activityInfo.isBOver = 2;
-            this.activityInfo.startTime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
-            this.activityInfo.endTime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
-            this.activityInfo.joinstime = DateUtil.formatDateTime(timeStartJoin,"MM月dd日 HH:mm" );
-            this.activityInfo.joinetime = DateUtil.formatDateTime(timeEndJoin,"MM月dd日 HH:mm" );
+            this.getDetail();
             this.getQrcode();
-            this.getRecommendActivity();
             this.loading=true;
         }
     });

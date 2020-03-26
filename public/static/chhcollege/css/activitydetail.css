@@ -288,6 +288,10 @@ select:-webkit-autofill {
 .activity-detail .body .info {
     padding: 17px;
 }
+.activity-detail .body .info p,
+.activity-detail .body .info img {
+    max-width: 100%;
+}
 
 .activity-detail .body .hot .info .item {
     margin-bottom: 10px;

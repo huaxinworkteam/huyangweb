@@ -25,17 +25,17 @@
                         <p class="title fs22 line-clamp2">{{activityInfo.title}}</p>
                         <p class="time fs16 mb15">
                             <i class="icon"></i>
-                            <span v-if="activityInfo.isOver == 0">未开始</span>
-                            <span v-if="activityInfo.isOver == 1">进行中</span>
-                            <span v-if="activityInfo.isOver == 2">已结束</span>
+                            <span v-if="activityInfo.isOver == 0">活动未开始</span>
+                            <span v-if="activityInfo.isOver == 1">活动进行中</span>
+                            <span v-if="activityInfo.isOver == 2">活动已结束</span>
                              ·
                             <span>{{activityInfo.startTime}} - {{activityInfo.endTime}}</span>
                         </p>
                         <p class="time fs16 mb15" style="padding: 0; border:none;">
                             <i class="icon"></i>
-                            <span v-if="activityInfo.isBOver == 0">未开始</span>
-                            <span v-if="activityInfo.isBOver == 1">进行中</span>
-                            <span v-if="activityInfo.isBOver == 2">已结束</span>
+                            <span v-if="activityInfo.isBOver == 0">报名未开始</span>
+                            <span v-if="activityInfo.isBOver == 1">报名进行中</span>
+                            <span v-if="activityInfo.isBOver == 2">报名已结束</span>
                              ·
                             <span>{{activityInfo.joinstime}} - {{activityInfo.joinetime}}</span>
                         </p>
@@ -110,7 +110,7 @@
                     joinstime: '{$act_id.joinstime | raw}',
                     joinetime: '{$act_id.joinetime | raw}',
                     isOver: 0,
-                    isOver: 0
+                    isBOver: 0
                 }, 
                 recommendActivity: '',
                 qrCodeShow: false,
