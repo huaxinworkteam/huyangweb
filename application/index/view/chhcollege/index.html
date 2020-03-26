@@ -81,7 +81,7 @@
                         <div class="scroll_in fl">
                             {volist name="teachers" id="vo"}
                             <ul>
-                                <li class="box_1 teacher" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
+                                <li class="box_1 teacher"  onclick="layerTeacher()" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
                                 data-level="{$vo.teacherlevel}" data-description="{$vo.teacherdescription}">
                                     <div class="in " >
                                         <img src="{$vo.teacherphoto}"/>
@@ -172,24 +172,23 @@
 </footer>
 <!-- 请在此处下方写此页面业务相关的脚本 -->
 <script>
-    $(document).ready(function () {
-        $(".teacher").click(function () {
-            layer.open({
-                type: 1,
-                title: $(this).data("name"),
-                skin: 'layer-bg-color', //样式类名
-                closeBtn: 1, //不显示关闭按钮
-                anim: 2,
-                shadeClose: true, //开启遮罩关闭
-                area: ['620px', '500px'], //宽高
-                content: '<div class="layer-teacher"><img src="'+
-                    $(this).data("photo")+'" />'+ '<div class="des"><h3>' + 
-                    $(this).data("name") + '</h3><h4>'+ $(this).data("level")+ 
-                    '</h4></div></div><p class="layer-teacher-desc">'+ 
-                    $(this).data("description") +'</p>'
-            });
+    function layerTeacher() {
+        data = event.currentTarget.dataset;
+        layer.open({
+            type: 1,
+            title: data.name,
+            skin: 'layer-bg-color', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            area: ['620px', '500px'], //宽高
+            content: '<div class="layer-teacher"><img src="'+
+                data.photo+'" />'+ '<div class="des"><h3>' + 
+                data.name + '</h3><h4>'+ data.level+ 
+                '</h4></div></div><p class="layer-teacher-desc">'+ 
+                data.description +'</p>'
         });
-    });
+    }
     
 </script>
 <!-- 请在此处上方写此页面业务相关的脚本 -->

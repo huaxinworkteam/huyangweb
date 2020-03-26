@@ -51,9 +51,9 @@
                 <div class="staff">
                     <ul id="teacher-list">
                         {volist name="teachers" id="vo"}
-                        <li>
-                            <div class="item teacher" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
-                            data-level="{$vo.teacherlevel}" data-description="{$vo.teacherdescription}">
+                        <li onclick="layerTeacher()" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
+                        data-level="{$vo.teacherlevel}" data-description="{$vo.teacherdescription}">
+                            <div class="item teacher" >
                                 <div class="fl">
                                     <a href="javascript:;" class="pic"><img
                                             src="{$vo.teacherphoto}"></a>
@@ -83,6 +83,26 @@
 <footer>
     {include file="public/coll_footer" /}
 </footer>
+<script>
+    function layerTeacher() {
+        data = event.currentTarget.dataset;
+        layer.open({
+            type: 1,
+            title: data.name,
+            skin: 'layer-bg-color', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            shadeClose: true, //开启遮罩关闭
+            area: ['620px', '500px'], //宽高
+            content: '<div class="layer-teacher"><img src="'+
+                data.photo+'" />'+ '<div class="des"><h3>' + 
+                data.name + '</h3><h4>'+ data.level+ 
+                '</h4></div></div><p class="layer-teacher-desc">'+ 
+                data.description +'</p>'
+        });
+    }
+    
+</script>
 <script type="text/javascript">
     function searchAll() {
         var str = $("#keys").val();
@@ -99,27 +119,6 @@
         }, function () {
             $("ul.nav_list li .sub_Nav").stop(false, true);
             $(this).find(".sub_Nav").fadeOut();
-        });
-    });
-</script>
-<!-- ajax 请求数据 html 写入页面 -->
-<script>
-    $(document).ready(function () {
-        $(".teacher").click(function () {
-            layer.open({
-                type: 1,
-                title: $(this).data("name"),
-                skin: 'layer-bg-color', //样式类名
-                closeBtn: 1, //不显示关闭按钮
-                anim: 2,
-                shadeClose: true, //开启遮罩关闭
-                area: ['620px', '500px'], //宽高
-                content: '<div class="layer-teacher"><img src="'+
-                    $(this).data("photo")+'" />'+ '<div class="des"><h3>' + 
-                    $(this).data("name") + '</h3><h4>'+ $(this).data("level")+ 
-                    '</h4></div></div><p class="layer-teacher-desc">'+ 
-                    $(this).data("description") +'</p>'
-            });
         });
     });
 </script>
