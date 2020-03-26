@@ -59,6 +59,24 @@
                     <h3>胡杨概况</h3>
                     <h4>Huyang Overview</h4>
                 </div>
+                <ul class="list">
+                    <li>
+                        <a  href="{:url('index/about')}" target=""git class="title cur">概况</a>
+                    </li>
+                    <li>
+                        <a  href="{:url('index/introduction')}" target=""git class="title cur">学院介绍</a>
+                    </li>
+                    {volist name="more" id="vo"}
+                    <li>
+                        <a  href="{:url('index/aboutMore',['id'=>$vo.id])}" target=""git class="title cur">{$vo.name}</a>
+                    </li>
+                    {/volist}
+                    <!-- {volist name="group" id="vo"}
+                    <li>
+                        <a  href="{:url('index/szll',['seriesNO'=>$vo['seriesID']])}" target=""git class="title cur">{$vo.series}</a>
+                    </li>
+                    {/volist} -->
+                </ul>
                 {include file="public/coll_leftBy" /}
             </div>
             <!--left End-->
