@@ -199,6 +199,7 @@
     border: 1px solid #B48A61;
     cursor: pointer;
     margin-bottom: 108px;
+    display: inline-block;
 }
 .list-container .show-more span.no-border {
     border: none;
@@ -208,6 +209,7 @@
     margin-bottom: 108px;
     color: #aeaeae;
     position: relative;
+    display: inline-block;
 }
 .list-container .no-more span::before,
 .list-container .no-more span::after {

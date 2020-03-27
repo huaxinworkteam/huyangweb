@@ -49,6 +49,9 @@ textarea {
 }
 i, span {
     font-style: normal;
+    /* display: inline-block; */
+}
+i {
     display: inline-block;
 }
 .left {
