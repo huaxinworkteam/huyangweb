@@ -82,7 +82,9 @@
             mounted() {
                 this.ue = UE.getEditor('content'); // 初始化富文本编辑器
                 http_post('/admin/news/newsInfo',{newsid: this.dataForm.newsid}).then(res => {
-                    this.dataForm = res.data;
+                    this.dataForm.articleKey = res.data.articleKey;
+                    this.dataForm.isShow = res.data.isShow;
+                    this.dataForm.newspicture = res.data.newspicture;
                     this.dataForm.articleTitle = res.data.newstitle;
                     this.dataForm.content = res.data.articleContent;
                     this.dataForm.articleAuthor = res.data.writer;
