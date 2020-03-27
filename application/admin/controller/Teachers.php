@@ -129,7 +129,7 @@ class Teachers extends Base
         $sq=model('Teachers')->where('teachername','like','%'.$searchinfo.'%')->select();
         $total=count($sq);
         $this->assign('total',$total);
-        $sql=model('Teachers')->alias('n')->join('series a', 'a.seriesId=n.seriesNO')->order('sort desc ,create_time desc')->where('teachername','like','%'.$searchinfo.'%')->paginate(20);
+        $sql=model('Teachers')->alias('n')->join('series a', 'a.seriesId=n.seriesNO')->order('n.sort desc ,n.create_time desc')->where('teachername','like','%'.$searchinfo.'%')->paginate(20);
         $this->assign('teachers',$sql);
         return view('teachers/index');
     }
