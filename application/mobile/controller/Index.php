@@ -307,7 +307,7 @@ class Index extends Controller
         $seriesID=input('seriesID');
         $res=Series::where('seriesID',$seriesID)->field('seriesID,series,introdution')->find();
         $this->assign('XYI',$res);
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         return view('chhcollege/about/college');
     }
