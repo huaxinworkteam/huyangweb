@@ -81,8 +81,11 @@
             },
             mounted() {
                 this.ue = UE.getEditor('content'); // 初始化富文本编辑器
-                http_post('/admin/news/newsInfo',{id: this.dataForm.newsid}).then(res => {
+                http_post('/admin/news/newsInfo',{newsid: this.dataForm.newsid}).then(res => {
                     this.dataForm = res.data;
+                    this.dataForm.articleTitle = res.data.newstitle;
+                    this.dataForm.content = res.data.articleContent;
+                    this.dataForm.articleAuthor = res.data.writer;
                     this.ue.ready( () => {
                         // editor准备好之后才可以使用
                         this.ue.setContent(this.dataForm.content);

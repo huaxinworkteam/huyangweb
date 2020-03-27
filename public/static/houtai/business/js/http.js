@@ -12,7 +12,7 @@ function http_post(url, data) {
             dataType:'json',
             success:function (res) {
                 if (res === undefined) {
-                    reslove(res);
+                    layer.msg('返回的数据是 undefined');
                     return;
                 }
                 // 格式化 json
@@ -41,8 +41,9 @@ function http_get(url, data) {
             data:data,
             dataType:'json',
             success: function (res) {
+                console.log(res)
                 if (res === undefined) {
-                    reslove(res);
+                    layer.msg('返回的数据是 undefined');
                     return;
                 }
                 // 格式化 json
