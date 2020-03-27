@@ -14,7 +14,7 @@ use think\Validate;
 class News extends Validate
 {
     protected $rule =[
-        'newstitle|新闻标题'=>'require|unique:news|max:50|min:3',
+        'newstitle|新闻标题'=>'require|max:50|min:3',
         'writer|作者'=>'require|max:20',
         'isShow|是否显示'=>'require',
     ];
