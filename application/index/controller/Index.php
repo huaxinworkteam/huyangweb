@@ -42,7 +42,7 @@ class Index extends Controller
     {   $this->headFoot();
         $gallery=Gallery::where('webno',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
-            $list = Teachers::where('isShow',1)->where('delete_time',null)->where('isTop',1)->limit(8)->order('sort desc')->select();
+            $list = Teachers::where('isShow',1)->where('delete_time',null)->where('isTop',1)->limit(8)->order('indexSort desc,sort desc')->select();
         $this->assign('teachers', $list);
         //主页下方左侧新闻
         $news=News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->limit(3)->select();

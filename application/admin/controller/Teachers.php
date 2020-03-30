@@ -32,6 +32,7 @@ class Teachers extends Base
                 'teacherdescription' => input('teacherdescription'),
                 'teacherphoto'=>input('teacherphoto'),
                 'sort'=>input('sort'),
+                'indexSort'=>input('indexSort')?:0,
                 'isTop'=>input('isTop') ? 1 : 0,
                 'create_time'=>time(),
                 'update_time'=>time()
@@ -65,7 +66,7 @@ class Teachers extends Base
         $id=input('teacherid');
         if (request()->isAjax()) {
 
-           $result=model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('seriesNO,s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,isTop,sort')->find($id);
+           $result=model('Teachers')->leftJoin('series s','seriesNO=s.seriesID')->field('seriesNO,s.series,teacherid,teachername,teacherlevel,job,teacherdescription,teacherphoto,isShow,isTop,sort,indexSort')->find($id);
             if ($result) {
                 return json_encode(['code'=>1,'data'=>$result]);
             } else {
@@ -90,6 +91,7 @@ class Teachers extends Base
      'teacherdescription' => input('teacherdescription'),
      'teacherphoto'=>input('teacherphoto'),
      'sort'=>input('sort'),
+         'indexSort'=>input('indexSort'),
       'update_time'=>time(),
     ];
      $res=model('teachers')->edit($data);
@@ -127,24 +129,13 @@ class Teachers extends Base
         $sq=model('Teachers')->where('teachername','like','%'.$searchinfo.'%')->select();
         $total=count($sq);
         $this->assign('total',$total);
-        $sql=model('Teachers')->alias('n')->join('series a', 'a.seriesId=n.seriesNO')->order('sort desc ,create_time desc')->where('teachername','like','%'.$searchinfo.'%')->paginate(20);
+        $sql=model('Teachers')->alias('n')->join('series a', 'a.seriesId=n.seriesNO')->order('n.sort desc ,n.create_time desc')->where('teachername','like','%'.$searchinfo.'%')->paginate(20);
         $this->assign('teachers',$sql);
         return view('teachers/index');
     }
     //院系列表
     public function series(){
     $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,seriesSort,IFNULL(count(t.seriesNO),0) as sums,a.icon')->group('a.seriesID')->select()->toArray();
-/*
-       $teachers=model('series')->alias('a')->leftJoin('teachers t','a.seriesID=t.seriesNO')->where(['t.delete_time'=>null])->where(['a.delete_time'=>null])->field('a.seriesID,a.series,seriesSort,count(t.seriesNO)as sums,a.icon')->group('a.seriesID')->select()->toArray();
-        $has='';
-        foreach ($teachers as $k=>$v){
-            $has=$has.$teachers[$k]['seriesID'].',';
-        }
-        $miss=model('series')->whereNotIn('seriesID',$has)->where('delete_time',null)->field('series,seriesID,seriesSort,icon')->select()->toArray();
-       foreach ($miss as $k=>$v) {
-            $miss[$k]['sums']=0;
-       }
-        $teachers=array_merge($teachers,$miss);*/
         $this->assign('series',$teachers);
         $total=count(model('series')->where('delete_time',null)->select());
         $this->assign('total',$total);
