@@ -40,5 +40,6 @@ return [
         '__CON__'=>'/static/chhconsulting',
         '__COLL__'=>'/static/chhcollege',
         '__ADMIN__'=>'/static/houtai',
+        '__MOBILE__'=>'/static/mobile',
     ],
 ];
