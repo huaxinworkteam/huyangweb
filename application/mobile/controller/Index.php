@@ -1,6 +1,6 @@
 <?php
 
-namespace app\index\controller;
+namespace app\mobile\controller;
 
 use app\common\model\Activity;
 use app\common\model\Config;
@@ -51,7 +51,7 @@ class Index extends Controller
         $index_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->limit(3)->select();
         $this->assign('index_activity',$index_activity);
 
-        return view('chhcollege/index');
+        return view('/index');
     }
     //左边活动栏
     public function left_bar(){

@@ -1,10 +1,10 @@
 var designW = 750;  //设计稿宽
 var font_rate = 100;
 // rem适配 1rem = 100px
-
+//适配
 window.onresize = function () {
-    var offsetWid = document.body.clientWidth;
-    var offsetHei = document.body.clientHeight;
+    var offsetWid = document.body.offsetWidth;
+    var offsetHei = document.body.offsetHeight;
     if (/(Android)/i.test(navigator.userAgent)){     // 判断是否为Android手机
         offsetWid = screen.width;
         offsetHei = screen.height;

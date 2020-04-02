@@ -1,0 +1,64 @@
+/* margin-left 50px == 0.5rem(width=750px) */
+.ml50{
+    margin-left: 0.5rem;
+}
+
+/* padding-left-right 20px == 0.2rem(width=750px) */
+.pl-r20 {
+    padding: 0 0.2rem;
+}
+
+/* flex-center */
+.flex-plumb-center {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    align-items: center;
+}
+/* flex-space-between */
+.flex-space-between {
+    display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
+    justify-content: space-between;
+}
+/* flex 布局 换行 */
+.flex-wrap {
+    flex-wrap: wrap;
+}
+/* vant-icon 文字垂直居中对齐
+（align-items: center; 影响 ） */
+.vant-icon {
+    position: relative;
+    top: 0.03rem;
+}
+
+/* 文本溢出不换行 */
+.text-nowrap {
+    overflow:hidden; text-overflow:ellipsis;white-space:nowrap;
+}
+/* 文本溢出换行 */
+.text-line-clamp2 {
+    overflow:hidden; text-overflow:ellipsis; display:-webkit-box;  -webkit-box-orient:vertical; -webkit-line-clamp:2; 
+}
+.text-line-clamp3 {
+    overflow:hidden; text-overflow:ellipsis; display:-webkit-box;  -webkit-box-orient:vertical; -webkit-line-clamp:3; 
+}
+/* p 标签首行缩进2字符 */
+.text-indent2 {
+    text-indent:2em;
+}
+
+/* 行高 */
+.p-line-height {
+    line-height: 0.5rem;
+}
+/* nav position: fixed 上边距 */
+.content {
+    position: relative;
+    top:1.4rem;
+}

@@ -1,0 +1,35 @@
+header {
+    height: 1.4rem;
+    border-bottom: 1px solid #F2F2F2;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 3;
+    background-color: #ffffff;
+}
+header .list {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 1.4rem;
+    left: 0;
+    transform: scaleY(0);
+    transform-origin: 0 0;
+    transition: transform 0.15s linear;
+}
+header .active{
+    transform: scaleY(1);
+}
+header .list li .item {
+    display: block;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    color: #3D3D3D;
+    font-size: 0.36rem;
+}
+header .list li .active {
+    background-color: #F9F5EE;
+    color: #C17A41;
+}
