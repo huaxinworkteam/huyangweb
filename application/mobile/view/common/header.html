@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link href="__MOBILE__/css/reset.css" rel="stylesheet">
-    <link href="__MOBILE__/css/border1px.css" rel="stylesheet">
-</head>
+<header class="flex-plumb-center flex-wrap pl-r20">
+    <h2>胡杨大学官网</h2>
+    <van-icon class="vant-icon ml50" name="bars" color="#7c7c7c" size="0.5rem"
+        @click="listActive"></van-icon>
+    <ul class="list" :class="headerActive?'active':''">
+        <li><a class="item pl-r20 active" href="#">首页</a></li>
+        <li><a class="item pl-r20" href="#">胡杨概况</a></li>
+        <li><a class="item pl-r20" href="#">师资力量</a></li>
+        <li><a class="item pl-r20" href="#">培训报名</a></li>
+        <li><a class="item pl-r20" href="#">培训课程</a></li>
+        <li><a class="item pl-r20" href="#">新闻动态</a></li>
+    </ul>
+</header>
