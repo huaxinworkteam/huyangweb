@@ -93,11 +93,11 @@
     width:100%;margin-left: 0.2rem; position: relative;
 }
 .home-signUp-content h4 {
-    font-size: 0.32rem; margin-bottom: 0.2rem;
+    font-size: 0.32rem; margin-bottom: 0.2rem; color: #333333;
 }
 .home-signUp-content p {
-    font-size: 0.28rem; max-height: 1.2rem; line-height: 0.35rem;
+    font-size: 0.28rem; max-height: 1.2rem; line-height: 0.35rem; color:#666666;
 }
 .home-signUp-content time {
-    font-size: 0.24rem; color:#666666;
+    font-size: 0.24rem; color:#bbbbbb;
 }

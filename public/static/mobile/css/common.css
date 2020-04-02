@@ -2,6 +2,9 @@
 .ml50{
     margin-left: 0.5rem;
 }
+.ml30{
+    margin-left: 0.3rem;
+}
 
 /* padding-left-right 20px == 0.2rem(width=750px) */
 .pl-r20 {
@@ -31,7 +34,7 @@
     flex-wrap: wrap;
 }
 /* vant-icon 文字垂直居中对齐
-（align-items: center; 影响 ） */
+（align-items: center; 影响 ）-- 不知为什么又不影响了 */
 .vant-icon {
     position: relative;
     top: 0.03rem;
