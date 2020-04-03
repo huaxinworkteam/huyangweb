@@ -7,6 +7,11 @@ header {
     z-index: 3;
     background-color: #ffffff;
 }
+header .logo {
+    width: 3.5rem;
+    position: absolute;
+    right: 0.2rem;
+}
 header .list {
     width: 100%;
     height: auto;
