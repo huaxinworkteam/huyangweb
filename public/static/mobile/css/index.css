@@ -3,6 +3,8 @@
     width: 100%;
     height: 3.2rem;
     object-fit: cover;
+    /* 去除img下面间隙 */
+    vertical-align: middle;
 }
 
 /* card */
@@ -176,12 +178,18 @@
 }
 
 /* activity (培训报名)*/
-.activity .tab-title {
+.activity .nav-tabs {
+    position: static;
+    background-color: #fff;
+    z-index: 1;
+    width: 100%;
+}
+.activity .nav-tabs .tab-title {
     color: #505050;
     flex: none;
     font-size: 0.28rem;
 }
-.activity .tab-item {
+.activity .nav-tabs .tab-item {
     width: 100%; overflow: auto;
 }
 .activity .van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after {

@@ -99,3 +99,14 @@
     font-size: 0.32rem !important;
     line-height: 0.48rem !important;
 }
+/* 轮播 */
+.van-swipe__indicators {
+    bottom: 0.2rem !important;
+}
+.van-swipe__indicator {
+    width: 0.12rem !important;
+    height: 0.12rem !important;
+}
+.van-swipe__indicator:not(:last-child) {
+    margin-right: 0.12rem !important;
+}
