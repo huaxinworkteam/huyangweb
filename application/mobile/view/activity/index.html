@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>培训课程</title>
+    <!-- 引用 css 引用列表 -->
+    {include file="common/meta" /}
+</head>
+<body>
+    <div id="app">
+        <!-- 引用 头部组件 -->
+        {include file="common/header" /}
+        <content class="activity nav-top">
+            <!-- 背景轮播 -->
+            <van-swipe :autoplay="1000">
+                <van-swipe-item v-for="(image, index) in images" :key="index">
+                    <img class="banner" :src="image" />
+                </van-swipe-item>
+            </van-swipe>
+            <!-- 培训报名 -->
+            <!-- <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
+            line-width="0" line-height="0" :offset-top="offsetTop">
+                <van-tab class="tabs " v-for="item in tabs" :title="item.label">
+                    
+                </van-tab>
+            </van-tabs> -->
+            <div class="flex-plumb-center pl-r20" :class="index != 1? 'bottom-dashed':''" v-for="(item, index) in 2" :key="index">
+                <span class="tab-title">专栏：</span>
+                <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
+                line-width="0" line-height="0" class="tab-item">
+                    <van-tab class="tabs" v-for="item in tabs" :title="item.label"></van-tab>
+                </van-tabs>
+            </div>
+            <div class="card pl-r20" v-for="itemList in 6">
+                <van-image class="image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
+                <h3 class="title text-line-clamp2">【报名通知】华创胡杨大学实践学院第2期线上直播开课啦！</h3>
+                <div class="ic-info">
+                    <p class="ic-p"><van-icon class="vant-icon mr30" name="location-o"></van-icon>上海市杨浦区国定东路200号</p>
+                    <p class="ic-p"><van-icon class="vant-icon mr30" name="clock-o"></van-icon>04月07日 19:30 - 04月30日 20:30</p>
+                    <p class="ic-p"><van-icon class="vant-icon mr30" name="friends-o"></van-icon><em>100</em>人已报名</p>
+                </div>
+            </div>
+        </content>
+        
+        <!-- 引用 尾部组件 -->
+        {include file="common/footer" /}
+    </div>
+</body>
+<!-- 引用 js 脚本引用列表 -->
+{include file="common/script" /}
+<!-- 在此下方编写脚本 -->
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                headerActive: false, // header 列表显示-true 隐藏-false
+                offsetTop: 0,
+                activeNames: ['1'],
+                images: [
+                    'https://img.yzcdn.cn/vant/apple-1.jpg',
+                    'https://img.yzcdn.cn/vant/apple-2.jpg'
+                ],
+                tabs: [
+                    {
+                        label: '创业CEO学院',
+                        value: 0
+                    },
+                    {
+                        label: '电商学院',
+                        value: 1
+                    },
+                    {
+                        label: '法商学院',
+                        value: 2
+                    },
+                    {
+                        label: '法商学院',
+                        value: 3
+                    },
+                    {
+                        label: '法商学院',
+                        value: 4
+                    },
+                    {
+                        label: '法商学院',
+                        value: 5
+                    }
+                ]
+            }
+        },
+        mounted: function() {
+            // 设置导航吸顶距离
+            this.offsetTop = this.$refs.header.offsetHeight;
+        },
+        methods: {
+            
+
+        }
+    });
+
+    // 调用函数组件，弹出一个 Toast
+    // vant.Toast('提示');
+</script>
+<!-- 在此上方编写脚本 -->
+</html>

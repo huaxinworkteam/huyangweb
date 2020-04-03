@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>师资力量</title>
+    <!-- 引用 css 引用列表 -->
+    {include file="common/meta" /}
+</head>
+<body>
+    <div id="app">
+        <!-- 引用 头部组件 -->
+        {include file="common/header" /}
+        <content class="szll nav-top">
+            <!-- 背景轮播 -->
+            <van-swipe :autoplay="1000">
+                <van-swipe-item v-for="(image, index) in images" :key="index">
+                    <img class="banner" :src="image" />
+                </van-swipe-item>
+            </van-swipe>
+            <!-- 学院 -->
+            <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
+            line-width="1.2rem" line-height="0.06rem" :offset-top="offsetTop">
+                <van-tab class="tabs pl-r20" v-for="item in tabs" :title="item.label">
+                    <div class="card" v-for="itemList in 6">
+                        <van-image class="teach-image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
+                        <van-collapse v-model="activeNames" :border="false">
+                            <van-collapse-item title="徐冰 | 中国众创联盟理事长，华创俱乐部会长,华创胡杨大学校长" name="1">
+                                中国众创联盟理事长，华创俱乐部会长，华创胡杨大学校长，
+                                杨浦区政协委员、上海众创空间联盟副理事长，杨浦区青年
+                                企业家协会副会长，华莘网络科技公司董事长，韬华投资基
+                                金创始人，上海市创业指导专家志愿团导师，上海市企业发
+                                展服务专家志愿团导师，上海市退役军人创业指导专家志愿
+                                团导师，中国电信创新孵化基地创业导师，上海市大学生创
+                                业训练营导师，上海市发改委/科委项目评审专家。
+                            </van-collapse-item>
+                        </van-collapse>
+                    </div>
+                </van-tab>
+            </van-tabs>
+        </content>
+        
+        <!-- 引用 尾部组件 -->
+        {include file="common/footer" /}
+    </div>
+</body>
+<!-- 引用 js 脚本引用列表 -->
+{include file="common/script" /}
+<!-- 在此下方编写脚本 -->
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                headerActive: false, // header 列表显示-true 隐藏-false
+                offsetTop: 0,
+                activeNames: ['1'],
+                images: [
+                    'https://img.yzcdn.cn/vant/apple-1.jpg',
+                    'https://img.yzcdn.cn/vant/apple-2.jpg'
+                ],
+                tabs: [
+                    {
+                        label: '创业CEO学院',
+                        value: 0
+                    },
+                    {
+                        label: '电商学院',
+                        value: 1
+                    },
+                    {
+                        label: '法商学院',
+                        value: 2
+                    },
+                    {
+                        label: '法商学院',
+                        value: 3
+                    },
+                    {
+                        label: '法商学院',
+                        value: 4
+                    },
+                    {
+                        label: '法商学院',
+                        value: 5
+                    }
+                ]
+            }
+        },
+        mounted: function() {
+            // 设置导航吸顶距离
+            this.offsetTop = this.$refs.header.offsetHeight;
+        },
+        methods: {
+            listActive: function() {
+                this.headerActive = !this.headerActive;
+            }
+        }
+    });
+
+    // 调用函数组件，弹出一个 Toast
+    // vant.Toast('提示');
+</script>
+<!-- 在此上方编写脚本 -->
+</html>

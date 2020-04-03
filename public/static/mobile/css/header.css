@@ -16,7 +16,9 @@ header .list {
     transform: scaleY(0);
     transform-origin: 0 0;
     transition: transform 0.15s linear;
+    background-color: #ffffff;
 }
+
 header .active{
     transform: scaleY(1);
 }
@@ -28,7 +30,7 @@ header .list li .item {
     border-bottom: 1px solid #eee;
     color: #3D3D3D;
     font-size: 0.36rem;
-}
+}   
 header .list li .active {
     background-color: #F9F5EE;
     color: #C17A41;

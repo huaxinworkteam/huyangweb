@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Document</title>
+    <!-- 引用 css 引用列表 -->
+    {include file="common/meta" /}
+</head>
+<body>
+    <div id="app">
+        <!-- 引用 头部组件 -->
+        {include file="common/header" /}
+        <content class="news nav-top">
+            详情
+        </content>
+        
+        <!-- 引用 尾部组件 -->
+        {include file="common/footer" /}
+    </div>
+</body>
+<!-- 引用 js 脚本引用列表 -->
+{include file="common/script" /}
+<!-- 在此下方编写脚本 -->
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                headerActive: false, // header 列表显示-true 隐藏-false
+                activeNames: ['1'],
+                images: [
+                    'https://img.yzcdn.cn/vant/apple-1.jpg',
+                    'https://img.yzcdn.cn/vant/apple-2.jpg'
+                ],
+                tabs: [
+                    {
+                        label: '创业CEO学院',
+                        value: 0
+                    },
+                    {
+                        label: '电商学院',
+                        value: 1
+                    },
+                    {
+                        label: '法商学院',
+                        value: 2
+                    },
+                    {
+                        label: '法商学院',
+                        value: 3
+                    },
+                    {
+                        label: '法商学院',
+                        value: 4
+                    },
+                    {
+                        label: '法商学院',
+                        value: 5
+                    }
+                ]
+            }
+        },
+        mounted: function() {
+
+        },
+        methods: {
+            listActive: function() {
+                this.headerActive = !this.headerActive;
+            }
+        }
+    });
+
+    // 调用函数组件，弹出一个 Toast
+    // vant.Toast('提示');
+</script>
+<!-- 在此上方编写脚本 -->
+</html>

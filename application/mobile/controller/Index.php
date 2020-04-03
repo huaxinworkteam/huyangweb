@@ -129,7 +129,7 @@ class Index extends Controller
             if($all_activity) return myJson('T',['info'=>$all_activity,'total'=>$total]);
             else return myJson('T',['info'=>'','total'=>0]);
         }
-        return view('chhcollege/activity/index');
+        return view('/activity/index');
     }
     public  function act_detail(){
 
@@ -164,7 +164,7 @@ class Index extends Controller
         $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->paginate(6);
         $this->assign('news', $news);
 
-        return view('chhcollege/news/index');
+        return view('/news/index');
     }
     //新闻独立页面查询
     public  function news_detail(){
@@ -187,7 +187,7 @@ class Index extends Controller
         $this->assign('more',$more);
         $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
-        return view('chhcollege/about/index');
+        return view('/about/index');
     }
     //关于胡杨概况页面
     public function aboutMore()
@@ -219,7 +219,7 @@ class Index extends Controller
             $typeName=model('CourseType')->where('id',$id)->field('typeName')->find()['typeName'];
             $this->assign('content',['courseName'=>'暂无课程','courseIntroduce'=>'暂无课程内容','typeName'=>$typeName]);
         }*/
-        return view('chhcollege/course/index');
+        return view('/course/index');
     }
     //异步获取子分类
     public function getSons(){
@@ -265,7 +265,7 @@ class Index extends Controller
             $list = Teachers::alias('t')->where(['t.isShow'=>'1','t.delete_time'=>null ])->leftJoin('series s' ,' t.seriesNO=s.seriesID')->field('teacherphoto,teachername,teacherdescription,series,teacherlevel,job')->order("t.sort desc,t.create_time asc")->paginate(7);
         else   $list = Teachers::alias('t')->where(['t.seriesNO'=>$t,'t.isShow'=>'1','t.delete_time'=>null ])->leftJoin('series s', 't.seriesNO=s.seriesID')->field('teacherphoto,teachername,teacherdescription,series,teacherlevel,job')->order("t.sort desc,t.create_time asc")->paginate(7);
         $this->assign('teachers', $list);
-        return view('chhcollege/szll/szll');
+        return view('/szll/index');
     }
    //sendEmail
     public function sendEmail(){

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <title>Document</title>
+    <title>胡杨大学</title>
     <!-- 引用 css 引用列表 -->
     {include file="common/meta" /}
 </head>
@@ -11,7 +11,7 @@
     <div id="app">
         <!-- 引用 头部组件 -->
         {include file="common/header" /}
-        <content class="content">
+        <content class="content nav-top">
             <!-- 背景轮播 -->
             <van-swipe :autoplay="1000">
                 <van-swipe-item v-for="(image, index) in images" :key="index">
@@ -119,6 +119,7 @@
                 </li>
             </ul>
         </content>
+        
         <!-- 引用 尾部组件 -->
         {include file="common/footer" /}
     </div>

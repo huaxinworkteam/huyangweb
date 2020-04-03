@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>胡杨概况</title>
+    <!-- 引用 css 引用列表 -->
+    {include file="common/meta" /}
+</head>
+<body>
+    <div id="app">
+        <!-- 引用 头部组件 -->
+        {include file="common/header" /}
+        <content class="about nav-top">
+            <!-- 背景轮播 -->
+            <van-swipe :autoplay="1000">
+                <van-swipe-item v-for="(image, index) in images" :key="index">
+                    <img class="banner" :src="image" />
+                </van-swipe-item>
+            </van-swipe>
+            <!-- 类目 -->
+            <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41" :offset-top="offsetTop">
+                <van-tab class="tabs pl-r20" v-for="item in tabs" :title="item.label">
+                    <van-grid v-if="item.value == 1" column-num="3" gutter="0.2rem" :border="false" clickable>
+                        <van-grid-item icon="photo-o" text="文字" v-for="item2 in 6" />
+                    </van-grid>
+                    <div v-else>
+                        {{item.value}}
+                    </div>
+                </van-tab>
+            </van-tabs>
+        </content>
+        
+        <!-- 引用 尾部组件 -->
+        {include file="common/footer" /}
+    </div>
+</body>
+<!-- 引用 js 脚本引用列表 -->
+{include file="common/script" /}
+<!-- 在此下方编写脚本 -->
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                headerActive: false, // header 列表显示-true 隐藏-false
+                offsetTop: 0,
+                images: [
+                    'https://img.yzcdn.cn/vant/apple-1.jpg',
+                    'https://img.yzcdn.cn/vant/apple-2.jpg'
+                ],
+                tabs: [
+                    {
+                        label: '胡杨概况',
+                        value: 0
+                    },
+                    {
+                        label: '学院介绍',
+                        value: 1
+                    },
+                    {
+                        label: '组织架构',
+                        value: 2
+                    }
+                ]
+            }
+        },
+        mounted: function() {
+            // 设置导航吸顶距离
+            this.offsetTop = this.$refs.header.offsetHeight;
+        },
+        methods: {
+            listActive: function() {
+                this.headerActive = !this.headerActive;
+            }
+        }
+    });
+
+    // 调用函数组件，弹出一个 Toast
+    // vant.Toast('提示');
+</script>
+<!-- 在此上方编写脚本 -->
+</html>
