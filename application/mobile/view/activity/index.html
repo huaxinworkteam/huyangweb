@@ -19,18 +19,12 @@
                 </van-swipe-item>
             </van-swipe>
             <!-- 培训报名 -->
-            <!-- <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
-            line-width="0" line-height="0" :offset-top="offsetTop">
-                <van-tab class="tabs " v-for="item in tabs" :title="item.label">
-                    
-                </van-tab>
-            </van-tabs> -->
             <div class="nav-tabs pl-r20" ref="tab" :style="{position: navPosition}">
-                <div class="flex-plumb-center" :class="index != 1? 'bottom-dashed':''" v-for="(item, index) in 2" :key="index">
-                    <span class="tab-title">专栏：</span>
+                <div class="flex-plumb-center" :class="index!='type' ? 'bottom-dashed':''" v-for="(item, index) in tabs" :key="index">
+                    <span class="tab-title">{{item.label}}:</span>
                     <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
                     line-width="0" line-height="0" class="tab-item">
-                        <van-tab class="tabs" v-for="item in tabs" :title="item.label"></van-tab>
+                        <van-tab class="tabs" v-for="item2 in item.data" :title="item2.label"></van-tab>
                     </van-tabs>
                 </div>
             </div>
@@ -68,39 +62,43 @@
                     'https://img.yzcdn.cn/vant/apple-1.jpg',
                     'https://img.yzcdn.cn/vant/apple-2.jpg'
                 ],
-                tabs: [
-                    {
-                        label: '创业CEO学院',
-                        value: 0
+                tabs: {
+                    column: {
+                        label: '专栏',
+                        value: 0,
+                        data: [
+                            {
+                                label: '胡杨大学官网同步',
+                                value: 0
+                            },
+                            {
+                                label: '胡杨大学官网同步驿站·云课堂',
+                                value: 1
+                            }
+                        ]
                     },
-                    {
-                        label: '电商学院',
-                        value: 1
-                    },
-                    {
-                        label: '法商学院',
-                        value: 2
-                    },
-                    {
-                        label: '法商学院',
-                        value: 3
-                    },
-                    {
-                        label: '法商学院',
-                        value: 4
-                    },
-                    {
-                        label: '法商学院',
-                        value: 5
+                    type: {
+                        label: '类型',
+                        value: 1,
+                        data: [
+                            {
+                                label: '直播',
+                                value: 0
+                            },
+                            {
+                                label: '视频',
+                                value: 1
+                            }
+                        ]
                     }
-                ]
+                }
             }
         },
         mounted: function() {
             // 设置导航吸顶距离 监听滚动
             window.addEventListener('scroll', this.handleScroll);
             this.offsetTop = this.$refs.tab.offsetTop; // 元素距离文档顶端偏移值
-            console.log(this.offsetTop)
+            console.log(Object.keys(this.tabs).length  )
         },
         methods: {
             handleScroll: function () {
