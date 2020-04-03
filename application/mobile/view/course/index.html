@@ -13,19 +13,23 @@
         {include file="common/header" /}
         <content class="course nav-top">
             <!-- 背景轮播 -->
-            <van-swipe :autoplay="1000">
+            <van-swipe :autoplay="10000">
                 <van-swipe-item v-for="(image, index) in images" :key="index">
                     <img class="banner" :src="image" />
                 </van-swipe-item>
             </van-swipe>
-            <!-- 课程 分类 tab -->
-            <div class="flex-plumb-center pl-r20" :class="index != 1? 'bottom-dashed':''" v-for="(item, index) in 2" :key="index">
-                <span class="tab-title">专栏：</span>
-                <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
-                line-width="0" line-height="0" class="tab-item">
-                    <van-tab class="tabs" v-for="item in tabs" :title="item.label"></van-tab>
-                </van-tabs>
+            <!-- 培训报名 -->
+            <div class="nav-tabs pl-r20" ref="tab" :style="{position: navPosition}">
+                <div class="flex-plumb-center" :class="index!='type' ? 'bottom-dashed':''" v-for="(item, index) in tabs" :key="index">
+                    <span class="tab-title">{{item.label}}:</span>
+                    <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
+                    line-width="0" line-height="0" class="tab-item">
+                        <van-tab class="tabs" v-for="item2 in item.data" :title="item2.label"></van-tab>
+                    </van-tabs>
+                </div>
             </div>
+            <!-- 这个div是用来填充的(nav-tab 切换状态脱落文档流) -->
+            <div style="height: 1.78rem;" v-show="navPosition=='fixed'"></div>
             <div class="card pl-r20" v-for="itemList in 6">
                 <van-image class="image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
                 <h3 class="title text-line-clamp2">【报名通知】华创胡杨大学实践学院第2期线上直播开课啦！</h3>
@@ -50,48 +54,65 @@
         data: function() {
             return {
                 headerActive: false, // header 列表显示-true 隐藏-false
-                headerId: 4, //胡杨概况id==4
-                offsetTop: 0,
+                headerId: 3, //胡杨概况id==3
+                offsetTop: 0, // 元素距离文档大偏移值（记录初始状态的值-状态变更值会改变）
+                navPosition: 'static',
                 activeNames: ['1'],
                 images: [
                     'https://img.yzcdn.cn/vant/apple-1.jpg',
                     'https://img.yzcdn.cn/vant/apple-2.jpg'
                 ],
-                tabs: [
-                    {
-                        label: '创业CEO学院',
-                        value: 0
+                tabs: {
+                    column: {
+                        label: '专栏',
+                        value: 0,
+                        data: [
+                            {
+                                label: '胡杨大学官网同步',
+                                value: 0
+                            },
+                            {
+                                label: '胡杨大学官网同步驿站·云课堂',
+                                value: 1
+                            }
+                        ]
                     },
-                    {
-                        label: '电商学院',
-                        value: 1
-                    },
-                    {
-                        label: '法商学院',
-                        value: 2
-                    },
-                    {
-                        label: '法商学院',
-                        value: 3
-                    },
-                    {
-                        label: '法商学院',
-                        value: 4
-                    },
-                    {
-                        label: '法商学院',
-                        value: 5
+                    type: {
+                        label: '类型',
+                        value: 1,
+                        data: [
+                            {
+                                label: '直播',
+                                value: 0
+                            },
+                            {
+                                label: '视频',
+                                value: 1
+                            }
+                        ]
                     }
-                ]
+                }
             }
         },
         mounted: function() {
-            // 设置导航吸顶距离
-            this.offsetTop = this.$refs.header.offsetHeight;
+            // 设置导航吸顶距离 监听滚动
+            window.addEventListener('scroll', this.handleScroll);
+            this.offsetTop = this.$refs.tab.offsetTop; // 元素距离文档顶端偏移值
+            console.log(Object.keys(this.tabs).length  )
         },
         methods: {
-            
-
+            handleScroll: function () {
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                var offsetHeight = this.$refs.header.offsetHeight; // 导航栏的高度
+                var distance = this.offsetTop - scrollTop + offsetHeight; // 页面元素距离浏览器工作区顶端的距离
+                console.log('distance',distance)
+                if ( distance < offsetHeight ) {
+                    this.navPosition = 'fixed';
+                } else {
+                    this.navPosition = 'static';
+                }
+                console.log(this.navPosition)
+            }
         }
     });
 

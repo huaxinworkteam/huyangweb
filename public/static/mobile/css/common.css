@@ -84,9 +84,7 @@
 }
 .van-tab {
     font-size: 0.28rem !important; line-height: 0.88rem !important;
-    padding: 0 0.2rem !important; position: static !important;
-    flex-basis: 28% !important;
-    flex: none !important;
+    padding: 0 0.2rem !important;
 }
 
 .van-cell {
