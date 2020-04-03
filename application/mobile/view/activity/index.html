@@ -13,7 +13,7 @@
         {include file="common/header" /}
         <content class="activity nav-top">
             <!-- 背景轮播 -->
-            <van-swipe :autoplay="10000">
+            <van-swipe :autoplay="3000">
                 <van-swipe-item v-for="(image, index) in images" :key="index">
                     <img class="banner" :src="image" />
                 </van-swipe-item>
@@ -98,20 +98,17 @@
             // 设置导航吸顶距离 监听滚动
             window.addEventListener('scroll', this.handleScroll);
             this.offsetTop = this.$refs.tab.offsetTop; // 元素距离文档顶端偏移值
-            console.log(Object.keys(this.tabs).length  )
         },
         methods: {
             handleScroll: function () {
                 var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
                 var offsetHeight = this.$refs.header.offsetHeight; // 导航栏的高度
                 var distance = this.offsetTop - scrollTop + offsetHeight; // 页面元素距离浏览器工作区顶端的距离
-                console.log('distance',distance)
                 if ( distance < offsetHeight ) {
                     this.navPosition = 'fixed';
                 } else {
                     this.navPosition = 'static';
                 }
-                console.log(this.navPosition)
             }
         }
     });
