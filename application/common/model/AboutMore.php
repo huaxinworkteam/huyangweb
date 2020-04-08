@@ -44,7 +44,7 @@ class AboutMore extends Model
     }
 
     public static function getAll(){
-       $res=self::where(['isDel'=>0])->field('id,name,isShow,sort')->order('isIndex desc,sort desc')->select();
+       $res=self::where(['isDel'=>0])->field('id,name,isShow,sort,isIndex')->order('isIndex desc,sort desc')->select();
        if($res)
        return $res;
        else return 0;
