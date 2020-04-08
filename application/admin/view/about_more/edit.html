@@ -19,6 +19,9 @@
             <el-form-item label="是否显示：" prop="isShow">
                 <el-switch :active-value="1" :inactive-value="0" v-model="dataForm.isShow" :active-text="dataForm.isShow? '启用':'禁用'"></el-switch>
             </el-form-item>
+            <el-form-item label="是否为首页：" prop="isIndex">
+                <el-switch :active-value="1" :inactive-value="0" v-model="dataForm.isIndex" :active-text="dataForm.isIndex? '启用':'禁用'"></el-switch>
+            </el-form-item>
             <el-form-item label="排序号：" prop="sort">
                 <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
             </el-form-item>
@@ -46,6 +49,7 @@
                         content: '',  // 栏目内容
                         isShow: 1, // 是否显示
                         sort: 0, // 排序
+                        isIndex:0
                     },
                     rules: {
                         name: [

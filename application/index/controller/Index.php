@@ -188,7 +188,7 @@ class Index extends Controller
         $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         if(request()->isAjax()){
-            $info=model('AboutMore')->where(['name'=>'胡杨概况','isShow'=>1,'isDel'=>0])->find();
+            $info=model('AboutMore')->where(['isIndex'=>1,'isShow'=>1,'isDel'=>0])->find();
             return myJson('T',$info);
         }
         return view('chhcollege/about/index');

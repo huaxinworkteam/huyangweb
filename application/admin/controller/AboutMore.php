@@ -38,7 +38,8 @@ class AboutMore extends Base
              'content'=>input('content'),
                 'isShow'=>input('isShow'),
                 'sort'=>input('sort'),
-                'updateTime'=>time()
+                'updateTime'=>time(),
+                'isIndex'=>input('isIndex')
             ];
 
             $res=AboutMoreModel::saveInfo($data);
