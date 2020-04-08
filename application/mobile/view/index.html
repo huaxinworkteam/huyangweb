@@ -50,11 +50,17 @@
             <div class="home-title">
                 <span>师资力量</span>
             </div>
-            <van-swipe :autoplay="3000">
-                <van-swipe-item v-for="(item, index) in teacher" :key="item.id">
-                    <img class="banner" :src="item.image" />
-                </van-swipe-item>
-            </van-swipe>
+            <div class="flex-space-between teach-card">
+                <div class="card-item" v-for="item in teacher" @click="item.teachMask = !item.teachMask">
+                    <van-image class="teach-image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
+                    <h3>{{item.name + ' | ' + item.obj}}</h3>
+                    <div class="mask" v-show="item.teachMask">
+                        {{item.pro}}
+                    </div>
+                </div>
+                <!-- 最后一个 -->
+                <div class="card-item"></div>
+            </div>
             <!-- 培训报名 -->
             <div class="home-title">
                 <span>培训报名</span>
@@ -141,6 +147,7 @@
                 teacher: [
                     {
                         id: 0,
+                        teachMask: false,
                         name: '徐彬',
                         image: 'https://img.yzcdn.cn/vant/apple-1.jpg',
                         obj: '中国众创联盟理事长，华创俱乐部会长,华创胡杨大学校长',
@@ -148,6 +155,7 @@
                     },
                     {
                         id: 1,
+                        teachMask: false,
                         name: '徐彬',
                         image: 'https://img.yzcdn.cn/vant/apple-1.jpg',
                         obj: '中国众创联盟理事长，华创俱乐部会长,华创胡杨大学校长',
@@ -155,6 +163,7 @@
                     },
                     {
                         id: 2,
+                        teachMask: false,
                         name: '徐彬',
                         image: 'https://img.yzcdn.cn/vant/apple-1.jpg',
                         obj: '中国众创联盟理事长，华创俱乐部会长,华创胡杨大学校长',
@@ -162,6 +171,7 @@
                     },
                     {
                         id: 3,
+                        teachMask: false,
                         name: '徐彬',
                         obj: '中国众创联盟理事长，华创俱乐部会长,华创胡杨大学校长',
                         pro: '中国众创联盟理事长，华创俱乐部会长，华创胡杨大学校长，杨浦区政协委员、上海众创空间联盟副理事长，杨浦区青年企业家协会副会长，华莘网络科技公司董事长，韬华投资基金创始人，上海市创业指导专家志愿团导师，上海市企业发展服务专家志愿团导师，上海市退役军人创业指导专家志愿团导师，中国电信创新孵化基地创业导师，上海市大学生创业训练营导师，上海市发改委/科委项目评审专家。'
@@ -170,7 +180,7 @@
             }
         },
         mounted: function() {
-
+            
         },
         methods: {
             listActive: function() {
