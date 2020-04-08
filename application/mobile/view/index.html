@@ -50,7 +50,7 @@
             <div class="home-title">
                 <span>师资力量</span>
             </div>
-            <div class="flex-space-between teach-card">
+            <div class="flex-space-between teach-card" id="teach-card">
                 <div class="card-item" v-for="item in teacher" @click="item.teachMask = !item.teachMask">
                     <van-image class="teach-image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
                     <h3>{{item.name + ' | ' + item.obj}}</h3>
@@ -180,7 +180,7 @@
             }
         },
         mounted: function() {
-            
+            cardAnimate.init('teach-card');
         },
         methods: {
             listActive: function() {
