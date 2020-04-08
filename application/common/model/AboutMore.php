@@ -44,14 +44,14 @@ class AboutMore extends Model
     }
 
     public static function getAll(){
-       $res=self::where(['isDel'=>0])->field('id,name,isShow,sort')->order('sort desc')->select();
+       $res=self::where(['isDel'=>0])->field('id,name,isShow,sort')->order('isIndex desc,sort desc')->select();
        if($res)
        return $res;
        else return 0;
     }
 
     public static function getOne($id){
-        $res=self::where('id',$id)->field('id,name,content,isShow,sort')->find();
+        $res=self::where('id',$id)->field('id,name,content,isShow,sort,isIndex')->find();
         if($res) return $res;
         return 0;
     }
