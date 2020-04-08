@@ -32,7 +32,7 @@ class Index extends Controller
     public function headFoot(){
        $xueYuan=model('series')->where('delete_time',null)->order('seriesSort desc')->select();
         $this->assign('shizi',$xueYuan);
-        $AB=model('AboutMore')->where(['isDel'=>0,'isShow'=>1])->field('id,name')->order(['sort'=>'desc'])->select();
+        $AB=model('AboutMore')->where(['isDel'=>0,'isShow'=>1,'isIndex'=>0])->field('id,name')->order(['sort'=>'desc'])->select();
         $this->assign('AB',$AB);
         $course=model('CourseType')->where(['isDel'=>0,'typeLevel'=>1])->field('id,typeName')->order('sort desc')->select();
         $this->assign('Course',$course);
@@ -197,7 +197,7 @@ class Index extends Controller
     public function aboutMore()
     {  $this->headFoot();
         $this->left_bar();
-        $more=model('AboutMore')->where(['isShow'=>1,'isDel'=>0])->order('sort desc')->field('id,name')->select();
+        $more=model('AboutMore')->where(['isShow'=>1,'isDel'=>0,'isIndex'=>0])->order('sort desc')->field('id,name')->select();
         $this->assign('more',$more);
         $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
