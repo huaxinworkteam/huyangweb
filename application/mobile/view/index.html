@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>胡杨大学</title>
+    <meta name='keywords' content="胡杨大学，商学院，商学院课程"/>
+    <meta name='description'
+          content="华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。学校致力于系统性的培养企业家及其管理团队，打造最有价值的学习与发展平台，为中国创新创业事业和实业发展贡献力量。"/>
     <!-- 引用 css 引用列表 -->
     {include file="common/meta" /}
 </head>
@@ -14,9 +17,11 @@
         <content class="content nav-top">
             <!-- 背景轮播 -->
             <van-swipe :autoplay="1000">
-                <van-swipe-item v-for="(image, index) in images" :key="index">
-                    <img class="banner" :src="image" />
+                {volist name="gallery" id="vo"}
+                <van-swipe-item>
+                    <img class="banner" src="{$vo.path}" />
                 </van-swipe-item>
+                {/volist}
             </van-swipe>
             <!-- 文字介绍 -->
             <div class="home-title">
@@ -50,7 +55,8 @@
             <div class="home-title">
                 <span>师资力量</span>
             </div>
-            <div class="flex-space-between teach-card" id="teach-card">
+            <div class="flex-space-between teach-card" >
+                {volist name="teachers" id="vo"}
                 <div class="card-item" v-for="item in teacher" @click="item.teachMask = !item.teachMask">
                     <van-image class="teach-image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
                     <h3>{{item.name + ' | ' + item.obj}}</h3>
@@ -58,7 +64,7 @@
                         {{item.pro}}
                     </div>
                 </div>
-                <!-- 最后一个 -->
+                {/volist}
                 <div class="card-item"></div>
             </div>
             <!-- 培训报名 -->
@@ -180,7 +186,6 @@
             }
         },
         mounted: function() {
-            cardAnimate.init('teach-card');
         },
         methods: {
             listActive: function() {

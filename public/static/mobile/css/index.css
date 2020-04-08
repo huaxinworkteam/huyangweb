@@ -119,12 +119,9 @@
 .home-signUp-content time {
     font-size: 0.24rem; color:#bbbbbb;
 }
-
 .teach-card {
-    overflow: auto; width: 100%;
+    overflow-x: auto;
 }
-/* 隐藏滚动条 */
-.teach-card::-webkit-scrollbar {display:none;}
 .teach-card .card-item {
     border-radius: 4px;
     background-color: #c4c4c4;
@@ -132,19 +129,20 @@
     height: 5rem;
     flex: none;
     margin: 0 0.1rem;
-    position: relative;
 }
 .teach-card .card-item:first-child {
-    margin-left: 0.2rem;
+    margin-left: 0.75rem;
 }
 .teach-card .card-item:last-child {
     background-color: #ffffff;
-    width: 0.1rem;
+    width: 0.65rem;
     margin-left: 0;
     height: 2rem;
     flex: none;
 }
-
+.van-swipe__track {
+    width: auto !important;
+}
 .teach-card .card-item .teach-image{
     width: 100%;
     height: 3.75rem;
@@ -175,6 +173,7 @@
     opacity: 0.8;
     border-radius: 4px;
 }
+
 
 /* 胡杨概况 */
 .about .tabs {
@@ -287,14 +286,48 @@
 
 
 /* course */
-.course .tab-title {
+.course .nav-tabs {
+    position: static;
+    background-color: #fff;
+    z-index: 1;
+    width: 100%;
+}
+.course .van-tab {
+    flex: none !important;
+}
+.course .nav-tabs .tab-title {
     color: #505050;
     flex: none;
     font-size: 0.28rem;
 }
-.course .tab-item {
+.course .nav-tabs .tab-item {
     width: 100%; overflow: auto;
 }
 .course .van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after {
     border-width: 0;
+}
+.course .news-image {
+    width: 2.2rem;
+    height: 1.5rem;
+    border-radius: 4px;
+}
+.course .info {
+    margin-left: 0.24rem;
+    position: relative;
+    height: 1.5rem;
+    width: 100%;
+}
+.course .info .title{
+    font-size: 0.28rem;
+    color: #515151;
+    margin-top: 0.2rem;
+}
+.course .info .liulan {
+    font-size: 0.2rem;
+    color: #A0A0A0;
+    position: absolute;
+    bottom: 0.2rem;
+}
+.course .info .liulan span {
+    color: #df3333;
 }
