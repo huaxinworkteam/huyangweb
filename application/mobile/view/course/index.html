@@ -30,15 +30,16 @@
             </div>
             <!-- 这个div是用来填充的(nav-tab 切换状态脱落文档流) -->
             <div style="height: 1.78rem;" v-show="navPosition=='fixed'"></div>
-            <div class="card pl-r20" v-for="itemList in 6">
-                <van-image class="image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
-                <h3 class="title text-line-clamp2">【报名通知】华创胡杨大学实践学院第2期线上直播开课啦！</h3>
-                <div class="ic-info">
-                    <p class="ic-p"><van-icon class="vant-icon mr30" name="location-o"></van-icon>上海市杨浦区国定东路200号</p>
-                    <p class="ic-p"><van-icon class="vant-icon mr30" name="clock-o"></van-icon>04月07日 19:30 - 04月30日 20:30</p>
-                    <p class="ic-p"><van-icon class="vant-icon mr30" name="friends-o"></van-icon><em>100</em>人已报名</p>
-                </div>
-            </div>
+            
+            <ul class="pl-r20">
+                <li class="flex-plumb-center card" v-for="item in 5">
+                    <img class="news-image" src="https://img.yzcdn.cn/vant/cat.jpeg"/>
+                    <div class="info">
+                        <p class="title text-line-clamp2">「创合汇」第二届全球商学院DBA共创论坛： 聚势谋远，赋能未来！| 论坛直击</p>
+                        <p class="liulan"><span>免费</span> | 有20人浏览</p>
+                    </div>
+                </li>
+            </ul>
         </content>
         
         <!-- 引用 尾部组件 -->
