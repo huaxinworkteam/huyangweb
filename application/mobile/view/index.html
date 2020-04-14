@@ -73,7 +73,7 @@
                     v-for="(item,index) in activity" :key="index"
                     @click="goPage('act_detail',item.id,0)">
                     <van-image class="home-signUp-image"
-                    :src="item.thumb"></van-image>
+                    :src="'http://test.v7mall.com/attachment/'+item.thumb"></van-image>
                     <div class="home-signUp-content">
                         <h4 class="text-nowrap">{{item.title}}</h4>
                         <p class="text-line-clamp3">{{item.intro}}</p>
@@ -133,7 +133,7 @@
         },
         methods: {
             goPage(url,param,index) {
-                if(index == 0) window.location.href= url+'?activityId='+param;
+                if(index == 0) window.location.href= 'https://test.v7mall.com/app/index.php?i=2&c=entry&m=fx_activity&do=activity&ac=detail&op=display&activityid='+param;
                 else window.location.href= '/mobile/index/'+url+'?newsid='+param;
             }
         }

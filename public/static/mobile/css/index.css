@@ -344,3 +344,35 @@
 .course .info .liulan span {
     color: #df3333;
 }
+
+/* 详情 */
+.detail-banner {
+    width: 100%;
+    object-fit: cover;
+    height: 4.2188rem;
+}
+.detail-title {
+    margin: 0.48rem 0.2rem;
+    color: #282828;
+    font-size: 0.36rem;
+}
+.detail-p {
+    padding-top: 0.2rem;
+    font-size: 0.32rem;
+    color: #696969;
+    margin: 0 0.2rem;
+}
+.borderTop-das {
+    border-top: 1px dashed #ACACAC;
+}
+.btn-detail {
+    border-radius: 4px;
+    background-color: #B48A61;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;    
+    margin: 0.3rem 0.2rem;
+    height: 0.75rem;
+    line-height: 0.75rem;
+    font-size: 0.32rem;
+}
