@@ -108,7 +108,7 @@
     border-radius: 4px;
 }
 .home-signUp-content {
-    width:100%;margin-left: 0.2rem; position: relative;
+    width:100%;margin-left: 0.2rem; position: relative; overflow: hidden;
 }
 .home-signUp-content h4 {
     font-size: 0.32rem; margin-bottom: 0.2rem; color: #333333;
@@ -121,14 +121,20 @@
 }
 .teach-card {
     overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+.teach-card::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
 }
 .teach-card .card-item {
     border-radius: 4px;
     background-color: #c4c4c4;
     width: 6rem;
-    height: 5rem;
+    height: 5.5rem;
     flex: none;
     margin: 0 0.1rem;
+    position: relative;
 }
 .teach-card .card-item:first-child {
     margin-left: 0.75rem;
@@ -142,6 +148,10 @@
 }
 .van-swipe__track {
     width: auto !important;
+}
+.teach-card .job {
+    position: absolute;
+    bottom: 0.05rem;
 }
 .teach-card .card-item .teach-image{
     width: 100%;
@@ -236,7 +246,10 @@
     position: absolute;
     bottom: 0.2rem;
 }
-
+.news-detail,
+.news-detail *{
+    width: 100%;
+}
 /* activity (培训报名)*/
 .activity .nav-tabs {
     position: static;

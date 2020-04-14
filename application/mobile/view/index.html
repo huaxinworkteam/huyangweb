@@ -17,11 +17,9 @@
         <content class="content nav-top">
             <!-- 背景轮播 -->
             <van-swipe :autoplay="1000">
-                {volist name="gallery" id="vo"}
-                <van-swipe-item>
-                    <img class="banner" src="{$vo.path}" />
+                <van-swipe-item v-for="(item,index) in gallery" :key="index">
+                    <img class="banner" :src="item.path" />
                 </van-swipe-item>
-                {/volist}
             </van-swipe>
             <!-- 文字介绍 -->
             <div class="home-title">
@@ -56,15 +54,14 @@
                 <span>师资力量</span>
             </div>
             <div class="flex-space-between teach-card" >
-                {volist name="teachers" id="vo"}
-                <div class="card-item" v-for="item in teacher" @click="item.teachMask = !item.teachMask">
-                    <van-image class="teach-image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
-                    <h3>{{item.name + ' | ' + item.obj}}</h3>
+                <div class="card-item" v-for="(item,index) in teacherInfo" :key="index" @click="item.teachMask = !item.teachMask">
+                    <van-image class="teach-image" :src="item.teacherphoto"></van-image>
+                    <h3 class="text-line-clamp2">{{item.teachername + ' | ' + item.teacherlevel}}</h3>
+                    <h3 class="job">{{item.job}}</h3>
                     <div class="mask" v-show="item.teachMask">
-                        {{item.pro}}
+                        {{item.teacherdescription}}
                     </div>
                 </div>
-                {/volist}
                 <div class="card-item"></div>
             </div>
             <!-- 培训报名 -->
@@ -72,28 +69,14 @@
                 <span>培训报名</span>
             </div>
             <ul>
-                <li class="flex-space-between flex-plumb-center pl-r20" style="margin-bottom: 0.2rem;">
+                <li class="flex-space-between flex-plumb-center pl-r20" style="margin-bottom: 0.2rem;"
+                    v-for="(item,index) in activity" :key="index"
+                    @click="goPage('act_detail',item.id,0)">
                     <van-image class="home-signUp-image"
-                    src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
+                    :src="item.thumb"></van-image>
                     <div class="home-signUp-content">
-                        <h4 class="text-nowrap">华创胡杨大学创意</h4>
-                        <p class="text-line-clamp3">华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。</p>
-                    </div>
-                </li>
-                <li class="flex-space-between flex-plumb-center pl-r20" style="margin-bottom: 0.2rem;">
-                    <van-image class="home-signUp-image"
-                    src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
-                    <div class="home-signUp-content">
-                        <h4 class="text-nowrap">华创胡杨大学创意</h4>
-                        <p class="text-line-clamp3">华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。</p>                        
-                    </div>
-                </li>
-                <li class="flex-space-between flex-plumb-center pl-r20" style="margin-bottom: 0.2rem;">
-                    <van-image class="home-signUp-image"
-                    src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
-                    <div class="home-signUp-content">
-                        <h4 class="text-nowrap">华创胡杨大学创意</h4>
-                        <p class="text-line-clamp3">华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。</p>
+                        <h4 class="text-nowrap">{{item.title}}</h4>
+                        <p class="text-line-clamp3">{{item.intro}}</p>
                     </div>
                 </li>
             </ul>
@@ -102,31 +85,15 @@
                 <span>新闻动态</span>
             </div>
             <ul>
-                <li class="flex-space-between flex-plumb-center pl-r20" style="margin-bottom: 0.2rem;">
+                <li class="flex-space-between flex-plumb-center pl-r20" style="margin-bottom: 0.2rem;"
+                v-for="(item,index) in news" :key="index"
+                @click="goPage('news_detail',item.newsid,1)">
                     <van-image class="home-signUp-image"
-                    src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
+                    :src="item.newspicture"></van-image>
                     <div class="home-signUp-content">
-                        <h4 class="text-line-clamp2">华创胡杨大学创意</h4>
-                        <p>作者：华创俱乐部</p>
-                        <time datetime="2020-03-27 10:50:42">2020-03-27 10:50:42</time>
-                    </div>
-                </li>
-                <li class="flex-space-between flex-plumb-center pl-r20" style="margin-bottom: 0.2rem;">
-                    <van-image class="home-signUp-image"
-                    src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
-                    <div class="home-signUp-content">
-                        <h4 class="text-line-clamp2">华创胡杨大学创意</h4>
-                        <p>作者：华创俱乐部</p>
-                        <time datetime="2020-03-27 10:50:42">2020-03-27 10:50:42</time>
-                    </div>
-                </li>
-                <li class="flex-space-between flex-plumb-center pl-r20" style="margin-bottom: 0.2rem;">
-                    <van-image class="home-signUp-image"
-                    src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
-                    <div class="home-signUp-content">
-                        <h4 class="text-line-clamp2">华创胡杨大学创意</h4>
-                        <p>作者：华创俱乐部</p>
-                        <time datetime="2020-03-27 10:50:42">2020-03-27 10:50:42</time>
+                        <h4 class="text-line-clamp2">{{item.newstitle}}</h4>
+                        <p>作者：{{item.writer}}</p>
+                        <time :datetime="item.createTime">{{item.createTime}}</time>
                     </div>
                 </li>
             </ul>
@@ -146,50 +113,28 @@
             return {
                 headerActive: false, // header 列表显示-true 隐藏-false
                 headerId: 0, //首页id==0
-                images: [
-                    'https://img.yzcdn.cn/vant/apple-1.jpg',
-                    'https://img.yzcdn.cn/vant/apple-2.jpg'
-                ],
-                teacher: [
-                    {
-                        id: 0,
-                        teachMask: false,
-                        name: '徐彬',
-                        image: 'https://img.yzcdn.cn/vant/apple-1.jpg',
-                        obj: '中国众创联盟理事长，华创俱乐部会长,华创胡杨大学校长',
-                        pro: '中国众创联盟理事长，华创俱乐部会长，华创胡杨大学校长，杨浦区政协委员、上海众创空间联盟副理事长，杨浦区青年企业家协会副会长，华莘网络科技公司董事长，韬华投资基金创始人，上海市创业指导专家志愿团导师，上海市企业发展服务专家志愿团导师，上海市退役军人创业指导专家志愿团导师，中国电信创新孵化基地创业导师，上海市大学生创业训练营导师，上海市发改委/科委项目评审专家。'
-                    },
-                    {
-                        id: 1,
-                        teachMask: false,
-                        name: '徐彬',
-                        image: 'https://img.yzcdn.cn/vant/apple-1.jpg',
-                        obj: '中国众创联盟理事长，华创俱乐部会长,华创胡杨大学校长',
-                        pro: '中国众创联盟理事长，华创俱乐部会长，华创胡杨大学校长，杨浦区政协委员、上海众创空间联盟副理事长，杨浦区青年企业家协会副会长，华莘网络科技公司董事长，韬华投资基金创始人，上海市创业指导专家志愿团导师，上海市企业发展服务专家志愿团导师，上海市退役军人创业指导专家志愿团导师，中国电信创新孵化基地创业导师，上海市大学生创业训练营导师，上海市发改委/科委项目评审专家。'
-                    },
-                    {
-                        id: 2,
-                        teachMask: false,
-                        name: '徐彬',
-                        image: 'https://img.yzcdn.cn/vant/apple-1.jpg',
-                        obj: '中国众创联盟理事长，华创俱乐部会长,华创胡杨大学校长',
-                        pro: '中国众创联盟理事长，华创俱乐部会长，华创胡杨大学校长，杨浦区政协委员、上海众创空间联盟副理事长，杨浦区青年企业家协会副会长，华莘网络科技公司董事长，韬华投资基金创始人，上海市创业指导专家志愿团导师，上海市企业发展服务专家志愿团导师，上海市退役军人创业指导专家志愿团导师，中国电信创新孵化基地创业导师，上海市大学生创业训练营导师，上海市发改委/科委项目评审专家。'
-                    },
-                    {
-                        id: 3,
-                        teachMask: false,
-                        name: '徐彬',
-                        obj: '中国众创联盟理事长，华创俱乐部会长,华创胡杨大学校长',
-                        pro: '中国众创联盟理事长，华创俱乐部会长，华创胡杨大学校长，杨浦区政协委员、上海众创空间联盟副理事长，杨浦区青年企业家协会副会长，华莘网络科技公司董事长，韬华投资基金创始人，上海市创业指导专家志愿团导师，上海市企业发展服务专家志愿团导师，上海市退役军人创业指导专家志愿团导师，中国电信创新孵化基地创业导师，上海市大学生创业训练营导师，上海市发改委/科委项目评审专家。'
-                    }
-                ]
+                gallery: [], // 首页轮播
+                teacherInfo: [], //教师
+                activity: [], //活动
+                news: [], //新闻
             }
         },
         mounted: function() {
+            http.get('index/index').then(res=>{
+                console.log(res)
+                this.gallery = res.data.data.gallery;
+                this.teacherInfo = res.data.data.teacherInfo;
+                this.activity = res.data.data.activity;
+                this.news = res.data.data.news;
+                this.teacherInfo.forEach(item => {
+                    this.$set(item,'teachMask',false)
+                });
+            });
         },
         methods: {
-            listActive: function() {
-                this.headerActive = !this.headerActive;
+            goPage(url,param,index) {
+                if(index == 0) window.location.href= url+'?activityId='+param;
+                else window.location.href= url+'?newsid='+param;
             }
         }
     });
