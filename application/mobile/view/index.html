@@ -121,7 +121,6 @@
         },
         mounted: function() {
             http.get('index/index').then(res=>{
-                console.log(res)
                 this.gallery = res.data.data.gallery;
                 this.teacherInfo = res.data.data.teacherInfo;
                 this.activity = res.data.data.activity;

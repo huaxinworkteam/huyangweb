@@ -14,8 +14,8 @@
         <content class="news nav-top">
             <!-- 背景轮播 -->
             <van-swipe :autoplay="1000">
-                <van-swipe-item v-for="(image, index) in images" :key="index">
-                    <img class="banner" :src="image" />
+                <van-swipe-item v-for="(item, index) in gallery" :key="index">
+                    <img class="banner" :src="item.path" alt="item.headline" />
                 </van-swipe-item>
             </van-swipe>
             <!-- 新闻 -->
@@ -23,11 +23,12 @@
                 <van-sidebar-item title="新闻列表" ></van-sidebar-item>
             </van-sidebar>
             <ul class="pl-r20">
-                <li class="flex-plumb-center card" v-for="item in 5">
-                    <img class="news-image" src="https://img.yzcdn.cn/vant/cat.jpeg"/>
+                <li class="flex-plumb-center card" v-for="item in newsList" 
+                @click="goPage(item.newsid)">
+                    <img class="news-image" :src="item.newspicture"/>
                     <div class="info">
-                        <p class="title text-line-clamp2">「创合汇」第二届全球商学院DBA共创论坛： 聚势谋远，赋能未来！| 论坛直击</p>
-                        <time datetime="2020-03-27 10:50:42">2020-03-27 10:50:42</time>
+                        <p class="title text-line-clamp2">{{item.newstitle}}</p>
+                        <time :datetime="item.createTime">{{item.createTime}}</time>
                     </div>
                 </li>
             </ul>
@@ -46,46 +47,27 @@
         data: function() {
             return {
                 headerActive: false, // header 列表显示-true 隐藏-false
-                headerId: 5, //胡杨概况id==5
-                activeNames: ['1'],
-                images: [
-                    'https://img.yzcdn.cn/vant/apple-1.jpg',
-                    'https://img.yzcdn.cn/vant/apple-2.jpg'
-                ],
-                tabs: [
-                    {
-                        label: '创业CEO学院',
-                        value: 0
-                    },
-                    {
-                        label: '电商学院',
-                        value: 1
-                    },
-                    {
-                        label: '法商学院',
-                        value: 2
-                    },
-                    {
-                        label: '法商学院',
-                        value: 3
-                    },
-                    {
-                        label: '法商学院',
-                        value: 4
-                    },
-                    {
-                        label: '法商学院',
-                        value: 5
-                    }
-                ]
+                headerId: 5, //新闻动态id==5
+                pages:{
+                    total: 0, // 总条数
+                    per_page: 10, // 每页条数
+                    current_page: 1, // 第几页
+                },
+                gallery: [],
+                newsList: []
             }
         },
         mounted: function() {
-
+            http.get('index/news').then(res=>{
+                console.log(res)
+                this.gallery = res.data.data.gallery;
+                this.newsList = res.data.data.news.data;
+                this.pages.total = res.data.data.news.total;
+            });
         },
         methods: {
-            listActive: function() {
-                this.headerActive = !this.headerActive;
+            goPage(param) {
+                window.location.href= '/mobile/index/news_detail?newsid='+param;
             }
         }
     });
