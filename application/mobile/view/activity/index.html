@@ -14,8 +14,8 @@
         <content class="activity nav-top">
             <!-- 背景轮播 -->
             <van-swipe :autoplay="3000">
-                <van-swipe-item v-for="(image, index) in images" :key="index">
-                    <img class="banner" :src="image" />
+                <van-swipe-item v-for="(item, index) in gallery" :key="index">
+                    <img class="banner" :src="item.path" />
                 </van-swipe-item>
             </van-swipe>
             <!-- 培训报名 -->
@@ -57,30 +57,27 @@
                 headerId: 3, //胡杨概况id==3
                 offsetTop: 0, // 元素距离文档大偏移值（记录初始状态的值-状态变更值会改变）
                 navPosition: 'static',
-                activeNames: ['1'],
-                images: [
-                    'https://img.yzcdn.cn/vant/apple-1.jpg',
-                    'https://img.yzcdn.cn/vant/apple-2.jpg'
-                ],
+                gallery: [],
+                zhuanlanData: [],
+                page: {
+                    per_page: 8,
+                    current_page: 1,
+                    total: 0
+                },
                 tabs: {
                     column: {
                         label: '专栏',
-                        value: 0,
-                        data: [
-                            {
-                                label: '胡杨大学官网同步',
-                                value: 0
-                            },
-                            {
-                                label: '胡杨大学官网同步驿站·云课堂',
-                                value: 1
-                            }
-                        ]
+                        value: '',
+                        data: []
                     },
                     type: {
                         label: '类型',
-                        value: 1,
+                        value: '',
                         data: [
+                            {
+                                label: '全部',
+                                value: ''
+                            },
                             {
                                 label: '直播',
                                 value: 0
@@ -91,13 +88,15 @@
                             }
                         ]
                     }
-                }
+                },
+                last_id: ''
             }
         },
         mounted: function() {
             // 设置导航吸顶距离 监听滚动
             window.addEventListener('scroll', this.handleScroll);
             this.offsetTop = this.$refs.tab.offsetTop; // 元素距离文档顶端偏移值
+            this.getGoodsName();
         },
         methods: {
             handleScroll: function () {
@@ -109,6 +108,30 @@
                 } else {
                     this.navPosition = 'static';
                 }
+            },
+            async getGoodsName() {
+                await http.get('index/course').then(res=>{
+                    this.gallery = res.data.data.gallery;
+                    res.data.data.zhuanlan.forEach(item => {
+                        let array = {label: '', value: ''};
+                        array.label = item.goods_name;
+                        array.value = item.goods_name;
+                        this.tabs.column.data.push(array);
+                    });
+                });
+                this.tabs.column.value = this.tabs.column.data[0].value;
+                this.getListData();
+            },
+            getListData() {
+                let params = {
+                    goods_name: this.tabs.column.value,
+                    last_id: this.last_id,
+                    page_size: this.page.per_page,
+                    resource_type: this.tabs.type.value,
+                }
+                http.post('index/getCourse',params).then(res => {
+                    console.log(res)
+                });
             }
         }
     });

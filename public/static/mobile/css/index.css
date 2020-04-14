@@ -248,7 +248,7 @@
 }
 .news-detail,
 .news-detail *{
-    width: 100%;
+    width: 100%; overflow: hidden;
 }
 /* activity (培训报名)*/
 .activity .nav-tabs {

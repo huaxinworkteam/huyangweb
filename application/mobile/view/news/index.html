@@ -48,7 +48,7 @@
             return {
                 headerActive: false, // header 列表显示-true 隐藏-false
                 headerId: 5, //新闻动态id==5
-                pages:{
+                page:{
                     total: 0, // 总条数
                     per_page: 10, // 每页条数
                     current_page: 1, // 第几页
@@ -59,7 +59,6 @@
         },
         mounted: function() {
             http.get('index/news').then(res=>{
-                console.log(res)
                 this.gallery = res.data.data.gallery;
                 this.newsList = res.data.data.news.data;
                 this.pages.total = res.data.data.news.total;
