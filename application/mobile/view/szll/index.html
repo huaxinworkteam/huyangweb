@@ -14,14 +14,14 @@
         <content class="szll nav-top">
             <!-- 背景轮播 -->
             <van-swipe :autoplay="1000">
-                <van-swipe-item v-for="(image, index) in images" :key="index">
-                    <img class="banner" :src="image" />
+                <van-swipe-item v-for="(item, index) in gallery" :key="index">
+                    <img class="banner" :src="item.path" />
                 </van-swipe-item>
             </van-swipe>
             <!-- 学院 -->
             <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
             line-width="1.2rem" line-height="0.06rem" :offset-top="offsetTop">
-                <van-tab class="tabs pl-r20" v-for="item in tabs" :title="item.label">
+                <van-tab class="tabs pl-r20" v-for="item in series" :title="item.series">
                     <div class="card" v-for="itemList in 6">
                         <van-image class="teach-image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
                         <van-collapse v-model="activeNames" :border="false">
@@ -56,46 +56,40 @@
                 headerId: 2, //胡杨概况id==2
                 offsetTop: 0,
                 activeNames: ['1'],
-                images: [
-                    'https://img.yzcdn.cn/vant/apple-1.jpg',
-                    'https://img.yzcdn.cn/vant/apple-2.jpg'
-                ],
-                tabs: [
-                    {
-                        label: '创业CEO学院',
-                        value: 0
-                    },
-                    {
-                        label: '电商学院',
-                        value: 1
-                    },
-                    {
-                        label: '法商学院',
-                        value: 2
-                    },
-                    {
-                        label: '法商学院',
-                        value: 3
-                    },
-                    {
-                        label: '法商学院',
-                        value: 4
-                    },
-                    {
-                        label: '法商学院',
-                        value: 5
-                    }
-                ]
+                gallery: [],
+                series: [],
+                page: {
+                    per_page: 10,
+                    current_page: 1,
+                    total: 0
+                },
             }
         },
         mounted: function() {
             // 设置导航吸顶距离
             this.offsetTop = this.$refs.header.offsetHeight;
+            this.getSeries();
         },
         methods: {
-            listActive: function() {
-                this.headerActive = !this.headerActive;
+            async getSeries() {
+                await http.get('index/shizi').then(res=>{
+                    if (res.data.data == null) return;
+                    this.gallery = res.data.data.gallery;
+                    this.series = res.data.data.series;
+                });
+                this.series.unshift({series: '全部', seriesID: ''});
+                this.getUserInfo()
             },
+            getUserInfo() {
+                let params = {
+                    seriesNO: this.series[0].seriesID,
+                    number: this.page.per_page,
+                    page: this.page.current_page
+                }
+                http.get('index/shiziInfo',params).then(res => {
+                    
+                });
+            }
         }
     });
 

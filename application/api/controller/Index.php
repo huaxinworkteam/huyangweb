@@ -84,4 +84,26 @@ class Index
         return myJson('T',$data);
     }
 
+    public function shizi(){
+        $group=Series::where('delete_time',null)->order('seriesSort desc')->field('series,seriesID')->select();
+        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $data=[
+            'gallery'=>$gallery,
+            'series'=> $group
+        ];
+        return myJson('T',$data);
+    }
+
+    public function shiziInfo(){
+        $t = input('seriesNO');
+        $n =input ('number')?:10;
+        $p =input('page')?:1;
+        if (!$t)
+        $list = Teachers::alias('t')->where(['t.isShow'=>'1','t.delete_time'=>null ])->leftJoin('series s' ,' t.seriesNO=s.seriesID')->field('teacherphoto,teachername,teacherdescription,series,teacherlevel,job')->order("t.sort desc,t.create_time asc")->limit(($p-1)*$n,$n)->select();
+        else   $list = Teachers::alias('t')->where(['t.seriesNO'=>$t,'t.isShow'=>'1','t.delete_time'=>null ])->leftJoin('series s', 't.seriesNO=s.seriesID')->field('teacherphoto,teachername,teacherdescription,series,teacherlevel,job')->order("t.sort desc,t.create_time asc")->limit(($p-1)*$n,$n)->select();
+        $data=[
+            'shiziInfo'=>$list
+        ];
+        return myJson('T',$data);
+    }
 }

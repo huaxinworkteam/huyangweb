@@ -76,7 +76,7 @@
 
 /* vant 自适应 */
 .van-tabs__line {
-    left: 0.1rem !important;
+    /* left: 0.1rem !important; */
 }
 .van-tabs__wrap {
     height: 0.88rem !important;
