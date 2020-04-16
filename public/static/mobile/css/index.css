@@ -250,7 +250,7 @@
     bottom: 0.2rem;
 }
 .news-detail,
-.news-detail *{
+.news-detail img{
     width: 100%; overflow: hidden;
 }
 /* activity (培训报名)*/
