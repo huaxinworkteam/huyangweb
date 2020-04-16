@@ -189,6 +189,9 @@
 .about .tabs {
     min-height: 4.5rem;
 }
+.about .van-grid-item__content--center {
+    justify-content: start;
+}
 
 /* 师资力量 */
 .szll .tabs{
@@ -320,8 +323,9 @@
     border-width: 0;
 }
 .course .news-image {
-    width: 2.2rem;
-    height: 1.5rem;
+    flex: none;
+}
+.course .news-image img{
     border-radius: 4px;
 }
 .course .info {

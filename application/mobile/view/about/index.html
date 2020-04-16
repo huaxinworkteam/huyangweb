@@ -14,18 +14,21 @@
         <content class="about nav-top">
             <!-- 背景轮播 -->
             <van-swipe :autoplay="1000">
-                <van-swipe-item v-for="(image, index) in images" :key="index">
-                    <img class="banner" :src="image" />
+                <van-swipe-item v-for="(item, index) in gallery" :key="index">
+                    <img class="banner" :src="item.path" />
                 </van-swipe-item>
             </van-swipe>
             <!-- 类目 -->
             <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41" :offset-top="offsetTop">
                 <van-tab class="tabs pl-r20" v-for="item in tabs" :title="item.label">
-                    <van-grid v-if="item.value == 1" column-num="3" gutter="0.2rem" :border="false" clickable>
-                        <van-grid-item icon="photo-o" text="文字" v-for="item2 in 6" />
+                </br>
+                    <van-grid v-if="item.label == '学院介绍'" column-num="3" gutter="0.2rem" :border="false" clickable>
+                        <van-grid-item v-for="item2 in item.data" @click="goPage(item2.seriesID)">
+                            <img :src="item2.icon" style="width: 1.7rem; height: 1.7rem;" />
+                            <span style="font-size: 0.3rem; display: block; margin-top: 0.2rem; text-align: center;">{{item2.series}}</span>
+                        </van-grid-item>
                     </van-grid>
-                    <div v-else>
-                        {{item.value}}
+                    <div v-else v-html="item.data.content">
                     </div>
                 </van-tab>
             </van-tabs>
@@ -46,33 +49,38 @@
                 headerActive: false, // header 列表显示-true 隐藏-false
                 headerId: 1, //胡杨概况id==1
                 offsetTop: 0,
-                images: [
-                    'https://img.yzcdn.cn/vant/apple-1.jpg',
-                    'https://img.yzcdn.cn/vant/apple-2.jpg'
-                ],
-                tabs: [
-                    {
+                gallery:[],
+                tabs: {
+                    gaikuang: {
                         label: '胡杨概况',
-                        value: 0
+                        data: {}
                     },
-                    {
+                    xueyuan: {
                         label: '学院介绍',
-                        value: 1
+                        data: []
                     },
-                    {
+                    zuzhi: {
                         label: '组织架构',
-                        value: 2
+                        data: {}
                     }
-                ]
+                }
             }
         },
         mounted: function() {
             // 设置导航吸顶距离
             this.offsetTop = this.$refs.header.offsetHeight;
+
+            http.get('index/aboutMore').then(res=>{
+                console.log(res)
+                this.gallery = res.data.data.gallery;
+                this.tabs.gaikuang.data = res.data.data.gaikuang;
+                this.tabs.xueyuan.data = res.data.data.xueyuan;
+                this.tabs.zuzhi.data = res.data.data.zuzhi;
+            });
         },
         methods: {
-            listActive: function() {
-                this.headerActive = !this.headerActive;
+            goPage(id) {
+                window.location.href= '/mobile/index/college?seriesID='+id;
             }
         }
     });

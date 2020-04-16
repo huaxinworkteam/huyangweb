@@ -13,18 +13,29 @@
         {include file="common/header" /}
         <content class="course nav-top">
             <!-- 背景轮播 -->
-            <van-swipe :autoplay="3000">
-                <van-swipe-item v-for="(item, index) in gallery" :key="index">
-                    <img class="banner" :src="item.path" />
-                </van-swipe-item>
-            </van-swipe>
+            <div ref="banner">
+                <van-swipe :autoplay="3000" >
+                    <van-swipe-item v-for="(item, index) in gallery" :key="index">
+                        <img class="banner" :src="item.path" />
+                    </van-swipe-item>
+                </van-swipe>
+            </div>
             <!-- 培训报名 -->
             <div class="nav-tabs pl-r20" ref="tab" :style="{position: navPosition}">
-                <div class="flex-plumb-center" :class="index!='type' ? 'bottom-dashed':''" v-for="(item, index) in tabs" :key="index">
-                    <span class="tab-title">{{item.label}}:</span>
+                <div class="flex-plumb-center bottom-dashed">
+                    <span class="tab-title">{{tabs.column.label}}:</span>
                     <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
-                    line-width="0" line-height="0" class="tab-item">
-                        <van-tab class="tabs" v-for="item2 in item.data" :title="item2.label"></van-tab>
+                    line-width="0" line-height="0" class="tab-item" @change="handlerChange">
+                        <van-tab v-for="(item2,index2) in tabs.column.data" :title="item2.label" :key="index2">
+                        </van-tab>
+                    </van-tabs>
+                </div>
+                <div class="flex-plumb-center">
+                    <span class="tab-title">{{tabs.type.label}}:</span>
+                    <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
+                    line-width="0" line-height="0" class="tab-item" @change="handlerChange2">
+                        <van-tab v-for="(item2,index2) in tabs.type.data" :title="item2.label" :key="index2">
+                        </van-tab>
                     </van-tabs>
                 </div>
             </div>
@@ -32,14 +43,22 @@
             <div style="height: 1.78rem;" v-show="navPosition=='fixed'"></div>
             
             <ul class="pl-r20">
-                <li class="flex-plumb-center card" v-for="item in 5">
-                    <img class="news-image" src="https://img.yzcdn.cn/vant/cat.jpeg"/>
+                <li class="flex-plumb-center card" v-for="(item, index) in goods_list" :key="index"
+                @click="goPage(item.resource_type, item.rescource_id)">
+                <van-image width="2.2rem" height="1.6rem" :src="item.img_url" class="news-image"></van-image>
+                    <!-- <img class="news-image" :src="item.img_url"/> -->
                     <div class="info">
-                        <p class="title text-line-clamp2">「创合汇」第二届全球商学院DBA共创论坛： 聚势谋远，赋能未来！| 论坛直击</p>
-                        <p class="liulan"><span>免费</span> | 有20人浏览</p>
+                        <p class="title text-line-clamp2">{{item.title}}</p>
+                        <p class="liulan"><span>免费</span> | 有{{item.view_count}}人浏览</p>
                     </div>
                 </li>
             </ul>
+
+            <!-- 当数据为空时 -->
+            <img src="__MOBILE__/images/no-data.png" alt="" v-if="goods_list.length == 0" style="width: 100%;">
+
+            <!-- 没有了 -->
+            <!-- <p v-show="loadMore&&goods_list.length > 0">没有了</p> -->
         </content>
         
         <!-- 引用 尾部组件 -->
@@ -50,6 +69,9 @@
 {include file="common/script" /}
 <!-- 在此下方编写脚本 -->
 <script>
+    window.onload = function() {
+        
+    }
     new Vue({
         el: '#app',
         data: function() {
@@ -59,7 +81,9 @@
                 offsetTop: 0, // 元素距离文档大偏移值（记录初始状态的值-状态变更值会改变）
                 navPosition: 'static',
                 gallery: [],
-                zhuanlanData: [],
+                goods_list: [],
+                tabsType: '',
+                link: 'https://wx058c82772f505e9c.h5.xiaoe-tech.com/v1/course/',
                 page: {
                     per_page: 8,
                     current_page: 1,
@@ -81,33 +105,47 @@
                             },
                             {
                                 label: '直播',
-                                value: 0
+                                value: 4
                             },
                             {
                                 label: '视频',
-                                value: 1
+                                value: 3
                             }
                         ]
                     }
                 },
-                last_id: ''    
+                last_id: '',
+                loadMore: false,
+                finished: 0
             }
         },
         mounted: function() {
             // 设置导航吸顶距离 监听滚动
             window.addEventListener('scroll', this.handleScroll);
-            this.offsetTop = this.$refs.tab.offsetTop; // 元素距离文档顶端偏移值
             this.getGoodsName();
         },
         methods: {
             handleScroll: function () {
                 var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                var winHeight = document.documentElement.clientHeight || document.body.clientHeight;// 浏览器视口高度
+                var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
                 var offsetHeight = this.$refs.header.offsetHeight; // 导航栏的高度
-                var distance = this.offsetTop - scrollTop + offsetHeight; // 页面元素距离浏览器工作区顶端的距离
-                if ( distance < offsetHeight ) {
+                var bannerHeight = this.$refs.banner.offsetHeight; // banner 的高度
+                var footerHeight = this.$refs.footer.offsetHeight; // 底部的高度
+                if ( scrollTop > bannerHeight ) {
                     this.navPosition = 'fixed';
                 } else {
                     this.navPosition = 'static';
+                }
+
+                // 加载 - 判断 数据有
+                if (!this.loadMore) return;
+                if (this.finished == 0) {
+                    if (scrollTop + winHeight + footerHeight >scrollHeight -50 ) {
+                        this.finished = 1;
+                        this.last_id = this.goods_list[this.goods_list.length -1].resource_id;
+                        this.getListData(true);
+                    }
                 }
             },
             async getGoodsName() {
@@ -123,7 +161,8 @@
                 this.tabs.column.value = this.tabs.column.data[0].value;
                 this.getListData();
             },
-            getListData() {
+            getListData(load) {
+                if (!load) {this.goods_list=[], this.last_id=''}
                 let params = {
                     goods_name: this.tabs.column.value,
                     last_id: this.last_id,
@@ -132,8 +171,40 @@
                 }
                 http.post('index/getCourse',params).then(res => {
                     console.log(res)
+                    if (res.data.data == null) return;
+                    if (res.data.data.goods_list.length < this.page.per_page) this.loadMore = false;
+                    else this.loadMore = true;
+                    res.data.data.goods_list.forEach(item => {
+                        this.goods_list.push(item);
+                    });
+                    console.log(this.loadMore)
                 });
-            }
+            },
+            handlerChange(index, value) {
+                this.tabs.column.value = value;
+                this.getListData();
+            },
+            handlerChange2(index, value, event) { 
+                this.tabs.type.value = this.tabs.type.data[index].value;
+                this.getListData();
+            },
+            goPage(type,id) {
+                let linkurl = '';
+                if (type == 4) linkurl = this.link + 'alive/' + id + '?type=2';
+                else if (type == 3) linkurl = this.link + 'video/' + id + '?type=2';
+                window.location.href= linkurl;
+            },
+
+            fliterTabs() {
+				for (let i = 0; i < colors.length; i++) {
+					colors[i].onclick = function() {
+						colors[index].innerHTML="";
+						index=i;
+						let html = "<span class=\"mui-icon mui-icon-star\" style=\"color:red;width:50px;height:50px;\"></span>";
+						this.innerHTML = html;
+					}
+				}
+			}
         }
     });
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>{$act_id.title}</title>
+    <!-- 引用 css 引用列表 -->
+    {include file="common/meta" /}
+</head>
+<body>
+    <div id="app">
+
+        <!-- banner -->
+        <img class="detail-banner" :src="'http://test.v7mall.com/attachment/'+activityInfo.thumb" alt="">
+        <!-- title -->
+        <h2 class="detail-title text-line-clamp2">{{activityInfo.title}}</h2>
+        <p class="detail-p borderTop-das">
+            <i class="icon"></i>
+            {{activityInfo.startTime}} - {{activityInfo.endTime}}
+        </p>
+        <p class="detail-p">
+            <i class="icon"></i>
+            {{activityInfo.address}}
+        </p>
+        <p class="detail-p">
+            <i class="icon"></i>
+            {{activityInfo.joinNum}}人已报名
+        </p>
+        <div class="btn-detail">
+            <span  :class="{disabled: !(activityInfo.isOver==0)}"
+            @click="toWechat(activityInfo.qrCode)">
+            {{activityInfo.isOver==0?'火热报名中':'报名已结束'}}</span>
+        </div>
+        <content class="activiy"  v-html="activityInfo.introduce">
+        </content>
+        
+        <!-- 引用 尾部组件 -->
+        {include file="common/footer" /}
+    </div>
+</body>
+<!-- 引用 js 脚本引用列表 -->
+{include file="common/script" /}
+<!-- 在此下方编写脚本 -->
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                activityInfo: {
+                    thumb: '{$act_id.thumb | raw}',
+                    title: "{$act_id.title | raw}",
+                    address: '{$act_id.address | raw}',
+                    joinNum: '{$act_id.gnum | raw}',
+                    introduce: '{$act_id.detail | raw}',
+                    qrCode: '{$act_id.qrCode | raw}',
+                    startTime: '{$act_id.starttime | raw}',
+                    endTime: '{$act_id.endtime | raw}',
+                    joinstime: '{$act_id.joinstime | raw}',
+                    joinetime: '{$act_id.joinetime | raw}',
+                    isOver: 0
+                }, 
+                recommendActivity: '',
+                qrCodeShow: false,
+                loading: false,
+            }
+        },
+        methods: {
+            getRecommendActivity() {
+                http.post('getRecommend').then(res=>{
+                    this.recommendActivity = res.data;
+                });
+            },
+            toWechat(url) {
+                // 动态加载js脚本文件 h5跳转小程序 还需要加载一个微信的jssdk
+                // let script = document.createElement("script");
+                // script.type = "text/javascript";
+                // script.src = 'https://res.wx.qq.com/open/js/jweixin-1.3.2.js';
+                // document.body.appendChild(script);
+                // 点击跳转小程序页面
+                window.location.href = url;
+            }
+     
+        },
+        mounted: function () {
+            // window.addEventListener('scroll', this.handleScroll);
+            this.getRecommendActivity();
+        }
+    });
+</script>
+<!-- 在此上方编写脚本 -->
+</html>
