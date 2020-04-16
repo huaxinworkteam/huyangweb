@@ -20,7 +20,7 @@
             </van-swipe>
             <!-- 类目 -->
             <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41" :offset-top="offsetTop">
-                <van-tab class="tabs pl-r20" v-for="item in tabs" :title="item.label">
+                <van-tab class="tabs" v-for="item in tabs" :title="item.label">
                 </br>
                     <van-grid v-if="item.label == '学院介绍'" column-num="3" gutter="0.2rem" :border="false" clickable>
                         <van-grid-item v-for="item2 in item.data" @click="goPage(item2.seriesID)">
@@ -28,7 +28,7 @@
                             <span style="font-size: 0.3rem; display: block; margin-top: 0.2rem; text-align: center;">{{item2.series}}</span>
                         </van-grid-item>
                     </van-grid>
-                    <div v-else v-html="item.data.content">
+                    <div class="news-detail" v-else v-html="item.data.content" style="width: 100%;">
                     </div>
                 </van-tab>
             </van-tabs>
