@@ -132,7 +132,7 @@
                 var offsetHeight = this.$refs.header.offsetHeight; // 导航栏的高度
                 var bannerHeight = this.$refs.banner.offsetHeight; // banner 的高度
                 var footerHeight = this.$refs.footer.offsetHeight; // 底部的高度
-                if ( scrollTop > bannerHeight ) {
+                if ( scrollTop >= bannerHeight ) {
                     this.navPosition = 'fixed';
                 } else {
                     this.navPosition = 'static';
@@ -149,7 +149,7 @@
                 }
             },
             async getGoodsName() {
-                await http.get('index/course').then(res=>{
+                await http.get('/api/index/course').then(res=>{
                     this.gallery = res.data.data.gallery;
                     res.data.data.zhuanlan.forEach(item => {
                         let array = {label: '', value: ''};
@@ -169,7 +169,7 @@
                     page_size: this.page.per_page,
                     resource_type: this.tabs.type.value,
                 }
-                http.post('index/getCourse',params).then(res => {
+                http.post('/api/index/getCourse',params).then(res => {
                     console.log(res)
                     this.finished = 0;
                     if (res.data.data == null) return;

@@ -1,7 +1,9 @@
 // 创建实例
 var instance = axios.create({
-    baseURL: '/api/',
-    timeout: 5000
+    // baseURL: '/api/',
+    timeout: 5000,
+    // `headers` 是即将被发送的自定义请求头
+    headers: {'X-Requested-With': 'XMLHttpRequest'},
 });
 
 
@@ -18,6 +20,7 @@ instance.interceptors.request.use(function (config) {
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
     // 对响应数据做点什么
+    if (!isJSON(response.data)) response.data = JSON.parse( response.data );
     return response;
   }, function (error) {
     // 对响应错误做点什么
@@ -45,6 +48,11 @@ var http = function request(api, method, params) {
     http[method] = (api, params, opt) => http(api, method, params, opt || {});
 });
 
+// 校验数据是否是json 数据
+function isJSON(str) {
+  var isjson = typeof(str) == "object" && Object.prototype.toString.call(str).toLowerCase() == "[object object]" && !str.length;
+  return isjson;
+}
 /**
  * 使用方法
  * http.get(url,params).then( res => {

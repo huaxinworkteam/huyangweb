@@ -13,34 +13,46 @@
         {include file="common/header" /}
         <content class="activity nav-top">
             <!-- 背景轮播 -->
-            <van-swipe :autoplay="3000">
-                <van-swipe-item v-for="(item, index) in gallery" :key="index">
-                    <img class="banner" :src="item.path" />
-                </van-swipe-item>
-            </van-swipe>
+            <div ref="banner">
+                <van-swipe :autoplay="3000" >
+                    <van-swipe-item v-for="(item, index) in gallery" :key="index">
+                        <img class="banner" :src="item.path" />
+                    </van-swipe-item>
+                </van-swipe>
+            </div>
             <!-- 培训报名 -->
-            <div class="nav-tabs pl-r20" ref="tab" :style="{position: navPosition}">
-                <div class="flex-plumb-center" :class="index!='type' ? 'bottom-dashed':''" v-for="(item, index) in tabs" :key="index">
-                    <span class="tab-title">{{item.label}}:</span>
+            <div class="nav-tabs pl-r20" ref="tab" :style="{position: navPosition}" v-cloak>
+                <div class="flex-plumb-center bottom-dashed">
+                    <span class="tab-title">{{tabs.time.label}}:</span>
                     <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
-                    line-width="0" line-height="0" class="tab-item">
-                        <van-tab class="tabs" v-for="item2 in item.data" :title="item2.label"></van-tab>
+                    line-width="0" line-height="0" class="tab-item" @change="handlerChange">
+                        <van-tab class="tabs" v-for="item2 in tabs.time.data" :title="item2.label"></van-tab>
+                    </van-tabs>
+                </div>
+                <div class="flex-plumb-center">
+                    <span class="tab-title">{{tabs.type.label}}:</span>
+                    <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
+                    line-width="0" line-height="0" class="tab-item" @change="handlerChange2">
+                        <van-tab class="tabs" v-for="item2 in tabs.type.data" :title="item2.label"></van-tab>
                     </van-tabs>
                 </div>
             </div>
             <!-- 这个div是用来填充的(nav-tab 切换状态脱落文档流) -->
             <div style="height: 1.78rem;" v-show="navPosition=='fixed'"></div>
-            <div class="card pl-r20" v-for="itemList in 6">
-                <van-image class="image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
-                <h3 class="title text-line-clamp2">【报名通知】华创胡杨大学实践学院第2期线上直播开课啦！</h3>
+            <div class="card pl-r20" v-for="itemList in actiList">
+                <van-image class="image" :src="'http://test.v7mall.com/attachment/'+itemList.thumb"></van-image>
+                <h3 class="title text-line-clamp2">{{itemList.title}}</h3>
                 <div class="ic-info">
-                    <p class="ic-p"><van-icon class="vant-icon mr30" name="location-o"></van-icon>上海市杨浦区国定东路200号</p>
-                    <p class="ic-p"><van-icon class="vant-icon mr30" name="clock-o"></van-icon>04月07日 19:30 - 04月30日 20:30</p>
-                    <p class="ic-p"><van-icon class="vant-icon mr30" name="friends-o"></van-icon><em>100</em>人已报名</p>
+                    <p class="ic-p"><van-icon class="vant-icon mr30" name="location-o"></van-icon>{{itemList.address}}</p>
+                    <p class="ic-p"><van-icon class="vant-icon mr30" name="clock-o"></van-icon>{{itemList.starttime}}-{{itemList.endtime}}</p>
+                    <!-- <p class="ic-p"><van-icon class="vant-icon mr30" name="friends-o"></van-icon><em>100</em>人已报名</p> -->
                 </div>
             </div>
+
+            
+            <!-- 当数据为空时 -->
+            <img src="__MOBILE__/images/no-data.png" alt="" v-if="actiList.length == 0" style="width: 100%;">
         </content>
-        
         <!-- 引用 尾部组件 -->
         {include file="common/footer" /}
     </div>
@@ -58,20 +70,15 @@
                 offsetTop: 0, // 元素距离文档大偏移值（记录初始状态的值-状态变更值会改变）
                 navPosition: 'static',
                 gallery: [],
-                zhuanlanData: [],
+                actiList: [],
                 page: {
                     per_page: 8,
                     current_page: 1,
                     total: 0
                 },
                 tabs: {
-                    column: {
-                        label: '专栏',
-                        value: '',
-                        data: []
-                    },
-                    type: {
-                        label: '类型',
+                    time: {
+                        label: '时间',
                         value: '',
                         data: [
                             {
@@ -79,60 +86,102 @@
                                 value: ''
                             },
                             {
-                                label: '直播',
+                                label: '本周',
+                                value: 'week'
+                            },
+                            {
+                                label: '本月',
+                                value: 'month'
+                            },
+                        ]
+                    },
+                    type: {
+                        label: '类型',
+                        value: 0,
+                        data: [
+                            {
+                                label: '全部',
                                 value: 0
                             },
                             {
-                                label: '视频',
+                                label: '未开始',
                                 value: 1
-                            }
+                            },
+                            {
+                                label: '进行中',
+                                value: 2
+                            },
+                            {
+                                label: '已结束',
+                                value: 3
+                            },
                         ]
                     }
                 },
-                last_id: ''
+                
+                loadMore: false,
+                finished: 0
             }
         },
         mounted: function() {
             // 设置导航吸顶距离 监听滚动
             window.addEventListener('scroll', this.handleScroll);
-            this.offsetTop = this.$refs.tab.offsetTop; // 元素距离文档顶端偏移值
-            this.getGoodsName();
+            this.gallery = JSON.parse('{$gallery | raw}');
+            this.getListData();
+            console.log(this.gallery)
         },
         methods: {
             handleScroll: function () {
                 var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                var winHeight = document.documentElement.clientHeight || document.body.clientHeight;// 浏览器视口高度
+                var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
                 var offsetHeight = this.$refs.header.offsetHeight; // 导航栏的高度
-                var distance = this.offsetTop - scrollTop + offsetHeight; // 页面元素距离浏览器工作区顶端的距离
-                if ( distance < offsetHeight ) {
+                var bannerHeight = this.$refs.banner.offsetHeight; // banner 的高度
+                var footerHeight = this.$refs.footer.offsetHeight; // 底部的高度
+                if ( scrollTop >= bannerHeight ) {
                     this.navPosition = 'fixed';
                 } else {
                     this.navPosition = 'static';
                 }
+
+                // 加载 - 判断 数据有
+                if (!this.loadMore) return;
+                if (this.finished == 0) {
+                    if (scrollTop + winHeight + footerHeight >scrollHeight -50 ) {
+                        this.finished = 1;
+                        this.getListData(true);
+                    }
+                }
             },
-            async getGoodsName() {
-                await http.get('index/course').then(res=>{
-                    this.gallery = res.data.data.gallery;
-                    res.data.data.zhuanlan.forEach(item => {
-                        let array = {label: '', value: ''};
-                        array.label = item.goods_name;
-                        array.value = item.goods_name;
-                        this.tabs.column.data.push(array);
+            getListData(load) {
+                if (!load) {this.actiList=[]; this.page.current_page=1;this.page.total=0;}
+                let params = {
+                    per_page: this.page.per_page,
+                    current_page: this.page.current_page,
+                    total: this.page.total,
+                    time: this.tabs.time.value,
+                    status: this.tabs.type.value,
+                }
+                http.post('activity',params).then(res => {
+                    console.log(res)
+                    this.finished = 0;
+                    if (res.data.data.info == '') return;
+                    this.page.toatal = res.data.data.total;
+                    if (this.page.toatal <= this.page.current_page) this.loadMore = false;
+                    else this.loadMore = true;
+                    res.data.data.info.forEach(item => {
+                        this.actiList.push(item);
                     });
                 });
-                this.tabs.column.value = this.tabs.column.data[0].value;
+            },
+            handlerChange(index, value) {
+                this.tabs.time.value = this.tabs.time.data[index].value;
                 this.getListData();
             },
-            getListData() {
-                let params = {
-                    goods_name: this.tabs.column.value,
-                    last_id: this.last_id,
-                    page_size: this.page.per_page,
-                    resource_type: this.tabs.type.value,
-                }
-                http.post('index/getCourse',params).then(res => {
-                    console.log(res)
-                });
-            }
+            handlerChange2(index, value, event) { 
+                this.tabs.type.value = this.tabs.type.data[index].value;
+                this.getListData();
+            },
         }
     });
 

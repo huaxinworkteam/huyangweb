@@ -67,7 +67,9 @@ class Index extends Controller
         $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         if(request()->isAjax()) {
-            $p=input('page');
+            $p=input('per_page');
+            $currp=input('current_page');
+            $total=input('total');
             $t=input('time');
             $s=input('status');
             if(!$p) return myJson('F','参数异常');
@@ -117,7 +119,7 @@ class Index extends Controller
                 ->where($p1,$p2,$p3)
                 ->where($p4,$p5,$p6)
                 ->order('displayorder desc')
-                ->limit(($p['current_page'] - 1) * $p['per_page'], $p['per_page'])
+                ->limit(($currp - 1) * $p, $p)
                 ->select();
             $total = Db::connect('db_config1')
                 ->name('fx_activity')

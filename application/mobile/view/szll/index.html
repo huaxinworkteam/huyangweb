@@ -89,7 +89,7 @@
                 }
             },
             async getSeries() {
-                await http.get('index/shizi').then(res=>{
+                await http.get('/api/index/shizi').then(res=>{
                     if (res.data.data == null) return;
                     this.gallery = res.data.data.gallery;
                     this.series = res.data.data.series;
@@ -104,7 +104,7 @@
                     number: this.page.per_page,
                     page: this.page.current_page
                 }
-                http.get('index/shiziInfo',params).then(res => {
+                http.get('/api/index/shiziInfo',params).then(res => {
                     this.finished = 0;
                     if (res.data.data == null) return;
                     if (res.data.data.shiziInfo.length < this.page.per_page) this.loadMore = false;
