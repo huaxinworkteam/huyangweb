@@ -120,7 +120,7 @@
             }
         },
         mounted: function() {
-            http.get('/api/index/index').then(res=>{
+            http.get('/api/index/index',{platform: 1}).then(res=>{
                 this.gallery = res.data.data.gallery;
                 this.teacherInfo = res.data.data.teacherInfo;
                 this.activity = res.data.data.activity;

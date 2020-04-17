@@ -58,7 +58,7 @@
             }
         },
         mounted: function() {
-            http.get('/api/index/news').then(res=>{
+            http.get('/api/index/news',{platform: 1}).then(res=>{
                 this.gallery = res.data.data.gallery;
                 this.newsList = res.data.data.news.data;
                 this.pages.total = res.data.data.news.total;

@@ -21,7 +21,7 @@
                 </van-swipe>
             </div>
             <!-- 培训报名 -->
-            <div class="nav-tabs pl-r20" ref="tab" :style="{position: navPosition}">
+            <div class="nav-tabs pl-r20" ref="tab" :style="{position: navPosition, top: navTop}">
                 <div class="flex-plumb-center bottom-dashed">
                     <span class="tab-title">{{tabs.column.label}}:</span>
                     <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
@@ -151,7 +151,7 @@
                 }
             },
             async getGoodsName() {
-                await http.get('/api/index/course').then(res=>{
+                await http.get('/api/index/course',{platform: 1}).then(res=>{
                     this.gallery = res.data.data.gallery;
                     res.data.data.zhuanlan.forEach(item => {
                         let array = {label: '', value: ''};

@@ -89,7 +89,7 @@
                 }
             },
             async getSeries() {
-                await http.get('/api/index/shizi').then(res=>{
+                await http.get('/api/index/shizi',{platform: 1}).then(res=>{
                     if (res.data.data == null) return;
                     this.gallery = res.data.data.gallery;
                     this.series = res.data.data.series;

@@ -70,7 +70,7 @@
             // 设置导航吸顶距离
             this.offsetTop = this.$refs.header.offsetHeight;
 
-            http.get('/api/index/aboutMore').then(res=>{
+            http.get('/api/index/aboutMore',{platform: 1}).then(res=>{
                 console.log(res)
                 this.gallery = res.data.data.gallery;
                 this.tabs.gaikuang.data = res.data.data.gaikuang;
