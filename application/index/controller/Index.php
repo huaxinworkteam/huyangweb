@@ -40,7 +40,7 @@ class Index extends Controller
     //主页
     public function index()
     {   $this->headFoot();
-        $gallery=Gallery::where('webno',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',0)->where('is_show',1)->where('is_del',0)->where('platform',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
             $list = Teachers::where('isShow',1)->where('delete_time',null)->where('isTop',1)->limit(8)->order('indexSort desc,sort desc')->select();
         $this->assign('teachers', $list);
@@ -64,7 +64,7 @@ class Index extends Controller
     public function activity()
     {
         $this->headFoot();
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',3)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         if(request()->isAjax()) {
             $p=input('page');
@@ -135,7 +135,7 @@ class Index extends Controller
 
         $this->headFoot();
         $this->left_bar();
-        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',4)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         //获取参数
         $param=input('activityId');
@@ -159,7 +159,7 @@ class Index extends Controller
     {   $this->headFoot();
         $this->left_bar();
 
-        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',5)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->paginate(6);
         $this->assign('news', $news);
@@ -171,7 +171,7 @@ class Index extends Controller
         $this->headFoot();
         $this->left_bar();
 
-        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',5)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         //获取参数
         $param=input('newsid');
@@ -185,7 +185,7 @@ class Index extends Controller
         $this->left_bar();
         $more=model('AboutMore')->where(['isShow'=>1,'isDel'=>0])->order('sort desc')->field('id,name')->select();
         $this->assign('more',$more);
-        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',1)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         if(request()->isAjax()){
             $info=model('AboutMore')->where(['isIndex'=>1,'isShow'=>1,'isDel'=>0])->find();
@@ -199,7 +199,7 @@ class Index extends Controller
         $this->left_bar();
         $more=model('AboutMore')->where(['isShow'=>1,'isDel'=>0,'isIndex'=>0])->order('sort desc')->field('id,name')->select();
         $this->assign('more',$more);
-        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',1)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $id=input('id');
         $content=model('AboutMore')->where('id',$id)->field('id,name,content')->find();
@@ -209,7 +209,7 @@ class Index extends Controller
     //课程页面
     public function course()
     {   $this->headFoot();
-        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',4)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
       /*  $id=input('id');
         $concrete=model('Course')->where(['isDel'=>0,'courseType'=>$id])->field('id,courseName')->order('sort desc')->select();
@@ -258,7 +258,7 @@ class Index extends Controller
       //  $group = Teachers::alias('t')->Join('series s','s.seriesID=t.seriesNO')->where('isShow',1)->group('seriesNO')->select();
         $group=Series::where('delete_time',null)->order('seriesSort desc')->field('series,seriesID')->select();
         $this->assign('group', $group);
-        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',2)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $t = input('seriesNO');
         //获取教师信息
@@ -295,7 +295,7 @@ class Index extends Controller
         $this->left_bar();
         $more=model('AboutMore')->where(['isShow'=>1,'isDel'=>0])->order('sort desc')->field('id,name')->select();
         $this->assign('more',$more);
-        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',1)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $xueyuan=Series::where(['delete_time'=>null])->field('seriesID,series,icon')->order(['seriesSort'=>'desc'])->select();
         $this->assign('xueyuan',$xueyuan);
@@ -309,7 +309,7 @@ class Index extends Controller
         $seriesID=input('seriesID');
         $res=Series::where('seriesID',$seriesID)->field('seriesID,series,introdution')->find();
         $this->assign('XYI',$res);
-        $gallery=Gallery::where('webno',3)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',3)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         return view('chhcollege/about/college');
     }
@@ -325,7 +325,7 @@ class Index extends Controller
 
     public  function  getCourseDetail(){
         $this->headFoot();
-        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',2)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
         $goods_id = input('goods_id');
         $goods_type = input('goods_type');

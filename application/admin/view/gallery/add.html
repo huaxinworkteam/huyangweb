@@ -26,6 +26,9 @@
                 </el-upload>
                 
             </el-form-item>
+            <el-form-item label="平台：" prop="platform">
+                <el-switch v-model="dataForm.platform" :active-text="dataForm.platform? 'WAP':'PC'"></el-switch>
+            </el-form-item>
             <el-form-item label="排序：" prop="sort">
                 <el-input-number v-model="dataForm.sort" controls-position="right" :min="0" :max="100"></el-input-number>
             </el-form-item>
@@ -57,7 +60,8 @@
                         src: '',
                         path: null,
                         sort: '',
-                        is_show: true
+                        is_show: true,
+                        platform:0
                     },
                     rules: {
                         path: [
