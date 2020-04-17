@@ -28,7 +28,7 @@
                             <span style="font-size: 0.3rem; display: block; margin-top: 0.2rem; text-align: center;">{{item2.series}}</span>
                         </van-grid-item>
                     </van-grid>
-                    <div class="news-detail" v-else v-html="item.data.content" style="width: 100%;">
+                    <div class="news-detail" :class="item.label== '组织架构'?'pl-r20':''" v-else v-html="item.data.content" style="width: 100%;">
                     </div>
                 </van-tab>
             </van-tabs>
