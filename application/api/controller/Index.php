@@ -20,7 +20,7 @@ class Index
         $teacherInfo = Teachers::where('isShow',1)->where('delete_time',null)->where('isTop',1)->limit(8)->order('sort desc')->select();
         $activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->limit(3)->select();
         $news=News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->limit(3)->select();
-        $gallery=Gallery::where('webno',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',0)->where('platform',input('platform'))->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $data=[
             'gallery'=>$gallery,
             'teacherInfo'=>$teacherInfo,
@@ -31,7 +31,7 @@ class Index
     }
 
     public function aboutMore(){
-        $gallery=Gallery::where('webno',1)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',1)->where('platform',input('platform'))->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $gaikuang=AboutMore::where(['isIndex'=>1,'isShow'=>1,'isDel'=>0])->find();
         $xueyuan=Series::where(['delete_time'=>null])->field('seriesID,series,icon')->order(['seriesSort'=>'desc'])->select();
         $zuzhi=AboutMore::where('name','组织架构')->field('id,name,content')->find();
@@ -45,7 +45,7 @@ class Index
     }
 
     public function course(){
-        $gallery=Gallery::where('webno',4)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',4)->where('platform',input('platform'))->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $zhuanlan=Xetzhuanlan::where('is_del',0)->order('sort desc')->field('id,goods_name')->select();
         $data=[
             'gallery'=>$gallery,
@@ -64,7 +64,7 @@ class Index
     }
 
     public function news(){
-        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',5)->where('platform',input('platform'))->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->paginate(6);
         $data=[
             'gallery'=>$gallery,
@@ -74,7 +74,7 @@ class Index
     }
 
     public function  newsDetail(){
-        $gallery=Gallery::where('webno',5)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',5)->where('platform',input('platform'))->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $param=input('newsid');
         $newsDetail = News::where('newsid',$param)->find();
         $data=[
@@ -86,7 +86,7 @@ class Index
 
     public function shizi(){
         $group=Series::where('delete_time',null)->order('seriesSort desc')->field('series,seriesID')->select();
-        $gallery=Gallery::where('webno',2)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
+        $gallery=Gallery::where('webno',2)->where('platform',input('platform'))->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $data=[
             'gallery'=>$gallery,
             'series'=> $group

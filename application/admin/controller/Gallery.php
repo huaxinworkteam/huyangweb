@@ -37,7 +37,8 @@ class Gallery extends Base
                 'path' => input('path'),
                 'is_show' => input('is_show') ? 1 : 0,
                 'create_time'=>time(),
-                'sort'=>input('sort')?input('sort'): 0
+                'sort'=>input('sort')?input('sort'): 0,
+                'platform'=>input('platform')
             ];
             $result = model('Gallery')->add($data);
             if ($result == 1) {
