@@ -126,7 +126,7 @@
         },
         mounted: function() {
             // 设置导航吸顶距离 监听滚动
-            this.navTop = this.$refs.header.offsetHeight + 'px'; // 导航栏的高度
+            this.navTop = this.$refs.header.offsetHeight -1 + 'px'; // 导航栏的高度
             window.addEventListener('scroll', this.handleScroll);
             this.gallery = JSON.parse('{$gallery | raw}');
             this.getListData();
