@@ -52,9 +52,11 @@
                         galleryId:{$galleryId},
                         headline: '',
                         webno:'',
+                        platform: 0,
                         src: '',
                         path: null,
                         sort: '',
+
                         is_show: true
                     },
                     rules: {
@@ -74,6 +76,7 @@
                     this.dataForm.path = res['0'].path;
                     this.dataForm.sort = res['0'].sort;
                     this.dataForm.is_show = res['0'].is_show==1?true:false;
+                    this.dataForm.platform = res['0'].platform;
                 });
             },
             methods: {
