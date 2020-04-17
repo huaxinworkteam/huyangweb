@@ -114,7 +114,7 @@ body {
     width:100%;margin-left: 0.2rem; position: relative; overflow: hidden;
 }
 .home-signUp-content h4 {
-    font-size: 0.28rem; margin-bottom: 0.2rem; color: #333333;     line-height: 0.32rem;
+    font-size: 0.3rem; margin-bottom: 0.2rem; color: #333333;     line-height: 0.36rem;
 }
 .home-signUp-content p {
     font-size: 0.28rem; max-height: 1.2rem; line-height: 0.35rem; color:#666666;
@@ -242,9 +242,9 @@ body {
     width: 100%;
 }
 .news .info .title{
-    font-size: 0.28rem;
+    font-size: 0.3rem;
     color: #515151;
-    margin-top: 0.2rem; line-height: 0.32rem;
+    margin-top: 0.2rem; line-height: 0.36rem;
 }
 .news .info time {
     font-size: 0.2rem;
