@@ -50,7 +50,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 
 /* 文本溢出不换行 */
 .text-nowrap {
-    overflow:hidden; text-overflow:ellipsis;white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis;white-space:nowrap; 
 }
 /* 文本溢出换行 */
 .text-line-clamp2 {
