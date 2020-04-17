@@ -105,6 +105,7 @@
                     page: this.page.current_page
                 }
                 http.get('index/shiziInfo',params).then(res => {
+                    this.finished = 0;
                     if (res.data.data == null) return;
                     if (res.data.data.shiziInfo.length < this.page.per_page) this.loadMore = false;
                     else this.loadMore = true;
