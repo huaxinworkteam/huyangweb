@@ -20,19 +20,13 @@
             </van-swipe>
             <!-- 学院 -->
             <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
-            line-width="1.2rem" line-height="0.06rem" :offset-top="offsetTop">
+            line-width="1.2rem" line-height="0.06rem" :offset-top="offsetTop"@change="handlerChange">
                 <van-tab class="tabs pl-r20" v-for="item in series" :title="item.series">
-                    <div class="card" v-for="itemList in 6">
-                        <van-image class="teach-image" src="https://img.yzcdn.cn/vant/cat.jpeg"></van-image>
-                        <van-collapse v-model="activeNames" :border="false">
-                            <van-collapse-item title="徐冰 | 中国众创联盟理事长，华创俱乐部会长,华创胡杨大学校长" name="1">
-                                中国众创联盟理事长，华创俱乐部会长，华创胡杨大学校长，
-                                杨浦区政协委员、上海众创空间联盟副理事长，杨浦区青年
-                                企业家协会副会长，华莘网络科技公司董事长，韬华投资基
-                                金创始人，上海市创业指导专家志愿团导师，上海市企业发
-                                展服务专家志愿团导师，上海市退役军人创业指导专家志愿
-                                团导师，中国电信创新孵化基地创业导师，上海市大学生创
-                                业训练营导师，上海市发改委/科委项目评审专家。
+                    <div class="card" v-for="itemList in teacherInfo">
+                        <van-image class="teach-image" :src="itemList.teacherphoto"></van-image>
+                        <van-collapse v-model="itemList.active" :border="false">
+                            <van-collapse-item :title="itemList.teachername +' | ' + itemList.teacherlevel" name="1">
+                                {{itemList.teacherdescription}}
                             </van-collapse-item>
                         </van-collapse>
                     </div>
@@ -58,19 +52,42 @@
                 activeNames: ['1'],
                 gallery: [],
                 series: [],
+                seriesID: '',
                 page: {
                     per_page: 10,
                     current_page: 1,
                     total: 0
                 },
+                teacherInfo:[],
+                loadMore: false,
+                finished: 0
             }
         },
         mounted: function() {
+            
+            // 设置导航吸顶距离 监听滚动
+            window.addEventListener('scroll', this.handleScroll);
             // 设置导航吸顶距离
             this.offsetTop = this.$refs.header.offsetHeight;
             this.getSeries();
         },
         methods: {
+            handleScroll: function () {
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                var winHeight = document.documentElement.clientHeight || document.body.clientHeight;// 浏览器视口高度
+                var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+                var footerHeight = this.$refs.footer.offsetHeight; // 底部的高度
+
+                // 加载 - 判断 数据有
+                if (!this.loadMore) return;
+                if (this.finished == 0) {
+                    if (scrollTop + winHeight + footerHeight >scrollHeight -50 ) {
+                        this.finished = 1;
+                        this.page.current_page ++;
+                        this.getUserInfo(true);
+                    }
+                }
+            },
             async getSeries() {
                 await http.get('index/shizi').then(res=>{
                     if (res.data.data == null) return;
@@ -80,15 +97,26 @@
                 this.series.unshift({series: '全部', seriesID: ''});
                 this.getUserInfo()
             },
-            getUserInfo() {
+            getUserInfo(load) {
+                if (!load) {this.teacherInfo=[]; this.page.current_page=1}
                 let params = {
-                    seriesNO: this.series[0].seriesID,
+                    seriesNO: this.seriesID,
                     number: this.page.per_page,
                     page: this.page.current_page
                 }
                 http.get('index/shiziInfo',params).then(res => {
-                    
+                    if (res.data.data == null) return;
+                    if (res.data.data.shiziInfo.length < this.page.per_page) this.loadMore = false;
+                    else this.loadMore = true;
+                    res.data.data.shiziInfo.forEach(item => {
+                        this.teacherInfo.push(item);
+                        this.$set(item,'active',['0']);
+                    });
                 });
+            },
+            handlerChange(index, value) {
+                this.seriesID = this.series[index].seriesID;
+                this.getUserInfo();
             }
         }
     });
