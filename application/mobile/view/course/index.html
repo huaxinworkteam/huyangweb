@@ -21,7 +21,7 @@
                 </van-swipe>
             </div>
             <!-- 培训报名 -->
-            <div class="nav-tabs pl-r20" ref="tab" :style="{position: navPosition}">
+            <div class="nav-tabs pl-r20" ref="tab" :style="{position: navPosition, top: navTop}">
                 <div class="flex-plumb-center bottom-dashed">
                     <span class="tab-title">{{tabs.column.label}}:</span>
                     <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
@@ -80,6 +80,7 @@
                 headerId: 4, //培训课程id==4
                 offsetTop: 0, // 元素距离文档大偏移值（记录初始状态的值-状态变更值会改变）
                 navPosition: 'static',
+                navTop: '1.4rem', // header 高度
                 gallery: [],
                 goods_list: [],
                 tabsType: '',
@@ -122,6 +123,7 @@
         mounted: function() {
             // 设置导航吸顶距离 监听滚动
             window.addEventListener('scroll', this.handleScroll);
+            this.navTop = this.$refs.header.offsetHeight + 'px'; // 导航栏的高度
             this.getGoodsName();
         },
         methods: {
