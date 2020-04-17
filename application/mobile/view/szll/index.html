@@ -68,7 +68,7 @@
             // 设置导航吸顶距离 监听滚动
             window.addEventListener('scroll', this.handleScroll);
             // 设置导航吸顶距离
-            this.offsetTop = this.$refs.header.offsetHeight;
+            this.offsetTop = this.$refs.header.offsetHeight-1;
             this.getSeries();
         },
         methods: {

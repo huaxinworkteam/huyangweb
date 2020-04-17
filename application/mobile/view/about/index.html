@@ -68,7 +68,7 @@
         },
         mounted: function() {
             // 设置导航吸顶距离
-            this.offsetTop = this.$refs.header.offsetHeight;
+            this.offsetTop = this.$refs.header.offsetHeight-1;
 
             http.get('/api/index/aboutMore',{platform: 1}).then(res=>{
                 console.log(res)

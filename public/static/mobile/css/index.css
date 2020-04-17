@@ -1,3 +1,6 @@
+body {
+    letter-spacing:2px;
+}
 /* 除去首页外 背景 */
 .banner {
     width: 100%;
