@@ -44,7 +44,7 @@
             
             <ul class="pl-r20">
                 <li class="flex-plumb-center card" v-for="(item, index) in goods_list" :key="index"
-                @click="goPage(item.resource_type, item.rescource_id)">
+                @click="goPage(item.resource_type, item.resource_id)">
                 <van-image width="2.2rem" height="1.6rem" :src="item.img_url" class="news-image"></van-image>
                     <!-- <img class="news-image" :src="item.img_url"/> -->
                     <div class="info">
@@ -194,8 +194,7 @@
                 let linkurl = '';
                 if (type == 4) linkurl = this.link + 'alive/' + id + '?type=2';
                 else if (type == 3) linkurl = this.link + 'video/' + id + '?type=2';
-                // window.location.href= linkurl;
-                console.log(linkurl)
+                window.location.href= linkurl;
             },
 
             fliterTabs() {
