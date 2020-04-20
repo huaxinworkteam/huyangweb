@@ -22,8 +22,8 @@
             <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
             line-width="1.2rem" line-height="0.06rem" :offset-top="offsetTop"@change="handlerChange">
                 <van-tab class="tabs pl-r20" v-for="item in series" :title="item.series">
-                    <div class="card" v-for="itemList in teacherInfo">
-                        <van-image class="teach-image" :src="itemList.teacherphoto"></van-image>
+                    <div class="card" v-for="(itemList,index) in teacherInfo">
+                        <van-image @click="Array.prototype.isPrototypeOf(itemList.active)&&itemList.active.length === 0?itemList.active=['1']:itemList.active=[]"  class="teach-image" :src="itemList.teacherphoto"></van-image>
                         <van-collapse v-model="itemList.active" :border="false">
                             <van-collapse-item :title="itemList.teachername +' | ' + itemList.teacherlevel" name="1">
                                 {{itemList.teacherdescription}}
@@ -49,7 +49,7 @@
                 headerActive: false, // header 列表显示-true 隐藏-false
                 headerId: 2, //胡杨概况id==2
                 offsetTop: 0,
-                activeNames: ['1'],
+                activeNames: [],
                 gallery: [],
                 series: [],
                 seriesID: '',
@@ -111,7 +111,7 @@
                     else this.loadMore = true;
                     res.data.data.shiziInfo.forEach(item => {
                         this.teacherInfo.push(item);
-                        this.$set(item,'active',['0']);
+                        this.$set(item,'active',[]);
                     });
                 });
             },
