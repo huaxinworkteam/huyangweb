@@ -66,7 +66,7 @@ class Index extends Controller
         $this->headFoot();
         $gallery=Gallery::where('webno',3)->where('platform',0)->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $this->assign('gallery',$gallery);
-        if(request()->isAjax()) {
+      if(request()->isAjax()) {
             $p=input('page');
             $t=input('time');
             $s=input('status');
@@ -93,18 +93,23 @@ class Index extends Controller
                     $p2='> time';
                     $p3=$time;
                     break;
+                case 2:
+                    $p1='joinstime';
+                    $p2='< time';
+                    $p3=$time;
+                    $p4='joinetime';
+                    $p5='> time';
+                    $p6=$time;
+                    break;
                 case 3:
-                    $p1='endtime';
+                    $p1='joinetime';
                     $p2='< time';
                     $p3=$time;
                     break;
-                case 2:
-                    $p1='starttime';
+                case 4:
+                    $p1='endtime';
                     $p2='< time';
                     $p3=$time;
-                    $p4='endtime';
-                    $p5='> time';
-                    $p6=$time;
                     break;
                 default:
                     break;
@@ -119,6 +124,7 @@ class Index extends Controller
                 ->order('displayorder desc')
                 ->limit(($p['current_page'] - 1) * $p['per_page'], $p['per_page'])
                 ->select();
+            //halt($all_activity);
             $total = Db::connect('db_config1')
                 ->name('fx_activity')
                 ->where(['show' => 1, 'merchantid' => 19])
