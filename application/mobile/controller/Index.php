@@ -69,7 +69,7 @@ class Index extends Controller
         if(request()->isAjax()) {
             $p=input('per_page');
             $currp=input('current_page');
-            $total=input('total');
+          //  $total=input('total');
             $t=input('time');
             $s=input('status');
             if(!$p) return myJson('F','参数异常');
@@ -91,29 +91,37 @@ class Index extends Controller
             $time=time();
             switch ($s){
                 case 1:
-                    $p1='starttime';
+                    $p1='joinstime';
                     $p2='> time';
                     $p3=$time;
                     break;
-                case 3:
-                    $p1='endtime';
+                case 2:
+                    $p1='joinstime';
                     $p2='< time';
                     $p3=$time;
+                    $p4='joinetime';
+                    $p5='> time';
+                    $p6=$time;
                     break;
-                case 2:
-                    $p1='starttime';
+                case 3:
+                    $p1='joinetime';
                     $p2='< time';
                     $p3=$time;
                     $p4='endtime';
                     $p5='> time';
                     $p6=$time;
                     break;
+                case 4:
+                    $p1='endtime';
+                    $p2='< time';
+                    $p3=$time;
+                    break;
                 default:
                     break;
             }
             $all_activity = Db::connect('db_config1')
                 ->name('fx_activity')
-                ->field('id,title,thumb,intro,starttime,endtime,address')
+                ->field('id,title,thumb,intro,starttime,endtime,joinstime,joinetime,address')
                 ->where(['show' => 1, 'merchantid' => 19])
                 ->whereTime('starttime',$t)
                 ->where($p1,$p2,$p3)
@@ -145,6 +153,7 @@ class Index extends Controller
         $act_id['qrCode']='https://test.v7mall.com/app/index.php?i=2&c=entry&m=fx_activity&do=activity&ac=detail&op=display&activityid='.$param;
         //  halt($act_id);
         $this->assign('act_id', $act_id);
+        Db::connect('db_config1')->name('fx_activity')->update(['trueread'=>Db::raw('trueread+1')]);
         return view('/activity/detail');
     }
 
