@@ -71,9 +71,10 @@
                                 
                                 <span :class="item.isOver===0?'not-start':item.isOver===1?'processing':'is-over'">
                                     <i class="dot"></i>
-                                    <span v-if="item.isOver === 0">未开始</span>
-                                    <span v-if="item.isOver === 1">进行中</span>
-                                    <span v-if="item.isOver === 2">已结束</span>
+                                    <span v-if="item.isOver === 0">还未开始</span>
+                                    <span v-if="item.isOver === 1">报名中</span>
+                                    <span v-if="item.isOver === 2">报名已结束</span>
+                                    <span v-if="item.isOver === 3">活动已结束</span>
                                 </span>
                             </div>
                             <div class="listItem-body pr">
@@ -85,7 +86,7 @@
                                 <div class="float-clear">
                                     <p class="time fs14 float-left">
                                         <i class="icon"></i>
-                                        {{item.starttime}} - {{item.endtime}}
+                                        活动时间:{{item.starttime}} - {{item.endtime}}
                                     </p>
                                     <p class="num float-right">{{item.initial_join_num}}100人已报名</p>
                                 </div>
@@ -153,16 +154,20 @@
                                     value: 0
                                 },
                                 {
-                                    label: '未开始',
+                                    label: '还未开始',
                                     value: 1
                                 },
                                 {
-                                    label: '进行中',
+                                    label: '报名中',
                                     value: 2
                                 },
                                 {
-                                    label: '已结束',
+                                    label: '报名已结束',
                                     value: 3
+                                },
+                                {
+                                    label: '活动已结束',
+                                    value: 4
                                 },
                             ]
                         }
@@ -192,9 +197,12 @@
                         res.data.info.forEach(item => {
                             let timeStart = DateUtil.getDate(item.starttime);
                             let timeEnd = DateUtil.getDate(item.endtime);
-                            if( timeStart > newTime ) item.isOver = 0;
-                            else if (newTime > timeEnd ) item.isOver = 1;
-                            else item.isOver = 2;
+                            let joinTimeStart = DateUtil.getDate(item.joinstime);
+                            let joinTimeEnd = DateUtil.getDate(item.joinetime);
+                            if( newTime < joinTimeStart ) item.isOver = 0;
+                            else if (newTime >= joinTimeStart && newTime < joinTimeEnd ) item.isOver = 1;
+                            else if (newTime >= joinTimeEnd && newTime < timeEnd) item.isOver = 2;
+                            else item.isOver = 3;
                             item.starttime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
                             item.endtime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
                             this.activityData.push(item);

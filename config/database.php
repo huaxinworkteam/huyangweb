@@ -65,7 +65,7 @@ return [
     'db_config1'=>[
         'type'=>'mysql',
         'hostname'=>'115.159.66.98',
-        'database'=> 'kefu',
+        'database'=> 'weiqing',
         'username'=> 'root',
         'password'=> 'Aa654321',
         'charset'=> 'utf8',
