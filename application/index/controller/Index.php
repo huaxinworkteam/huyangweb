@@ -89,7 +89,7 @@ class Index extends Controller
             $time=time();
             switch ($s){
                 case 1:
-                    $p1='starttime';
+                    $p1='joinstime';
                     $p2='> time';
                     $p3=$time;
                     break;
@@ -105,6 +105,9 @@ class Index extends Controller
                     $p1='joinetime';
                     $p2='< time';
                     $p3=$time;
+                    $p4='endtime';
+                    $p5='> time';
+                    $p6=$time;
                     break;
                 case 4:
                     $p1='endtime';
