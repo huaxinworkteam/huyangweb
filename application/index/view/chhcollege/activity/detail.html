@@ -41,9 +41,9 @@
                         </p>
                         <div style="position: relative;">
                             <div class="btn float-left">
-                                <span class="item" :class="{disabled: !(activityInfo.isOver==0)}"
-                                @click="activityInfo.isOver==0 ? qrCodeShow=!qrCodeShow : ''">
-                                {{activityInfo.isOver==0?'火热报名中':'报名已结束'}}</span>
+                                <span class="item" :class="{disabled: !(activityInfo.isOver==1)}"
+                                @click="activityInfo.isOver==1 ? qrCodeShow=!qrCodeShow : ''">
+                                {{activityInfo.isOver==0?'还未开始':activityInfo.isOver==1?'火热报名中':activityInfo.isOver==2?'报名已结束':'活动已结束'}}</span>
                                 <!-- <span class="item" :class="{disabled: !activityInfo.isOver==1}" v-if="activityInfo.isOver==1" 
                                     @click="offlineClick()">
                                     看直播</span>
@@ -134,10 +134,13 @@
             // window.addEventListener('scroll', this.handleScroll);
             let timeStart = DateUtil.getDate(this.activityInfo.startTime);
             let timeEnd = DateUtil.getDate(this.activityInfo.endTime);
+            let joinTimeStart = DateUtil.getDate(this.activityInfo.joinstime);
+            let joinTimeEnd = DateUtil.getDate(this.activityInfo.joinetime);
             let newTime = new Date();
-            if( timeStart > newTime ) this.activityInfo.isOver = 0;
-            else if (newTime > timeEnd ) this.activityInfo.isOver = 1;
-            else this.activityInfo.isOver = 2;
+            if( newTime < joinTimeStart ) this.activityInfo.isOver = 0;
+            else if (newTime >= joinTimeStart && newTime < joinTimeEnd ) this.activityInfo.isOver = 1;
+            else if (newTime >= joinTimeEnd && newTime < timeEnd) this.activityInfo.isOver = 2;
+            else this.activityInfo.isOver = 3;
             this.activityInfo.startTime = DateUtil.formatDateTime(timeStart,date_formate.normDatetimeMinutePattern );
             this.activityInfo.endTime = DateUtil.formatDateTime(timeEnd,date_formate.normDatetimeMinutePattern );
             this.getQrcode();
