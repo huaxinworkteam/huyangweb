@@ -38,7 +38,7 @@ class Index extends Controller
     public function  verify(){
         $config=[
             'length'=>4,
-            'useNoise'=>false,
+            'useNoise'=>true,
         ];
         $captcha=new Captcha($config);
         ob_clean();
