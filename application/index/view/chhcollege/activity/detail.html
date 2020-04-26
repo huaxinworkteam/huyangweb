@@ -25,9 +25,10 @@
                         <p class="title fs22 line-clamp2">{{activityInfo.title}}</p>
                         <p class="time fs16 mb15">
                             <i class="icon"></i>
-                            <span v-if="activityInfo.isOver == 0">活动未开始</span>
-                            <span v-if="activityInfo.isOver == 1">活动进行中</span>
-                            <span v-if="activityInfo.isOver == 2">活动已结束</span>
+                            <span v-if="activityInfo.isOver == 0">报名未开始</span>
+                            <span v-if="activityInfo.isOver == 1">报名进行中</span>
+                            <span v-if="activityInfo.isOver == 2">报名已结束</span>
+                            <span v-if="activityInfo.isOver == 3">活动已结束</span>
                              ·
                             <span>{{activityInfo.startTime}} - {{activityInfo.endTime}}</span>
                         </p>
