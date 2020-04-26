@@ -116,7 +116,7 @@ class Index extends Controller
             }
             $all_activity = Db::connect('db_config1')
                 ->name('fx_activity')
-                ->field('id,title,thumb,intro,starttime,endtime,address')
+                ->field('id,title,thumb,intro,starttime,endtime,joinstime,joinetime,address')
                 ->where(['show' => 1, 'merchantid' => 19])
                 ->whereTime('starttime',$t)
                 ->where($p1,$p2,$p3)
