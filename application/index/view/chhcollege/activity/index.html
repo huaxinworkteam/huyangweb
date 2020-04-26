@@ -195,18 +195,18 @@
                         this.page.total = res.data.total;
                         let newTime = new Date();
                         res.data.info.forEach(item => {
-                            console.log(item)
-                            // let timeStart = DateUtil.getDate(item.starttime);
-                            // let timeEnd = DateUtil.getDate(item.endtime);
-                            // let joinTimeStart = DateUtil.getDate(item.joinstime);
-                            // let joinTimeEnd = DateUtil.getDate(item.joinetime);
-                            // if( newTime < joinTimeStart ) item.isOver = 0;
-                            // else if (newTime >= joinTimeStart && newTime < joinTimeEnd ) item.isOver = 1;
-                            // else if (newTime >= joinTimeEnd && newTime < timeEnd) item.isOver = 2;
-                            // else item.isOver = 3;
-                            // item.starttime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
-                            // item.endtime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
-                            // this.activityData.push(item);
+                            // console.log(item)
+                            let timeStart = DateUtil.getDate(item.starttime);
+                            let timeEnd = DateUtil.getDate(item.endtime);
+                            let joinTimeStart = DateUtil.getDate(item.joinstime);
+                            let joinTimeEnd = DateUtil.getDate(item.joinetime);
+                            if( newTime < joinTimeStart ) item.isOver = 0;
+                            else if (newTime >= joinTimeStart && newTime < joinTimeEnd ) item.isOver = 1;
+                            else if (newTime >= joinTimeEnd && newTime < timeEnd) item.isOver = 2;
+                            else item.isOver = 3;
+                            item.starttime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
+                            item.endtime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
+                            this.activityData.push(item);
                         });
                         console.log(this.activityData)
                     }).catch(err => {
