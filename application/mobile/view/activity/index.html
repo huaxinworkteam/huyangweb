@@ -32,7 +32,7 @@
                 <div class="flex-plumb-center">
                     <span class="tab-title">{{tabs.type.label}}:</span>
                     <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41"
-                    line-width="0" line-height="0" class="tab-item" @change="handlerChange2">
+                    line-width="0" line-height="0" class="tab-item" @change="handlerChange2" v-model="tabs.type.value">
                         <van-tab class="tabs" v-for="item2 in tabs.type.data" :title="item2.label"></van-tab>
                     </van-tabs>
                 </div>
@@ -98,25 +98,29 @@
                     },
                     type: {
                         label: '类型',
-                        value: 0,
+                        value: 2,
                         data: [
-                            {
-                                label: '全部',
-                                value: 0
-                            },
-                            {
-                                label: '未开始',
-                                value: 1
-                            },
-                            {
-                                label: '进行中',
-                                value: 2
-                            },
-                            {
-                                label: '已结束',
-                                value: 3
-                            },
-                        ]
+                                {
+                                    label: '全部',
+                                    value: 0
+                                },
+                                {
+                                    label: '还未开始',
+                                    value: 1
+                                },
+                                {
+                                    label: '报名中',
+                                    value: 2
+                                },
+                                {
+                                    label: '报名已结束',
+                                    value: 3
+                                },
+                                {
+                                    label: '活动已结束',
+                                    value: 4
+                                },
+                            ]
                     }
                 },
                 
@@ -152,6 +156,7 @@
                     if (scrollTop + winHeight + footerHeight > scrollHeight -50 ) {
                         this.finished = 1;
                         this.getListData(true);
+                        this.page.current_page++;
                     }
                 }
             },
@@ -165,11 +170,10 @@
                     status: this.tabs.type.value,
                 }
                 http.post('activity',params).then(res => {
-                    console.log(res)
                     this.finished = 0;
                     if (res.data.data.info == '') return;
                     this.page.toatal = res.data.data.total;
-                    if (this.page.toatal <= this.page.current_page) this.loadMore = false;
+                    if (this.page.toatal <= this.page.current_page*this.page.per_page) this.loadMore = false;
                     else this.loadMore = true;
                     res.data.data.info.forEach(item => {
                         this.actiList.push(item);
