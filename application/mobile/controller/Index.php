@@ -153,7 +153,7 @@ class Index extends Controller
         $act_id['qrCode']='https://test.v7mall.com/app/index.php?i=2&c=entry&m=fx_activity&do=activity&ac=detail&op=display&activityid='.$param;
         //  halt($act_id);
         $this->assign('act_id', $act_id);
-        Db::connect('db_config1')->name('fx_activity')->update(['trueread'=>Db::raw('trueread+1')]);
+        Db::connect('db_config1')->name('fx_activity')->where(['id'=>$param])->update(['trueread'=>Db::raw('trueread+1')]);
         return view('/activity/detail');
     }
 
