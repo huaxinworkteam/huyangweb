@@ -2,56 +2,59 @@
 <html>
 
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>首页</title>
-    <meta name='keywords' content="胡杨大学，商学院，商学院课程"/>
-    <meta name='description'
-          content="华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。 <br/>学校致力于系统性的培养企业家及其管理团队，打造最有价值的学习与发展平台，为中国创新创业事业和实业发展贡献力量。"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>首页</title>
+  <meta name='keywords' content="胡杨大学，商学院，商学院课程" />
+  <meta name='description'
+    content="华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。 <br/>学校致力于系统性的培养企业家及其管理团队，打造最有价值的学习与发展平台，为中国创新创业事业和实业发展贡献力量。" />
 
-    {include file="public/head" /}
+  {include file="public/head" /}
 </head>
 
 <body>
 
-<header>
+  <header>
     {include file="public/coll_header" /}
-</header>
+  </header>
 
-<div class="index_kv_body">
+  <div class="index_kv_body">
     {volist name="gallery" id="vo"}
     <a href="{$vo.src}" class="kv" style="background-image:url({$vo.path});"></a>
     {/volist}
-</div>
+  </div>
 
-<div class="index_center_body">
+  <div class="index_center_body">
     <div class="cw">
-        <h3 class="blank_tit"><span>创造价值，回报社会</span></h3>
-        <h6>华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。 <br/>学校致力于系统性的培养企业家及其管理团队，打造最有价值的学习与发展平台，为中国创新创业事业和实业发展贡献力量。</h6>
-        <div class="ico_list">
-            <a href="#" class="ico_10">
-                <span></span>
-                <p>互动教学</p>
-                <i></i>
-            </a>
-            <em>|</em>
-            <a href="#" class="ico_7">
-                <span></span>
-                <p>咨询辅导</p>
-                <i></i>
-            </a>
-            <em>|</em>
-            <a href="#" class="ico_9">
-                <span></span>
-                <p>融资路演</p>
-                <i></i>
-            </a>
-            <em>|</em>
-            <a href="#" class="ico_8">
-                <span></span>
-                <p>综合服务</p>
-                <i></i>
-            </a>
-            <!--<em>|</em>
+      <h3 class="blank_tit" data-scroll-reveal>
+        <span>创造价值，回报社会</span></h3>
+      <h6 data-scroll-reveal>
+        华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。
+        <br />学校致力于系统性的培养企业家及其管理团队，打造最有价值的学习与发展平台，为中国创新创业事业和实业发展贡献力量。</h6>
+      <div class="ico_list">
+        <a href="#" class="ico_10" data-scroll-reveal>
+          <span></span>
+          <p>互动教学</p>
+          <i></i>
+        </a>
+        <em>|</em>
+        <a href="#" class="ico_7" data-scroll-reveal>
+          <span></span>
+          <p>咨询辅导</p>
+          <i></i>
+        </a>
+        <em>|</em>
+        <a href="#" class="ico_9" data-scroll-reveal>
+          <span></span>
+          <p>融资路演</p>
+          <i></i>
+        </a>
+        <em>|</em>
+        <a href="#" class="ico_8" data-scroll-reveal>
+          <span></span>
+          <p>综合服务</p>
+          <i></i>
+        </a>
+        <!--<em>|</em>
             <a href="/index/course/index/cid/387.html" target="_blank" class="ico_5">
                 <span></span>
                 <p>O2O课程</p>
@@ -63,95 +66,100 @@
                 <p>国际访学</p>
                 <i></i>
             </a>-->
-        </div>
-        <h6 style="margin: 50px 0 25px;">胡杨大学给学员培养的不仅仅是知识和能力，更重要的是社会责任感和核心价值观。鼓励所有学员奉献和担当，通过持续创造价值来成就自己的事业。 <br/>胡杨大学不仅仅是一所学校，而是助力创业者成长和企业发展的全方位服务生态，是创业者的加油站和休息站。</h6>
+      </div>
+      <h6 style="margin: 50px 0 25px;" data-scroll-reveal>
+        胡杨大学给学员培养的不仅仅是知识和能力，更重要的是社会责任感和核心价值观。鼓励所有学员奉献和担当，通过持续创造价值来成就自己的事业。
+        <br />胡杨大学不仅仅是一所学校，而是助力创业者成长和企业发展的全方位服务生态，是创业者的加油站和休息站。</h6>
     </div>
-</div>
+  </div>
 
-<div class="gradient">
+  <div class="gradient">
     <div class="index_btm_body">
-        <div class="cw">
-    
-            <h3 class="blank_tit"><a href="#"><span>师资力量</span></a></h3>
-            <a class="blank_add" href="{:url('index/szll',['seriesNO'=>1])}" target="_blank">更多 +</a>
-            <div class="tab_con">
-    
-                <div class="con">
-                    <div class="scroll_body" id="scroll_1">
-                        <div class="scroll_in fl">
-                            {volist name="teachers" id="vo"}
-                            <ul>
-                                <li class="box_1 teacher"  onclick="layerTeacher()" data-photo="{$vo.teacherphoto}" data-name="{$vo.teachername}"
-                                data-level="{$vo.teacherlevel}" data-description="{$vo.teacherdescription}">
-                                    <div class="in " >
-                                        <img src="{$vo.teacherphoto}"/>
-                                        <h3>{$vo.teachername}</h3>
-                                        <h4>{$vo.teacherlevel}</h4>
-                                        <p>{$vo.teacherdescription}</p>
-                                    </div>
-                                </li>
-    
-                            </ul>
-                            {/volist}
-                        </div>
-    
+      <div class="cw">
+
+        <h3 class="blank_tit" data-scroll-reveal><a href="#"><span>师资力量</span></a></h3>
+        <a class="blank_add" href="{:url('index/szll',['seriesNO'=>1])}" target="_blank" data-scroll-reveal>更多 +</a>
+        <div class="tab_con">
+
+          <div class="con">
+            <div class="scroll_body" id="scroll_1">
+              <div class="scroll_in fl">
+                {volist name="teachers" id="vo"}
+                <ul>
+                  <li class="box_1 teacher" onclick="layerTeacher()" data-photo="{$vo.teacherphoto}"
+                    data-name="{$vo.teachername}" data-level="{$vo.teacherlevel}"
+                    data-description="{$vo.teacherdescription}" data-scroll-reveal>
+                    <div class="in ">
+                      <img src="{$vo.teacherphoto}" />
+                      <h3>{$vo.teachername}</h3>
+                      <h4>{$vo.teacherlevel}</h4>
+                      <p>{$vo.teacherdescription}</p>
                     </div>
-                </div>
+                  </li>
+
+                </ul>
+                {/volist}
+              </div>
+
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    
-    
+
+
     <div class="index_news_body">
-        <div class="cw">
-            <div class="clearfix">
-                
-                <div class="event_body fl">
-                    <h3 class="tit">
-                        <a href="{:url('index/activity')}" target="_blank">更多 +</a>
-                        <span>培训报名</span>
-                    </h3>
-                    <ul class="list">
-                        {volist name="index_activity" id="vo"}
-                        <li>
-                            <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" target="_blank" style="position: relative;">
-                                <img src="http://test.v7mall.com/attachment/{$vo.thumb}" class="fl"/>
-    
-                                <div class="fl">
-                                    <h3>{$vo.title}</h3>
-                                    <p>{$vo.intro|raw}</p>
-                                    <span style="position: absolute; bottom: 0; right: 0;">立即报名</span>
-                                </div>
-                            </a>
-                        </li>
-                        {/volist}
-                    </ul>
-                </div>
-                <div class="event_body fr">
-                    <h3 class="tit">
-                        <a href="{:url('index/news')}" target="_blank">更多 +</a>
-                        <span>新闻动态</span>
-                    </h3>
-                    <ul class="list">
-                        {volist name="news" id="vo"}
-                        <li style="position: relative;">
-                            <a href="{:url('index/news_detail',['newsid'=>$vo['newsid']])}" target="_blank">
-                                <img src="{$vo.newspicture}" class="fl"/>
-    
-                                <div class="fl">
-                                    <h3>{$vo.newstitle | raw}</h3>
-                                    <p>作者：{$vo.writer | raw}</p>
-                                    <!-- <p>点赞：{$vo.newsup}</p> -->
-                                    <p style=" position: absolute; bottom: 2px;left:220px; color: #6f6f6f;"><em>{$vo.createTime | raw}</em></p>
-                                    <span style="position: absolute; bottom: 0; right: 0;">查看详情</span>
-                                </div>
-                                
-                            </a>
-                        </li>
-                        {/volist}
-                    </ul>
-                </div>
-                <!-- <div class="news_body fr">
+      <div class="cw">
+        <div class="clearfix">
+
+          <div class="event_body fl">
+            <h3 class="tit" data-scroll-reveal>
+              <a href="{:url('index/activity')}" target="_blank">更多 +</a>
+              <span>培训报名</span>
+            </h3>
+            <ul class="list">
+              {volist name="index_activity" id="vo"}
+              <li data-scroll-reveal>
+                <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" target="_blank"
+                  style="position: relative;">
+                  <img src="http://test.v7mall.com/attachment/{$vo.thumb}" class="fl" />
+
+                  <div class="fl">
+                    <h3>{$vo.title}</h3>
+                    <p>{$vo.intro|raw}</p>
+                    <span style="position: absolute; bottom: 0; right: 0;">立即报名</span>
+                  </div>
+                </a>
+              </li>
+              {/volist}
+            </ul>
+          </div>
+          <div class="event_body fr">
+            <h3 class="tit" data-scroll-reveal>
+              <a href="{:url('index/news')}" target="_blank">更多 +</a>
+              <span>新闻动态</span>
+            </h3>
+            <ul class="list">
+              {volist name="news" id="vo"}
+              <li style="position: relative;" data-scroll-reveal>
+                <a href="{:url('index/news_detail',['newsid'=>$vo['newsid']])}" target="_blank">
+                  <img src="{$vo.newspicture}" class="fl" />
+
+                  <div class="fl">
+                    <h3>{$vo.newstitle | raw}</h3>
+                    <p>作者：{$vo.writer | raw}</p>
+                    <!-- <p>点赞：{$vo.newsup}</p> -->
+                    <p style=" position: absolute; bottom: 2px;left:220px; color: #6f6f6f;"><em>{$vo.createTime |
+                        raw}</em></p>
+                    <span style="position: absolute; bottom: 0; right: 0;">查看详情</span>
+                  </div>
+
+                </a>
+              </li>
+              {/volist}
+            </ul>
+          </div>
+          <!-- <div class="news_body fr">
                     <h3 class="tit">
                         <a href="{:url('index/news')}" target="_blank">更多 +</a>
                         <span>新闻动态</span>
@@ -163,37 +171,36 @@
                         {/volist}
                     </ul>
                 </div> -->
-            </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="color_blank s_1"></div>
-<footer>
+  <div class="color_blank s_1"></div>
+  <footer>
     {include file="public/coll_footer" /}
-</footer>
-<!-- 请在此处下方写此页面业务相关的脚本 -->
-<script>
+  </footer>
+  <!-- 请在此处下方写此页面业务相关的脚本 -->
+  <script>
     function layerTeacher() {
-        data = event.currentTarget.dataset;
-        layer.open({
-            type: 1,
-            title: data.name,
-            skin: 'layer-bg-color', //样式类名
-            closeBtn: 1, //不显示关闭按钮
-            anim: 2,
-            shadeClose: true, //开启遮罩关闭
-            area: ['620px', '500px'], //宽高
-            content: '<div class="layer-teacher"><img src="'+
-                data.photo+'" />'+ '<div class="des"><h3>' + 
-                data.name + '</h3><h4>'+ data.level+ 
-                '</h4></div></div><p class="layer-teacher-desc">'+ 
-                data.description +'</p>'
-        });
+      data = event.currentTarget.dataset;
+      layer.open({
+        type: 1,
+        title: data.name,
+        skin: 'layer-bg-color', //样式类名
+        closeBtn: 1, //不显示关闭按钮
+        anim: 2,
+        shadeClose: true, //开启遮罩关闭
+        area: ['620px', '500px'], //宽高
+        content: '<div class="layer-teacher"><img src="' +
+          data.photo + '" />' + '<div class="des"><h3>' +
+          data.name + '</h3><h4>' + data.level +
+          '</h4></div></div><p class="layer-teacher-desc">' +
+          data.description + '</p>'
+      });
     }
-    
-</script>
-<!-- 请在此处上方写此页面业务相关的脚本 -->
+  </script>
+  <!-- 请在此处上方写此页面业务相关的脚本 -->
 </body>
 
 </html>
