@@ -120,7 +120,7 @@
                 qrcode.makeCode(this.activityInfo.qrCode);
             },
             toActivityDetail: function (item) {
-                var url = '' + item.id + '.html';
+                var url = 'act_detail?activityId=' + item.id + '.html';
                 common.toPage(url);
             },
 
