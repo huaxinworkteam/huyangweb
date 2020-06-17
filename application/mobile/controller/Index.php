@@ -126,7 +126,7 @@ class Index extends Controller
                 ->whereTime('starttime',$t)
                 ->where($p1,$p2,$p3)
                 ->where($p4,$p5,$p6)
-                ->order('displayorder desc')
+                ->order('displayorder desc,endtime desc,id desc')
                 ->limit(($currp - 1) * $p, $p)
                 ->select();
             $total = Db::connect('db_config1')
