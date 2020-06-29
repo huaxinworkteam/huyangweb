@@ -14,6 +14,8 @@ use app\common\model\Gallery;
 use app\common\model\AboutMore;
 use app\common\model\Series;
 use app\common\model\Xetzhuanlan;
+use think\Request;
+
 class Index
 {
     public function index(){
@@ -63,12 +65,18 @@ class Index
         return $a;
     }
 
-    public function news(){
+    public function news(Request $request){
         $gallery=Gallery::where('webno',5)->where('platform',input('platform'))->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
-        $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->paginate(99);
+        $page=$request->param("current_page")?:1;
+        $per_page=$request->param("per_page")?:10;
+        $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->limit(($page-1),$per_page)->select()->toArray();
+        $total=News::where('isShow',1)->where('delete_time',null)->count();
         $data=[
             'gallery'=>$gallery,
-            'news'=>$news
+            'news'=>[
+                "data"=>$news,
+                "total"=>$total
+            ]
         ];
         return myJson('T',$data);
     }
