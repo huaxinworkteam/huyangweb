@@ -48,7 +48,7 @@ class Index extends Controller
         $news=News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->limit(3)->select();
         $this->assign('news',$news);
         //主页下方右侧活动
-        $index_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->limit(3)->select();
+        $index_activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc,id desc')->limit(3)->select();
         $this->assign('index_activity',$index_activity);
 
         return view('/index');
