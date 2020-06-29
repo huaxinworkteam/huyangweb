@@ -18,7 +18,7 @@ class Index
 {
     public function index(){
         $teacherInfo = Teachers::where('isShow',1)->where('delete_time',null)->where('isTop',1)->limit(8)->order('indexSort desc,sort desc')->select();
-        $activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc')->limit(3)->select();
+        $activity=Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show',1)->order('displayorder desc,id desc')->limit(3)->select();
         $news=News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->limit(3)->select();
         $gallery=Gallery::where('webno',0)->where('platform',input('platform'))->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $data=[
