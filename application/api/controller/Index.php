@@ -69,7 +69,7 @@ class Index
         $gallery=Gallery::where('webno',5)->where('platform',input('platform'))->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
         $page=$request->param("current_page")?:1;
         $per_page=$request->param("per_page")?:10;
-        $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->limit(($page-1),$per_page)->select()->toArray();
+        $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->limit(($page-1)*$per_page,$per_page)->select()->toArray();
         $total=News::where('isShow',1)->where('delete_time',null)->count();
         $data=[
             'gallery'=>$gallery,
