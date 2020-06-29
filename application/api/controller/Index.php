@@ -65,7 +65,7 @@ class Index
 
     public function news(){
         $gallery=Gallery::where('webno',5)->where('platform',input('platform'))->where('is_show',1)->where('is_del',0)->order('sort')->field('headline,src,path')->select();
-        $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->paginate(6);
+        $news = News::where('isShow',1)->where('delete_time',null)->order('createTime desc')->select();
         $data=[
             'gallery'=>$gallery,
             'news'=>$news
