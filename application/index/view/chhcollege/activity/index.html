@@ -1,28 +1,28 @@
-
 <!DOCTYPE HTML>
 <html>
 
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>培训报名</title>
-    {include file="public/head" /}
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>培训报名</title>
+  {include file="public/head" /}
 </head>
+
 <body>
-    <header>
-        {include file="public/coll_header" /}
-    </header>
-    <div id="app" class="pc" v-cloak>
-        <g-message ref="g-message"></g-message>
-        <div class="activity g-width-100">
-            <section>
-                <div class="banner">
-                    <swiper class="swiper-container" ref="banner-swiper">
-                        <swiper-slide class="swiper-wrapper" v-for="(item, index) in bannerData" :key="index" v-cloak="">
-                            <div class="banner-bg g-width-100 pr" :style="{backgroundImage: 'url(' + item.path + ')'}" >
-                                <!-- <div class="banner-bg-wrapper">
+  <header>
+    {include file="public/coll_header" /}
+  </header>
+  <div id="app" class="pc" v-cloak>
+    <g-message ref="g-message"></g-message>
+    <div class="activity g-width-100">
+      <section>
+        <div class="banner">
+          <swiper class="swiper-container" ref="banner-swiper">
+            <swiper-slide class="swiper-wrapper" v-for="(item, index) in bannerData" :key="index" v-cloak="">
+              <div class="banner-bg g-width-100 pr" :style="{backgroundImage: 'url(' + item.path + ')'}">
+                <!-- <div class="banner-bg-wrapper">
                                     <div class="wrapper g-width">
                                         <div class="info">
                                             <p class="title fs16">{{item.title}}</p>
@@ -46,196 +46,201 @@
                                         </div>
                                     </div>
                                 </div> -->
-                            </div>
-                        </swiper-slide>
-                        <div class="swiper-pagination" slot="pagination" v-if="bannerData.length > 1"></div>
-                    </swiper>
-                </div>
-                <div class="filter">
-                    <div class="wrapper g-width" v-cloak="">
-                        <ul class="list fs16 float-clear" v-for="(item, key) in filterOption" :key="key">
-                            <li class="label float-left">{{item.name}}:</li>
-                            <li>
-                                <span class="item float-left" :class="{active: listItem.value===item.currentIndex}" v-for="(listItem, index) in item.data" :key="listItem" @click="fliterActivity(item.value, listItem.value)">
-                                    {{listItem.label}}
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="wrapper g-width flexWrap" v-if="activityData.length !== 0">
-                        <div class="listItem" v-for="(item, index) in activityData" :key="index" v-cloak="" @click="toActivityDetail(item)">
-                            <div class="listItem-head pr">
-                                <img class="g-width-100" :src="'http://test.v7mall.com/attachment/'+item.thumb" alt="活动封面">
-                                
-                                <span :class="item.isOver===0?'not-start':item.isOver===1?'processing':'is-over'">
-                                    <i class="dot"></i>
-                                    <span v-if="item.isOver === 0">还未开始</span>
-                                    <span v-if="item.isOver === 1">报名中</span>
-                                    <span v-if="item.isOver === 2">报名已结束</span>
-                                    <span v-if="item.isOver === 3">活动已结束</span>
-                                </span>
-                            </div>
-                            <div class="listItem-body pr">
-                                <p class="title fs16 line-clamp2">{{item.title}}</p>
-                                <p class="address fs14">
-                                    <i class="icon"></i>
-                                    {{item.address}}
-                                </p>
-                                <div class="float-clear">
-                                    <p class="time fs14 float-left">
-                                        <i class="icon"></i>
-                                        活动时间:{{item.starttime}} - {{item.endtime}}
-                                    </p>
-                                    <p class="num float-right">{{item.initial_join_num}}100人已报名</p>
-                                </div>
-                            </div>
-                        </div>                       
-                    </div>
-                    <div v-if="activityData.length !== 0">
-                        <div class="show-more center" v-if="activityData.length < page.total">
-                            <p @click="showMore" v-if="!showMoreFlag">加载更多</p>
-                            <p class="no-border" v-else="">加载中。。。</p>
-                        </div>
-                        <div class="no-more center" v-else="">
-                            <p>没有更多了</p>
-                        </div>
-                    </div>
-                    <div class="no-data center" v-if="activityData.length === 0">
-                        <img src="__COLL__/images/no-data.png" alt="暂无数据">
-                    </div>
-                </div>
-            </section>
+              </div>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination" v-if="bannerData.length > 1"></div>
+          </swiper>
         </div>
-        <footer v-show="loading">
-            {include file="public/coll_footer" /}
-        </footer>
-    </div>
-    
-    <script>
-        new Vue({
-            el: '#app',
-            data: function () {
-                return {
-                    bannerData: '{$gallery | raw}',
-                    page: {
-                        per_page: 6,
-                        current_page: 1,
-                        total: 0
-                    },
-                    filterOption: {
-                        times: {
-                            name: '时间',
-                            value: 'times',
-                            currentIndex: '',
-                            data: [
-                                {
-                                    label: '全部',
-                                    value: ''
-                                },
-                                {
-                                    label: '本周',
-                                    value: 'week'
-                                },
-                                {
-                                    label: '本月',
-                                    value: 'month'
-                                },
-                            ]
-                        },
-                        status: {
-                            name: '状态',
-                            value: 'status',
-                            currentIndex: 2,
-                            data: [
-                                {
-                                    label: '全部',
-                                    value: 0
-                                },
-                                {
-                                    label: '还未开始',
-                                    value: 1
-                                },
-                                {
-                                    label: '报名中',
-                                    value: 2
-                                },
-                                {
-                                    label: '报名已结束',
-                                    value: 3
-                                },
-                                {
-                                    label: '活动已结束',
-                                    value: 4
-                                },
-                            ]
-                        }
-                    },
-                    activityData: [],
-                    showMoreFlag: false,
-                    loading: false
-                }
-            },
-            methods: {
-                /**
-                * flag boolen 用于判断是分页加载还是换分类
-                */
-                getIndex: function(flag) {
-                    if (flag) {
-                        this.activityData = []; this.page.current_page = 1;
-                    }
-                    let data = {
-                        page: this.page,
-                        time: this.filterOption.times.currentIndex,
-                        status: this.filterOption.status.currentIndex,
-                    }
-                    http_post('activity',data).then( res => {
-                        this.showMoreFlag = false;
-                        this.page.total = res.data.total;
-                        let newTime = new Date();
-                        res.data.info.forEach(item => {
-                            // console.log(item)
-                            let timeStart = DateUtil.getDate(item.starttime);
-                            let timeEnd = DateUtil.getDate(item.endtime);
-                            let joinTimeStart = DateUtil.getDate(item.joinstime);
-                            let joinTimeEnd = DateUtil.getDate(item.joinetime);
-                            if( newTime < joinTimeStart ) item.isOver = 0;
-                            else if (newTime >= joinTimeStart && newTime < joinTimeEnd ) item.isOver = 1;
-                            else if (newTime >= joinTimeEnd && newTime < timeEnd) item.isOver = 2;
-                            else item.isOver = 3;
-                            item.starttime = DateUtil.formatDateTime(timeStart,"MM月dd日 HH:mm" );
-                            item.endtime = DateUtil.formatDateTime(timeEnd,"MM月dd日 HH:mm" );
-                            this.activityData.push(item);
-                        });
-                        console.log(this.activityData)
-                    }).catch(err => {
-                        console.log(err)
-                    });
-                },
-                showMore: function () {
-                    this.showMoreFlag = true;
-                    this.page.current_page++;
-                    this.getIndex(false);
-                },
+        <div class="filter">
+          <div class="wrapper g-width" v-cloak="">
+            <ul class="list fs16 float-clear" v-for="(item, key) in filterOption" :key="key">
+              <li class="label float-left">{{item.name}}:</li>
+              <li>
+                <span class="item float-left" :class="{active: listItem.value===item.currentIndex}"
+                  v-for="(listItem, index) in item.data" :key="listItem"
+                  @click="fliterActivity(item.value, listItem.value)">
+                  {{listItem.label}}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="content">
+          <div class="wrapper g-width flexWrap" v-if="activityData.length !== 0">
+            <div class="listItem" v-for="(item, index) in activityData" :key="index" v-cloak=""
+              @click="toActivityDetail(item)">
+              <div class="listItem-head pr">
+                <img class="g-width-100" :src="'http://test.v7mall.com/attachment/'+item.thumb" alt="活动封面"
+                  @error="this.src='https:\/\/test.v7mall.com/attachment/'+item.thumb;this.onerror=null;">
 
-                toActivityDetail: function (item) {
-                    var url = 'act_detail?activityId=' + item.id;
-                    common.toPage(url);
+                <span :class="item.isOver===0?'not-start':item.isOver===1?'processing':'is-over'">
+                  <i class="dot"></i>
+                  <span v-if="item.isOver === 0">还未开始</span>
+                  <span v-if="item.isOver === 1">报名中</span>
+                  <span v-if="item.isOver === 2">报名已结束</span>
+                  <span v-if="item.isOver === 3">活动已结束</span>
+                </span>
+              </div>
+              <div class="listItem-body pr">
+                <p class="title fs16 line-clamp2">{{item.title}}</p>
+                <p class="address fs14">
+                  <i class="icon"></i>
+                  {{item.address}}
+                </p>
+                <div class="float-clear">
+                  <p class="time fs14 float-left">
+                    <i class="icon"></i>
+                    活动时间:{{item.starttime}} - {{item.endtime}}
+                  </p>
+                  <p class="num float-right">{{item.initial_join_num}}100人已报名</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="activityData.length !== 0">
+            <div class="show-more center" v-if="activityData.length < page.total">
+              <p @click="showMore" v-if="!showMoreFlag">加载更多</p>
+              <p class="no-border" v-else="">加载中。。。</p>
+            </div>
+            <div class="no-more center" v-else="">
+              <p>没有更多了</p>
+            </div>
+          </div>
+          <div class="no-data center" v-if="activityData.length === 0">
+            <img src="__COLL__/images/no-data.png" alt="暂无数据">
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer v-show="loading">
+      {include file="public/coll_footer" /}
+    </footer>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: function () {
+        return {
+          bannerData: '{$gallery | raw}',
+          page: {
+            per_page: 6,
+            current_page: 1,
+            total: 0
+          },
+          filterOption: {
+            times: {
+              name: '时间',
+              value: 'times',
+              currentIndex: '',
+              data: [
+                {
+                  label: '全部',
+                  value: ''
                 },
-                fliterActivity(key, value) {
-                    if (key == 'times') this.filterOption.times.currentIndex = value;
-                    else if (key == 'status') this.filterOption.status.currentIndex = value;
-                    this.getIndex(true);
-                }
+                {
+                  label: '本周',
+                  value: 'week'
+                },
+                {
+                  label: '本月',
+                  value: 'month'
+                },
+              ]
             },
-            created: function () {
-                if (!isJSON(this.bannerData)) this.bannerData = $.parseJSON( this.bannerData );
-                this.getIndex();
-                this.loading=true;
+            status: {
+              name: '状态',
+              value: 'status',
+              currentIndex: 2,
+              data: [
+                {
+                  label: '全部',
+                  value: 0
+                },
+                {
+                  label: '还未开始',
+                  value: 1
+                },
+                {
+                  label: '报名中',
+                  value: 2
+                },
+                {
+                  label: '报名已结束',
+                  value: 3
+                },
+                {
+                  label: '活动已结束',
+                  value: 4
+                },
+              ]
             }
-        });
-    </script>
-    
+          },
+          activityData: [],
+          showMoreFlag: false,
+          loading: false
+        }
+      },
+      methods: {
+        /**
+        * flag boolen 用于判断是分页加载还是换分类
+        */
+        getIndex: function (flag) {
+          if (flag) {
+            this.activityData = []; this.page.current_page = 1;
+          }
+          let data = {
+            page: this.page,
+            time: this.filterOption.times.currentIndex,
+            status: this.filterOption.status.currentIndex,
+          }
+          http_post('activity', data).then(res => {
+            this.showMoreFlag = false;
+            this.page.total = res.data.total;
+            let newTime = new Date();
+            res.data.info.forEach(item => {
+              // console.log(item)
+              let timeStart = DateUtil.getDate(item.starttime);
+              let timeEnd = DateUtil.getDate(item.endtime);
+              let joinTimeStart = DateUtil.getDate(item.joinstime);
+              let joinTimeEnd = DateUtil.getDate(item.joinetime);
+              if (newTime < joinTimeStart) item.isOver = 0;
+              else if (newTime >= joinTimeStart && newTime < joinTimeEnd) item.isOver = 1;
+              else if (newTime >= joinTimeEnd && newTime < timeEnd) item.isOver = 2;
+              else item.isOver = 3;
+              item.starttime = DateUtil.formatDateTime(timeStart, "MM月dd日 HH:mm");
+              item.endtime = DateUtil.formatDateTime(timeEnd, "MM月dd日 HH:mm");
+              this.activityData.push(item);
+            });
+            console.log(this.activityData)
+          }).catch(err => {
+            console.log(err)
+          });
+        },
+        showMore: function () {
+          this.showMoreFlag = true;
+          this.page.current_page++;
+          this.getIndex(false);
+        },
+
+        toActivityDetail: function (item) {
+          var url = 'act_detail?activityId=' + item.id;
+          common.toPage(url);
+        },
+        fliterActivity(key, value) {
+          if (key == 'times') this.filterOption.times.currentIndex = value;
+          else if (key == 'status') this.filterOption.status.currentIndex = value;
+          this.getIndex(true);
+        }
+      },
+      created: function () {
+        if (!isJSON(this.bannerData)) this.bannerData = $.parseJSON(this.bannerData);
+        this.getIndex();
+        this.loading = true;
+      }
+    });
+  </script>
+
 </body>
+
 </html>
