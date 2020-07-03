@@ -1,78 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <title>新闻动态</title>
-    <!-- 引用 css 引用列表 -->
-    {include file="common/meta" /}
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>新闻动态</title>
+  <!-- 引用 css 引用列表 -->
+  {include file="common/meta" /}
 </head>
+
 <body>
-    <div id="app">
-        <!-- 引用 头部组件 -->
-        {include file="common/header" /}
-        <content class="news nav-top">
-            <!-- 背景轮播 -->
-            <van-swipe :autoplay="1000">
-                <van-swipe-item v-for="(item, index) in gallery" :key="index">
-                    <img class="banner" :src="item.path" alt="item.headline" />
-                </van-swipe-item>
-            </van-swipe>
-            <!-- 新闻 -->
-            <van-sidebar>
-                <van-sidebar-item title="新闻列表" ></van-sidebar-item>
-            </van-sidebar>
-            <ul class="pl-r20">
-                <li class="flex-plumb-center card" v-for="item in newsList" 
-                @click="goPage(item.newsid)">
-                    <img class="news-image" :src="item.newspicture"/>
-                    <div class="info">
-                        <p class="title text-line-clamp2">{{item.newstitle}}</p>
-                        <time :datetime="item.createTime">{{item.createTime}}</time>
-                    </div>
-                </li>
-            </ul>
-        </content>
-        
-        <!-- 引用 尾部组件 -->
-        {include file="common/footer" /}
-    </div>
+  <div id="app">
+    <!-- 引用 头部组件 -->
+    {include file="common/header" /}
+    <content class="news nav-top">
+      <!-- 背景轮播 -->
+      <van-swipe :autoplay="1000">
+        <van-swipe-item v-for="(item, index) in gallery" :key="index">
+          <img class="banner" :src="item.path" alt="item.headline" />
+        </van-swipe-item>
+      </van-swipe>
+      <!-- 新闻 -->
+      <van-sidebar>
+        <van-sidebar-item title="新闻列表"></van-sidebar-item>
+      </van-sidebar>
+      <ul class="pl-r20">
+        <li class="flex-plumb-center card" v-for="item in newsList" @click="goPage(item.newsid)">
+          <img class="news-image" :src="item.newspicture" />
+          <div class="info">
+            <p class="title text-line-clamp2">{{item.newstitle}}</p>
+            <time :datetime="item.createTime">{{item.createTime}}</time>
+          </div>
+        </li>
+      </ul>
+      <!-- 当数据为空时 -->
+      <img src="__MOBILE__/images/no-data.png" alt="" v-if="newsList.length == 0" style="width: 100%;">
+    </content>
+
+    <!-- 引用 尾部组件 -->
+    {include file="common/footer" /}
+  </div>
 </body>
 <!-- 引用 js 脚本引用列表 -->
 {include file="common/script" /}
 <!-- 在此下方编写脚本 -->
 <script>
-    new Vue({
-        el: '#app',
-        data: function() {
-            return {
-                headerActive: false, // header 列表显示-true 隐藏-false
-                headerId: 5, //新闻动态id==5
-                page:{
-                    total: 0, // 总条数
-                    per_page: 10, // 每页条数
-                    current_page: 1, // 第几页
-                },
-                gallery: [],
-                newsList: []
-            }
+  new Vue({
+    el: '#app',
+    data: function () {
+      return {
+        headerActive: false, // header 列表显示-true 隐藏-false
+        headerId: 5, //新闻动态id==5
+        page: {
+          total: 0, // 总条数
+          per_page: 10, // 每页条数
+          current_page: 1, // 第几页
         },
-        mounted: function() {
-            http.get('/api/index/news',{platform: 1}).then(res=>{
-                this.gallery = res.data.data.gallery;
-                this.newsList = res.data.data.news.data;
-                this.pages.total = res.data.data.news.total;
-            });
-        },
-        methods: {
-            goPage(param) {
-                window.location.href= '/mobile/index/news_detail?newsid='+param;
-            }
+        gallery: [],
+        newsList: [],
+        loadMore: false,
+        finished: 0
+      }
+    },
+    mounted: function () {
+      // 设置导航吸顶距离 监听滚动
+      window.addEventListener('scroll', this.handleScroll);
+      this.getListData();
+    },
+    methods: {
+      goPage(param) {
+        window.location.href = '/mobile/index/news_detail?newsid=' + param;
+      },
+      handleScroll: function () {
+
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        var winHeight = document.documentElement.clientHeight || document.body.clientHeight;// 浏览器视口高度
+        var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+        var footerHeight = this.$refs.footer.offsetHeight; // 底部的高度
+
+        // 加载 - 判断 数据有
+        if (!this.loadMore) return;
+        // alert("cccc")
+        if (this.finished == 0) {
+          if (scrollTop + winHeight + footerHeight > scrollHeight - 100) {
+            this.finished = 1;
+            this.getListData(true);
+          }
         }
-    });
+      },
+      getListData(load) {
+        if (!load) { this.newsList = []; }
+        let params = {
+          per_page: this.page.per_page,
+          current_page: this.page.current_page
+        }
+        http.post('/api/index/news', params).then(res => {
+          console.log(res)
+          this.finished = 0;
+          if (res.data.data == null) return;
+          if (this.gallery.length == 0) this.gallery = res.data.data.gallery;
+          if (this.page.total == 0) this.page.total = res.data.data.news.total;
+          res.data.data.news.data.forEach(item => {
+            this.newsList.push(item);
+          });
+          this.page.current_page++;
+          if (this.newsList.length < this.page.total) this.loadMore = true;
+          else this.loadMore = false;
+          console.log(this.newsList)
+        });
+      }
+    }
+  });
 
     // 调用函数组件，弹出一个 Toast
     // vant.Toast('提示');
 </script>
 <!-- 在此上方编写脚本 -->
+
 </html>
