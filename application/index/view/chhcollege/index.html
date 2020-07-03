@@ -120,7 +120,8 @@
               <li data-scroll-reveal>
                 <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" target="_blank"
                   style="position: relative;">
-                  <img src="http://test.v7mall.com/attachment/{$vo.thumb}" class="fl" οnerrοr="errorImg();" />
+                  <img src="http://test.v7mall.com/attachment/{$vo.thumb}" class="fl"
+                    οnErrοr="javascript: console.log('111')" />
 
                   <div class="fl">
                     <h3
