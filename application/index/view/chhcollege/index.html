@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 
 <head runat="server">
@@ -120,11 +120,16 @@
               <li data-scroll-reveal>
                 <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" target="_blank"
                   style="position: relative;">
-                  <img src="//test.v7mall.com/attachment/{$vo.thumb}" class="fl" />
+                  <img src="http://test.v7mall.com/attachment/{$vo.thumb}" class="fl"
+                    οnerrοr="imgError(this,'test.v7mall.com/attachment/{$vo.thumb}')" />
 
                   <div class="fl">
-                    <h3 style="overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:2; ">{$vo.title}</h3>
-                    <p style="overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:2; ">{$vo.intro|raw}</p>
+                    <h3
+                      style="overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:2; ">
+                      {$vo.title}</h3>
+                    <p
+                      style="overflow:hidden; text-overflow:ellipsis;display:-webkit-box; -webkit-box-orient:vertical;-webkit-line-clamp:2; ">
+                      {$vo.intro|raw}</p>
                     <span style="position: absolute; bottom: 0; right: 0;">立即报名</span>
                   </div>
                 </a>
