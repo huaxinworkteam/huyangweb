@@ -120,8 +120,7 @@
               <li data-scroll-reveal>
                 <a href="{:url('index/act_detail',['activityId'=>$vo['id']])}" target="_blank"
                   style="position: relative;">
-                  <img src="http://test.v7mall.com/attachment/{$vo.thumb}" class="fl"
-                    οnerrοr="imgError(this,'test.v7mall.com/attachment/{$vo.thumb}')" />
+                  <img src="http://test.v7mall.com/attachment/{$vo.thumb}" class="fl" οnerrοr="errorImg();" />
 
                   <div class="fl">
                     <h3
@@ -201,6 +200,9 @@
           '</h4></div></div><p class="layer-teacher-desc">' +
           data.description + '</p>'
       });
+    }
+    function errorImg() {
+      console.log("111")
     }
   </script>
   <!-- 请在此处上方写此页面业务相关的脚本 -->
