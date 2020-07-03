@@ -152,6 +152,8 @@ Date.prototype.format = function (fmt) {
 
 // 图片访问不到
 function imgError(event, path) {
+  console.log("sssss")
+  console.log(event)
   let img = event.srcElement;
   img.src = 'https://' + path;
   img.onerror = null; //防止闪图
