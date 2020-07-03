@@ -96,7 +96,6 @@
           current_page: this.page.current_page
         }
         http.post('/api/index/news', params).then(res => {
-          console.log(res)
           this.finished = 0;
           if (res.data.data == null) return;
           if (this.gallery.length == 0) this.gallery = res.data.data.gallery;
@@ -107,7 +106,6 @@
           this.page.current_page++;
           if (this.newsList.length < this.page.total) this.loadMore = true;
           else this.loadMore = false;
-          console.log(this.newsList)
         });
       }
     }
