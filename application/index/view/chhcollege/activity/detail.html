@@ -20,7 +20,7 @@
       <section>
         <div class="head" ref="activity-detail-head">
           <div class="wrapper g-width alignCenter">
-            <img class="cover" :src="'http://test.v7mall.com/attachment/'+activityInfo.thumb">
+            <img class="cover" :src="'//test.v7mall.com/attachment/'+activityInfo.thumb">
             <div class="info flexColumn justifyCenter flex_1">
               <p class="title fs22 line-clamp2">{{activityInfo.title}}</p>
               <p class="time fs16 mb15">
@@ -74,7 +74,7 @@
               <div class="info">
                 <p class="item" v-for="(item, index) in recommendActivity" v-if="index < 6" :key="index"
                   @click="toActivityDetail(item)">
-                  <img class="g-width-100" :src="'http://test.v7mall.com/attachment/'+item.thumb" alt="">
+                  <img class="g-width-100" :src="'//test.v7mall.com/attachment/'+item.thumb" alt="">
                 </p>
               </div>
             </div>
