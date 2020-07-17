@@ -28,8 +28,9 @@
     <div class="hx_home_top"></div>
     <!-- 培训报名 -->
     <div class="hx_container hx_college">
-      <h3 class="hx_container_title hx_container_title_before">学院<span>介绍</span></h3>
-      <ul class="hx_school_list">
+      <h3 class="hx_container_title hx_container_title_before"
+        data-scroll-reveal="wait 0.3s, then enter top and move 40px over 1s">学院<span>介绍</span></h3>
+      <ul class="hx_school_list" data-scroll-reveal="wait 0.3s, then enter bottom and move 40px over 1s">
         <li class="hx_school_item"><a href="{:url('index/college',['seriesID'=>1])}" target="_blank"><i
               style="background-image: url(__COLL__/images/hx_hy_icon.png)"></i>
             <p class="hx_text_ellipsis">创业CEO学院</p>
@@ -83,7 +84,7 @@
       </ul>
     </div>
     <!-- 师资力量 -->
-    <div class="hx_container hx_szll">
+    <div class="hx_container hx_szll" data-scroll-reveal="wait 0.3s, then enter bottom and move 40px over 1s">
       <div class="swiper-container hx_szllSwiper-container">
         <div class="swiper-wrapper hx_szllSwiper-wrapper">
 
@@ -146,10 +147,10 @@
 
   <!--  -->
 
-  <div class="hx_middle_banner"></div>
+  <div class="hx_middle_banner" data-scroll-reveal="wait 0.3s, then enter right and move 40px over 1s"></div>
 
   <!-- 简介 -->
-  <div class="hx_container hx_default">
+  <div class="hx_container hx_default" data-scroll-reveal="wait 0.3s, then enter bottom and move 40px over 1s">
     <h3 class="hx_container_title hx_container_title_before hx_container_title_before2">
       创造<span>价值</span>，回报<span>社会</span></h3>
     <p class="hx_container_desc">华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。
@@ -181,13 +182,16 @@
 
   <!--  -->
 
-  <div class="hx_middle_banner hx_middle_banner2"></div>
+  <div class="hx_middle_banner hx_middle_banner2" data-scroll-reveal="wait 0.3s, then enter left and move 40px over 1s">
+  </div>
 
   <!-- 新闻动态 -->
   <div class="hx_container hx_default">
-    <h3 class="hx_container_title hx_container_title_after"><span>新闻</span>动态</h3>
+    <h3 class="hx_container_title hx_container_title_after"
+      data-scroll-reveal="wait 0.3s, then enter top and move 40px over 1s"><span>新闻</span>动态</h3>
     <div style="overflow: hidden; position: relative;">
-      <div class="fL hx_news_swiper" style="margin-top: 12px">
+      <div class="fL hx_news_swiper" style="margin-top: 12px"
+        data-scroll-reveal="wait 0.3s, then enter left and move 40px over 1s">
         <div class="swiper-container newsSwiper-container">
           <div class="swiper-wrapper">
             {volist name="news" id="vo"}
@@ -209,7 +213,7 @@
           <div class="swiper-button-next newsSwiper-next"></div>
         </div>
       </div>
-      <div class="fR hx_news_list" id="newsList">
+      <div class="fR hx_news_list" id="newsList" data-scroll-reveal="wait 0.3s, then enter right and move 40px over 1s">
         <ul class="roll__list hx_news_itemList">
           {volist name="news" id="vo"}
           <li class="hx_news_item hx_bottom_dashed">
