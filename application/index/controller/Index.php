@@ -47,7 +47,12 @@ class Index extends Controller
         $list = Teachers::where('isShow', 1)->where('delete_time', null)->where('isTop', 1)->limit(8)->order('indexSort desc,sort desc')->select();
         $this->assign('teachers', $list);
         //主页下方左侧新闻
-        $news = News::where('isShow', 1)->where('delete_time', null)->order(['createTime' => 'desc'])->limit(6)->select();
+        $news = News::where('isShow', 1)->where('delete_time', null)->order(['createTime' => 'desc'])->limit(6)->select()->toArray();
+        foreach ($news as &$v) {
+
+            $v['time_month'] = substr($v['createTime'], 5, 2);
+            $v['time_day'] = substr($v['createTime'], 8, 2);
+        }
         $this->assign('news', $news);
         //主页下方右侧活动
         $index_activity = Db::connect('db_config1')->name('fx_activity')->field('id,title,thumb,intro')->where('show', 1)->order('displayorder desc,id desc')->limit(3)->select();
