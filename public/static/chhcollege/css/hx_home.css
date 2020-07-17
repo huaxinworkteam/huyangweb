@@ -142,7 +142,7 @@ body {
   font-size: 30px;
   letter-spacing: 20px;
   text-align: center;
-  padding: 20px 0 50px;
+  padding: 0 0 50px;
 }
 
 .hx_container_desc {
@@ -310,7 +310,7 @@ home-header {
   font-size: 20px;
   color: #aaaaaa;
   text-align: center;
-  margin-top: -20px;
+  margin-top: -30px;
 }
 
 .hx_szllSwiper_single .hx_szll_item0 {
@@ -321,14 +321,14 @@ home-header {
 
 .hx_szllSwiper_single .hx_szll_item1 {
   position: absolute;
-  top: 366px;
-  left: 20px;
+  top: 175px;
+  right: 20px;
 }
 
 .hx_szllSwiper_single .hx_szll_item2 {
   position: absolute;
-  top: 175px;
-  right: 20px;
+  top: 366px;
+  left: 20px;
 }
 
 .hx_szllSwiper_single .hx_szll_item3 {
@@ -339,26 +339,26 @@ home-header {
 
 .hx_szllSwiper_plural .hx_szll_item0 {
   position: absolute;
-  top: 0;
-  right: 130px;
-}
-
-.hx_szllSwiper_plural .hx_szll_item1 {
-  position: absolute;
-  top: 366px;
-  right: 20px;
-}
-
-.hx_szllSwiper_plural .hx_szll_item2 {
-  position: absolute;
   top: 175px;
   left: 20px;
 }
 
-.hx_szllSwiper_plural .hx_szll_item3 {
+.hx_szllSwiper_plural .hx_szll_item1 {
+  position: absolute;
+  top: 0;
+  right: 130px;
+}
+
+.hx_szllSwiper_plural .hx_szll_item2 {
   position: absolute;
   top: 540px;
   left: 130px;
+}
+
+.hx_szllSwiper_plural .hx_szll_item3 {
+  position: absolute;
+  top: 366px;
+  right: 20px;
 }
 
 .hx_szll_item {
@@ -713,12 +713,34 @@ home-header {
   width: 110px;
   height: 110px;
   margin: 32px auto 12px;
-  background: url('../images/hx_hy_icon.png') no-repeat top;
+  background-image: url('../images/hx_hy_icon.png');
+  background-repeat: no-repeat;
+  background-position: top;
   background-size: contain;
 }
 
+
 .hx_school_item p {
   font-size: 24px;
-  color: #BB282C;
   text-align: center;
+}
+
+.hx_school_item:nth-of-type(odd) {
+  border-color: #BB282C;
+}
+
+.hx_school_item:nth-of-type(even) {
+  border-color: #A16220;
+}
+
+.hx_school_item:nth-of-type(odd) p {
+  color: #BB282C;
+}
+
+.hx_school_item:nth-of-type(even) p {
+  color: #A16220;
+}
+
+.hx_school_item:last-child {
+  border-color: #aaaaaa;
 }

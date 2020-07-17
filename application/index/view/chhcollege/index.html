@@ -8,6 +8,7 @@
 
   {include file="public/head" /}
   <link rel="stylesheet" href="__COLL__/plugins/swiper5/swiper.min.css">
+  <link rel="stylesheet" href="__COLL__/plugins/swiper5/animate.min.css">
   <link rel="stylesheet" href="__COLL__/css/hx_home.css">
 </head>
 
@@ -27,37 +28,37 @@
     <div class="hx_home_top"></div>
     <!-- 培训报名 -->
     <div class="hx_container hx_college">
-      <h3 class="hx_container_title hx_container_title_before">报名<span>培训</span></h3>
+      <h3 class="hx_container_title hx_container_title_before">学院<span>介绍</span></h3>
       <ul class="hx_school_list">
-        <li class="hx_school_item"><i></i>
-          <p class="hx_text_ellipsis">创业CEO学院创业CEO学院</p>
-        </li>
-        <li class="hx_school_item"><i></i>
-          <p class="hx_text_ellipsis">创业CEO学院创业CEO学院</p>
-        </li>
-        <li class="hx_school_item"><i></i>
-          <p class="hx_text_ellipsis">创业CEO学院创业CEO学院</p>
-        </li>
-        <li class="hx_school_item"><i></i>
-          <p class="hx_text_ellipsis">创业CEO学院创业CEO学院</p>
-        </li>
-        <li class="hx_school_item"><i></i>
+        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon.png)"></i>
           <p class="hx_text_ellipsis">创业CEO学院</p>
         </li>
-        <li class="hx_school_item"><i></i>
-          <p class="hx_text_ellipsis">创业CEO学院</p>
+        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon2.png)"></i>
+          <p class="hx_text_ellipsis">国学创意学院</p>
         </li>
-        <li class="hx_school_item"><i></i>
-          <p class="hx_text_ellipsis">创业CEO学院</p>
+        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon3.png)"></i>
+          <p class="hx_text_ellipsis">电商学院</p>
         </li>
-        <li class="hx_school_item"><i></i>
-          <p class="hx_text_ellipsis">创业CEO学院</p>
+        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon4.png)"></i>
+          <p class="hx_text_ellipsis">女性创意学院</p>
         </li>
-        <li class="hx_school_item"><i></i>
-          <p class="hx_text_ellipsis">创业CEO学院</p>
+        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon5.png)"></i>
+          <p class="hx_text_ellipsis">个人品牌学院</p>
         </li>
-        <li class="hx_school_item"><i></i>
-          <p class="hx_text_ellipsis">创业CEO学院</p>
+        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon6.png)"></i>
+          <p class="hx_text_ellipsis">人工智能学院</p>
+        </li>
+        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon7.png)"></i>
+          <p class="hx_text_ellipsis">经理人学院</p>
+        </li>
+        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon8.png)"></i>
+          <p class="hx_text_ellipsis">法商学院</p>
+        </li>
+        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon9.png)"></i>
+          <p class="hx_text_ellipsis">新零售学院</p>
+        </li>
+        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon_more.png)"></i>
+          <p class="hx_text_ellipsis">更多</p>
         </li>
       </ul>
     </div>
@@ -67,12 +68,15 @@
         <div class="swiper-wrapper hx_szllSwiper-wrapper">
 
           <div class="swiper-slide hx_szllSwiper-slide hx_szllSwiper_single">
-            <div class="hx_szll_title_container">
+            <div class="hx_szll_title_container ani" swiper-animate-effect="zoomIn" swiper-animate-duration="1.2s"
+              swiper-animate-delay="0.3s">
               <h3 class="hx_container_title hx_container_title_after"><span>师资</span>力量</h3>
               <p class="hx_szll_more">查看更多</p>
             </div>
             {volist name="teachers" k="key" id="vo" offset="0" length="4"}
-            <div class="hx_szll_item hx_szll_item{$key%4} hx_box_shadow"
+            <div class="hx_szll_item hx_szll_item{$key%4} hx_box_shadow ani"
+              swiper-animate-effect="{if $key%2 == 0} bounceInLeft {else /} bounceInRight {/if}"
+              swiper-animate-duration="1.2s" swiper-animate-delay="0.1s"
               style="background-image: url('{$vo.teacherphoto}');">
               <p class="hx_szll_name">{$vo.teachername}</p>
               <p class="hx_szll_label hx_text_ellipsis">{$vo.teacherlevel}</p>
@@ -89,12 +93,15 @@
 
           <div class="swiper-slide hx_szllSwiper-slide hx_szllSwiper_plural">
             <!-- 标题 -->
-            <div class="hx_szll_title_container">
+            <div class="hx_szll_title_container ani" swiper-animate-effect="zoomIn" swiper-animate-duration="1.2s"
+              swiper-animate-delay="0.3s">
               <h3 class="hx_container_title hx_container_title_after"><span>师资</span>力量</h3>
               <p class="hx_szll_more">查看更多</p>
             </div>
             {volist name="teachers" k="key" id="vo" offset="4" length="4"}
-            <div class="hx_szll_item hx_szll_item{$key%4} hx_box_shadow"
+            <div class="hx_szll_item hx_szll_item{$key%4} hx_box_shadow ani"
+              swiper-animate-effect="{if $key%2 == 0} bounceInLeft {else /} bounceInRight {/if}"
+              swiper-animate-duration="1.2s" swiper-animate-delay="0.1s"
               style="background-image: url('{$vo.teacherphoto}');">
               <p class="hx_szll_name">{$vo.teachername}</p>
               <p class="hx_szll_label hx_text_ellipsis">{$vo.teacherlevel}</p>
@@ -209,7 +216,9 @@
     {include file="public/coll_footer" /}
   </footer>
   <!-- 请在此处下方写此页面业务相关的脚本 -->
-  <script src="__COLL__/plugins/swiper5/swiper.min.js"></script>
+  <!-- <script src="__COLL__/plugins/swiper5/swiper.min.js"></script> -->
+  <script src="__COLL__/plugins/swiper5/swiper.js"></script>
+  <script src="__COLL__/plugins/swiper5/swiper.animate1.0.3.min.js"></script>
   <script>
     (function () {
       var topHeight = (document.documentElement.clientWidth || document.body.clientWidth) * 1150 / 1920;
@@ -235,18 +244,28 @@
   </script>
   <script>
     var szllSwiper = new Swiper('.hx_szllSwiper-container', {
-      loop: true, // 循环模式选项
-      // effect: 'fade',
+      // loop: true, // 循环模式选项
+      effect: 'fade',
       // 如果需要分页器
       pagination: {
         el: '.hx_szllSwiper-pagination',
         clickable: true,
       },
       autoplay: {
-        delay: 3000,
+        delay: 10000,
         // stopOnLastSlide: false,
         disableOnInteraction: false,
       },
+      on: {
+        init: function () {
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        },
+        slideChangeTransitionEnd: function () {
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        }
+      }
     })
     //鼠标覆盖停止自动切换与隐藏前进后退按钮
     szllSwiper.el.onmouseover = function () {
