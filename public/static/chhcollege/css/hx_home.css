@@ -313,6 +313,10 @@ home-header {
   margin-top: -30px;
 }
 
+.hx_szll_more a {
+  cursor: pointer;
+}
+
 .hx_szllSwiper_single .hx_szll_item0 {
   position: absolute;
   top: 0;
@@ -707,6 +711,9 @@ home-header {
   margin-bottom: 40px;
 }
 
+.hx_school_item a {
+  width: 100%;
+}
 
 .hx_school_item i {
   display: block;

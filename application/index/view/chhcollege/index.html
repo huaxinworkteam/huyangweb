@@ -30,35 +30,55 @@
     <div class="hx_container hx_college">
       <h3 class="hx_container_title hx_container_title_before">学院<span>介绍</span></h3>
       <ul class="hx_school_list">
-        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon.png)"></i>
-          <p class="hx_text_ellipsis">创业CEO学院</p>
+        <li class="hx_school_item"><a href="{:url('index/college',['seriesID'=>1])}" target="_blank"><i
+              style="background-image: url(__COLL__/images/hx_hy_icon.png)"></i>
+            <p class="hx_text_ellipsis">创业CEO学院</p>
+          </a>
         </li>
-        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon2.png)"></i>
-          <p class="hx_text_ellipsis">国学创意学院</p>
+        <li class="hx_school_item"><a href="{:url('index/college',['seriesID'=>15])}" target="_blank"><i
+              style="background-image: url(__COLL__/images/hx_hy_icon2.png)"></i>
+            <p class="hx_text_ellipsis">国学创意学院</p>
+          </a>
         </li>
-        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon3.png)"></i>
-          <p class="hx_text_ellipsis">电商学院</p>
+        <li class="hx_school_item"><a href="{:url('index/college',['seriesID'=>14])}" target="_blank"><i
+              style="background-image: url(__COLL__/images/hx_hy_icon3.png)"></i>
+            <p class="hx_text_ellipsis">电商学院</p>
+          </a>
         </li>
-        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon4.png)"></i>
-          <p class="hx_text_ellipsis">女性创意学院</p>
+        <li class="hx_school_item"><a href="{:url('index/college',['seriesID'=>8])}" target="_blank"><i
+              style="background-image: url(__COLL__/images/hx_hy_icon4.png)"></i>
+            <p class="hx_text_ellipsis">女性创意学院</p>
+          </a>
         </li>
-        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon5.png)"></i>
-          <p class="hx_text_ellipsis">个人品牌学院</p>
+        <li class="hx_school_item"><a href="{:url('index/college',['seriesID'=>3])}" target="_blank"><i
+              style="background-image: url(__COLL__/images/hx_hy_icon5.png)"></i>
+            <p class="hx_text_ellipsis">个人品牌学院</p>
+          </a>
         </li>
-        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon6.png)"></i>
-          <p class="hx_text_ellipsis">人工智能学院</p>
+        <li class="hx_school_item"><a href="{:url('index/college',['seriesID'=>9])}" target="_blank"><i
+              style="background-image: url(__COLL__/images/hx_hy_icon6.png)"></i>
+            <p class="hx_text_ellipsis">人工智能学院</p>
+          </a>
         </li>
-        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon7.png)"></i>
-          <p class="hx_text_ellipsis">经理人学院</p>
+        <li class="hx_school_item"><a href="{:url('index/college',['seriesID'=>12])}" target="_blank"><i
+              style="background-image: url(__COLL__/images/hx_hy_icon7.png)"></i>
+            <p class="hx_text_ellipsis">经理人学院</p>
+          </a>
         </li>
-        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon8.png)"></i>
-          <p class="hx_text_ellipsis">法商学院</p>
+        <li class="hx_school_item"><a href="{:url('index/college',['seriesID'=>6])}" target="_blank"><i
+              style="background-image: url(__COLL__/images/hx_hy_icon8.png)"></i>
+            <p class="hx_text_ellipsis">法商学院</p>
+          </a>
         </li>
-        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon9.png)"></i>
-          <p class="hx_text_ellipsis">新零售学院</p>
+        <li class="hx_school_item"><a href="{:url('index/college',['seriesID'=>2])}" target="_blank"><i
+              style="background-image: url(__COLL__/images/hx_hy_icon9.png)"></i>
+            <p class="hx_text_ellipsis">新零售学院</p>
+          </a>
         </li>
-        <li class="hx_school_item"><i style="background-image: url(__COLL__/images/hx_hy_icon_more.png)"></i>
-          <p class="hx_text_ellipsis">更多</p>
+        <li class="hx_school_item"><a href="{:url('index/introduction')}" target="_blank"><i
+              style="background-image: url(__COLL__/images/hx_hy_icon_more.png)"></i>
+            <p class="hx_text_ellipsis">更多</p>
+          </a>
         </li>
       </ul>
     </div>
@@ -71,7 +91,7 @@
             <div class="hx_szll_title_container ani" swiper-animate-effect="zoomIn" swiper-animate-duration="1.2s"
               swiper-animate-delay="0.3s">
               <h3 class="hx_container_title hx_container_title_after"><span>师资</span>力量</h3>
-              <p class="hx_szll_more">查看更多</p>
+              <p class="hx_szll_more"><a href="{:url('index/szll',['seriesNO'=>0])}">查看更多</a></p>
             </div>
             {volist name="teachers" k="key" id="vo" offset="0" length="4"}
             <div class="hx_szll_item hx_szll_item{$key%4} hx_box_shadow ani"
@@ -96,7 +116,7 @@
             <div class="hx_szll_title_container ani" swiper-animate-effect="zoomIn" swiper-animate-duration="1.2s"
               swiper-animate-delay="0.3s">
               <h3 class="hx_container_title hx_container_title_after"><span>师资</span>力量</h3>
-              <p class="hx_szll_more">查看更多</p>
+              <p class="hx_szll_more"><a href="{:url('index/szll',['seriesNO'=>0])}">查看更多</a></p>
             </div>
             {volist name="teachers" k="key" id="vo" offset="4" length="4"}
             <div class="hx_szll_item hx_szll_item{$key%4} hx_box_shadow ani"
