@@ -1,116 +1,156 @@
-table, caption, tbody, tfoot, thead, tr, th, td {
-    text-align: center;
-    font-size: 0.32rem;
-    padding: 0.1rem 0.05rem;
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  text-align: center;
+  font-size: 0.32rem;
+  padding: 0.1rem 0.05rem;
 }
 
 /* margin-left 50px == 0.5rem(width=750px) */
-.ml50{
-    margin-left: 0.5rem;
+.ml50 {
+  margin-left: 0.5rem;
 }
-.ml30{
-    margin-left: 0.3rem;
+
+.ml30 {
+  margin-left: 0.3rem;
 }
-.mr30{
-    margin-right: 0.3rem;
+
+.mr30 {
+  margin-right: 0.3rem;
 }
+
 /* padding-left-right 20px == 0.2rem(width=750px) */
 .pl-r20 {
-    padding: 0 0.2rem;
+  padding: 0 0.2rem;
+}
+
+.pl-r40 {
+  padding: 0 0.4rem;
 }
 
 /* flex-center */
 .flex-plumb-center {
-    display: flex;
-    -o-display: flex;
-    -ms-display: flex;
-    -moz-display: flex;
-    -webkit-display: flex;
-    align-items: center;
+  display: flex;
+  -o-display: flex;
+  -ms-display: flex;
+  -moz-display: flex;
+  -webkit-display: flex;
+  align-items: center;
 }
+
 /* flex-space-between */
 .flex-space-between {
-    display: flex;
-    -o-display: flex;
-    -ms-display: flex;
-    -moz-display: flex;
-    -webkit-display: flex;
-    justify-content: space-between;
+  display: flex;
+  -o-display: flex;
+  -ms-display: flex;
+  -moz-display: flex;
+  -webkit-display: flex;
+  justify-content: space-between;
 }
+
 /* flex 布局 换行 */
 .flex-wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
+
 /* vant-icon 文字垂直居中对齐
 （align-items: center; 影响 ）-- 不知为什么又不影响了 */
 .vant-icon {
-    position: relative;
-    top: 0.03rem;
+  position: relative;
+  top: 0.03rem;
 }
 
 /* 文本溢出不换行 */
 .text-nowrap {
-    overflow:hidden; text-overflow:ellipsis;white-space:nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
 /* 文本溢出换行 */
 .text-line-clamp2 {
-    overflow:hidden; text-overflow:ellipsis; display:-webkit-box;  -webkit-box-orient:vertical; -webkit-line-clamp:2; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
+
 .text-line-clamp3 {
-    overflow:hidden; text-overflow:ellipsis; display:-webkit-box;  -webkit-box-orient:vertical; -webkit-line-clamp:3; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
+
 /* p 标签首行缩进2字符 */
 .text-indent2 {
-    text-indent:2em;
+  text-indent: 2em;
 }
 
 /* 行高 */
 .p-line-height {
-    line-height: 0.5rem;
+  line-height: 0.5rem;
 }
+
 /* nav position: fixed 上边距 */
 .nav-top {
-    position: relative;
-    top:1.4rem;
+  position: relative;
+  top: 1.4rem;
 }
+
 /* 底部虚线 */
-.bottom-dashed{
-    border-bottom: 1px dashed #CFCFCF;
+.bottom-dashed {
+  border-bottom: 1px dashed #CFCFCF;
 }
 
 
 
 /* vant 自适应 */
 .van-tabs__line {
-    /* left: 0.1rem !important; */
+  /* left: 0.1rem !important; */
 }
+
 .van-tabs__wrap {
-    height: 0.88rem !important;
+  height: 0.88rem !important;
 }
+
 .van-tab {
-    font-size: 0.28rem !important; line-height: 0.88rem !important;
-    padding: 0 0.2rem !important;
+  font-size: 0.28rem !important;
+  line-height: 0.88rem !important;
+  padding: 0 0.2rem !important;
 }
 
 .van-cell {
-    padding: 0.2rem 0.32rem !important;
-    font-size: 0.28rem !important;
-    line-height: 0.48rem !important;
+  padding: 0.2rem 0.32rem !important;
+  font-size: 0.28rem !important;
+  line-height: 0.48rem !important;
 }
-.van-cell__left-icon, .van-cell__right-icon {
-    min-width: 1em;
-    height: 0.48rem !important;
-    font-size: 0.32rem !important;
-    line-height: 0.48rem !important;
+
+.van-cell__left-icon,
+.van-cell__right-icon {
+  min-width: 1em;
+  height: 0.48rem !important;
+  font-size: 0.32rem !important;
+  line-height: 0.48rem !important;
 }
+
 /* 轮播 */
 .van-swipe__indicators {
-    bottom: 0.2rem !important;
+  bottom: 0.2rem !important;
 }
+
 .van-swipe__indicator {
-    width: 0.12rem !important;
-    height: 0.12rem !important;
+  width: 0.12rem !important;
+  height: 0.12rem !important;
 }
+
 .van-swipe__indicator:not(:last-child) {
-    margin-right: 0.12rem !important;
+  margin-right: 0.12rem !important;
 }

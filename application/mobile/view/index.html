@@ -11,58 +11,114 @@
     content="华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。学校致力于系统性的培养企业家及其管理团队，打造最有价值的学习与发展平台，为中国创新创业事业和实业发展贡献力量。" />
   <!-- 引用 css 引用列表 -->
   {include file="common/meta" /}
+  <!-- 引入 index 首页 css -->
+  <link href="__MOBILE__/css/hy_home.css" rel="stylesheet">
+  <link href="__MOBILE__/plugins/swiper-5.4.5/css/swiper.min.css" rel="stylesheet">
 </head>
 
 <body>
   <div id="app">
     <!-- 引用 头部组件 -->
     {include file="common/header" /}
+
+    <!-- 纯净界面 -->
+    <div></div>
+    <div class="hy_home_full" v-if="cover" :style="{transform:'translateY(-'+transFullY+'vh)', opacity: opacityFull}">
+      <div class="hy_home_full_img" id="startTouch" :style="{transform:'translate(-50%,'+transFormY+'px)'}">
+        <img src="__MOBILE__/images/hy_home_fall_img.png" alt="">
+      </div>
+    </div>
+
+
+
     <content class="content nav-top">
       <!-- 背景轮播 -->
-      <van-swipe :autoplay="1000">
+      <!-- <van-swipe :autoplay="1000">
         <van-swipe-item v-for="(item,index) in gallery" :key="index">
           <img class="banner" :src="item.path" />
         </van-swipe-item>
-      </van-swipe>
+      </van-swipe> -->
       <div style="background-image:url(__MOBILE__/images/bgc.jpg);background-size: cover;
       background-repeat: no-repeat;">
         <!-- 文字介绍 -->
-        <div class="home-title" data-scroll-reveal>
-          <span>创造价值，回报社会</span>
+        <div class="home-title">
+          <span>报名培训</span>
         </div>
-        <p data-scroll-reveal class="text-indent2 p-line-height pl-r20">
+        <!-- <p class="text-indent2 p-line-height pl-r20">
           华创胡杨大学，是一所不设门槛的创新创业大学，是一所终身公益免费培养企业家的学校，是一所所有导师无私奉献的学校。</p>
-        <p data-scroll-reveal class="text-indent2 p-line-height pl-r20">
+        <p class="text-indent2 p-line-height pl-r20">
           学校致力于系统性的培养企业家及其管理团队，打造最有价值的学习与发展平台，为中国创新创业事业和实业发展贡献力量。</p>
         <ul class="flex-space-between flex-wrap pl-r20 home-list">
-          <li data-scroll-reveal class="home-list-item flex-plumb-center ico_10">
+          <li class="home-list-item flex-plumb-center ico_10">
             <i><img src="__MOBILE__/images/ico_10.png" /></i>
             <p>互动教学</p>
           </li>
-          <li data-scroll-reveal class="home-list-item flex-plumb-center ico_7">
+          <li class="home-list-item flex-plumb-center ico_7">
             <i><img src="__MOBILE__/images/ico_7.png" /></i>
             <p>咨询服务</p>
           </li>
-          <li data-scroll-reveal class="home-list-item flex-plumb-center ico_8">
+          <li class="home-list-item flex-plumb-center ico_8">
             <i><img src="__MOBILE__/images/ico_8.png" /></i>
             <p>融资路演</p>
           </li>
-          <li data-scroll-reveal class="home-list-item flex-plumb-center ico_9">
+          <li class="home-list-item flex-plumb-center ico_9">
             <i><img src="__MOBILE__/images/ico_9.png" /></i>
             <p>综合服务</p>
           </li>
         </ul>
-        <p data-scroll-reveal class="text-indent2 p-line-height pl-r20">
+        <p class="text-indent2 p-line-height pl-r20">
           胡杨大学给学员培养的不仅仅是知识和能力，更重要的是社会责任感和核心价值观。鼓励所有学员奉献和担当，通过持续创造价值来成就自己的事业。
           胡杨大学不仅仅是一所学校，而是助力创业者成长和企业发展的全方位服务生态，是创业者的加油站和休息站。
-        </p>
+        </p> -->
+        <ul class="flex-space-between flex-wrap pl-r40">
+          <li class="hy_home_apply" style="border-color: #BB282C;">
+            <img src="__COLL__/images/hx_hy_icon.png" alt="">
+            <p class="text-nowrap" style="color: #BB282C;">创业CEO学院</p>
+          </li>
+          <li class="hy_home_apply" style="border-color: #A16220;">
+            <img src="__COLL__/images/hx_hy_icon2.png" alt="">
+            <p class="text-nowrap" style="color: #A16220;">国学创意学院</p>
+          </li>
+          <li class="hy_home_apply" style="border-color: #A16220;">
+            <img src="__COLL__/images/hx_hy_icon4.png" alt="">
+            <p class="text-nowrap" style="color: #A16220;">女性创意学院</p>
+          </li>
+          <li class="hy_home_apply" style="border-color: #BB282C;">
+            <img src="__COLL__/images/hx_hy_icon3.png" alt="">
+            <p class="text-nowrap" style="color: #BB282C;">电商学院</p>
+          </li>
+          <li class="hy_home_apply" style="border-color: #BB282C;">
+            <img src="__COLL__/images/hx_hy_icon5.png" alt="">
+            <p class="text-nowrap" style="color: #BB282C;">个人品牌学院</p>
+          </li>
+          <li class="hy_home_apply" style="border-color: #A16220;">
+            <img src="__COLL__/images/hx_hy_icon6.png" alt="">
+            <p class="text-nowrap" style="color: #A16220;">人工智能学院</p>
+          </li>
+          <li class="hy_home_apply" style="border-color: #A16220;">
+            <img src="__COLL__/images/hx_hy_icon8.png" alt="">
+            <p class="text-nowrap" style="color: #A16220;">法商学院</p>
+          </li>
+          <li class="hy_home_apply" style="border-color: #BB282C;">
+            <img src="__COLL__/images/hx_hy_icon7.png" alt="">
+            <p class="text-nowrap" style="color: #BB282C;">经理人学院</p>
+          </li>
+          <li class="hy_home_apply" style="border-color: #BB282C;">
+            <img src="__COLL__/images/hx_hy_icon9.png" alt="">
+            <p class="text-nowrap" style="color: #BB282C;">新零售学院</p>
+          </li>
+          <li class="hy_home_apply" style="border-color: #A16220;">
+            <img src="__COLL__/images/hx_hy_icon_more.png" alt="">
+            <p class="text-nowrap" style="color: #A16220;">更多</p>
+          </li>
+        </ul>
       </div>
 
       <!-- 师资力量 -->
-      <div data-scroll-reveal class="home-title">
+      <div class="home-title">
         <span>师资力量</span>
       </div>
-      <div class="flex-space-between teach-card">
+      <!-- <div class="flex-space-between teach-card">
         <div class="card-item" v-for="(item,index) in teacherInfo" :key="index"
           @click="item.teachMask = !item.teachMask">
           <van-image class="teach-image" :src="item.teacherphoto"></van-image>
@@ -73,12 +129,28 @@
           </div>
         </div>
         <div class="card-item"></div>
+      </div> -->
+
+      <div class="swiper-container">
+        <div class="swiper-wrapper" style="transform: translate3d(41.406px, 0px, 0px);">
+          <div class="swiper-slide" v-for="(item,index) in teacherInfo" :key="index"
+            @click="item.teachMask = !item.teachMask">
+            <img class="teach-image" :src="'http://www.hccollege.cn'+item.teacherphoto" />
+            <div class="hx_szll_mask" :class="{hy_mask_active: item.teachMask }">
+            </div>
+            <div class="hx_szll_mask_content" :class="{hy_mask_active: item.teachMask }">
+              <p class="hx_szll_mask_name">{{item.teachername}}</p>
+              <p class="hx_szll_mask_label hx_text_ellipsis">{{item.teacherlevel}}</p>
+              <p class="hx_szll_mask_desc">{{item.teacherdescription}}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div data-scroll-reveal class="pl-r20">
+      <div class="pl-r20">
         <a class="morebtn" href="{:url('szll')}">查看更多</a>
       </div>
       <!-- 培训报名 -->
-      <div data-scroll-reveal class="home-title">
+      <!-- <div class="home-title">
         <span>培训报名</span>
       </div>
       <ul style="background-image:url(__MOBILE__/images/bgc.jpg);background-size: cover;
@@ -94,7 +166,7 @@
       </ul>
       <div class="pl-r20">
         <a class="morebtn" href="{:url('activity')}">查看更多</a>
-      </div>
+      </div> -->
       <!-- 新闻动态 -->
       <div class="home-title">
         <span>新闻动态</span>
@@ -111,7 +183,7 @@
           </div>
         </li>
       </ul>
-      <div data-scroll-reveal class="pl-r20">
+      <div class="pl-r20">
         <a class="morebtn" href="{:url('news')}">查看更多</a>
       </div>
     </content>
@@ -122,6 +194,7 @@
 </body>
 <!-- 引用 js 脚本引用列表 -->
 {include file="common/script" /}
+<script type="text/javascript" src="__MOBILE__/plugins/swiper-5.4.5/js/swiper.min.js"></script>
 <!-- 在此下方编写脚本 -->
 <script>
   new Vue({
@@ -134,9 +207,21 @@
         teacherInfo: [], //教师
         activity: [], //活动
         news: [], //新闻
+        startX: 0, // 鼠标开始点击的x坐标
+        startY: 0, // 鼠标开始点击的Y坐标
+        cover: true,
+        transFullY: 0,
+        transFormY: 0,
+        opacityFull: 1,
+        fullHomeActive: true,
+        swiper: null
       }
     },
     mounted: function () {
+      let element = document.getElementById('startTouch')
+      this.addHandler(element, 'touchstart', this.handleTouchEvent)
+      this.addHandler(element, 'touchend', this.handleTouchEvent)
+      this.addHandler(element, 'touchmove', this.handleTouchEvent)
       http.get('/api/index/index', {
         platform: 1
       }).then(res => {
@@ -147,6 +232,7 @@
         this.teacherInfo.forEach(item => {
           this.$set(item, 'teachMask', false)
         });
+        this.instantSwiper();
       });
     },
     methods: {
@@ -155,6 +241,62 @@
           'https://test.v7mall.com/app/index.php?i=2&c=entry&m=fx_activity&do=activity&ac=detail&op=display&activityid=' +
           param;
         else window.location.href = '/mobile/index/' + url + '?newsid=' + param;
+      },
+      // 给目标添加事件，处理兼容
+      addHandler(element, type, handler) {
+        if (element.addEventListener) {
+          element.addEventListener(type, handler, false)
+        } else if (element.attachEvent) {
+          element.attachEvent('on' + type, handler)
+        } else {
+          element['on' + type] = handler
+        }
+      },
+      // 具体的滑动处理
+      handleTouchEvent(event) {
+        switch (event.type) {
+          case 'touchstart':
+            this.startX = event.touches[0].pageX
+            this.startY = event.touches[0].pageY
+            break
+          case 'touchend':
+            var spanX = event.changedTouches[0].pageX - this.startX
+            var spanY = event.changedTouches[0].pageY - this.startY
+            if (Math.abs(spanY) > 70) {
+              this.transFullY = 100
+              this.fullHomeActive = false
+              setTimeout(() => {
+                this.cover = false;
+              }, 300)
+            } else {
+              this.opacityFull = 0;
+              this.transFormY = 0
+            }
+            break
+          case 'touchmove':
+            // 阻止默认行为
+            event.preventDefault()
+            this.transFormY = event.changedTouches[0].pageY - this.startY
+            break
+        }
+      },
+
+      instantSwiper() {
+        this.swiper = new Swiper('.swiper-container', {
+          // loop: true,
+          slidesPerView: 'auto',
+          centeredSlides: true, // 设定为true时，active slide会居中，而不是默认状态下的居左。
+          spaceBetween: -10,
+          initialSlide: 0,
+          // autoplay: {
+          //   disableOnInteraction: false,//增加此属性即可
+          // },
+          speed: 500,
+          autoplayDisableOnInteraction: false,
+          observer: true,//修改swiper自己或子元素时，自动初始化swiper
+          observeParents: true,//修改swiper的父元素时，自动初始化swiper
+          observeSlideChildren: true,
+        });
       }
     }
   });
