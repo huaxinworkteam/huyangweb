@@ -226,6 +226,20 @@
 {include file="common/script" /}
 <script type="text/javascript" src="__MOBILE__/plugins/swiper-5.4.5/js/swiper.min.js"></script>
 <!-- 在此下方编写脚本 -->
+<!--
+  <script>
+  // 这个测试结果说明persisted属性并不能够用来判断页面是通过链接打开还是通过后退按钮返回打开的！！！
+  // 于是想到还有一个window.performance.navigation.type属性可以帮我解决这个问题。window.performance 是W3C性能小组引入的新的API，目前IE9以上的浏览器都支持。
+
+  // window.performance.navigation.type包含三个值：
+  // 0 : TYPE_NAVIGATE(用户通过常规导航方式访问页面，比如点一个链接，或者一般的get方式)
+
+  // 1 : TYPE_RELOAD(用户通过刷新，包括JS调用刷新接口等方式访问页面)
+
+  // 2 : TYPE_BACK_FORWARD(用户通过后退按钮访问本页面)
+  // console.log(window.performance.navigation.type) 
+  </script>
+  -->
 <script>
   new Vue({
     el: '#app',
@@ -239,7 +253,7 @@
         news: [], //新闻
         startX: 0, // 鼠标开始点击的x坐标
         startY: 0, // 鼠标开始点击的Y坐标
-        coverHidden: window.history.length < 2 ? true : false,
+        coverHidden: window.performance.navigation.type == 2 ? false : true,
         transFullY: 0,
         transFormY: 0,
         opacityFull: 1,
