@@ -239,7 +239,7 @@
         news: [], //新闻
         startX: 0, // 鼠标开始点击的x坐标
         startY: 0, // 鼠标开始点击的Y坐标
-        coverHidden: window.history.length >= 2 ? false : true,
+        coverHidden: window.history.length < 2 ? true : false,
         transFullY: 0,
         transFormY: 0,
         opacityFull: 1,
