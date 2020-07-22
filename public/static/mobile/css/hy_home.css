@@ -113,6 +113,16 @@
   /* transition: all 0.3s; */
 }
 
+.hy_home_full_desc {
+  position: absolute;
+  bottom: 0.15rem;
+  font-size: 0.24rem;
+  text-align: center;
+  display: block;
+  width: 100%;
+  color: #ffffff;
+}
+
 .hy_home_full_img img {
   display: block;
   border-radius: 50%;
