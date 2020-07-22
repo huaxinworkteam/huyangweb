@@ -23,7 +23,8 @@
 
     <!-- 纯净界面 -->
     <div></div>
-    <div class="hy_home_full" v-if="cover" :style="{transform:'translateY(-'+transFullY+'vh)', opacity: opacityFull}">
+    <div class="hy_home_full" v-if="coverHidden"
+      :style="{transform:'translateY(-'+transFullY+'vh)', opacity: opacityFull}">
       <div class="hy_home_full_img" id="startTouch" :style="{transform:'translate(-50%,'+transFormY+'px)'}">
         <img src="__MOBILE__/images/hy_home_fall_img.gif" alt="">
       </div>
@@ -238,7 +239,7 @@
         news: [], //新闻
         startX: 0, // 鼠标开始点击的x坐标
         startY: 0, // 鼠标开始点击的Y坐标
-        cover: true,
+        coverHidden: true,
         transFullY: 0,
         transFormY: 0,
         opacityFull: 1,
@@ -293,12 +294,12 @@
             var spanY = event.changedTouches[0].pageY - this.startY
             if (Math.abs(spanY) > 70) {
               this.transFullY = 100
+              this.opacityFull = 0;
               this.fullHomeActive = false
               setTimeout(() => {
-                this.cover = false;
+                this.coverHidden = false;
               }, 300)
             } else {
-              this.opacityFull = 0;
               this.transFormY = 0
             }
             break

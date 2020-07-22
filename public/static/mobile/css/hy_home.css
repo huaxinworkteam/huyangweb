@@ -96,6 +96,7 @@
   height: calc(100vh - 1.4rem);
   z-index: 9;
   background: url(../images/hy_home_fall.jpg) no-repeat center;
+  background-size: cover;
   transform: translatey(0);
   opacity: 1;
   transition: all 0.9s;
@@ -112,6 +113,9 @@
 .hy_home_full_img img {
   display: block;
   border-radius: 50%;
+  width: 1.4rem;
+  height: 1.4rem;
+  object-fit: cover;
 }
 
 .hy_home_full_img:before,
@@ -122,8 +126,8 @@
   left: 50%;
   z-index: -1;
   transform: translate(-50%, -50%);
-  width: 96px;
-  height: 96px;
+  width: 1.4rem;
+  height: 1.4rem;
   display: block;
   background-color: #f8892f;
   border-radius: 50%;
@@ -151,8 +155,8 @@
 
 @keyframes ripple {
   0% {
-    width: 96px;
-    height: 96px;
+    width: 1.4rem;
+    height: 1.4rem;
     opcity: 0;
   }
 
@@ -162,8 +166,8 @@
 
   100% {
     opacity: 0;
-    width: 150px;
-    height: 150px;
+    width: 2.1rem;
+    height: 2.1rem;
   }
 }
 
