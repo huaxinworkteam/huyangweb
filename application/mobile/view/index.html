@@ -22,8 +22,7 @@
     {include file="common/header" /}
 
     <!-- 纯净界面 -->
-    <div></div>
-    <div class="hy_home_full" v-if="coverHidden"
+    <div class="hy_home_full" v-if="coverHidden" v-clock
       :style="{transform:'translateY(-'+transFullY+'vh)', opacity: opacityFull}">
       <div class="hy_home_full_img" id="startTouch" :style="{transform:'translate(-50%,'+transFormY+'px)'}">
         <img src="__MOBILE__/images/hy_home_fall_img.gif" alt="">
