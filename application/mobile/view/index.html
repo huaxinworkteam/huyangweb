@@ -76,39 +76,39 @@
             <img src="__COLL__/images/hx_hy_icon.png" alt="">
             <p class="text-nowrap" style="color: #BB282C;">创业CEO学院</p>
           </li>
-          <li class="hy_home_apply" style="border-color: #A16220;">
+          <li class="hy_home_apply" style="border-color: #A16220;" @click="goPage2(15)">
             <img src="__COLL__/images/hx_hy_icon2.png" alt="">
             <p class="text-nowrap" style="color: #A16220;">国学创意学院</p>
           </li>
-          <li class="hy_home_apply" style="border-color: #A16220;">
+          <li class="hy_home_apply" style="border-color: #A16220;" @click="goPage2(8)">
             <img src="__COLL__/images/hx_hy_icon4.png" alt="">
             <p class="text-nowrap" style="color: #A16220;">女性创意学院</p>
           </li>
-          <li class="hy_home_apply" style="border-color: #BB282C;">
+          <li class="hy_home_apply" style="border-color: #BB282C;" @click="goPage2(14)">
             <img src="__COLL__/images/hx_hy_icon3.png" alt="">
             <p class="text-nowrap" style="color: #BB282C;">电商学院</p>
           </li>
-          <li class="hy_home_apply" style="border-color: #BB282C;">
+          <li class="hy_home_apply" style="border-color: #BB282C;" @click="goPage2(3)">
             <img src="__COLL__/images/hx_hy_icon5.png" alt="">
             <p class="text-nowrap" style="color: #BB282C;">个人品牌学院</p>
           </li>
-          <li class="hy_home_apply" style="border-color: #A16220;">
+          <li class="hy_home_apply" style="border-color: #A16220;" @click="goPage2(9)">
             <img src="__COLL__/images/hx_hy_icon6.png" alt="">
             <p class="text-nowrap" style="color: #A16220;">人工智能学院</p>
           </li>
-          <li class="hy_home_apply" style="border-color: #A16220;">
+          <li class="hy_home_apply" style="border-color: #A16220;" @click="goPage2(6)">
             <img src="__COLL__/images/hx_hy_icon8.png" alt="">
             <p class="text-nowrap" style="color: #A16220;">法商学院</p>
           </li>
-          <li class="hy_home_apply" style="border-color: #BB282C;">
+          <li class="hy_home_apply" style="border-color: #BB282C;" @click="goPage2(12)">
             <img src="__COLL__/images/hx_hy_icon7.png" alt="">
             <p class="text-nowrap" style="color: #BB282C;">经理人学院</p>
           </li>
-          <li class="hy_home_apply" style="border-color: #BB282C;">
+          <li class="hy_home_apply" style="border-color: #BB282C;" @click="goPage2(2)">
             <img src="__COLL__/images/hx_hy_icon9.png" alt="">
             <p class="text-nowrap" style="color: #BB282C;">新零售学院</p>
           </li>
-          <li class="hy_home_apply" style="border-color: #A16220;">
+          <li class="hy_home_apply" style="border-color: #A16220;" @click="goPage3()">
             <img src="__COLL__/images/hx_hy_icon_more.png" alt="">
             <p class="text-nowrap" style="color: #A16220;">更多</p>
           </li>
@@ -239,19 +239,21 @@
         news: [], //新闻
         startX: 0, // 鼠标开始点击的x坐标
         startY: 0, // 鼠标开始点击的Y坐标
-        coverHidden: true,
+        coverHidden: window.history.length >= 3 ? false : true,
         transFullY: 0,
         transFormY: 0,
         opacityFull: 1,
-        fullHomeActive: true,
+        // fullHomeActive: true,
         swiper: null
       }
     },
     mounted: function () {
-      let element = document.getElementById('startTouch')
-      this.addHandler(element, 'touchstart', this.handleTouchEvent)
-      this.addHandler(element, 'touchend', this.handleTouchEvent)
-      this.addHandler(element, 'touchmove', this.handleTouchEvent)
+      if (this.coverHidden) {
+        let element = document.getElementById('startTouch')
+        this.addHandler(element, 'touchstart', this.handleTouchEvent)
+        this.addHandler(element, 'touchend', this.handleTouchEvent)
+        this.addHandler(element, 'touchmove', this.handleTouchEvent)
+      }
       http.get('/api/index/index', {
         platform: 1
       }).then(res => {
@@ -271,6 +273,13 @@
           'https://test.v7mall.com/app/index.php?i=2&c=entry&m=fx_activity&do=activity&ac=detail&op=display&activityid=' +
           param;
         else window.location.href = '/mobile/index/' + url + '?newsid=' + param;
+      },
+      goPage2(id) {
+        window.location.href = '/mobile/index/college?seriesID=' + id;
+      },
+      goPage3() {
+
+        window.location.href = '/mobile/index/about';
       },
       // 给目标添加事件，处理兼容
       addHandler(element, type, handler) {
@@ -330,7 +339,6 @@
       }
     }
   });
-
   // 调用函数组件，弹出一个 Toast
   // vant.Toast('提示');
 </script>
