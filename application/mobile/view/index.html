@@ -17,12 +17,12 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" v-cloak>
     <!-- 引用 头部组件 -->
     {include file="common/header" /}
 
     <!-- 纯净界面 -->
-    <div class="hy_home_full" v-if="coverHidden" v-cloak
+    <div class="hy_home_full" v-if="coverHidden"
       :style="{transform:'translateY(-'+transFullY+'vh)', opacity: opacityFull}">
       <div class="hy_home_full_img" id="startTouch" :style="{transform:'translate(-50%,'+transFormY+'px)'}">
         <img src="__MOBILE__/images/hy_home_fall_img.gif" alt="">
