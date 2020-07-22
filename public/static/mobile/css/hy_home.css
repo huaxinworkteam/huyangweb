@@ -118,6 +118,10 @@
   object-fit: cover;
 }
 
+.hy_home_title {
+  color: #f8892f;
+}
+
 .hy_home_full_img:before,
 .hy_home_full_img:after {
   content: "";

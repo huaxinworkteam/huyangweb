@@ -1,390 +1,491 @@
 body {
-    letter-spacing:1px;
+  letter-spacing: 1px;
 }
+
 /* 除去首页外 背景 */
 .banner {
-    width: 100%;
-    height: 3.2rem;
-    object-fit: cover;
-    /* 去除img下面间隙 */
-    vertical-align: middle;
+  width: 100%;
+  height: 3.2rem;
+  object-fit: cover;
+  /* 去除img下面间隙 */
+  vertical-align: middle;
 }
+
 .morebtn {
-    width: 100%; font-size: 0.28rem; color: #ffffff; background-color: #C17647;
-    padding: 0.15rem 0; margin: 0.2rem 0; border-radius: 4px; border: none;
-    display: block;
-    text-align: center;
+  width: 100%;
+  font-size: 0.28rem;
+  color: #ffffff;
+  background-color: #C17647;
+  padding: 0.15rem 0;
+  margin: 0.2rem 0;
+  border-radius: 4px;
+  border: none;
+  display: block;
+  text-align: center;
 }
+
 /* card */
 
 .card {
-    border-radius: 4px; margin-top: 0.2rem; background-color: #ffffff;
+  border-radius: 4px;
+  margin-top: 0.2rem;
+  background-color: #ffffff;
 }
 
 /* 首页 */
 .content .banner {
-    width: 100%;
-    height: 4rem;
-    object-fit: cover;
+  width: 100%;
+  height: 4rem;
+  object-fit: cover;
 }
+
 .content .home-title {
-    text-align: center;
-    color: #333;
-    margin: 0.5rem 0;
-    width: 100%;
-    overflow: auto;
+  text-align: center;
+  color: #333;
+  margin: 0.5rem 0;
+  width: 100%;
+  overflow: auto;
 }
+
 .content .home-title span {
-    font-style: normal;
-    display: inline-block;
-    position: relative;
+  font-style: normal;
+  display: inline-block;
+  position: relative;
 }
+
+.content .home-title span::after,
 .content .home-title span::before {
-    position: absolute;
-    content: '';
-    width: 1.8rem;
-    height: 0.3rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    top: 50%;
-    transform: translateY(-50%);
-    background-image: url(/static/mobile/images/home-title-bg-left.png);
-    left: -2rem;
+  position: absolute;
+  content: '';
+  width: 1.8rem;
+  height: 1px;
+  /* height: 0.3rem; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #222222;
 }
+
+.content .home-title-after span::after,
+.content .home-title-before span::before {
+  background: #f8892f;
+}
+
+.content .home-title span::before {
+  /* background-image: url(/static/mobile/images/home-title-bg-left.png); */
+  left: -2rem;
+}
+
 .content .home-title span::after {
-    position: absolute;
-    content: '';
-    width: 1.8rem;
-    height: 0.3rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    top: 50%;
-    transform: translateY(-50%);
-    background-image: url(/static/mobile/images/home-title-bg-right.png);
-    right: -2rem;
+  /* background-image: url(/static/mobile/images/home-title-bg-right.png); */
+  right: -2rem;
 }
+
 .content p {
-    font-size: 0.28rem; color: #666666;
+  font-size: 0.28rem;
+  color: #666666;
 }
+
 .content .home-list {
-    margin: 0.4rem 0;
+  margin: 0.4rem 0;
 }
-.content .home-list .home-list-item  {
-    width: 3.45rem;
-    padding: 0.18rem 0;
-    border-radius: 10px;
-    margin-bottom: 0.16rem;
+
+.content .home-list .home-list-item {
+  width: 3.45rem;
+  padding: 0.18rem 0;
+  border-radius: 10px;
+  margin-bottom: 0.16rem;
 }
+
 .content .home-list .ico_7 {
-    background-color: #b0b0b0;
+  background-color: #b0b0b0;
 }
+
 .content .home-list .ico_8 {
-    background-color: #d6ae61;
+  background-color: #d6ae61;
 }
+
 .content .home-list .ico_9 {
-    background-color: #1e1766;
+  background-color: #1e1766;
 }
+
 .content .home-list .ico_10 {
-    background-color: #ea7a5c;
+  background-color: #ea7a5c;
 }
-.content .home-list .home-list-item i{
-    border-radius: 50%;
-    background: #ffffff;
-    width: 0.7rem;
-    height: 0.7rem;
-    display: inline-block;
-    position: relative;
-    margin-left: 0.3rem;
+
+.content .home-list .home-list-item i {
+  border-radius: 50%;
+  background: #ffffff;
+  width: 0.7rem;
+  height: 0.7rem;
+  display: inline-block;
+  position: relative;
+  margin-left: 0.3rem;
 }
-.content .home-list .home-list-item  i img{
-    width: 0.36rem;
-    position: absolute;
-    top: 0.16rem;
-    left: 0.16rem;
+
+.content .home-list .home-list-item i img {
+  width: 0.36rem;
+  position: absolute;
+  top: 0.16rem;
+  left: 0.16rem;
 }
-.content .home-list .home-list-item  p{
-    color: #ffffff;
-    font-size: 0.28rem;
-    text-indent: 0.7em;
+
+.content .home-list .home-list-item p {
+  color: #ffffff;
+  font-size: 0.28rem;
+  text-indent: 0.7em;
 }
+
 .home-signUp-image {
-    flex: none;
-    width: 3rem;
-    height: 2.2rem;
+  flex: none;
+  width: 3rem;
+  height: 2.2rem;
 }
+
 .home-signUp-image img {
-    border-radius: 4px;
+  border-radius: 4px;
 }
+
 .home-signUp-content {
-    width:100%;margin-left: 0.2rem; position: relative; overflow: hidden;
+  width: 100%;
+  margin-left: 0.2rem;
+  position: relative;
+  overflow: hidden;
 }
+
 .home-signUp-content h4 {
-    font-size: 0.32rem; margin-bottom: 0.2rem; color: #333333;     line-height: 0.4rem;
+  font-size: 0.32rem;
+  margin-bottom: 0.2rem;
+  color: #333333;
+  line-height: 0.4rem;
 }
+
 .home-signUp-content p {
-    font-size: 0.28rem; max-height: 1.2rem; line-height: 0.35rem; color:#666666;
+  font-size: 0.28rem;
+  max-height: 1.2rem;
+  line-height: 0.35rem;
+  color: #666666;
 }
+
 .home-signUp-content time {
-    font-size: 0.24rem; color:#bbbbbb;
+  font-size: 0.24rem;
+  color: #bbbbbb;
 }
+
 .teach-card {
-    overflow-x: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
 }
+
 .teach-card::-webkit-scrollbar {
-    display: none; /* Chrome Safari */
+  display: none;
+  /* Chrome Safari */
 }
+
 .teach-card .card-item {
-    border-radius: 4px;
-    background-color: #f7f8fa;
-    width: 6rem;
-    height: 5.5rem;
-    flex: none;
-    margin: 0 0.1rem;
-    position: relative;
+  border-radius: 4px;
+  background-color: #f7f8fa;
+  width: 6rem;
+  height: 5.5rem;
+  flex: none;
+  margin: 0 0.1rem;
+  position: relative;
 }
+
 .teach-card .card-item:first-child {
-    margin-left: 0.75rem;
+  margin-left: 0.75rem;
 }
+
 .teach-card .card-item:last-child {
-    background-color: #ffffff;
-    width: 0.65rem;
-    margin-left: 0;
-    height: 2rem;
-    flex: none;
+  background-color: #ffffff;
+  width: 0.65rem;
+  margin-left: 0;
+  height: 2rem;
+  flex: none;
 }
+
 .van-swipe__track {
-    width: auto !important;
+  width: auto !important;
 }
+
 .teach-card .job {
-    position: absolute;
-    bottom: 0.05rem;
+  position: absolute;
+  bottom: 0.05rem;
 }
-.teach-card .card-item .teach-image{
-    width: 100%;
-    height: 3.75rem;
-    object-fit: cover;
+
+.teach-card .card-item .teach-image {
+  width: 100%;
+  height: 3.75rem;
+  object-fit: cover;
 }
-.teach-card .card-item .teach-image img{
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+
+.teach-card .card-item .teach-image img {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
+
 .teach-card .card-item h3 {
-    font-size: 0.32rem;
-    line-height: 0.45rem;
-    text-align: justify;
-    margin: 0.1rem;
-    color: #C17A41;
+  font-size: 0.32rem;
+  line-height: 0.45rem;
+  text-align: justify;
+  margin: 0.1rem;
+  color: #C17A41;
 }
+
 .teach-card .card-item .mask {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    padding: 0.2rem;
-    font-size: 0.28rem;
-    color: #ffffff;
-    background-color: #000000;
-    line-height: 0.45rem;
-    text-align: justify;
-    opacity: 0.8;
-    border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  padding: 0.2rem;
+  font-size: 0.28rem;
+  color: #ffffff;
+  background-color: #000000;
+  line-height: 0.45rem;
+  text-align: justify;
+  opacity: 0.8;
+  border-radius: 4px;
 }
 
 
 /* 胡杨概况 */
 .about .tabs {
-    min-height: 4.5rem;
+  min-height: 4.5rem;
 }
+
 .about .van-grid-item__content--center {
-    justify-content: start;
+  justify-content: start;
 }
 
 /* 师资力量 */
-.szll .tabs{
-    min-height: 4.5rem;
+.szll .tabs {
+  min-height: 4.5rem;
 }
-.szll .tabs .teach-image{
-    width: 100%;
-    height: 4.45rem;
-    object-fit: cover;
+
+.szll .tabs .teach-image {
+  width: 100%;
+  height: 4.45rem;
+  object-fit: cover;
 }
-.szll .tabs .teach-image img{
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+
+.szll .tabs .teach-image img {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
+
 .szll .van-tab {
-    flex: none !important;
+  flex: none !important;
 }
+
 .szll .tabs.van-collapse {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
+
 .szll .tabs .van-cell {
-    color: #C17A41;
+  color: #C17A41;
 }
 
 /* news */
 .news .van-sidebar {
-    width: 100% !important;
+  width: 100% !important;
 }
+
 .news .van-sidebar .van-sidebar-item {
-    padding: 0.2rem 0.24rem !important;
-    font-size: 0.28rem !important;
-    border-left: 0.06rem solid transparent !important;
-    border-color: #C17A41 !important;
+  padding: 0.2rem 0.24rem !important;
+  font-size: 0.28rem !important;
+  border-left: 0.06rem solid transparent !important;
+  border-color: #C17A41 !important;
 }
+
 .news .news-image {
-    width: 2.2rem;
-    height: 1.5rem;
-    border-radius: 4px;
+  width: 2.2rem;
+  height: 1.5rem;
+  border-radius: 4px;
 }
+
 .news .info {
-    margin-left: 0.24rem;
-    position: relative;
-    height: 1.5rem;
-    width: 100%;
+  margin-left: 0.24rem;
+  position: relative;
+  height: 1.5rem;
+  width: 100%;
 }
-.news .info .title{
-    font-size: 0.32rem;
-    color: #515151;
-    margin-top: 0.1rem; line-height: 0.4rem;
+
+.news .info .title {
+  font-size: 0.32rem;
+  color: #515151;
+  margin-top: 0.1rem;
+  line-height: 0.4rem;
 }
+
 .news .info time {
-    font-size: 0.28rem;
-    color: #A0A0A0;
-    position: absolute;
-    bottom: 0.1rem;
+  font-size: 0.28rem;
+  color: #A0A0A0;
+  position: absolute;
+  bottom: 0.1rem;
 }
+
 .news-detail,
-.news-detail img{
-    width: 100%; overflow: hidden;
+.news-detail img {
+  width: 100%;
+  overflow: hidden;
 }
+
 /* activity (培训报名)*/
 .activity .nav-tabs {
-    position: static;
-    background-color: #fff;
-    z-index: 1;
-    width: 100%;
+  position: static;
+  background-color: #fff;
+  z-index: 1;
+  width: 100%;
 }
+
 .activity .van-tab {
-    flex: none !important;
+  flex: none !important;
 }
+
 .activity .nav-tabs .tab-title {
-    color: #505050;
-    flex: none;
-    font-size: 0.28rem;
+  color: #505050;
+  flex: none;
+  font-size: 0.28rem;
 }
+
 .activity .nav-tabs .tab-item {
-    width: 100%; overflow: auto;
+  width: 100%;
+  overflow: auto;
 }
-.activity .van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after {
-    border-width: 0;
+
+.activity .van-hairline--top-bottom::after,
+.van-hairline-unset--top-bottom::after {
+  border-width: 0;
 }
+
 .activity .image {
-    width: 100%;
-    height: 4.5rem;
-    object-fit: cover;
+  width: 100%;
+  height: 4.5rem;
+  object-fit: cover;
 }
-.activity .image img{
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+
+.activity .image img {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
+
 .activity .title {
-    padding: .2rem 0;
-    border-bottom: 1px dashed #CFCFCF;
-    color: #494949;
-    line-height: 0.45rem;
-    font-weight: bold;
-    font-size: 0.32rem;
+  padding: .2rem 0;
+  border-bottom: 1px dashed #CFCFCF;
+  color: #494949;
+  line-height: 0.45rem;
+  font-weight: bold;
+  font-size: 0.32rem;
 }
+
 .activity .ic-info {
-    padding: 0.2rem 0;
+  padding: 0.2rem 0;
 }
+
 .activity .ic-info .ic-p {
-    font-size: 0.28rem;
-    margin: 0.2rem 0;
-    color: #5f5f5f;
+  font-size: 0.28rem;
+  margin: 0.2rem 0;
+  color: #5f5f5f;
 }
 
 
 /* course */
 .course .nav-tabs {
-    position: static;
-    background-color: #fff;
-    z-index: 1;
-    width: 100%;
+  position: static;
+  background-color: #fff;
+  z-index: 1;
+  width: 100%;
 }
+
 .course .van-tab {
-    flex: none !important;
+  flex: none !important;
 }
+
 .course .nav-tabs .tab-title {
-    color: #505050;
-    flex: none;
-    font-size: 0.28rem;
+  color: #505050;
+  flex: none;
+  font-size: 0.28rem;
 }
+
 .course .nav-tabs .tab-item {
-    width: 100%; overflow: auto;
+  width: 100%;
+  overflow: auto;
 }
-.course .van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after {
-    border-width: 0;
+
+.course .van-hairline--top-bottom::after,
+.van-hairline-unset--top-bottom::after {
+  border-width: 0;
 }
+
 .course .news-image {
-    flex: none;
+  flex: none;
 }
-.course .news-image img{
-    border-radius: 4px;
+
+.course .news-image img {
+  border-radius: 4px;
 }
+
 .course .info {
-    margin-left: 0.24rem;
-    position: relative;
-    height: 1.5rem;
-    width: 100%;
+  margin-left: 0.24rem;
+  position: relative;
+  height: 1.5rem;
+  width: 100%;
 }
-.course .info .title{
-    font-size: 0.28rem;
-    color: #515151;
-    margin-top: 0.2rem;
+
+.course .info .title {
+  font-size: 0.28rem;
+  color: #515151;
+  margin-top: 0.2rem;
 }
+
 .course .info .liulan {
-    font-size: 0.2rem;
-    color: #A0A0A0;
-    position: absolute;
-    bottom: 0.2rem;
+  font-size: 0.2rem;
+  color: #A0A0A0;
+  position: absolute;
+  bottom: 0.2rem;
 }
+
 .course .info .liulan span {
-    color: #df3333;
+  color: #df3333;
 }
 
 /* 详情 */
 .detail-banner {
-    width: 100%;
-    object-fit: cover;
-    height: 4.2188rem;
+  width: 100%;
+  object-fit: cover;
+  height: 4.2188rem;
 }
+
 .detail-title {
-    margin: 0.48rem 0.2rem;
-    color: #282828;
-    font-size: 0.36rem;
+  margin: 0.48rem 0.2rem;
+  color: #282828;
+  font-size: 0.36rem;
 }
+
 .detail-p {
-    padding-top: 0.2rem;
-    font-size: 0.32rem;
-    color: #696969;
-    margin: 0 0.2rem;
+  padding-top: 0.2rem;
+  font-size: 0.32rem;
+  color: #696969;
+  margin: 0 0.2rem;
 }
+
 .borderTop-das {
-    border-top: 1px dashed #ACACAC;
+  border-top: 1px dashed #ACACAC;
 }
+
 .btn-detail {
-    border-radius: 4px;
-    background-color: #B48A61;
-    text-align: center;
-    color: #fff;
-    cursor: pointer;    
-    margin: 0.3rem 0.2rem;
-    height: 0.75rem;
-    line-height: 0.75rem;
-    font-size: 0.32rem;
+  border-radius: 4px;
+  background-color: #B48A61;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  margin: 0.3rem 0.2rem;
+  height: 0.75rem;
+  line-height: 0.75rem;
+  font-size: 0.32rem;
 }
