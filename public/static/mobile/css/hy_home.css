@@ -98,7 +98,7 @@
   background: url(../images/hy_home_fall.jpg) no-repeat center;
   background-size: cover;
   transform: translatey(0);
-  opacity: 0;
+  opacity: 1;
   transition: all 0.9s;
 }
 
