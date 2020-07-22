@@ -25,7 +25,7 @@
     <div></div>
     <div class="hy_home_full" v-if="cover" :style="{transform:'translateY(-'+transFullY+'vh)', opacity: opacityFull}">
       <div class="hy_home_full_img" id="startTouch" :style="{transform:'translate(-50%,'+transFormY+'px)'}">
-        <img src="__MOBILE__/images/hy_home_fall_img.png" alt="">
+        <img src="__MOBILE__/images/hy_home_fall_img.gif" alt="">
       </div>
     </div>
 
@@ -149,6 +149,35 @@
       <div class="pl-r20">
         <a class="morebtn" href="{:url('szll')}">查看更多</a>
       </div>
+
+      <!-- 我们的优势 -->
+
+      <div style="background-image:url(__MOBILE__/images/bgc.jpg);background-size: cover;
+            background-repeat: no-repeat;">
+        <!-- 文字介绍 -->
+        <div class="home-title">
+          <span>我们的优势</span>
+        </div>
+        <ul class="flex-space-between flex-wrap pl-r40">
+          <li class="hy_home_youshi hx_box_creative">
+            <img src="__COLL__/images/hx_icon1.png" alt="">
+            <p class="text-nowrap">互动教学</p>
+          </li>
+          <li class="hy_home_youshi hx_box_creative">
+            <img src="__COLL__/images/hx_icon2.png" alt="">
+            <p class="text-nowrap">咨询辅导</p>
+          </li>
+          <li class="hy_home_youshi hx_box_creative">
+            <img src="__COLL__/images/hx_icon3.png" alt="">
+            <p class="text-nowrap">融资路演</p>
+          </li>
+          <li class="hy_home_youshi hx_box_creative">
+            <img src="__COLL__/images/hx_icon4.png" alt="">
+            <p class="text-nowrap">综合服务</p>
+          </li>
+        </ul>
+      </div>
+
       <!-- 培训报名 -->
       <!-- <div class="home-title">
         <span>培训报名</span>

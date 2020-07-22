@@ -1,3 +1,94 @@
+/* 边框动效 */
+.hx_box_creative {
+  position: relative;
+  padding: 25px 15px;
+  text-align: center;
+  border: 1px solid #d6d6d6;
+  transition: .2s ease-in-out;
+  transform: translate3d(0, 0, 0);
+}
+
+.hx_box_creative:hover {
+  border-color: rgba(214, 214, 214, 0);
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.hx_box_creative::before,
+.hx_box_creative::after {
+  box-sizing: border-box;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  border: 1px solid #F59A23;
+  transition: .25s ease-out;
+  will-change: transform;
+  contain: paint;
+
+}
+
+.hx_box_creative::after,
+.hx_box_creative::before {
+  /*动画属性名，也就是我们前面keyframes定义的动画名*/
+  -webkit-animation-duration: 0s;
+  /*动画持续时间*/
+  -webkit-animation-timing-function: ease-out;
+  /*动画频率，和transition-timing-function是一样的*/
+  -webkit-animation-delay: 0s;
+  /*动画延迟时间*/
+  -webkit-animation-iteration-count: infinite;
+  /*定义循环资料，infinite为无限次*/
+  -webkit-animation-direction: normal;
+  /*定义动画方式*/
+}
+
+.hx_box_creative::before {
+  /* border-width: 1px 0 1px 0; */
+  /* -webkit-animation-name: 'hx_box_creative_before'; */
+}
+
+.hx_box_creative::after {
+  /* border-width: 0 1px 0 1px; */
+  /* -webkit-animation-name: 'hx_box_creative_after'; */
+  /*动画属性名，也就是我们前面keyframes定义的动画名*/
+}
+
+.hx_box_creative,
+.hx_box_creative:active,
+.hx_box_creative:focus,
+.hx_box_creative:hover {
+  color: #9a9a9a;
+}
+
+@keyframes hx_box_creative_before {
+  0% {
+    transform: scale3d(0, 1, 1);
+  }
+
+  100% {
+    transform: scale3d(0.9999, 0.9999, 0.9999);
+  }
+}
+
+@keyframes hx_box_creative_after {
+  0% {
+    transform: scale3d(1, 0, 1);
+  }
+
+  100% {
+    transform: scale3d(0.9999, 0.9999, 0.9999);
+  }
+}
+
+
+
+
+
+
+
 .hy_home_full {
   position: fixed;
   top: 1.4rem;
@@ -71,7 +162,7 @@
   }
 }
 
-
+.hy_home_youshi,
 .hy_home_apply {
   padding: 0.55rem 0.15rem;
   border: 1px solid #eaeaea;
@@ -82,11 +173,18 @@
   margin-bottom: 0.35rem;
 }
 
+.hy_home_youshi img {
+  width: 1.2rem;
+  height: 1.04rem;
+  margin-bottom: 0.18rem;
+}
+
 .hy_home_apply img {
   width: 1.4rem;
   height: 1.4rem;
 }
 
+.hy_home_youshi p,
 .hy_home_apply p {
   font-size: 0.3rem;
 }
