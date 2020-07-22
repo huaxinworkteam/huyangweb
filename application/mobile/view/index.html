@@ -255,7 +255,7 @@
         coverHidden: window.performance.navigation.type == 2 ? false : true,
         transFullY: 0,
         transFormY: 0,
-        opacityFull: 1,
+        opacityFull: window.performance.navigation.type == 2 ? 0 : 1,
         // fullHomeActive: true,
         swiper: null
       }
