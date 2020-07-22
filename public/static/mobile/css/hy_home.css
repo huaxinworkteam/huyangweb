@@ -155,17 +155,13 @@
 
 @keyframes ripple {
   0% {
-    width: 1.4rem;
-    height: 1.4rem;
+    transform: scale(1);
     opcity: 1;
-    -webkit-perspective: 1000;
-    -webkit-backface-visibility: hidden;
   }
 
   100% {
     opacity: 0;
-    width: 2.1rem;
-    height: 2.1rem;
+    transform: scale(1.1);
   }
 }
 
