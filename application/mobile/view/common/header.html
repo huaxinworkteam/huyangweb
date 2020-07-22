@@ -1,7 +1,7 @@
 <header class="flex-plumb-center flex-wrap pl-r20" ref="header" :class="{homeActive: fullHomeActive}">
   <!-- <h2 class="mr30">胡杨大学官网</h2> -->
   <img class="logo" src="__MOBILE__/images/logo.png" />
-  <van-icon class="vant-icon" name="bars" color="#FFFFFF" size="0.5rem" @click="headerActive=!headerActive"
+  <van-icon class="vant-icon" name="bars" color="#f8892f" size="0.5rem" @click="headerActive=!headerActive"
     style="left: 3rem;"></van-icon>
   <ul class="list" :class="headerActive?'active':''">
     <li><a class="item pl-r20" :class="headerId==0?'active': ''" href="{:url('index')}">首页</a></li>
