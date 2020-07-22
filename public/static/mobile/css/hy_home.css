@@ -120,8 +120,6 @@
 
 .hy_home_full_img:before,
 .hy_home_full_img:after {
-  -webkit-perspective: 1000;
-  -webkit-backface-visibility: hidden;
   content: "";
   position: absolute;
   top: 50%;
@@ -159,11 +157,9 @@
   0% {
     width: 1.4rem;
     height: 1.4rem;
-    opcity: 0;
-  }
-
-  1% {
     opcity: 1;
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
   }
 
   100% {
