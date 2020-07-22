@@ -111,6 +111,7 @@
 
 .hy_home_full_img img {
   display: block;
+  border-radius: 50%;
 }
 
 .hy_home_full_img:before,
@@ -150,9 +151,9 @@
 
 @keyframes ripple {
   0% {
-    opcity: 1;
     width: 96px;
     height: 96px;
+    opcity: 1;
   }
 
   100% {
