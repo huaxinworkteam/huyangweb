@@ -22,7 +22,7 @@
     {include file="common/header" /}
 
     <!-- 纯净界面 -->
-    <div class="hy_home_full" v-if="coverHidden" v-clock
+    <div class="hy_home_full" v-if="coverHidden"
       :style="{transform:'translateY(-'+transFullY+'vh)', opacity: opacityFull}">
       <div class="hy_home_full_img" id="startTouch" :style="{transform:'translate(-50%,'+transFormY+'px)'}">
         <img src="__MOBILE__/images/hy_home_fall_img.gif" alt="">
@@ -317,7 +317,6 @@
             if (Math.abs(spanY) > 70) {
               this.transFullY = 100
               this.opacityFull = 0;
-              this.fullHomeActive = false
               setTimeout(() => {
                 this.coverHidden = false;
               }, 300)
