@@ -19,7 +19,7 @@
                 </van-swipe-item>
             </van-swipe>
             <!-- 类目 -->
-            <van-tabs sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41" :offset-top="offsetTop">
+            <van-tabs v-model="tabsActive" sticky animated swipeable lazy-render color="#C17A41" title-active-color="#C17A41" :offset-top="offsetTop">
                 <van-tab class="tabs" v-for="item in tabs" :title="item.label">
                 </br>
                     <van-grid v-if="item.label == '学院介绍'" column-num="3" gutter="0.2rem" :border="false" clickable>
@@ -49,6 +49,7 @@
                 headerActive: false, // header 列表显示-true 隐藏-false
                 headerId: 1, //胡杨概况id==1
                 offsetTop: 0,
+                tabsActive: 0,
                 gallery:[],
                 tabs: {
                     gaikuang: {
@@ -69,6 +70,7 @@
         mounted: function() {
             // 设置导航吸顶距离
             this.offsetTop = this.$refs.header.offsetHeight-1;
+            this.tabsActive = this.getQueryVariable("type") | 0;
 
             http.get('/api/index/aboutMore',{platform: 1}).then(res=>{
                 console.log(res)
@@ -81,6 +83,16 @@
         methods: {
             goPage(id) {
                 window.location.href= '/mobile/index/college?seriesID='+id;
+            },
+            getQueryVariable(variable)
+            {
+                  var query = window.location.search.substring(1);
+                  var vars = query.split("&");
+                  for (var i=0;i<vars.length;i++) {
+                          var pair = vars[i].split("=");
+                          if(pair[0] == variable){return pair[1];}
+                  }
+                  return(false);
             }
         }
     });
