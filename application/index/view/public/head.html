@@ -73,6 +73,14 @@
         window.location.href = "/mobile/index/about.html";
         return;
       }
+      if (window.location.pathname.indexOf("/index/index/introduction.html") != -1) {
+        window.location.href = "/mobile/index/about?type=1";
+        return;
+      }
+      if (window.location.pathname.indexOf("/index/index/aboutmore") != -1) {
+        window.location.href = "/mobile/index/about?type=2";
+        return;
+      }
       // 移动端 href 跟换
       window.location.href = "/mobile/";
     }
