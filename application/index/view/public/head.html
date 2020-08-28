@@ -53,6 +53,21 @@
     var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 
     if (bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+      // 是否为新闻详情
+      if (window.location.pathname.indexOf("/news_detail/newsid/") != -1) {
+        var str = window.location.pathname.match(/newsid\/(\S*).html/)[1];
+        window.location.href = "/mobile/index/news_detail?newsid=" + str;
+        return;
+      }
+      if (window.location.pathname.indexOf("/szll/seriesNO/") != -1) {
+        window.location.href = "/mobile/index/szll.html";
+        return;
+      }
+      
+      if (window.location.pathname.indexOf("/index/index/news.html") != -1) {
+        window.location.href = "/mobile/index/news.html";
+        return;
+      }
       // 移动端 href 跟换
       window.location.href = "/mobile/";
     }
