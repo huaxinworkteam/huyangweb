@@ -63,16 +63,20 @@
         window.location.href = "/mobile/index/szll.html";
         return;
       }
-      
       if (window.location.pathname.indexOf("/index/index/news.html") != -1) {
         window.location.href = "/mobile/index/news.html";
+        return;
+      }
+      if (window.location.pathname.indexOf("/index/index/about.html") != -1 ||
+      window.location.pathname.indexOf("/index/index/aboutmore") != -1 ||
+      window.location.pathname.indexOf("/index/index/introduction") != -1) {
+        window.location.href = "/mobile/index/about.html";
         return;
       }
       // 移动端 href 跟换
       window.location.href = "/mobile/";
     }
   }
-
   fBrowserRedirect();
 </script>
 <link href="__COLL__/css/reset.css" type="text/css" rel="stylesheet" />
