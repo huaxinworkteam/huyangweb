@@ -79,6 +79,11 @@
         window.location.href = "/mobile/index/about?type=2";
         return;
       }
+      if (window.location.pathname.indexOf("/index/college/seriesID") != -1) {
+        var str = window.location.pathname.match(/seriesID\/(\S*).html/)[1];
+        window.location.href = "/mobile/index/college?seriesID=" + str;
+        return;
+      }
       // 移动端 href 跟换
       window.location.href = "/mobile/";
     }
